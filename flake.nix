@@ -48,7 +48,7 @@
    #   url = "github:caelestia-dots/cli";
     #  inputs.nixpkgs.follows = "nixpkgs";
    # };
-#  };
+  };
 
   outputs = { self, nixpkgs, nixpkgs-stable, ... } @ inputs:
     let
