@@ -1,18 +1,15 @@
 {
   description = "NixOS Optimized Flake for Ryzen 5600G";
 
-  nixConfig = {
-    extra-substituters = [ 
-      "https://noctalia.cachix.org"
-    ];
-    extra-trusted-public-keys = [ 
-      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
-    ];
-  };
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
+
+    # Home Manager follows our nixpkgs to avoid duplicate evaluation
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # MangoWM locked to its own nixpkgs to prevent source compilation
     mangowm = {
@@ -44,7 +41,7 @@
    # };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, ... } @ inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... } @ inputs:
     let
       system = "x86_64-linux";
       pkgs-stable = import nixpkgs-stable {
@@ -58,6 +55,16 @@
         modules = [
           ./configuration.nix
           inputs.mangowm.nixosModules.mango
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "hm-backup";
+              extraSpecialArgs = { inherit inputs; };
+              users.ackerman = ./home.nix;
+            };
+          }
         ];
       };
     };
