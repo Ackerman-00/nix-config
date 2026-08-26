@@ -1,23 +1,23 @@
 {
-  description = "NixOS Optimized Flake for Ryzen 5600G";
+  description = "NixOS Optimized Flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 
-    # Home Manager follows our nixpkgs to avoid duplicate evaluation
+    # Home Manager follows nixpkgs to avoid duplicate evaluation
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # MangoWM locked to its own nixpkgs to prevent source compilation
-    mangowm = {
-      url = "github:mangowm/mango";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # MangoWM
+    # mangowm = {
+    #   url = "github:mangowm/mango";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    # Custom packages share your system's appimageTools
+    # Custom packages
     nix-packages = {
       url = "github:Ackerman-00/nix-packages";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,15 +28,27 @@
       url = "github:noctalia-dev/noctalia/cachix";
     };
 
-   # Quickshell - git version needed for caelestia-shell-mango
+    # Noctalia Greeter
+    noctalia-greeter = {
+      url = "git+https://github.com/noctalia-dev/noctalia-greeter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Umbriel Wm
+    umbriel = {
+      url = "git+https://github.com/noctalia-dev/umbriel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # xdg-desktop-portal backend for Umbriel
+    xdg-desktop-portal-umbriel = {
+      url = "git+https://github.com/noctalia-dev/xdg-desktop-portal-umbriel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+   # Quickshell - git version
    #quickshell = {
    #  url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-   #  inputs.nixpkgs.follows = "nixpkgs";
-   # };
-
-   # Caelestia CLI - main control script for caelestia dotfiles
-   #caelestia-cli = {
-   #   url = "github:caelestia-dots/cli";
    #  inputs.nixpkgs.follows = "nixpkgs";
    # };
   };
@@ -54,7 +66,9 @@
         specialArgs = { inherit inputs pkgs-stable; }; 
         modules = [
           ./configuration.nix
-          inputs.mangowm.nixosModules.mango
+          # inputs.mangowm.nixosModules.mango # Mangowm
+          inputs.noctalia-greeter.nixosModules.default
+          inputs.umbriel.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {

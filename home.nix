@@ -135,7 +135,6 @@ in
     ffmpegthumbnailer
     libheif
     libva-utils
-    opencode
     
     # System-wide codecs (GStreamer framework)
     gst_all_1.gst-plugins-good
@@ -165,13 +164,6 @@ in
     protontricks
     vulkan-tools
     
-    # Theming
-    adw-gtk3
-    bibata-cursors
-    nwg-look
-    kdePackages.qt6ct
-    kdePackages.qtstyleplugin-kvantum
-
     # Development
     rustup
     zls
@@ -196,12 +188,7 @@ in
 
     # Flake Inputs
    #inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.rootapp
-    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.opencode-desktop
-    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
    #inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.helium
-    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.protonplus
   ];
 
   # --- Neovim with LazyVim ---

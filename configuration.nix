@@ -87,8 +87,25 @@
   };
 
   # --- Display Manager & Desktop ---
-  services.displayManager.ly.enable = true;
-  programs.mango.enable = true;
+  services.displayManager.ly.enable = false;
+  # programs.mango.enable = true; # Mangowm
+
+  programs.noctalia-greeter = {
+    enable = true;
+    settings = {
+      cursor = {
+        theme = "Bibata-Modern-Ice";
+        size = 24;
+        path = "${pkgs.bibata-cursors}/share/icons";
+      };
+    };
+  };
+
+  # Umbriel compositor with portal - binary via cachix (follows nixpkgs)
+  programs.umbriel = {
+    enable = true;
+    portalPackage = inputs.xdg-desktop-portal-umbriel.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  };
   
   # --- User Account ---
   users.users.ackerman = {
@@ -125,10 +142,21 @@
   ];
 
   # --- System Packages ---
-  # (user apps moved to home.nix; kept here: udev-rule tools & sudo-used tools)
   environment.systemPackages = with pkgs; [
-    brightnessctl   # ships udev rules - must be system-wide
-    efibootmgr      # used with sudo (not in user profile PATH)
+    brightnessctl
+    efibootmgr 
+    adw-gtk3
+    bibata-cursors
+    nwg-look
+    kdePackages.qt6ct
+    kdePackages.qtstyleplugin-kvantum
+    # Flake Inputs - system-wide
+    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.opencode-desktop
+    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.helium
+    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.protonplus
+    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.mixtapes
   ];
 
   # --- Fonts ---
@@ -179,30 +207,29 @@
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
-    wlr = {
-      enable = true;
-      settings.screencast = {
-        chooser_type = "simple";
-        chooser_cmd = "slurp -f 'Monitor: %o' -or";
-      };
-    };
+    # wlr = { # Mango wlr - Umbriel is the way
+    #   enable = true;
+    #   settings.screencast = {
+    #     chooser_type = "simple";
+    #     chooser_cmd = "slurp -f 'Monitor: %o' -or";
+    #   };
+    # };
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-wlr 
+      # pkgs.xdg-desktop-portal-wlr  # Mango wlr - Umbriel is the way
     ];
     config = {
       common = {
         default = [ "gtk" ];
       };
       
-      mango = {
-        default = [ "gtk" ];
-        "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
-        "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
-      };
+      # mango = { # Mango - Umbriel is the way
+      #   default = [ "gtk" ];
+      #   "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+      #   "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+      # };
     };
   };
 
   system.stateVersion = "26.11";
 }
-
