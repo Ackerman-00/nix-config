@@ -15,11 +15,9 @@
     substituters = lib.mkForce [
       "https://mirror.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://cache.nixos.org/"
-      "https://noctalia.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
     ];
   };
 
@@ -90,14 +88,16 @@
   services.displayManager.ly.enable = false;
   # programs.mango.enable = true; # Mangowm
 
-  programs.noctalia-greeter = {
+  # Native nixpkgs module (was programs.noctalia-greeter flake module)
+  services.displayManager.noctalia-greeter = {
     enable = true;
     settings = {
-      cursor = {
-        theme = "Bibata-Modern-Ice";
-        size = 24;
-        path = "${pkgs.bibata-cursors}/share/icons";
-      };
+      cursor.size = 24;
+      keyboard.layout = "us";
+    };
+    cursorTheme = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
     };
   };
 
@@ -142,6 +142,11 @@
   ];
 
   # --- System Packages ---
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    LIBVA_DRIVER_NAME = "radeonsi";
+  };
+
   environment.systemPackages = with pkgs; [
     brightnessctl
     efibootmgr 
@@ -153,10 +158,89 @@
     # Flake Inputs - system-wide
     inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.opencode-desktop
     inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    noctalia
     inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.helium
     inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.protonplus
     inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.mixtapes
+
+    # GUI Apps
+    blender
+    godot
+    kitty
+    nautilus
+    gnome-text-editor
+    file-roller
+    mpv
+    imv
+    sassc
+    loupe
+    proton-vpn
+    evince
+    qbittorrent
+    telegram-desktop
+    vesktop
+    zed-editor
+
+    # CLI / Essentials
+    cava
+    cliphist
+    wl-clipboard
+    libsecret
+    xdg-user-dirs
+    ffmpeg-full
+    ffmpegthumbnailer
+    libheif
+    libva-utils
+
+    # System-wide codecs (GStreamer framework)
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-libav
+    p7zip
+    unzip
+    zip
+    rar
+    fzf
+    eza
+    fastfetch
+    ripgrep
+    btop
+    gpu-screen-recorder
+    wget
+    grim
+    slurp
+    swappy
+
+    # Gaming
+    gamemode
+    heroic
+    mangohud
+    faugus-launcher
+    protontricks
+    vulkan-tools
+
+    # Development
+    rustup
+    zls
+    lazygit
+    fd
+    tree-sitter
+    lua-language-server
+    stylua
+    nil
+    nixfmt
+    marksman
+    prettier
+    prettierd
+    gcc
+
+    (python3.withPackages (ps: with ps; [
+      openai
+      requests
+      pip
+      numpy
+    ]))
   ];
 
   # --- Fonts ---

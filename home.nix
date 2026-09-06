@@ -94,10 +94,7 @@ in
   home.stateVersion = "26.11";
 
   # --- Environment Variables ---
-  home.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    LIBVA_DRIVER_NAME = "radeonsi";
-  };
+  # Moved to environment.sessionVariables in configuration.nix
 
   # --- PATH additions ---
   home.sessionPath = [
@@ -105,87 +102,8 @@ in
   ];
 
   # --- User Packages ---
+  # Moved to environment.systemPackages in configuration.nix
   home.packages = with pkgs; [
-    # GUI Apps
-   #brave
-    blender
-    godot
-    kitty
-    nautilus
-    gnome-text-editor
-    file-roller
-    mpv
-    imv
-    sassc
-    loupe
-    proton-vpn
-    evince
-    qbittorrent
-    telegram-desktop
-    vesktop
-    zed-editor
-      
-    # CLI / Essentials
-    cava
-    cliphist
-    wl-clipboard
-    libsecret
-    xdg-user-dirs
-    ffmpeg-full
-    ffmpegthumbnailer
-    libheif
-    libva-utils
-    
-    # System-wide codecs (GStreamer framework)
-    gst_all_1.gst-plugins-good
-    gst_all_1.gst-plugins-bad
-    gst_all_1.gst-plugins-ugly
-    gst_all_1.gst-libav
-    p7zip
-    unzip
-    zip
-    rar
-    fzf
-    eza
-    fastfetch
-    ripgrep
-    btop
-    gpu-screen-recorder
-    wget
-    grim
-    slurp 
-    swappy
-      
-    # Gaming
-    gamemode
-    heroic
-    mangohud
-    faugus-launcher
-    protontricks
-    vulkan-tools
-    
-    # Development
-    rustup
-    zls
-    lazygit
-    fd
-    tree-sitter
-    lua-language-server
-    stylua
-    nil
-    nixfmt
-    marksman
-    prettier
-    prettierd
-    gcc
-
-    (python3.withPackages (ps: with ps; [
-      openai
-      requests
-      pip
-      numpy
-    ]))
-
     # Flake Inputs
    #inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.rootapp
    #inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default

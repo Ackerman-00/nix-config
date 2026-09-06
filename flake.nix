@@ -23,17 +23,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Noctalia locked to the cachix branch without overrides for instant downloads
-    noctalia = {
-      url = "github:noctalia-dev/noctalia/cachix";
-    };
-
-    # Noctalia Greeter
-    noctalia-greeter = {
-      url = "git+https://github.com/noctalia-dev/noctalia-greeter";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Umbriel Wm
     umbriel = {
       url = "git+https://github.com/noctalia-dev/umbriel";
@@ -67,7 +56,6 @@
         modules = [
           ./configuration.nix
           # inputs.mangowm.nixosModules.mango # Mangowm
-          inputs.noctalia-greeter.nixosModules.default
           inputs.umbriel.nixosModules.default
           home-manager.nixosModules.home-manager
           {
