@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   plugins = with pkgs.vimPlugins; [
@@ -53,7 +53,6 @@ let
     (m: { name = m; path = pkgs.vimPlugins.mini-nvim; })
     [ "mini.ai" "mini.bufremove" "mini.comment" "mini.icons" "mini.indentscope" "mini.pairs" "mini.surround" ];
 
-  # Nix-compiled treesitter parsers.
   treesitterGrammars = (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [
     rust
     bash
@@ -93,23 +92,12 @@ in
 {
   home.stateVersion = "26.11";
 
-  # --- Environment Variables ---
-  # Moved to environment.sessionVariables in configuration.nix
-
-  # --- PATH additions ---
+  # --- PATH ---
   home.sessionPath = [
-    "${config.home.homeDirectory}/.cargo/bin"  # rustup proxies
+    "${config.home.homeDirectory}/.cargo/bin"
   ];
 
-  # --- User Packages ---
-  # Moved to environment.systemPackages in configuration.nix
-  home.packages = with pkgs; [
-    # Flake Inputs
-   #inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.rootapp
-   #inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
-  ];
-
-  # --- Neovim with LazyVim ---
+  # --- Neovim ---
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -136,7 +124,6 @@ in
           { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
         },
       })
-      -- Nix-compiled treesitter parsers (searchable via runtimepath)
       vim.opt.runtimepath:append("${grammarsPath}")
     '';
   };

@@ -1,11 +1,15 @@
-{ config, pkgs, pkgs-stable, lib, inputs, ... }:
+{ pkgs, lib, inputs, ... }:
 
+let
+  system = pkgs.stdenv.hostPlatform.system;
+  custom = inputs.nix-packages.packages.${system};
+in
 {
   imports = [
     ./hardware-configuration.nix
   ];
 
-  # --- Nix Settings ---
+  # --- Nix ---
   nixpkgs.config.allowUnfree = true;
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
@@ -20,75 +24,77 @@
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     ];
   };
-
-  # --- Bootloader & Kernel ---
-  boot.loader.systemd-boot.enable = false;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot";
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.consoleLogLevel = 3;
-  boot.initrd.verbose = false;
-  boot.kernelParams = [
-    "quiet"
-    "splash"
-    "boot.shell_on_fail"
-    "udev.log_priority=3"
-    "rd.systemd.show_status=auto"
-    "amd_pstate=active"
-    "amdgpu.gpu_recovery=1"
-  ];
-
-  # --- System Optimization & Networking ---
-  zramSwap.enable = true;
-  networking.hostName = "quietcraft";
-  networking.networkmanager.enable = true;
-
-  # --- Automatic Garbage Collection ---
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
 
-  # --- Limit GRUB menu entries ---
-  boot.loader.grub.configurationLimit = 10;
-
-  # --- Time & Locale ---
-  time.timeZone = "Asia/Dhaka";
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  # --- Hardware & Graphics ---
-  hardware.enableAllFirmware = true;
-  hardware.cpu.amd.updateMicrocode = true;
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [
-      mesa.opencl
+  # --- Boot ---
+  boot = {
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 10;
+      };
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+    };
+    kernelPackages = pkgs.linuxPackages_latest;
+    initrd.kernelModules = [ "amdgpu" ];
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+      "amd_pstate=active"
+      "amdgpu.gpu_recovery=1"
     ];
   };
 
-  # --- Display Manager & Desktop ---
-  services.displayManager.ly.enable = false;
-  # programs.mango.enable = true; # Mangowm
+  # --- System ---
+  zramSwap.enable = true;
+  networking = {
+    hostName = "quietcraft";
+    networkmanager.enable = true;
+  };
+  time.timeZone = "Asia/Dhaka";
 
-  # Native nixpkgs module (was programs.noctalia-greeter flake module)
+  # --- Locale ---
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
+  };
+
+  # --- Hardware & Graphics ---
+  hardware = {
+    enableAllFirmware = true;
+    cpu.amd.updateMicrocode = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        mesa.opencl
+      ];
+    };
+  };
+
+  # --- Display ---
   services.displayManager.noctalia-greeter = {
     enable = true;
     settings = {
@@ -101,139 +107,145 @@
     };
   };
 
-  # Umbriel compositor with portal - binary via cachix (follows nixpkgs)
   programs.umbriel = {
     enable = true;
-    portalPackage = inputs.xdg-desktop-portal-umbriel.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    portalPackage = inputs.xdg-desktop-portal-umbriel.packages.${system}.default;
   };
-  
-  # --- User Account ---
+
+  # --- User ---
   users.users.ackerman = {
     isNormalUser = true;
     description = "Quietcraft";
     extraGroups = [ "networkmanager" "wheel" "video" "input" "gamemode" ];
     shell = pkgs.zsh;
   };
-  
-  # --- Programs & Gaming ---
-  programs.zsh.enable = true;
-  programs.starship.enable = true;
-  programs.git.enable = true;
-  programs.steam.enable = true;
-  programs.gamemode.enable = true;
-  programs.dconf.enable = true;
 
-  # --- NIX LD ---
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc.lib 
-    zlib
-    fuse3
-    icu
-    nss
-    openssl
-    curl
-    expat
-    libxkbcommon
-    vulkan-loader
-    glib       
-    libxml2        
-    libgcc        
-  ];
+  # --- Programs ---
+  programs = {
+    zsh.enable = true;
+    starship.enable = true;
+    git.enable = true;
+    steam.enable = true;
+    gamemode.enable = true;
+    dconf.enable = true;
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc.lib
+        zlib
+        fuse3
+        icu
+        nss
+        openssl
+        curl
+        expat
+        libxkbcommon
+        vulkan-loader
+        glib
+        libxml2
+        libgcc
+      ];
+    };
+  };
 
-  # --- System Packages ---
+  # --- Environment ---
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     LIBVA_DRIVER_NAME = "radeonsi";
   };
 
   environment.systemPackages = with pkgs; [
-    brightnessctl
-    efibootmgr 
+    # Custom flake packages
+    custom.opencode-desktop
+    custom.zen-browser
+    custom.helium
+    custom.mixtapes
+
+    # Desktop shell (native nixpkgs)
+    noctalia
+
+    # Theming
     adw-gtk3
     bibata-cursors
-    nwg-look
     kdePackages.qt6ct
     kdePackages.qtstyleplugin-kvantum
-    # Flake Inputs - system-wide
-    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.opencode-desktop
-    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser
-    noctalia
-    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.helium
-    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.protonplus
-    inputs.nix-packages.packages.${pkgs.stdenv.hostPlatform.system}.mixtapes
+    nwg-look
 
-    # GUI Apps
+    # System utils
+    brightnessctl
+    efibootmgr
+
+    # GUI apps
     blender
-    godot
-    kitty
-    nautilus
-    gnome-text-editor
-    file-roller
-    mpv
-    imv
-    sassc
-    loupe
-    proton-vpn
     evince
+    file-roller
+    gnome-text-editor
+    godot
+    imv
+    kitty
+    loupe
+    mpv
+    nautilus
+    proton-vpn
     qbittorrent
+    sassc
     telegram-desktop
     vesktop
     zed-editor
 
-    # CLI / Essentials
+    # CLI / essentials
+    btop
     cava
     cliphist
-    wl-clipboard
-    libsecret
-    xdg-user-dirs
-    ffmpeg-full
-    ffmpegthumbnailer
-    libheif
-    libva-utils
-
-    # System-wide codecs (GStreamer framework)
-    gst_all_1.gst-plugins-good
-    gst_all_1.gst-plugins-bad
-    gst_all_1.gst-plugins-ugly
-    gst_all_1.gst-libav
-    p7zip
-    unzip
-    zip
-    rar
-    fzf
     eza
     fastfetch
-    ripgrep
-    btop
+    ffmpeg-full
+    ffmpegthumbnailer
+    fzf
     gpu-screen-recorder
-    wget
     grim
+    libheif
+    libsecret
+    libva-utils
+    p7zip
+    rar
+    ripgrep
     slurp
     swappy
+    unzip
+    wget
+    wl-clipboard
+    xdg-user-dirs
+    zip
+
+    # Codecs (GStreamer framework)
+    gst_all_1.gst-libav
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-ugly
 
     # Gaming
-    gamemode
+    faugus-launcher
     heroic
     mangohud
-    faugus-launcher
+    protonplus
     protontricks
     vulkan-tools
 
     # Development
-    rustup
-    zls
-    lazygit
     fd
-    tree-sitter
+    gcc
+    lazygit
     lua-language-server
-    stylua
+    marksman
     nil
     nixfmt
-    marksman
     prettier
     prettierd
-    gcc
+    rustup
+    stylua
+    tree-sitter
+    zls
 
     (python3.withPackages (ps: with ps; [
       openai
@@ -263,56 +275,37 @@
   };
 
   # --- Services ---
-  services.gvfs.enable = true;
-  services.udisks2.enable = true;
-  services.dbus.enable = true;
-  services.power-profiles-daemon.enable = true;
-  services.gnome.gnome-keyring.enable = true;
-  services.gnome.localsearch.enable = false;
-  systemd.user.services.speech-dispatcher = { enable = false; aliases = []; wantedBy = []; };
-   
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  services = {
+    gvfs.enable = true;
+    udisks2.enable = true;
+    dbus.enable = true;
+    power-profiles-daemon.enable = true;
+    gnome.gnome-keyring.enable = true;
+    gnome.localsearch.enable = false;
+    xserver.xkb = {
+      layout = "us";
+      variant = "";
+    };
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
+      wireplumber.enable = true;
+    };
   };
-
-  # --- Audio (Pipewire) ---
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-    wireplumber.enable = true;
-  };
+  systemd.user.services.speech-dispatcher = { enable = false; aliases = [ ]; wantedBy = [ ]; };
 
-  # --- Portals & Mime Types ---
+  # --- Portals ---
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
-    # wlr = { # Mango wlr - Umbriel is the way
-    #   enable = true;
-    #   settings.screencast = {
-    #     chooser_type = "simple";
-    #     chooser_cmd = "slurp -f 'Monitor: %o' -or";
-    #   };
-    # };
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      # pkgs.xdg-desktop-portal-wlr  # Mango wlr - Umbriel is the way
     ];
-    config = {
-      common = {
-        default = [ "gtk" ];
-      };
-      
-      # mango = { # Mango - Umbriel is the way
-      #   default = [ "gtk" ];
-      #   "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
-      #   "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
-      # };
-    };
+    config.common.default = [ "gtk" ];
   };
 
   system.stateVersion = "26.11";
