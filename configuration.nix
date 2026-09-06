@@ -107,10 +107,7 @@ in
     };
   };
 
-  programs.umbriel = {
-    enable = true;
-    portalPackage = inputs.xdg-desktop-portal-umbriel.packages.${system}.default;
-  };
+  programs.umbriel.enable = true;
 
   # --- User ---
   users.users.ackerman = {
@@ -305,7 +302,6 @@ in
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
     ];
-    config.common.default = [ "gtk" ];
   };
 
   system.stateVersion = "26.11";
