@@ -1,28 +1,26 @@
 # nix-config
 
-My NixOS flake config for `quietcraft`.
+NixOS flake configuration for `quietcraft`.
 
-## Install on a fresh NixOS machine
+## Prerequisites
+
+NixOS with flakes enabled and git installed.
+
+## Installation
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/Ackerman-00/nix-config /home/ackerman/nix-config
+git clone https://github.com/Ackerman-00/nix-config.git ~/nix-config
+```
 
-# 2. Back up stock config (keeps your hardware-configuration.nix safe)
-sudo cp -r /etc/nixos /etc/nixos.bak
+```bash
+sudo nixos-generate-config --show-hardware-config > ~/nix-config/hardware-configuration.nix
+sudo rm -rf /etc/nixos
+sudo cp -r ~/nix-config /etc/nixos
+```
 
-# 3. Replace /etc/nixos contents with this repo
-sudo rm -r /etc/nixos
-sudo mkdir -p /etc/nixos
-sudo cp -r /home/ackerman/nix-config/. /etc/nixos/
+## Rebuild
 
-# 4. Restore machine-specific hardware config (not tracked in git)
-sudo cp /etc/nixos.bak/hardware-configuration.nix /etc/nixos/
-# Or regenerate it instead:
-# sudo nixos-generate-config --show-hardware-config > /home/ackerman/nix-config/hardware-configuration.nix
-# sudo cp /home/ackerman/nix-config/hardware-configuration.nix /etc/nixos/
-
-# 5. Rebuild
+```bash
 sudo nixos-rebuild switch --flake /etc/nixos#quietcraft
 ```
 
