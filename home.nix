@@ -97,6 +97,18 @@ in
     "${config.home.homeDirectory}/.cargo/bin"
   ];
 
+  # --- Packages ---
+  home.packages = with pkgs; [
+    lua-language-server
+    marksman
+    nil
+    prettier
+    prettierd
+    stylua
+    tree-sitter
+    zls
+  ];
+
   # --- Neovim ---
   programs.neovim = {
     enable = true;

@@ -19,16 +19,25 @@
       url = "git+https://github.com/noctalia-dev/umbriel";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+    };
   };
 
   # --- Outputs ---
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: {
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
+
     nixosConfigurations."quietcraft" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
-        inputs.umbriel.nixosModules.default
+        # inputs.umbriel.nixosModules.default
+        { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
         home-manager.nixosModules.home-manager
         {
           home-manager = {

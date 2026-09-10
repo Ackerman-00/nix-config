@@ -19,15 +19,12 @@ in
     substituters = lib.mkForce [
       "https://mirror.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://cache.nixos.org/"
+      "https://niri.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
     ];
-  };
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
   };
 
   # --- Boot ---
@@ -84,6 +81,7 @@ in
   # --- Hardware & Graphics ---
   hardware = {
     enableAllFirmware = true;
+    bluetooth.enable = true;
     cpu.amd.updateMicrocode = true;
     graphics = {
       enable = true;
@@ -95,6 +93,8 @@ in
   };
 
   # --- Display ---
+  # programs.umbriel.enable = true;
+  services.displayManager.sessionPackages = [ pkgs.niri-unstable ];
   services.displayManager.noctalia-greeter = {
     enable = true;
     settings = {
@@ -106,8 +106,6 @@ in
       name = "Bibata-Modern-Ice";
     };
   };
-
-  programs.umbriel.enable = true;
 
   # --- User ---
   users.users.ackerman = {
@@ -129,18 +127,18 @@ in
       enable = true;
       libraries = with pkgs; [
         stdenv.cc.cc.lib
-        zlib
-        fuse3
-        icu
-        nss
-        openssl
         curl
         expat
-        libxkbcommon
-        vulkan-loader
+        fuse3
         glib
-        libxml2
+        icu
         libgcc
+        libxkbcommon
+        libxml2
+        nss
+        openssl
+        vulkan-loader
+        zlib
       ];
     };
   };
@@ -158,8 +156,10 @@ in
     custom.helium
     custom.mixtapes
 
-    # Desktop shell (native nixpkgs)
+    # Desktop
     noctalia
+    niri-unstable
+    xwayland-satellite-unstable
 
     # Theming
     adw-gtk3
@@ -190,7 +190,7 @@ in
     vesktop
     zed-editor
 
-    # CLI / essentials
+    # CLI
     btop
     cava
     cliphist
@@ -211,11 +211,10 @@ in
     swappy
     unzip
     wget
-    wl-clipboard
     xdg-user-dirs
     zip
 
-    # Codecs (GStreamer framework)
+    # Codecs
     gst_all_1.gst-libav
     gst_all_1.gst-plugins-bad
     gst_all_1.gst-plugins-good
@@ -233,16 +232,8 @@ in
     fd
     gcc
     lazygit
-    lua-language-server
-    marksman
-    nil
     nixfmt
-    prettier
-    prettierd
     rustup
-    stylua
-    tree-sitter
-    zls
 
     (python3.withPackages (ps: with ps; [
       openai
@@ -256,6 +247,7 @@ in
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
+      maple-mono.NF
       lohit-fonts.bengali
       noto-fonts
       noto-fonts-cjk-sans
@@ -265,9 +257,9 @@ in
       nerd-fonts.jetbrains-mono
     ];
     fontconfig.defaultFonts = {
-      serif = [ "Noto Serif" "Noto Serif Bengali" ];
-      sansSerif = [ "Noto Sans" "Noto Sans Bengali" ];
-      monospace = [ "JetBrainsMono Nerd Font" "Noto Sans Mono" ];
+      serif = [ "Maple Mono NF" "Noto Serif" "Noto Serif Bengali" ];
+      sansSerif = [ "Maple Mono NF" "Noto Sans" "Noto Sans Bengali" ];
+      monospace = [ "Maple Mono NF" "JetBrainsMono Nerd Font" "Noto Sans Mono" ];
     };
   };
 
@@ -275,14 +267,11 @@ in
   services = {
     gvfs.enable = true;
     udisks2.enable = true;
-    dbus.enable = true;
     power-profiles-daemon.enable = true;
+    upower.enable = true;
     gnome.gnome-keyring.enable = true;
     gnome.localsearch.enable = false;
-    xserver.xkb = {
-      layout = "us";
-      variant = "";
-    };
+    xserver.xkb.layout = "us";
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -293,7 +282,10 @@ in
     };
   };
   security.rtkit.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
   systemd.user.services.speech-dispatcher = { enable = false; aliases = [ ]; wantedBy = [ ]; };
+
+  services.dbus.packages = [ pkgs.nautilus ];
 
   # --- Portals ---
   xdg.portal = {
@@ -301,7 +293,14 @@ in
     xdgOpenUsePortal = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
     ];
+    config.niri = {
+      default = [ "gnome" "gtk" ];
+      "org.freedesktop.impl.portal.Access" = "gtk";
+      "org.freedesktop.impl.portal.Notification" = "gtk";
+      "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
+    };
   };
 
   system.stateVersion = "26.11";
