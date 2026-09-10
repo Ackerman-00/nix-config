@@ -151,10 +151,8 @@ in
 
   environment.systemPackages = with pkgs; [
     # Custom flake packages
-    custom.opencode-desktop
-    custom.zen-browser
     custom.helium
-    custom.mixtapes
+    custom.opencode-desktop
 
     # Desktop
     noctalia
@@ -176,6 +174,7 @@ in
     blender
     evince
     file-roller
+    firefox
     gnome-text-editor
     godot
     imv
@@ -188,6 +187,7 @@ in
     sassc
     telegram-desktop
     vesktop
+    ytmdesktop
     zed-editor
 
     # CLI

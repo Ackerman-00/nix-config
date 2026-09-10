@@ -15,10 +15,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    umbriel = {
-      url = "git+https://github.com/noctalia-dev/umbriel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # umbriel = {
+    #   url = "git+https://github.com/noctalia-dev/umbriel";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     niri = {
       url = "github:sodiboo/niri-flake";
