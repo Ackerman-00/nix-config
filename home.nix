@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
+  # Plugins
   plugins = with pkgs.vimPlugins; [
     LazyVim
     blink-cmp
@@ -44,15 +45,20 @@ let
     aerial-nvim
     rustaceanvim
   ];
+
+  # Helpers
   mkEntryFromDrv = drv:
     if lib.isDerivation drv then
       { name = lib.getName drv; path = drv; }
     else
       drv;
+
+  # Mini Modules
   miniModules = builtins.map
     (m: { name = m; path = pkgs.vimPlugins.mini-nvim; })
     [ "mini.ai" "mini.bufremove" "mini.comment" "mini.icons" "mini.indentscope" "mini.pairs" "mini.surround" ];
 
+  # Treesitter
   treesitterGrammars = (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [
     rust
     bash
@@ -83,21 +89,26 @@ let
     yaml
     zig
   ])).dependencies;
+
+  # Grammars Path
   grammarsPath = pkgs.symlinkJoin {
     name = "nvim-treesitter-parsers";
     paths = treesitterGrammars;
   };
+
+  # Lazy Path
   lazyPath = pkgs.linkFarm "lazy-plugins" (builtins.map mkEntryFromDrv plugins ++ miniModules);
 in
 {
+  # Home Version
   home.stateVersion = "26.11";
 
-  # --- PATH ---
+  # Session Path
   home.sessionPath = [
     "${config.home.homeDirectory}/.cargo/bin"
   ];
 
-  # --- Packages ---
+  # Home Packages
   home.packages = with pkgs; [
     lua-language-server
     marksman
@@ -109,7 +120,7 @@ in
     zls
   ];
 
-  # --- Neovim ---
+  # Neovim
   programs.neovim = {
     enable = true;
     defaultEditor = true;

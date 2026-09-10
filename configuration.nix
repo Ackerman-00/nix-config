@@ -5,12 +5,15 @@ let
   custom = inputs.nix-packages.packages.${system};
 in
 {
+  # Imports
   imports = [
     ./hardware-configuration.nix
   ];
 
-  # --- Nix ---
+  # Nixpkgs
   nixpkgs.config.allowUnfree = true;
+
+  # Nix Settings
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
@@ -19,15 +22,13 @@ in
     substituters = lib.mkForce [
       "https://mirror.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://cache.nixos.org/"
-      "https://niri.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
     ];
   };
 
-  # --- Boot ---
+  # Boot
   boot = {
     loader = {
       systemd-boot = {
@@ -54,15 +55,19 @@ in
     ];
   };
 
-  # --- System ---
+  # Swap
   zramSwap.enable = true;
+
+  # Networking
   networking = {
     hostName = "quietcraft";
     networkmanager.enable = true;
   };
+
+  # Timezone
   time.timeZone = "Asia/Dhaka";
 
-  # --- Locale ---
+  # Locale
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
@@ -78,7 +83,7 @@ in
     };
   };
 
-  # --- Hardware & Graphics ---
+  # Hardware
   hardware = {
     enableAllFirmware = true;
     bluetooth.enable = true;
@@ -92,9 +97,8 @@ in
     };
   };
 
-  # --- Display ---
-  # programs.umbriel.enable = true;
-  services.displayManager.sessionPackages = [ pkgs.niri-unstable ];
+  # Display Manager
+  programs.umbriel.enable = true;
   services.displayManager.noctalia-greeter = {
     enable = true;
     settings = {
@@ -107,7 +111,7 @@ in
     };
   };
 
-  # --- User ---
+  # Users
   users.users.ackerman = {
     isNormalUser = true;
     description = "Quietcraft";
@@ -115,7 +119,7 @@ in
     shell = pkgs.zsh;
   };
 
-  # --- Programs ---
+  # Programs
   programs = {
     zsh.enable = true;
     starship.enable = true;
@@ -143,21 +147,21 @@ in
     };
   };
 
-  # --- Environment ---
+  # Environment
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     LIBVA_DRIVER_NAME = "radeonsi";
   };
 
+  # System Packages
   environment.systemPackages = with pkgs; [
-    # Custom flake packages
+    # Custom
     custom.helium
     custom.opencode-desktop
 
     # Desktop
     noctalia
-    niri-unstable
-    xwayland-satellite-unstable
+    xwayland-satellite
 
     # Theming
     adw-gtk3
@@ -166,11 +170,11 @@ in
     kdePackages.qtstyleplugin-kvantum
     nwg-look
 
-    # System utils
+    # System Tools
     brightnessctl
     efibootmgr
 
-    # GUI apps
+    # Apps
     blender
     evince
     file-roller
@@ -190,7 +194,7 @@ in
     ytmdesktop
     zed-editor
 
-    # CLI
+    # Utilities
     btop
     cava
     cliphist
@@ -228,13 +232,14 @@ in
     protontricks
     vulkan-tools
 
-    # Development
+    # Dev
     fd
     gcc
     lazygit
     nixfmt
     rustup
 
+    # Python
     (python3.withPackages (ps: with ps; [
       openai
       requests
@@ -243,7 +248,7 @@ in
     ]))
   ];
 
-  # --- Fonts ---
+  # Fonts
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
@@ -263,7 +268,7 @@ in
     };
   };
 
-  # --- Services ---
+  # Services
   services = {
     gvfs.enable = true;
     udisks2.enable = true;
@@ -281,27 +286,31 @@ in
       wireplumber.enable = true;
     };
   };
+
+  # Security
   security.rtkit.enable = true;
   security.pam.services.greetd.enableGnomeKeyring = true;
+
+  # Speech
   systemd.user.services.speech-dispatcher = { enable = false; aliases = [ ]; wantedBy = [ ]; };
 
+  # D-Bus
   services.dbus.packages = [ pkgs.nautilus ];
 
-  # --- Portals ---
+  # Portals
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-gnome
     ];
-    config.niri = {
-      default = [ "gnome" "gtk" ];
-      "org.freedesktop.impl.portal.Access" = "gtk";
-      "org.freedesktop.impl.portal.Notification" = "gtk";
-      "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
-    };
   };
 
+  # Mime
+  xdg.mime.defaultApplications = {
+    "inode/directory" = "org.gnome.Nautilus.desktop";
+  };
+
+  # System Version
   system.stateVersion = "26.11";
 }

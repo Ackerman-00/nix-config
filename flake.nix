@@ -1,7 +1,8 @@
 {
+  # Description
   description = "NixOS Optimized Flake";
 
-  # --- Inputs ---
+  # Inputs
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -15,31 +16,27 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # umbriel = {
-    #   url = "git+https://github.com/noctalia-dev/umbriel";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
-    niri = {
-      url = "github:sodiboo/niri-flake";
+    umbriel = {
+      url = "git+https://github.com/noctalia-dev/umbriel";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
     };
   };
 
-  # --- Outputs ---
+  # Outputs
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: {
+    # Formatter
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
 
+    # System
     nixosConfigurations."quietcraft" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
-        # inputs.umbriel.nixosModules.default
-        { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
+        inputs.umbriel.nixosModules.default
         home-manager.nixosModules.home-manager
         {
+          # Home Manager
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
