@@ -14,8 +14,7 @@ git clone https://github.com/Ackerman-00/nix-config.git ~/nix-config
 
 ```bash
 sudo nixos-generate-config --show-hardware-config > ~/nix-config/hardware-configuration.nix
-sudo rm -rf /etc/nixos
-sudo cp -r ~/nix-config /etc/nixos
+sudo cp -r ~/nix-config/* /etc/nixos/
 ```
 
 ## Rebuild
