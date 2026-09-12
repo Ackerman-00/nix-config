@@ -149,6 +149,8 @@ in
         spec = {
           { "LazyVim/LazyVim", import = "lazyvim.plugins", opts = { colorscheme = "no-clown-fiesta" } },
           { "aktersnurra/no-clown-fiesta.nvim", lazy = false, priority = 1000, opts = {} },
+          -- Old theme, kept loaded so :colorscheme Tab offers it too
+          { "folke/tokyonight.nvim", lazy = false, priority = 1000, opts = {} },
           { "mason-org/mason.nvim", enabled = false },
           { "mason-org/mason-lspconfig.nvim", enabled = false },
           { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
