@@ -163,6 +163,8 @@ in
             opts = {},
             keys = {
               { "<leader>o", "<cmd>AerialToggle<cr>", desc = "Outline (book chapters)" },
+              { "]o", "<cmd>AerialNext<cr>", desc = "Next chapter" },
+              { "[o", "<cmd>AerialPrev<cr>", desc = "Prev chapter" },
             },
             config = function(_, opts)
               require("aerial").setup(opts)
