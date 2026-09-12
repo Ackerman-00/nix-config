@@ -191,7 +191,6 @@ in
     sassc
     telegram-desktop
     vesktop
-    ytmdesktop
     zed-editor
 
     # Utilities

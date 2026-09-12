@@ -34,6 +34,7 @@ let
     nvim-ts-autotag
     persistence-nvim
     plenary-nvim
+    render-markdown-nvim
     snacks-nvim
     telescope-nvim
     telescope-fzf-native-nvim
@@ -145,9 +146,48 @@ in
           { "mason-org/mason.nvim", enabled = false },
           { "mason-org/mason-lspconfig.nvim", enabled = false },
           { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
+          -- Book reading: pretty markdown inside the buffer (headings, code, lists)
+          { "MeanderingProgrammer/render-markdown.nvim",
+            ft = { "markdown" },
+            opts = {
+              code = { sign = false, width = "block", right_pad = 1 },
+              heading = { sign = false, icons = {} },
+              checkbox = { enabled = false },
+            },
+            config = function(_, opts)
+              require("render-markdown").setup(opts)
+            end,
+          },
+          -- Book reading: chapter list on the side
+          { "stevearc/aerial.nvim",
+            opts = {},
+            keys = {
+              { "<leader>o", "<cmd>AerialToggle<cr>", desc = "Outline (book chapters)" },
+            },
+            config = function(_, opts)
+              require("aerial").setup(opts)
+            end,
+          },
         },
       })
       vim.opt.runtimepath:append("${grammarsPath}")
+
+      -- Book mode: normal 1-to-last line numbers + calm reading in markdown.
+      -- (LazyVim uses relative numbers everywhere, so at the last line the
+      -- gutter reads 500-to-1. This keeps plain 1, 2, 3 ... in .md files.)
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "markdown",
+        callback = function()
+          vim.opt_local.number = true
+          vim.opt_local.relativenumber = false
+          vim.opt_local.wrap = true
+          vim.opt_local.linebreak = true
+          vim.opt_local.breakindent = true
+          vim.opt_local.spell = true
+          vim.opt_local.spelllang = { "en" }
+          vim.opt_local.conceallevel = 2
+        end,
+      })
     '';
   };
 }
