@@ -182,6 +182,9 @@ in
       })
       vim.opt.runtimepath:append("${grammarsPath}")
 
+      -- Book reading: visual theme list with live preview (no Tab guessing)
+      vim.keymap.set("n", "<leader>uC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes + preview" })
+
       -- Book mode: normal 1-to-last line numbers + calm reading in markdown.
       -- (LazyVim uses relative numbers everywhere, so at the last line the
       -- gutter reads 500-to-1. This keeps plain 1, 2, 3 ... in .md files.)
