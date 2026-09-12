@@ -4,6 +4,7 @@ let
   # Plugins
   plugins = with pkgs.vimPlugins; [
     LazyVim
+    base16-nvim
     blink-cmp
     bufferline-nvim
     cmp-buffer
@@ -135,6 +136,18 @@ in
       vim.g.mapleader = " "
       vim.g.maplocalleader = " "
 
+      -- Remember theme choice across restarts (must sit BEFORE lazy starts,
+      -- so the very first theme apply is saved too)
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        callback = function()
+          local f = io.open(vim.fn.stdpath("config") .. "/theme.txt", "w")
+          if f then
+            f:write(vim.g.colors_name or "")
+            f:close()
+          end
+        end,
+      })
+
       -- No swap files, ever (undo history + sessions already guard work,
       -- swap only pops scary E325 boxes for beginners)
       vim.opt.swapfile = false
@@ -147,7 +160,33 @@ in
           fallback = true,
         },
         spec = {
-          { "LazyVim/LazyVim", import = "lazyvim.plugins", opts = { colorscheme = "no-clown-fiesta" } },
+          { "LazyVim/LazyVim",
+            import = "lazyvim.plugins",
+            opts = {
+              -- Last picked theme wins (saved to theme.txt on every switch).
+              -- Plain string would forget your pick on restart.
+              colorscheme = function()
+                local path = vim.fn.stdpath("config") .. "/theme.txt"
+                local f = io.open(path, "r")
+                local name = f and f:read("*l") or nil
+                if f then f:close() end
+                if name == "matugen" then
+                  -- Wallpaper theme: a lua module, not a colorscheme file
+                  local ok, m = pcall(require, "matugen")
+                  if ok and m then
+                    pcall(m.setup)
+                    vim.g.colors_name = "matugen"
+                    return
+                  end
+                end
+                if not (name and name ~= "" and pcall(vim.cmd.colorscheme, name)) then
+                  vim.cmd.colorscheme("no-clown-fiesta")
+                end
+              end,
+            },
+          },
+          -- Needed by the wallpaper theme module above (loads eagerly, tiny)
+          { "RRethy/base16-nvim", lazy = false },
           { "aktersnurra/no-clown-fiesta.nvim", lazy = false, priority = 1000, opts = {} },
           -- Old theme, kept loaded so :colorscheme Tab offers it too
           { "folke/tokyonight.nvim", lazy = false, priority = 1000, opts = {} },
@@ -184,6 +223,19 @@ in
 
       -- Book reading: visual theme list with live preview (no Tab guessing)
       vim.keymap.set("n", "<leader>uC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes + preview" })
+
+      -- Wallpaper theme (Noctalia/matugen): run :Matugen to use + remember it.
+      -- Do NOT hand-edit lua/matugen.lua, your wallpaper tool rewrites it.
+      vim.api.nvim_create_user_command("Matugen", function()
+        require("matugen").setup()
+        vim.g.colors_name = "matugen"
+        local f = io.open(vim.fn.stdpath("config") .. "/theme.txt", "w")
+        if f then
+          f:write("matugen")
+          f:close()
+        end
+        print("matugen theme on (saved)")
+      end, { desc = "Wallpaper theme" })
 
       -- Book mode: normal 1-to-last line numbers + calm reading in markdown.
       -- (LazyVim uses relative numbers everywhere, so at the last line the
