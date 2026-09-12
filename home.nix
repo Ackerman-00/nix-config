@@ -134,6 +134,10 @@ in
       vim.g.mapleader = " "
       vim.g.maplocalleader = " "
 
+      -- No swap files, ever (undo history + sessions already guard work,
+      -- swap only pops scary E325 boxes for beginners)
+      vim.opt.swapfile = false
+
       require("lazy").setup({
         defaults = { lazy = true },
         dev = {
