@@ -21,6 +21,7 @@ let
     lualine-nvim
     neo-tree-nvim
     noice-nvim
+    no-clown-fiesta-nvim
     nui-nvim
     nvim-dap
     nvim-dap-ui
@@ -146,7 +147,8 @@ in
           fallback = true,
         },
         spec = {
-          { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+          { "LazyVim/LazyVim", import = "lazyvim.plugins", opts = { colorscheme = "no-clown-fiesta" } },
+          { "aktersnurra/no-clown-fiesta.nvim", lazy = false, priority = 1000, opts = {} },
           { "mason-org/mason.nvim", enabled = false },
           { "mason-org/mason-lspconfig.nvim", enabled = false },
           { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
