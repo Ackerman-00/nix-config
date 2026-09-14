@@ -166,6 +166,8 @@ in
     # Theming
     adw-gtk3
     bibata-cursors
+    tela-icon-theme
+    vimix-icon-theme
     kdePackages.qt6ct
     kdePackages.qtstyleplugin-kvantum
     nwg-look
@@ -216,7 +218,7 @@ in
     wget
     xdg-user-dirs
     zip
-
+   
     # Codecs
     gst_all_1.gst-libav
     gst_all_1.gst-plugins-bad
@@ -236,6 +238,7 @@ in
     gcc
     lazygit
     nixfmt
+    nodejs
     rustup
 
     # Python
