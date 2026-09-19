@@ -4,6 +4,7 @@
     ./home-manager/desktop/umbriel
     ./home-manager/programs/noctalia
     ./home-manager/programs/opencode.nix
+    ./home-manager/programs/opencode-desktop.nix
   ];
 
   home = {

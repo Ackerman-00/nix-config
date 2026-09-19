@@ -6,6 +6,5 @@
     ./packages-utils.nix
     ./packages-gaming.nix
     ./packages-dev.nix
-    ./opencode-desktop.nix
   ];
 }
