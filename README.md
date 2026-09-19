@@ -6,12 +6,12 @@ Umbriel compositor + Noctalia shell, home-manager user env, vendored Helium.
 ## Layout
 
 ```
-flake.nix                 # inputs (nixpkgs, home-manager, umbriel) + quietcraft
+flake.nix                 # inputs (nixpkgs, home-manager, umbriel, noctalia) + quietcraft
 configuration.nix         # thin host entry (imports, toggles, stateVersion)
 home.nix                  # thin home entry (imports only)
 modules/
   system/                 # nix-settings, boot, network, locale, users
-  desktop/                # session, fonts, services, umbriel
+  desktop/                # session, fonts, services, noctalia, umbriel
   packages/               # role sets: desktop, apps, utils, gaming, dev
   browsers/               # helium (vendored tarball), firefox
   shell/                  # tooling, neovim

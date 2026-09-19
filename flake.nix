@@ -1,8 +1,6 @@
 {
-  # Description
   description = "NixOS Optimized Flake";
 
-  # Inputs
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -16,16 +14,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # No follows: pinned cachix branch guarantees prebuilt binaries.
+    noctalia = {
+      url = "github:noctalia-dev/noctalia/cachix";
+    };
+
   };
 
-  # Outputs
   outputs =
     { nixpkgs, home-manager, ... }@inputs:
     {
-      # Formatter
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
 
-      # System
       nixosConfigurations."quietcraft" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
@@ -34,7 +34,6 @@
           inputs.umbriel.nixosModules.default
           home-manager.nixosModules.home-manager
           {
-            # Home Manager
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;

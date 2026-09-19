@@ -2,7 +2,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 {
@@ -14,7 +13,7 @@
 
   config = lib.mkIf config.my.firefox.enable {
     programs.firefox = {
-      enable = true;
+      enable = true; # also installs the wrapped build (policies baked in)
 
       # VA-API decode on AMD (wiki: Accelerated Video Playback, FF >= 137).
       preferences = {
@@ -38,9 +37,5 @@
         };
       };
     };
-
-    environment.systemPackages = with pkgs; [
-      firefox
-    ];
   };
 }

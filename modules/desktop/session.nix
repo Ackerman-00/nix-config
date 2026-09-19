@@ -1,8 +1,6 @@
-# Login session: compositor binary, greeter, Wayland env, portals, dirs.
+# Login session: greeter, Wayland env, portals, dirs.
 { pkgs, ... }:
 {
-  programs.umbriel.enable = true;
-
   services.displayManager.noctalia-greeter = {
     enable = true;
     settings = {
@@ -27,8 +25,6 @@
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
       ];
-      # Umbriel's own portal handles most, GTK picks up file chooser.
-      config.umbriel."org.freedesktop.impl.portal.FileChooser" = "gtk";
     };
 
     mime.defaultApplications = {

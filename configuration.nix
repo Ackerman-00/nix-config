@@ -10,6 +10,8 @@
   # my.apps.enable = false;
   # my.utils.enable = false;
   # my.desktop.enable = false;
+  # my.helium.enable = false;
+  # my.firefox.enable = false;
 
   system.stateVersion = "26.11";
 }

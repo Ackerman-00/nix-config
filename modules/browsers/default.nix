@@ -2,6 +2,6 @@
 {
   imports = [
     ./helium
-    ./firefox.nix
+    ./firefox
   ];
 }

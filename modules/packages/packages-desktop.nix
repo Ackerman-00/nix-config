@@ -13,7 +13,6 @@
 
   config = lib.mkIf config.my.desktop.enable {
     environment.systemPackages = with pkgs; [
-      noctalia
       xwayland-satellite
 
       adw-gtk3
