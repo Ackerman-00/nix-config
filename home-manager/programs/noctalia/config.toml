@@ -1,0 +1,757 @@
+[audio]
+enable_overdrive = true
+
+[bar.default]
+background_opacity = 0.4999999888241291
+capsule = true
+capsule_radius = 7
+center = [ "recorder", "workspaces", "cat" ]
+end = [ "tray", "notifications", "volume", "clock", "cat_2" ]
+font_scale = 0.89999998733401299
+margin_ends = 0
+position = "left"
+radius_bottom_left = 0
+radius_top_left = 0
+scale = 0.95000000670552254
+start = [ "group:g1" ]
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "end"
+    enabled = true
+    fill = "surface_variant"
+    id = "g1"
+    members = [ "cpu", "temp", "ram" ]
+    opacity = 1.0
+    padding = 6.0
+
+[desktop_widgets]
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
+[lockscreen]
+blur_intensity = 0.44999998994171619
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [
+    "lockscreen-login-box@WL-1",
+    "lockscreen-widget-000000000000000c",
+    "lockscreen-widget-000000000000001b",
+    "lockscreen-widget-000000000000000a",
+    "lockscreen-widget-000000000000000b",
+    "lockscreen-widget-000000000000000e",
+    "lockscreen-widget-0000000000000009",
+    "lockscreen-widget-0000000000000001",
+    "lockscreen-login-box@HDMI-A-1",
+    "lockscreen-widget-0000000000000002",
+    "lockscreen-widget-0000000000000003",
+    "lockscreen-widget-0000000000000005",
+    "lockscreen-widget-0000000000000008",
+    "lockscreen-widget-000000000000000d",
+    "lockscreen-widget-000000000000000f",
+    "lockscreen-widget-0000000000000011",
+    "lockscreen-widget-0000000000000012",
+    "lockscreen-widget-0000000000000013",
+    "lockscreen-widget-0000000000000014",
+    "lockscreen-widget-0000000000000015",
+    "lockscreen-widget-0000000000000016",
+    "lockscreen-widget-0000000000000017",
+    "lockscreen-widget-0000000000000018",
+    "lockscreen-widget-0000000000000019",
+    "lockscreen-widget-000000000000001a",
+    "lockscreen-widget-000000000000001d",
+    "lockscreen-widget-000000000000001e",
+    "lockscreen-widget-000000000000001f",
+    "lockscreen-widget-0000000000000020",
+    "lockscreen-widget-0000000000000021"
+]
+
+    [lockscreen_widgets.grid]
+    cell_size = 8
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 150.0
+    box_width = 810.0
+    cx = 683.0
+    cy = 688.0
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 20.0
+        center_password_text = true
+        input_opacity = 1.0
+        input_radius = 10.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = false
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@WL-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 659.00006103515625
+    cy = 572.0
+    output = "WL-1"
+    placement_height = 754.0
+    placement_width = 1318.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@WL-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 368.0
+    box_width = 464.0
+    cx = 677.30999755859375
+    cy = 290.0
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = true
+        background_color = "surface_variant"
+        background_opacity = 0.87
+        background_radius = 32
+        center_text = true
+        clock_style = "digital"
+        font_family = "Google Sans Flex"
+        format = """{:%H:%M}
+"""
+        shadow = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+    box_height = 166.27999877929688
+    box_width = 157.30999755859375
+    cx = 1048.219970703125
+    cy = 670.67999267578125
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.0
+    type = "sticker"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+        background = false
+        background_color = "on_surface"
+        background_opacity = 1.0
+        background_radius = 0
+        image_path = ""
+        opacity = 1.0
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
+    box_height = 32.0
+    box_width = 80.0
+    cx = 1158.550048828125
+    cy = 696.487548828125
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.2617993950843811
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000003.settings]
+        background = false
+        background_color = "on_surface"
+        background_opacity = 1.0
+        background_radius = 0
+        font_family = "Cal Sans"
+        shadow = false
+        title = "Locked, lol"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000005]
+    box_height = 125.0
+    box_width = 233.0
+    cx = 571.0
+    cy = 373.0
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.0
+    type = "volume"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000005.settings]
+        background = true
+        background_color = "on_secondary"
+        background_opacity = 0.5
+        background_radius = 0
+        device = "output"
+        scroll_step = 5
+        shadow = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000008]
+    box_height = 24.0
+    box_width = 328.0
+    cx = 683.0
+    cy = 281.54791259765625
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = -0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000008.settings]
+        background = false
+        background_color = "shadow"
+        center_text = false
+        color = "on_surface"
+        font_family = "JetBrainsMono NF ExtraLight"
+        format = "{:%a,  %b  %d}"
+        shadow = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000009]
+    box_height = 374.94000244140625
+    box_width = 475.67999267578125
+    cx = 676.29998779296875
+    cy = 294.27999877929688
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = -0.1333654522895813
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000009.settings]
+        background_color = "outline"
+        background_opacity = 1.0
+        background_radius = 32
+        shadow = false
+        title = " "
+
+    [lockscreen_widgets.widget.lockscreen-widget-000000000000000a]
+    box_height = 144.0
+    box_width = 800.0
+    cx = 671.6199951171875
+    cy = 685.510009765625
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = -0.0
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-000000000000000a.settings]
+        background_color = "on_secondary"
+        background_radius = 20
+        shadow = false
+        title = " "
+
+    [lockscreen_widgets.widget.lockscreen-widget-000000000000000b]
+    box_height = 928.8499755859375
+    box_width = 2487.949951171875
+    cx = 517.8358154296875
+    cy = -0.721527099609375
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = -0.27045175433158875
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-000000000000000b.settings]
+        background_color = "secondary"
+        background_opacity = 0.39000000000000001
+        shadow = false
+        title = " "
+
+    [lockscreen_widgets.widget.lockscreen-widget-000000000000000c]
+    box_height = 657.21002197265625
+    box_width = 2403.5
+    cx = 808.859130859375
+    cy = 768.0
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = -0.27045175433158875
+    type = "calendar"
+
+        [lockscreen_widgets.widget.lockscreen-widget-000000000000000c.settings]
+        background = false
+        background_color = "on_secondary"
+        background_opacity = 0.29999999999999999
+        show_events = false
+        show_week_numbers = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-000000000000000d]
+    box_height = 152.0
+    box_width = 160.0
+    cx = 159.3699951171875
+    cy = 187.72999572753906
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.0
+    type = "weather"
+
+        [lockscreen_widgets.widget.lockscreen-widget-000000000000000d.settings]
+        background = false
+        background_opacity = 1.0
+        background_radius = 10
+        forecast_days = 2
+        shadow = false
+        show_forecast = true
+
+    [lockscreen_widgets.widget.lockscreen-widget-000000000000000e]
+    box_height = 152.0
+    box_width = 160.0
+    cx = 159.3699951171875
+    cy = 187.72999572753906
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.52359879016876221
+    type = "media_player"
+
+        [lockscreen_widgets.widget.lockscreen-widget-000000000000000e.settings]
+        background = false
+        background_opacity = 1.0
+        background_radius = 10
+        hide_when_no_media = true
+        shadow = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-000000000000000f]
+    box_height = 152.0
+    box_width = 160.0
+    cx = 159.3699951171875
+    cy = 187.72999572753906
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 1.0471975803375244
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-000000000000000f.settings]
+        background = false
+        background_opacity = 1.0
+        background_radius = 10
+        font_family = ""
+        shadow = false
+        title = " "
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000011]
+    box_height = 112.0
+    box_width = 112.0
+    cx = 1266.0400390625
+    cy = 85.69000244140625
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.52359879016876221
+    type = "sysmon"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000011.settings]
+        background = false
+        background_color = "on_tertiary"
+        background_opacity = 1.0
+        background_radius = 20
+        color = "secondary"
+        display = "gauge"
+        shadow = false
+        stat = "cpu_usage"
+        stat2 = "cpu_temp"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000012]
+    box_height = 64.0
+    box_width = 64.0
+    cx = 1158.550048828125
+    cy = 111.44000244140625
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = -0.2617993950843811
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000012.settings]
+        background_color = "surface_variant"
+        background_opacity = 1.0
+        background_radius = 20
+        title = " "
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000013]
+    box_height = 56.0
+    box_width = 56.0
+    cx = 1273.68994140625
+    cy = 189.33000183105469
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.52359879016876221
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000013.settings]
+        background_color = "on_primary"
+        background_opacity = 1.0
+        background_padding = 0
+        background_radius = 32
+        title = " "
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000014]
+    box_height = 96.0
+    box_width = 96.0
+    cx = 56.919998168945312
+    cy = 74.819999694824219
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.2617993950843811
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000014.settings]
+        background_color = "outline"
+        background_opacity = 1.0
+        background_padding = 0
+        background_radius = 20
+        title = " "
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000015]
+    box_height = 56.0
+    box_width = 56.0
+    cx = 189.07000732421875
+    cy = 54.040000915527344
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.52359879016876221
+    type = "audio_visualizer"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000015.settings]
+        background = false
+        background_color = "on_secondary"
+        background_opacity = 1.0
+        background_radius = 32
+        bands = 20
+        centered = false
+        color_1 = "on_surface"
+        color_2 = "on_surface"
+        mirrored = true
+        reversed = true
+        show_when_idle = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000016]
+    box_height = 112.0
+    box_width = 800.0
+    cx = 683.0
+    cy = 531.99993896484375
+    flip_y = true
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = -3.1415927410125732
+    type = "audio_visualizer"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000016.settings]
+        background = false
+        bands = 32
+        centered = false
+        color_1 = "outline"
+        color_2 = "on_primary"
+        mirrored = true
+        reversed = true
+        show_when_idle = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000017]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 677.65997314453125
+    cy = 70.0
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.0
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000017.settings]
+        background = false
+        color = "surface"
+        font_family = "JetBrainsMono NF ExtraLight"
+        shadow = false
+        title = "L   O   C   K   E   D"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000018]
+    box_height = 40.0
+    box_width = 144.0
+    cx = 760.0
+    cy = 336.0
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.0
+    type = "button"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000018.settings]
+        background = true
+        color = "secondary"
+        font_family = "Cal Sans"
+        glyph = "noctalia"
+        label = " Noctalia v5"
+        variant = "ghost"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000019]
+    box_height = 40.0
+    box_width = 144.0
+    cx = 748.29998779296875
+    cy = 364.0
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = -0.0
+    type = "button"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000019.settings]
+        background = true
+        color = "primary"
+        font_family = "Cal Sans"
+        glyph = "umbriel"
+        hover_background = "hover"
+        label = " Umbriel"
+        variant = "ghost"
+
+    [lockscreen_widgets.widget.lockscreen-widget-000000000000001a]
+    box_height = 40.0
+    box_width = 128.0
+    cx = 768.0
+    cy = 400.0
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.0
+    type = "button"
+
+        [lockscreen_widgets.widget.lockscreen-widget-000000000000001a.settings]
+        background = true
+        color = "on_secondary"
+        font_family = "Cal Sans"
+        glyph = "lock-filled"
+        hover_background = "hover"
+        label = " Device is Locked"
+        variant = "destructive"
+
+    [lockscreen_widgets.widget.lockscreen-widget-000000000000001b]
+    box_height = 40.0
+    box_width = 808.0
+    cx = 673.72998046875
+    cy = 608.0
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = -0.0
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-000000000000001b.settings]
+        background_color = "on_secondary"
+        background_radius = 20
+        title = " "
+
+    [lockscreen_widgets.widget.lockscreen-widget-000000000000001d]
+    box_height = 120.0
+    box_width = 120.0
+    cx = 176.44000244140625
+    cy = 162.1300048828125
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = -0.0
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-000000000000001d.settings]
+        background = true
+        background_color = "surface"
+        background_opacity = 1.0
+        background_radius = 12
+        shadow = false
+        title = ""
+
+    [lockscreen_widgets.widget.lockscreen-widget-000000000000001e]
+    box_height = 120.0
+    box_width = 120.0
+    cx = 176.44000244140625
+    cy = 162.1300048828125
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = -0.52359879016876221
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-000000000000001e.settings]
+        background = true
+        background_color = "surface"
+        background_opacity = 1.0
+        background_radius = 12
+        shadow = false
+        title = ""
+
+    [lockscreen_widgets.widget.lockscreen-widget-000000000000001f]
+    box_height = 120.0
+    box_width = 120.0
+    cx = 177.3800048828125
+    cy = 161.58000183105469
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = -1.0471975803375244
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-000000000000001f.settings]
+        background = true
+        background_color = "surface"
+        background_opacity = 1.0
+        background_radius = 12
+        shadow = false
+        title = ""
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000020]
+    box_height = 120.0
+    box_width = 120.0
+    cx = 1276.3299560546875
+    cy = 81.239997863769531
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = -1.0471975803375244
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000020.settings]
+        background = true
+        background_color = "on_tertiary"
+        background_opacity = 1.0
+        background_radius = 12
+        shadow = false
+        title = ""
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000021]
+    box_height = 48.0
+    box_width = 48.0
+    cx = 250.35000610351562
+    cy = 68.029998779296875
+    output = "HDMI-A-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.52359879016876221
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000021.settings]
+        background_color = "on_primary"
+        background_opacity = 1.0
+        background_padding = 0
+        background_radius = 32
+        title = " "
+
+[osd]
+background_opacity = 0.54999998770654202
+offset_x = 10
+orientation = "vertical"
+position_vertical = "center_right"
+scale = 0.7500000037252903
+
+[plugins]
+enabled = [ "dotnetrob/cat", "noctalia/bongocat", "noctalia/screen_recorder" ]
+
+[shell]
+app_icon_colorize = true
+avatar_path = "/home/ackerman/Pictures/Pfp/2.jpg"
+font_family = "Annotation Mono"
+password_style = "random"
+polkit_agent = true
+settings_window_translucent = true
+
+    [shell.panel]
+    clipboard_position = "bottom_center"
+    control_center_placement = "floating"
+    launcher_position = "bottom_center"
+    polkit_position = "bottom_center"
+    session_placement = "floating"
+    session_position = "center_right"
+    transparency_mode = "glass"
+    wallpaper_placement = "floating"
+    wallpaper_position = "bottom_center"
+
+    [shell.screenshot]
+    annotate = true
+    confirm_region = true
+    directory = "/home/ackerman/Pictures/Screenshots"
+
+    [shell.session]
+    grid = true
+    grid_columns = 1
+
+[theme]
+community_palette = "Monochrome"
+source = "wallpaper"
+wallpaper_scheme = "m3-content"
+
+    [theme.templates]
+    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "kitty", "qt", "starship", "umbriel" ]
+    community_ids = [ "opencode", "discord", "zed", "fastfetch", "papirus-icons" ]
+    enable_builtin_templates = true
+
+[wallpaper]
+directory = "/home/ackerman/Pictures/wallpapers"
+
+    [wallpaper.default]
+    path = "/home/ackerman/Pictures/wallpapers/wallhaven-8gdpgo.png"
+
+    [wallpaper.last]
+    path = "/home/ackerman/Pictures/wallpapers/wallhaven-8gdpgo.png"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/ackerman/Pictures/wallpapers/wallhaven-8gdpgo.png"
+
+[widget.cat]
+type = "dotnetrob/cat:cat"
+
+[widget.cat_2]
+audio_spectrum = true
+tappy_mode = true
+type = "noctalia/bongocat:cat"
+
+[widget.cpu]
+show_value = false
+
+[widget.ram]
+show_value = false
+
+[widget.recorder]
+type = "noctalia/screen_recorder:recorder"
+
+[widget.temp]
+show_value = false
+
+[widget.tray]
+drawer = true
+
+[widget.workspaces]
+show_labels = false
