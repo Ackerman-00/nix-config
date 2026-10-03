@@ -15,7 +15,7 @@
     programs = {
       steam.enable = true;
       gamemode.enable = true;
-      gamescope.enable = true; # Valve micro-compositor: pacing, VRR, scaling
+      gamescope.enable = true;
     };
 
     environment.systemPackages = with pkgs; [

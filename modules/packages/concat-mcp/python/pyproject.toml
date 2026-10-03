@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "concat-mcp"
+version = "0.2.4"
+description = "MCP bridge for the Concat video editor JSON-RPC API"
+requires-python = ">=3.10"
+dependencies = ["mcp"]
+
+[project.scripts]
+concat-mcp = "concat_mcp:main"
+
+[tool.setuptools]
+py-modules = ["concat_mcp"]

@@ -19,15 +19,17 @@
       cliphist
       efibootmgr
       eza
-      fastfetch
       ffmpeg-full
       ffmpegthumbnailer
       fzf
+      glib
       gpu-screen-recorder
       grim
       libheif
       libsecret
       libva-utils
+      nh
+      nvd
       p7zip
       rar
       ripgrep

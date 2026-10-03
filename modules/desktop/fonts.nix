@@ -3,6 +3,8 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
+      anonymousPro
+      ibm-plex
       maple-mono.NF
       lohit-fonts.bengali
       noto-fonts

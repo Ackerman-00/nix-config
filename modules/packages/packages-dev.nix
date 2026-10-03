@@ -15,19 +15,23 @@
     environment.systemPackages = with pkgs; [
       fd
       gcc
+      pkg-config
       lazygit
       nixfmt
       nodejs
       rustup
+      uv
+      pipx
+    ];
 
-      (python3.withPackages (
-        ps: with ps; [
-          openai
-          requests
-          pip
-          numpy
-        ]
-      ))
+    # Domain libs for the single interpreter (python-env.nix builds it).
+    my.python.packages = [
+      "ipython"
+      "debugpy"
+      "openai"
+      "requests"
+      "numpy"
+      "pyyaml"
     ];
   };
 }

@@ -1,13 +1,13 @@
-# Helium, vendored in-tree: tarball build (_package.nix) + policies, mime,
-# default-browser wiring. Tarball reads /etc/chromium/policies natively.
+# Helium browser, policies, mime, default-browser wiring.
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }:
 let
-  helium = pkgs.callPackage ./_package.nix { };
+  helium = pkgs.callPackage ./package.nix { heliumPin = inputs.helium-pin; };
 in
 {
   options.my.helium.enable = lib.mkOption {
@@ -17,16 +17,11 @@ in
   };
 
   config = lib.mkIf config.my.helium.enable {
-    # Policy files only, no browser install. Verify live via helium://policy.
     programs.chromium = {
       enable = true;
       extensions = [
         "ghmbeldphafepmbegfdlkpapadhbakde" # Proton Pass
-        # Force-install more declaratively, e.g.:
-        # "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-        # "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
       ];
-      # IDs = 32-char tail of the Chrome Web Store URL.
     };
 
     environment = {
@@ -38,7 +33,7 @@ in
       };
     };
 
-    # DRM: point Helium at nixpkgs Widevine CDM (Ly-sec's component trick).
+    # Widevine CDM comes from nixpkgs, not the tarball.
     home-manager.users.ackerman.xdg.configFile."net.imput.helium/WidevineCdm/latest-component-updated-widevine-cdm".text =
       builtins.toJSON {
         Path = "${pkgs.widevine-cdm}/share/google/chrome/WidevineCdm";

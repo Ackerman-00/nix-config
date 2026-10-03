@@ -1,5 +1,4 @@
-# Mirrors binds.toml 1:1. Noctalia spawns verified against your live config;
-# compositor verbs match Umbriel's Actions reference (`umbriel msg --help`).
+# Keybinds
 {
   programs.umbriel.settings = {
     keybinds = {
@@ -7,12 +6,12 @@
       "Ctrl+Alt+W" = "spawn:noctalia msg wallpaper-random";
       "Ctrl+Alt+Delete" = "spawn:noctalia msg panel-toggle session";
       "Mod+W" = "spawn:noctalia msg panel-toggle wallpaper";
+      "Mod+Shift+W" = "column-toggle-tabbed";
       "Mod+A" = "spawn:noctalia msg panel-toggle launcher";
       "Mod+Z" = "spawn:noctalia msg panel-toggle launcher /emo";
       "Mod+V" = "spawn:noctalia msg panel-toggle clipboard";
       "Mod+X" = "spawn:noctalia msg bar-toggle";
       "Mod+P" = "spawn:noctalia msg panel-toggle control-center";
-      "Mod+Shift+T" = "spawn:noctalia msg panel-toggle test";
       "Mod+Comma" = "spawn:noctalia msg settings-toggle";
       "F5" = "spawn:noctalia msg volume-down";
       "F6" = "spawn:noctalia msg volume-up";
@@ -35,7 +34,8 @@
       "Mod+Shift+Ctrl+Down" = "column-move-to-output-down";
       "Mod+Shift+Ctrl+Up" = "column-move-to-output-up";
       "Mod+Shift+Ctrl+Right" = "column-move-to-output-right";
-      # Scrolling layout: Mod+scroll moves between windows, Alt+Wheel switches workspaces.
+
+      # Scrolling layout:
       "Mod+WheelUp" = {
         action = "window-focus-left";
         cooldown_ms = 150;
@@ -103,7 +103,7 @@
       "Mod+R" = "window-cycle-primary-extent";
       "Mod+Ctrl+R" = "window-toggle-maximize-to-edges";
       "Mod+F" = "window-toggle-maximize";
-      "Mod+E" = "spawn:pcmanfm-qt";
+      "Mod+E" = "spawn:nautilus";
       "Mod+N" = "workspace-set-layout:toggle";
       "Mod+O" = "overview-toggle";
       "Mod+Shift+Space" = "window-move-to-scratchpad";
@@ -118,6 +118,11 @@
       "Alt+F" = "window-toggle-fullscreen";
       "Alt+Tab" = "spawn:noctalia msg window-switcher";
       "Mod+MouseMiddle" = "layout-scroll-drag";
+      "Mod+Shift+Escape" = {
+        action = "shortcuts-inhibit-toggle";
+        allow_when_inhibited = true;
+        repeat = false;
+      };
     };
   };
 }

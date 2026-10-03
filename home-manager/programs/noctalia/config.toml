@@ -714,9 +714,10 @@ source = "wallpaper"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "kitty", "qt", "starship", "umbriel" ]
-    community_ids = [ "opencode", "discord", "zed", "fastfetch", "papirus-icons" ]
+    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "kitty", "niri", "qt", "starship" ]
+    community_ids = [ "opencode", "discord", "zed", "fastfetch" ]
     enable_builtin_templates = true
+    enable_community_templates = true
 
 [wallpaper]
 directory = "/home/ackerman/Pictures/wallpapers"
@@ -724,10 +725,7 @@ directory = "/home/ackerman/Pictures/wallpapers"
     [wallpaper.default]
     path = "/home/ackerman/Pictures/wallpapers/wallhaven-8gdpgo.png"
 
-    [wallpaper.last]
-    path = "/home/ackerman/Pictures/wallpapers/wallhaven-8gdpgo.png"
-
-    [wallpaper.monitors.HDMI-A-1]
+    [wallpaper.monitor."HDMI-A-1"]
     path = "/home/ackerman/Pictures/wallpapers/wallhaven-8gdpgo.png"
 
 [widget.cat]
@@ -739,15 +737,21 @@ tappy_mode = true
 type = "noctalia/bongocat:cat"
 
 [widget.cpu]
+type = "sysmon"
+stat = "cpu_usage"
 show_value = false
 
 [widget.ram]
+type = "sysmon"
+stat = "ram_used"
 show_value = false
 
 [widget.recorder]
 type = "noctalia/screen_recorder:recorder"
 
 [widget.temp]
+type = "sysmon"
+stat = "cpu_temp"
 show_value = false
 
 [widget.tray]

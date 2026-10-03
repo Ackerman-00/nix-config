@@ -3,9 +3,11 @@
 {
   services.displayManager.noctalia-greeter = {
     enable = true;
+    passwordlessSyncUsers = [ "ackerman" ];
     settings = {
       cursor.size = 24;
       keyboard.layout = "us";
+      user.default = "ackerman";
     };
     cursorTheme = {
       package = pkgs.bibata-cursors;

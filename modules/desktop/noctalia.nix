@@ -1,11 +1,8 @@
-# Noctalia shell, flake build pulled binary-only from noctalia.cachix.org.
-# Autostarted by Umbriel (see home-manager desktop config), so no systemd unit.
-{ inputs, pkgs, ... }:
-{
-  imports = [ inputs.noctalia.nixosModules.default ];
-
-  programs.noctalia = {
-    enable = true;
-    package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  };
+# Noctalia shell, from nixpkgs (no flake pin).
+# NOTE: nixpkgs ships 4.7.7 while the old flake pin tracked 5.2.0. The
+# 5.x-era config.toml still applies (unknown keys warn, they don't fail),
+# but Umbriel-era shell integration expects 5.x. If the bar/panels
+# misbehave under Umbriel, this downgrade is the first suspect.
+_: {
+  programs.noctalia.enable = true;
 }

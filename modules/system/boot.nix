@@ -26,5 +26,11 @@
     ];
   };
 
-  zramSwap.enable = true;
+  # zstd at 50% of 15GiB, ahead of the disk swap.
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+    priority = 5;
+  };
 }

@@ -1,19 +1,43 @@
-{ pkgs, lib }:
+# Helium browser, vendored in-tree: prebuilt upstream tarball.
+# Version, URL and hash come from the `helium-pin` flake input
+# (versions.json, rewritten by upstream CI), so flake.lock is the only
+# pin and `nix flake update` is the whole procedure.
+{
+  pkgs,
+  lib,
+  heliumPin,
+}:
 
 let
   pname = "helium";
-  version = "0.17.2.1";
 
-  archives = {
-    x86_64-linux = pkgs.fetchurl {
-      url = "https://github.com/imputnet/helium-linux/releases/download/${version}/helium-${version}-x86_64_linux.tar.xz";
-      hash = "sha256-KmOd9U49BfQTz7tGIqTRpoWEsx2lp6r1juPNg8fD4pk=";
-    };
-    aarch64-linux = pkgs.fetchurl {
-      url = "https://github.com/imputnet/helium-linux/releases/download/${version}/helium-${version}-arm64_linux.tar.xz";
-      hash = "sha256-6WYpl0uIuH8pKPNndzE9aqTym4uA2Mx4Ofp+6ReG7R0=";
-    };
-  };
+  pinFile = "${heliumPin}/versions.json";
+  pins =
+    if builtins.pathExists pinFile then
+      builtins.fromJSON (builtins.readFile pinFile)
+    else
+      throw "helium: ${pinFile} is missing; is the `helium-pin` flake input intact?";
+
+  # The pin is keyed by platform and carries { version, url, hash } per entry.
+  current =
+    pins.${pkgs.stdenv.hostPlatform.system}
+      or (throw "helium: helium-pin provides no entry for ${pkgs.stdenv.hostPlatform.system}");
+
+  inherit (current) version;
+  inherit (current) hash;
+
+  # Upstream owns the URL shape; reject a parse that disagrees with the
+  # version it came with rather than fetching something unexpected.
+  url =
+    let
+      raw = current.url;
+    in
+    if lib.hasPrefix "https://" raw && lib.hasInfix "/${version}/" raw then
+      raw
+    else
+      throw "helium: pin entry disagrees with its version (${version}): ${raw}";
+
+  src = pkgs.fetchurl { inherit url hash; };
 
   runtimeDeps = with pkgs; [
     stdenv.cc.cc.lib
@@ -66,9 +90,7 @@ let
   rpath = lib.makeLibraryPath runtimeDeps;
 in
 pkgs.stdenv.mkDerivation {
-  inherit pname version;
-
-  src = archives.${pkgs.stdenv.hostPlatform.system};
+  inherit pname version src;
 
   dontConfigure = true;
   dontBuild = true;
@@ -154,6 +176,15 @@ pkgs.stdenv.mkDerivation {
   installCheckPhase = ''
     $out/bin/helium --version
   '';
+
+  # The resolved pin, for inspection.
+  passthru = {
+    inherit
+      url
+      hash
+      version
+      ;
+  };
 
   meta = {
     homepage = "https://github.com/imputnet/helium-linux";

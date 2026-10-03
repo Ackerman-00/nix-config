@@ -12,7 +12,6 @@
   };
 
   config = lib.mkIf config.my.apps.enable {
-    # GPU decode in mpv (wiki: Accelerated Video Playback).
     home-manager.users.ackerman.xdg.configFile."mpv/mpv.conf".text = ''
       hwdec=auto
     '';
@@ -24,7 +23,6 @@
       gnome-text-editor
       godot
       imv
-      kitty
       loupe
       mpv
       nautilus

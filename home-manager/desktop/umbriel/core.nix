@@ -1,32 +1,21 @@
-# Mirrors core.toml 1:1. Shader paths point at ./shaders (vendored into the
-# store); commented example blocks kept as notes below their tables.
+# Core config
 {
   programs.umbriel.settings = {
     workspaces = {
       back_and_forth = false;
       empty_above = false;
     };
-
-    # Colors: all commented upstream, Noctalia template owns them via noctalia.toml.
-    # background/text_primary/text_muted/accent_primary/accent_secondary/
-    # warning/error/insert_hint/backdrop/shadow, see Umbriel Appearance reference.
-
     animation = {
       enabled = true;
       duration_ms = 200;
       curve = "easeout";
-
-      springs.snap = {
-        damping = 0.9;
-        stiffness = 400;
-      };
 
       windows_in = {
         enabled = true;
         duration_ms = 600;
         curve = "easeout";
         style = "zoom";
-        shader = "${./shaders/open.glsl}";
+        effect = "open";
       };
 
       windows_out = {
@@ -34,7 +23,7 @@
         duration_ms = 400;
         curve = "easeout";
         style = "slide";
-        shader = "${./shaders/close.glsl}";
+        effect = "close";
       };
 
       windows_move = {
@@ -112,10 +101,19 @@
       };
     };
 
+    effects = {
+      preset.open = {
+        kind = "animation";
+        shader = "${./shaders/open.glsl}";
+      };
+      preset.close = {
+        kind = "animation";
+        shader = "${./shaders/close.glsl}";
+      };
+    };
+
     overview = {
       zoom = 0.5;
-      # background_blur / workspace_background / shortcuts / badge_color
-      # left at defaults; see Umbriel docs/user/workspaces-overview.
     };
 
     hot_corners = {
@@ -173,9 +171,7 @@
       };
     };
 
-    # Workspace override example (docs/user/outputs.md#workspace-rules):
     # workspace = [{ name = "chat"; layout.mode = "dwindle"; }];
-
     output = {
       "Samsung Electric Company S19C170 HYCFB02483" = {
         mode = "1366x768@59.79";
@@ -225,7 +221,7 @@
         theme = "Bibata-Modern-Classic";
         size = 24;
         hardware_cursor = true;
-        follows_focus = false;
+        follows_focus = true;
         hide_when_typing = false;
         hide_timeout_ms = 0;
       };
@@ -235,8 +231,5 @@
         follows_mouse_max_scroll = 0.0;
       };
     };
-
-    # Per-device overrides example (names from `libinput list-devices`):
-    # input.device = [{ name = "Acme Precision Touchpad"; tap = true; }];
   };
 }

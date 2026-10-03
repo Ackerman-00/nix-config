@@ -1,4 +1,4 @@
-# Mirrors env.toml: compositor environment. Lid events don't apply (desktop PC).
+# Env
 {
   programs.umbriel.settings = {
     environment = {

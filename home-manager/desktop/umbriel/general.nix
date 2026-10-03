@@ -1,5 +1,4 @@
-# General + Noctalia theme hook. The optional include is pre-wired to the
-# live path so templates theme this setup without touching store files.
+# General
 { config, ... }:
 {
   programs.umbriel.settings = {
