@@ -94,6 +94,10 @@ The 'fileSystems' option does not specify your root file system.
 Use `path:` everywhere so the directory is copied verbatim. `nh` is already
 configured for this.
 
+This applies to `nix flake check` as well, so the check command below uses
+`path:.`. On a checkout without the file — a fresh clone, or CI — the check
+fails with that same assertion.
+
 ## Binary cache
 
 Umbriel and `xdg-desktop-portal-umbriel` come from
@@ -108,7 +112,7 @@ the cache when built against the nixpkgs its own lockfile pins.
 ## Lint and checks
 
 ```sh
-nix flake check                       # nixfmt, statix, deadnix, noctalia toml
+nix flake check path:.               # nixfmt, statix, deadnix, noctalia toml
 nix fmt                               # format
 nix flake update umbriel              # bump umbriel
 nix flake update                      # bump everything (includes nixpkgs)
