@@ -3,7 +3,7 @@
 {
   programs.nh = {
     enable = true;
-    flake = "path:/home/ackerman/nix-config";
+    flake = "path:/etc/nixos";
 
     # Daily safe cleanup: keeps the 5 newest generations plus everything
     # younger than 7 days, so a rollback target always survives. This is the
