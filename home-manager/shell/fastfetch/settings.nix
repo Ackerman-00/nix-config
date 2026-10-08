@@ -2,11 +2,11 @@
 {
   "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
   logo = {
-    type = "kitty-direct";
+    type = "kitty";
     width = 26;
     height = 17;
     padding = {
-      top = 5;
+      top = 4;
       right = 5;
       left = 3;
     };

@@ -6,6 +6,5 @@
     ./services.nix
     ./noctalia.nix
     ./umbriel.nix
-    ./niri.nix
   ];
 }

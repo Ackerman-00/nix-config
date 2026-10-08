@@ -1,13 +1,13 @@
 {
   description = "NixOS Optimized Flake";
 
-  # Eval-time caches for first-switch bootstrap.
+  # Eval-time caches for first-switch bootstrap. Mirrored into
+  # modules/system/nix-settings.nix, which is what the daemon actually
+  # substitutes through once the system is built.
   nixConfig = {
-    extra-substituters = [
-      "https://niri-epireyn.cachix.org"
-    ];
+    extra-substituters = [ "https://umbriel.cachix.org" ];
     extra-trusted-public-keys = [
-      "niri-epireyn.cachix.org-1:tlVyFN7CtsDT+ZcLPS+ekFWeT1X6X4OqvWqbBMyIzFA="
+      "umbriel.cachix.org-1:JfNq/2yg2S6D6z4Z2dVSZrZlDPQTKtexB6GAVLD98nw="
     ];
   };
 
@@ -20,19 +20,28 @@
     };
 
     # Umbriel compositor (noctalia-dev/umbriel, wlroots-based, official nix
-    # modules). `nix flake update umbriel` bumps it.
-    umbriel = {
-      url = "github:noctalia-dev/umbriel";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.xdg-desktop-portal-umbriel.inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # modules). Tracks the upstream `cachix` branch, NOT `main`: that branch
+    # is pinned to the newest commit whose CI run actually pushed binaries
+    # to umbriel.cachix.org, so `main` would often fetch artifacts that are
+    # not cached yet and force a full local C++ compile.
+    #
+    # No `follows` on nixpkgs here, deliberately — upstream requires it.
+    # Umbriel's store paths only match the cache when built against the
+    # nixpkgs its own flake.lock pins; inheriting ours would diverge on the
+    # next `nix flake update nixpkgs` and silently go back to compiling.
+    # The xdg-desktop-portal-umbriel sub-input inherits umbriel's nixpkgs
+    # for the same reason (umbriel's flake.nix sets that follows itself).
+    #
+    # Bump with: nix flake update umbriel
+    umbriel.url = "github:noctalia-dev/umbriel/cachix";
 
-    # Niri via epireyn fork (tracks niri-wm/niri main + satellite main).
-    niri = {
-      url = "github:epireyn/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
-    };
+    # Niri (epireyn fork) and its overlay were removed: the compositor had to
+    # compile from source, since its store paths never matched
+    # niri-epireyn.cachix.org (our nixpkgs followed the input). Umbriel is the
+    # single compositor now. To bring niri back, restore the `niri` input
+    # below, `inputs.niri.nixosModules.niri` in the module list, the
+    # `./niri.nix` module, and the substituter pair in nixConfig +
+    # modules/system/nix-settings.nix.
 
     # OpenCode feed pin; `nix flake update` bumps it.
     opencode-feed = {
@@ -122,7 +131,6 @@
         modules = [
           ./configuration.nix
           inputs.umbriel.nixosModules.default
-          inputs.niri.nixosModules.niri
           home-manager.nixosModules.home-manager
           {
             home-manager = {

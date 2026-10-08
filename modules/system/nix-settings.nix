@@ -24,11 +24,12 @@
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       ];
-      extra-substituters = [
-        "https://niri-epireyn.cachix.org"
-      ];
+      # Umbriel + xdg-desktop-portal-umbriel. Verbatim from
+      # docs.noctalia.dev/umbriel "Binary cache"; upstream flake.nix ships
+      # no nixConfig of its own, so the substituter must be declared here.
+      extra-substituters = [ "https://umbriel.cachix.org" ];
       extra-trusted-public-keys = [
-        "niri-epireyn.cachix.org-1:tlVyFN7CtsDT+ZcLPS+ekFWeT1X6X4OqvWqbBMyIzFA="
+        "umbriel.cachix.org-1:JfNq/2yg2S6D6z4Z2dVSZrZlDPQTKtexB6GAVLD98nw="
       ];
     };
 
