@@ -1,4 +1,4 @@
-# Nix store: caches, offline dedup timer, weekly GC.
+# Nix store: caches, offline dedup timer, daily GC.
 { lib, ... }:
 {
   nixpkgs.config.allowUnfree = true;
@@ -9,6 +9,19 @@
         "nix-command"
         "flakes"
       ];
+      # Let flake.nix's nixConfig (the substituter pair below, declaring
+      # umbriel.cachix.org for first-switch bootstrap) actually apply.
+      # Without this, nix refuses untrusted flake configuration and warns
+      # every time the flake is evaluated, silently ignoring those
+      # substituters until the built system provides them.
+      #
+      # Trade-off, knowingly accepted: any flake you run nix against can
+      # now set nix settings, including `post-build-hook`, which is
+      # arbitrary code run on a successful build. Safe as long as you only
+      # build flakes you trust. Remove this line to close that surface,
+      # then delete the nixConfig block in flake.nix to silence the
+      # warning instead.
+      accept-flake-config = true;
       auto-optimise-store = false;
       max-jobs = "auto";
       http-connections = 50;
