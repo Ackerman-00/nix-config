@@ -1,9 +1,7 @@
 {
   description = "NixOS Optimized Flake";
 
-  # Eval-time caches for first-switch bootstrap. Mirrored into
-  # modules/system/nix-settings.nix, which is what the daemon actually
-  # substitutes through once the system is built.
+  # Eval-time caches, mirrored in modules/system/nix-settings.nix.
   nixConfig = {
     extra-substituters = [ "https://umbriel.cachix.org" ];
     extra-trusted-public-keys = [
@@ -19,29 +17,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Umbriel compositor (noctalia-dev/umbriel, wlroots-based, official nix
-    # modules). Tracks the upstream `cachix` branch, NOT `main`: that branch
-    # is pinned to the newest commit whose CI run actually pushed binaries
-    # to umbriel.cachix.org, so `main` would often fetch artifacts that are
-    # not cached yet and force a full local C++ compile.
-    #
-    # No `follows` on nixpkgs here, deliberately — upstream requires it.
-    # Umbriel's store paths only match the cache when built against the
-    # nixpkgs its own flake.lock pins; inheriting ours would diverge on the
-    # next `nix flake update nixpkgs` and silently go back to compiling.
-    # The xdg-desktop-portal-umbriel sub-input inherits umbriel's nixpkgs
-    # for the same reason (umbriel's flake.nix sets that follows itself).
-    #
-    # Bump with: nix flake update umbriel
+    # Umbriel compositor: official nix modules, tracked on the `cachix` branch.
     umbriel.url = "github:noctalia-dev/umbriel/cachix";
-
-    # Niri (epireyn fork) and its overlay were removed: the compositor had to
-    # compile from source, since its store paths never matched
-    # niri-epireyn.cachix.org (our nixpkgs followed the input). Umbriel is the
-    # single compositor now. To bring niri back, restore the `niri` input
-    # below, `inputs.niri.nixosModules.niri` in the module list, the
-    # `./niri.nix` module, and the substituter pair in nixConfig +
-    # modules/system/nix-settings.nix.
 
     # OpenCode feed pin; `nix flake update` bumps it.
     opencode-feed = {
@@ -73,7 +50,6 @@
       url = "git+https://github.com/jkawamoto/mcp-youtube-transcript.git?ref=refs/tags/v0.7.0";
       flake = false;
     };
-
   };
 
   outputs =
