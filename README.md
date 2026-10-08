@@ -20,7 +20,7 @@ modules/
   shell/                     zsh tooling, neovim
 home-manager/
   shell/                     zsh, kitty, starship, fastfetch, git, direnv
-  desktop/                   niri, umbriel
+  desktop/                   umbriel
   programs/                  noctalia, vesktop, opencode
 ```
 
@@ -33,13 +33,17 @@ before anything else:
 nix-shell -p git --extra-experimental-features 'nix-command flakes'
 ```
 
-Clone the dotfiles and drop them in place:
+Clone straight into `/etc/nixos`. Do not keep a second copy in `$HOME`: `/etc/nixos`
+is the one every rebuild reads, so a copy elsewhere silently never applies.
+
+`/etc` is root-owned, so git cannot create the directory itself — make it first and
+hand it to your user, then clone into the empty dir (git refuses a non-empty one).
 
 ```sh
-git clone https://github.com/<you>/dotfiles ~/dotfiles
-
 sudo rm -rf /etc/nixos
-sudo cp -r ~/dotfiles /etc/nixos
+sudo mkdir -p /etc/nixos
+sudo chown "$USER" /etc/nixos
+git clone https://github.com/Ackerman-00/nix-config /etc/nixos
 ```
 
 `hardware-configuration.nix` is gitignored, so it never ships in the clone.
