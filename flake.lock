@@ -32,7 +32,7 @@
     "craft-launcher-feed": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-7tmIq76OX0PpsRHiO7cmO7EPRWSIw7xWaNG+wJZd3sM=",
+        "narHash": "sha256-NAq6RAN6cZq6boYeF+V73NhwrqOFd9llMWSyMlwwAXo=",
         "type": "file",
         "url": "https://api.github.com/repos/storytold/craft-launcher/releases/latest"
       },
@@ -80,7 +80,7 @@
     "hyperframes-npm": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-drIKPu8gamiN5xrJgf8EGhIyEkCn0Pyge9VA46QnNNs=",
+        "narHash": "sha256-NpGeW8Ta8a6NVbvOU1MWgW/jCJPWmyzDs0187MXT3Os=",
         "type": "file",
         "url": "https://registry.npmjs.org/-/package/hyperframes/dist-tags"
       },
