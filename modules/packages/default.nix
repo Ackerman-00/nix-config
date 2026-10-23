@@ -9,12 +9,8 @@
     ./packages-kankan.nix
     ./python-env.nix
     ./mcp-registry.nix
-    ./opencode
-    ./openchamber
-    ./concat
-    ./concat-mcp
-    ./blender-mcp
-    ./mcp-servers
-    ./tts
+    ./agent
+    ./media
+    ./mcp
   ];
 }

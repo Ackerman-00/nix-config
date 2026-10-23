@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Justifies going native via concrete mobile needs (installed app, push notifications) rather than vibes",
+      "passed": true,
+      "evidence": "'Your users are asking for two things on that list by name [installed app, notifications], so the answer is: go real' - tiebreak applied to stated needs"
+    },
+    {
+      "text": "Warns a rebuild is required and explains why the rebuild is easier than the first build",
+      "passed": true,
+      "evidence": "'Expect a full rebuild, not a port... a rebuild is far easier than the first build, because you already know exactly what to build'"
+    },
+    {
+      "text": "Prescribes flow-by-flow rebuild (map flows, per-flow specs) instead of one-shot regeneration",
+      "passed": true,
+      "evidence": "Section 3 maps flows from web screenshots; Section 4 PRD per flow; Section 6 'Never ask for the whole app in one prompt'"
+    },
+    {
+      "text": "Covers a concrete release path (TestFlight / testers / developer accounts)",
+      "passed": true,
+      "evidence": "Section 7: TestFlight ($99/yr), 5-7 engaged users first, Google Play $25 with 12-tester closed test"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  }
+}

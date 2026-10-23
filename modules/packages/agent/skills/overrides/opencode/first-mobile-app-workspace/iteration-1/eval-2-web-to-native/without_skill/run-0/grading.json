@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Justifies going native via concrete mobile needs (installed app, push notifications) rather than vibes",
+      "passed": false,
+      "evidence": "Argues the opposite: 'You do not need to rebuild anything native... by turning it into a PWA'; no case made FOR going native"
+    },
+    {
+      "text": "Warns a rebuild is required and explains why the rebuild is easier than the first build",
+      "passed": false,
+      "evidence": "Explicitly says 'never rewrite native' and 'do not rewrite' - no rebuild-is-easier argument because no rebuild is prescribed"
+    },
+    {
+      "text": "Prescribes flow-by-flow rebuild (map flows, per-flow specs) instead of one-shot regeneration",
+      "passed": false,
+      "evidence": "Prescribes adding PWA/push layers to the existing app, not a flow-mapped rebuild"
+    },
+    {
+      "text": "Covers a concrete release path (TestFlight / testers / developer accounts)",
+      "passed": true,
+      "evidence": "Route 3 covers store route: '$99/yr (Apple) + $25 (Google)', 12-tester closed test, review cycles - conditionally, if group insists"
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "failed": 3,
+    "total": 4,
+    "pass_rate": 0.25
+  }
+}

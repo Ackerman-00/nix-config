@@ -1,0 +1,22 @@
+[
+  {"id": 1,  "query": "my sister runs a dog grooming salon and I want to build her a booking app she can use on the app store, I've never coded before, where do I even start", "should_trigger": true},
+  {"id": 2,  "query": "thinking about turning my notion habit tracker into a real iphone app, is it worth it or should i just keep it web only", "should_trigger": true},
+  {"id": 3,  "query": "what's the difference between capacitor vs react native vs going full swift and kotlin for my first app", "should_trigger": true},
+  {"id": 4,  "query": "i have an idea for a running log app but my last idea flopped. how long should i validate with a web prototype before building the native version", "should_trigger": true},
+  {"id": 5,  "query": "how do i get real people testing my app before launch, my dev friend keeps mentioning testflight and i have no idea what that is", "should_trigger": true},
+  {"id": 6,  "query": "im a plumber not a programmer lol, can i actually ship something to google play with these AI tools everyone talks about, and how much would it cost me", "should_trigger": true},
+  {"id": 7,  "query": "i wrote a PRD for my mood journal app, next step is picking between lovable and something that outputs real swift, any advice on choosing", "should_trigger": true},
+  {"id": 8,  "query": "my board game night web app has about 50 weekly users and they keep asking for an app they can install with push notifications, do i need to rebuild native", "should_trigger": true},
+  {"id": 9,  "query": "how do i structure building my first mobile app so i don't end up with spaghetti, feature by feature or all at once", "should_trigger": true},
+  {"id": 10, "query": "how long does it realistically take one person to build and release a simple app on both app stores", "should_trigger": true},
+  {"id": 11, "query": "build me a dashboard in react showing our weekly sales metrics, the data comes from stripe webhooks", "should_trigger": false},
+  {"id": 12, "query": "my flutter app crashes with a render overflow exception when the keyboard opens, how do i debug this", "should_trigger": false},
+  {"id": 13, "query": "help me write the PRD for an internal admin tool our ops team will use in the browser", "should_trigger": false},
+  {"id": 14, "query": "design an icon set and app logo for my side project, something minimal and geometric", "should_trigger": false},
+  {"id": 15, "query": "my express server has a race condition when two webhooks arrive for the same order", "should_trigger": false},
+  {"id": 16, "query": "convert this csv of orders into an xlsx and add a pivot table by region and month", "should_trigger": false},
+  {"id": 17, "query": "edit my product demo video: trim the intro and add captions", "should_trigger": false},
+  {"id": 18, "query": "i need a landing page with a stripe checkout link for my saas waitlist, nothing fancy", "should_trigger": false},
+  {"id": 19, "query": "set up an automation so my phone gets a notification when the garage door opens", "should_trigger": false},
+  {"id": 20, "query": "which git workflow should a two-person unity game project use, trunk based or feature branches", "should_trigger": false}
+]

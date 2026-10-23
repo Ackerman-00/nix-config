@@ -1,0 +1,45 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugins": [
+    "superpowers@git+https://github.com/obra/superpowers.git#${superpowers_rev}"
+  ],
+  "disabled_providers": [
+    "vercel",
+    "pgsgrove"
+  ],
+  "warming": {
+    "duration": "180 minutes"
+  },
+  "providers": {
+    "pgsgrove": {
+      "name": "PGS",
+      "package": "aisdk:@ai-sdk/openai-compatible",
+      "settings": {
+        "baseURL": "https://api.pgsgrove.com/v1"
+      },
+      "models": {
+        "deepseek-v4.1-flash-1017": {
+          "modelID": "deepseek-v4.1-flash-1017",
+          "name": "Deepseek",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text",
+              "image",
+              "video",
+              "audio",
+              "pdf"
+            ],
+            "output": [
+              "text",
+              "image",
+              "audio",
+              "video",
+              "pdf"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "eval_id": 0,
+  "eval_name": "noob-habit-tracker-both-stores",
+  "prompt": "I have never coded. I have an idea for a habit tracker app for iPhone and Android. I want it in the App Store and Google Play. Walk me through what I should do, in order.",
+  "assertions": [
+    {
+      "text": "Plan prescribes a web prototype validated with real users BEFORE building native"
+    },
+    {
+      "text": "Plan instructs flow-by-flow building with a per-flow spec/PRD, explicitly against one giant prompt"
+    },
+    {
+      "text": "Mentions testing with 5-7 real people before release"
+    },
+    {
+      "text": "Covers BOTH stores: Apple ($99/yr, TestFlight) and Google Play ($25, closed testing requirement)"
+    }
+  ]
+}

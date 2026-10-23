@@ -1,0 +1,43 @@
+{
+  "skill_name": "first-mobile-app",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "noob-habit-tracker-both-stores",
+      "prompt": "I have never coded. I have an idea for a habit tracker app for iPhone and Android. I want it in the App Store and Google Play. Walk me through what I should do, in order.",
+      "expected_output": "Ordered plan: web prototype validation first, then native decision, flow-by-flow build with PRD, TestFlight + 5-7 testers release",
+      "files": [],
+      "assertions": [
+        {"text": "Plan prescribes a web prototype validated with real users BEFORE building native"},
+        {"text": "Plan instructs flow-by-flow building with a per-flow spec/PRD, explicitly against one giant prompt"},
+        {"text": "Mentions testing with 5-7 real people before release"},
+        {"text": "Covers BOTH stores: Apple ($99/yr, TestFlight) and Google Play ($25, closed testing requirement)"}
+      ]
+    },
+    {
+      "id": 1,
+      "eval_name": "tool-selection-gym-app",
+      "prompt": "I want to build a booking app for my sister's dog grooming salon. Should I use Lovable? I keep seeing ads for it. What tools would you pick and why?",
+      "expected_output": "Flags Lovable as web-only, gives builder selection criteria (pricing model, code ownership, feel), suggests validation before committing",
+      "files": [],
+      "assertions": [
+        {"text": "States that Lovable produces web apps, not native store-submittable mobile apps"},
+        {"text": "Gives concrete builder-selection criteria including pricing model and code ownership/export"},
+        {"text": "Advises validating the idea (prototype + real users) before investing in the real build"}
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "web-to-native-graduation",
+      "prompt": "I already built a web app for tracking local board game nights with Lovable and about 40 people use it weekly. People keep asking for an app they can install with push notifications. What should I do now?",
+      "expected_output": "Native justified by mobile needs (install + push), warns rebuild needed, flow-by-flow rebuild approach, release path",
+      "files": [],
+      "assertions": [
+        {"text": "Justifies going native via concrete mobile needs (installed app, push notifications) rather than vibes"},
+        {"text": "Warns a rebuild is required and explains why the rebuild is easier than the first build"},
+        {"text": "Prescribes flow-by-flow rebuild (map flows, per-flow specs) instead of one-shot regeneration"},
+        {"text": "Covers a concrete release path (TestFlight / testers / developer accounts)"}
+      ]
+    }
+  ]
+}

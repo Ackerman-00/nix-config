@@ -1,0 +1,19 @@
+{
+  "eval_id": 2,
+  "eval_name": "web-to-native-graduation",
+  "prompt": "I already built a web app for tracking local board game nights with Lovable and about 40 people use it weekly. People keep asking for an app they can install with push notifications. What should I do now?",
+  "assertions": [
+    {
+      "text": "Justifies going native via concrete mobile needs (installed app, push notifications) rather than vibes"
+    },
+    {
+      "text": "Warns a rebuild is required and explains why the rebuild is easier than the first build"
+    },
+    {
+      "text": "Prescribes flow-by-flow rebuild (map flows, per-flow specs) instead of one-shot regeneration"
+    },
+    {
+      "text": "Covers a concrete release path (TestFlight / testers / developer accounts)"
+    }
+  ]
+}

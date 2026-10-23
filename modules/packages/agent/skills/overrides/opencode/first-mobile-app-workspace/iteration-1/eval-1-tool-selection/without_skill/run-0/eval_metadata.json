@@ -1,0 +1,16 @@
+{
+  "eval_id": 1,
+  "eval_name": "tool-selection-gym-app",
+  "prompt": "I want to build a booking app for my sister's dog grooming salon. Should I use Lovable? I keep seeing ads for it. What tools would you pick and why?",
+  "assertions": [
+    {
+      "text": "States that Lovable produces web apps, not native store-submittable mobile apps"
+    },
+    {
+      "text": "Gives concrete builder-selection criteria including pricing model and code ownership/export"
+    },
+    {
+      "text": "Advises validating the idea (prototype + real users) before investing in the real build"
+    }
+  ]
+}

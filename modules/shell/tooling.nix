@@ -1,4 +1,4 @@
-# Shell programs: shell, git (credential helper in home-manager/shell/git).
+# Shell programs: shell, git (credential helper in modules/home-manager/shell/git).
 {
   programs = {
     zsh = {

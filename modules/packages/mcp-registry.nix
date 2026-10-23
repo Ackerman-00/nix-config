@@ -1,11 +1,4 @@
-# MCP server registry: providers declare `my.mcp.servers.<name>` inside
-# their own `mkIf enable` block, so disabling a module unregisters its
-# server. home-manager/programs/opencode.nix renders it to JSON.
-#
-# Nothing auto-connects: each server also has `my.mcp.<name>.enable`
-# (default false). Off renders as `"disabled": true`, so OpenCode lists it
-# in /mcp (toggleable live per session) but spawns no process. An agent
-# turns one on by setting the flag and rebuilding.
+# MCP registry
 {
   config,
   lib,
@@ -53,7 +46,16 @@
             enabled = lib.mkOption {
               type = lib.types.bool;
               default = false;
-              description = "Connect at startup. Off renders as `disabled: true` (no process spawned).";
+              description = "Connect at startup. Off renders as `enabled: false` (no process spawned).";
+            };
+
+            timeout = lib.mkOption {
+              type = lib.types.ints.unsigned;
+              default = 20000;
+              description = ''
+                Milliseconds an MCP request may take. The OpenCode default is
+                5000, which aborts any tool that generates or downloads.
+              '';
             };
           };
         }

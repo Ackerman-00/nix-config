@@ -1,0 +1,45 @@
+{
+  "vault": "/home/ackerman/.local/share/neurakeep/vault",
+  "searchRoots": [
+    {
+      "root": "/home/ackerman/.local/share/neurakeep/vault",
+      "space": "personal"
+    },
+    {
+      "root": "/home/ackerman/Documents/Kankan/.memory",
+      "space": "project"
+    }
+  ],
+  "capture": true,
+  "recall": true,
+  "autoApply": true,
+  "extractor": "llm",
+  "extractAgent": "memory-extractor",
+  "model": {
+    "providerID": "opencode",
+    "id": "deepseek-v4.1-flash-free"
+  },
+  "extractTitle": "neurakeep-extract",
+  "extractBatch": 2,
+  "extractIntervalMs": 180000,
+  "extractTimeoutMs": 180000,
+  "extractMaxCharsPerItem": 6000,
+  "space": "personal",
+  "trustLevel": "observed",
+  "visibility": "private",
+  "sensitivity": "internal",
+  "recallLimit": 5,
+  "recallBodyChars": 1200,
+  "recallTotalChars": 6000,
+  "maxMessagesPerCapture": 60,
+  "maxMessageChars": 4000,
+  "minCaptureChars": 60,
+  "searchTimeoutMs": 15000,
+  "sweepIntervalMs": 90000,
+  "sweepBatch": 10,
+  "skipTitles": [
+    "neurakeep-extract",
+    "review-panel"
+  ],
+  "paused": false
+}

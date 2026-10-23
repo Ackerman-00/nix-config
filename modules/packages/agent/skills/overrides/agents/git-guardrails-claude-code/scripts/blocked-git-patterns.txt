@@ -1,0 +1,6 @@
+git\s+push
+git\s+reset\s+--hard
+git\s+clean\s+-[a-z]*f
+git\s+branch\s+-D
+git\s+checkout\s+\.
+git\s+restore\s+\.

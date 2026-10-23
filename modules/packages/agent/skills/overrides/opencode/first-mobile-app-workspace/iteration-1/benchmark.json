@@ -1,0 +1,283 @@
+{
+  "metadata": {
+    "skill_name": "first-mobile-app",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-10-17T00:28:59Z",
+    "evals_run": [
+      0,
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 0,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Plan prescribes a web prototype validated with real users BEFORE building native",
+          "passed": true,
+          "evidence": "Step 2: 'Do not open a mobile builder yet... Two days: build a clickable web version... One full week: put it in front of real target users' precedes any native step"
+        },
+        {
+          "text": "Plan instructs flow-by-flow building with a per-flow spec/PRD, explicitly against one giant prompt",
+          "passed": true,
+          "evidence": "Step 5 PRD per flow; Step 7: 'One flow at a time... Never ask for the whole app in one prompt'"
+        },
+        {
+          "text": "Mentions testing with 5-7 real people before release",
+          "passed": true,
+          "evidence": "Step 8: 'Test with 5-7 real people before any release and collect feedback from each person individually'"
+        },
+        {
+          "text": "Covers BOTH stores: Apple ($99/yr, TestFlight) and Google Play ($25, closed testing requirement)",
+          "passed": true,
+          "evidence": "Step 8: 'Apple Developer Program, $99/year... TestFlight' and 'Google: Play developer registration, $25 one-time... closed test with 12 testers for 14 days'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 0,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "States that Lovable produces web apps, not native store-submittable mobile apps",
+          "passed": true,
+          "evidence": "'Lovable is a great fit for the prototype and validation stage: it produces a clickable web app fast' - and long-term table lists it only for prototype stage"
+        },
+        {
+          "text": "Gives concrete builder-selection criteria including pricing model and code ownership/export",
+          "passed": true,
+          "evidence": "Section 6 'three checks': pricing model (own-agent over per-credit), code ownership ('take your code and leave, free'), feel"
+        },
+        {
+          "text": "Advises validating the idea (prototype + real users) before investing in the real build",
+          "passed": true,
+          "evidence": "Section 2: 'Two days on the prototype, then a full week with real users' before committing to a builder"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 0,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Justifies going native via concrete mobile needs (installed app, push notifications) rather than vibes",
+          "passed": true,
+          "evidence": "'Your users are asking for two things on that list by name [installed app, notifications], so the answer is: go real' - tiebreak applied to stated needs"
+        },
+        {
+          "text": "Warns a rebuild is required and explains why the rebuild is easier than the first build",
+          "passed": true,
+          "evidence": "'Expect a full rebuild, not a port... a rebuild is far easier than the first build, because you already know exactly what to build'"
+        },
+        {
+          "text": "Prescribes flow-by-flow rebuild (map flows, per-flow specs) instead of one-shot regeneration",
+          "passed": true,
+          "evidence": "Section 3 maps flows from web screenshots; Section 4 PRD per flow; Section 6 'Never ask for the whole app in one prompt'"
+        },
+        {
+          "text": "Covers a concrete release path (TestFlight / testers / developer accounts)",
+          "passed": true,
+          "evidence": "Section 7: TestFlight ($99/yr), 5-7 engaged users first, Google Play $25 with 12-tester closed test"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 0,
+      "result": {
+        "pass_rate": 0.25,
+        "passed": 1,
+        "failed": 3,
+        "total": 4,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Plan prescribes a web prototype validated with real users BEFORE building native",
+          "passed": false,
+          "evidence": "Goes straight to 'Path A - AI-assisted build with Expo' as step 1; no web prototype or user-validation phase anywhere in the plan"
+        },
+        {
+          "text": "Plan instructs flow-by-flow building with a per-flow spec/PRD, explicitly against one giant prompt",
+          "passed": false,
+          "evidence": "Says 'build in thin slices' (feature list, not flows); no PRD, no per-flow spec, no warning against one giant prompt"
+        },
+        {
+          "text": "Mentions testing with 5-7 real people before release",
+          "passed": false,
+          "evidence": "Says 'Install it on family or friends' phones' but never specifies 5-7 testers"
+        },
+        {
+          "text": "Covers BOTH stores: Apple ($99/yr, TestFlight) and Google Play ($25, closed testing requirement)",
+          "passed": true,
+          "evidence": "Step 5: 'Apple Developer Program - $99/year'; Step 8: 'Google Play Console - $25 once... 12 testers who stay opted in for 14 continuous days'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 0,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "States that Lovable produces web apps, not native store-submittable mobile apps",
+          "passed": true,
+          "evidence": "Caveat 1: 'It cannot build a native mobile app... web-only platform... publishing always ends at a web URL'"
+        },
+        {
+          "text": "Gives concrete builder-selection criteria including pricing model and code ownership/export",
+          "passed": true,
+          "evidence": "Discusses Lovable credit pricing ('the cost is the credits, not the plan') and ownership ('GitHub export so you're never locked in'); compares alternatives with prices"
+        },
+        {
+          "text": "Advises validating the idea (prototype + real users) before investing in the real build",
+          "passed": true,
+          "evidence": "Guardrail 'Ship order: prototype -> show your sister -> fix -> pilot with 5 friendly clients -> security review -> then real bookings'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 0,
+      "result": {
+        "pass_rate": 0.25,
+        "passed": 1,
+        "failed": 3,
+        "total": 4,
+        "time_seconds": 0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Justifies going native via concrete mobile needs (installed app, push notifications) rather than vibes",
+          "passed": false,
+          "evidence": "Argues the opposite: 'You do not need to rebuild anything native... by turning it into a PWA'; no case made FOR going native"
+        },
+        {
+          "text": "Warns a rebuild is required and explains why the rebuild is easier than the first build",
+          "passed": false,
+          "evidence": "Explicitly says 'never rewrite native' and 'do not rewrite' - no rebuild-is-easier argument because no rebuild is prescribed"
+        },
+        {
+          "text": "Prescribes flow-by-flow rebuild (map flows, per-flow specs) instead of one-shot regeneration",
+          "passed": false,
+          "evidence": "Prescribes adding PWA/push layers to the existing app, not a flow-mapped rebuild"
+        },
+        {
+          "text": "Covers a concrete release path (TestFlight / testers / developer accounts)",
+          "passed": true,
+          "evidence": "Route 3 covers store route: '$99/yr (Apple) + $25 (Google)', 12-tester closed test, review cycles - conditionally, if group insists"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "tokens": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.5,
+        "stddev": 0.433,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "tokens": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.50",
+      "time_seconds": "+0.0",
+      "tokens": "+0"
+    }
+  },
+  "notes": []
+}

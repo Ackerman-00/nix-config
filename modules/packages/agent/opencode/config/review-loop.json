@@ -1,0 +1,54 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "rounds": 2,
+  "timeout": 900,
+  "reviewer_agent": "reviewer",
+  "auto": {
+    "enabled": true,
+    "models": [
+      "opencode/glm-5.3-flash-free",
+      "opencode/deepseek-v4.1-flash-free"
+    ],
+    "pool": [
+      "opencode/deepseek-v4.1-flash-free",
+      "opencode/glm-5.3-flash-free",
+      "opencode/minimax-m3.1-flash-free",
+      "opencode/longcat-2.5-preview-free",
+      "opencode/mimo-v2.6-flash-free",
+      "opencode/beam-free",
+      "opencode/big-pickle",
+      "opencode/nemotron-3-ultra-free",
+      "opencode/nemotron-3.5-lightning-free",
+      "opencode/nemotron-3.5-super-vl-free"
+    ],
+    "max_rounds": 2,
+    "cooldown_seconds": 45,
+    "min_changed_lines": 3,
+    "max_diff_chars": 40000,
+    "require_session_change": true
+  },
+  "writer": {
+    "model": "opencode/deepseek-v4.1-flash-free",
+    "agent": "writer",
+    "fallback": ["opencode/minimax-m3.1-flash-free"]
+  },
+  "reviewers": [
+    { "model": "opencode/glm-5.3-flash-free" },
+    { "model": "opencode/mimo-v2.6-flash-free" },
+    { "model": "opencode/minimax-m3.1-flash-free" },
+    { "model": "opencode/longcat-2.5-preview-free" },
+    { "model": "opencode/beam-free" }
+  ],
+  "pool": [
+    "opencode/deepseek-v4.1-flash-free",
+    "opencode/glm-5.3-flash-free",
+    "opencode/minimax-m3.1-flash-free",
+    "opencode/longcat-2.5-preview-free",
+    "opencode/mimo-v2.6-flash-free",
+    "opencode/beam-free",
+    "opencode/big-pickle",
+    "opencode/nemotron-3-ultra-free",
+    "opencode/nemotron-3.5-lightning-free",
+    "opencode/nemotron-3.5-super-vl-free"
+  ]
+}

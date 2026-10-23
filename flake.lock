@@ -20,13 +20,25 @@
     "concat-manifest": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-CaNG1pWShxzxvNVCP2iFcLD636iTGArSqxlU86BYNN8=",
+        "narHash": "sha256-hT5brLcbxZT2zft1ZBUvdlpl4/t/exWUWVh/V2Gb+50=",
         "type": "file",
         "url": "https://github.com/jub0t/Concat/releases/latest/download/manifest.json"
       },
       "original": {
         "type": "file",
         "url": "https://github.com/jub0t/Concat/releases/latest/download/manifest.json"
+      }
+    },
+    "craft-launcher-feed": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-7tmIq76OX0PpsRHiO7cmO7EPRWSIw7xWaNG+wJZd3sM=",
+        "type": "file",
+        "url": "https://api.github.com/repos/storytold/craft-launcher/releases/latest"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://api.github.com/repos/storytold/craft-launcher/releases/latest"
       }
     },
     "helium-pin": {
@@ -65,6 +77,46 @@
         "type": "github"
       }
     },
+    "hyperframes-npm": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-drIKPu8gamiN5xrJgf8EGhIyEkCn0Pyge9VA46QnNNs=",
+        "type": "file",
+        "url": "https://registry.npmjs.org/-/package/hyperframes/dist-tags"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://registry.npmjs.org/-/package/hyperframes/dist-tags"
+      }
+    },
+    "hyperframes-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792569154,
+        "narHash": "sha256-kq8uasZrJMHtPELqfv9Tv6vN8GhWek+7DF0Ya0C/0s4=",
+        "ref": "refs/heads/main",
+        "rev": "25a4829d098f4215f8c82d284c5a15e761a809f9",
+        "revCount": 5780,
+        "type": "git",
+        "url": "https://github.com/heygen-com/hyperframes.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://github.com/heygen-com/hyperframes.git"
+      }
+    },
+    "kokoro-pypi": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-o/hEfTJFHMRIY3yiHty+UUJIyqBvh774e22/8s2oZQk=",
+        "type": "file",
+        "url": "https://pypi.org/pypi/kokoro-onnx/json"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://pypi.org/pypi/kokoro-onnx/json"
+      }
+    },
     "mcp-youtube-transcript-src": {
       "flake": false,
       "locked": {
@@ -80,6 +132,18 @@
         "ref": "refs/tags/v0.7.0",
         "type": "git",
         "url": "https://github.com/jkawamoto/mcp-youtube-transcript.git"
+      }
+    },
+    "neurakeep-npm": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-oc3X2q2pAXtIdKR+jzTjoJshOwOXBimjkZW7+3qFfB8=",
+        "type": "file",
+        "url": "https://registry.npmjs.org/-/package/neurakeep/dist-tags"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://registry.npmjs.org/-/package/neurakeep/dist-tags"
       }
     },
     "nixpkgs": {
@@ -111,28 +175,63 @@
         "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
       }
     },
-    "opencode-feed": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-E1h3HQtKdxTBILoloKhnQNIt0l2ncIKG0Qzl2eAyM/c=",
-        "type": "file",
-        "url": "https://opencode.ai/update/api/latest/desktop/opencode/latest-linux.yml"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://opencode.ai/update/api/latest/desktop/opencode/latest-linux.yml"
-      }
-    },
     "root": {
       "inputs": {
         "blender-mcp-src": "blender-mcp-src",
         "concat-manifest": "concat-manifest",
+        "craft-launcher-feed": "craft-launcher-feed",
         "helium-pin": "helium-pin",
         "home-manager": "home-manager",
+        "hyperframes-npm": "hyperframes-npm",
+        "hyperframes-src": "hyperframes-src",
+        "kokoro-pypi": "kokoro-pypi",
         "mcp-youtube-transcript-src": "mcp-youtube-transcript-src",
+        "neurakeep-npm": "neurakeep-npm",
         "nixpkgs": "nixpkgs",
-        "opencode-feed": "opencode-feed",
+        "superpowers-src": "superpowers-src",
+        "torch-pypi": "torch-pypi",
+        "transformers-pypi": "transformers-pypi",
         "umbriel": "umbriel"
+      }
+    },
+    "superpowers-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792616449,
+        "narHash": "sha256-9+69YEdjdaDu5sWTyAbufSVcZgGD7h6wAq4nUVY2syE=",
+        "owner": "obra",
+        "repo": "superpowers",
+        "rev": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "obra",
+        "repo": "superpowers",
+        "type": "github"
+      }
+    },
+    "torch-pypi": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-UCdwOK7tWZJKL1wzY1uX9vHFmtZhF5Ar09elPst3WeE=",
+        "type": "file",
+        "url": "https://pypi.org/pypi/torch/json"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://pypi.org/pypi/torch/json"
+      }
+    },
+    "transformers-pypi": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-wJYScWCIzppShhd6Kq01/4+2jc93y6sap7P4HYWgKVU=",
+        "type": "file",
+        "url": "https://pypi.org/pypi/transformers/json"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://pypi.org/pypi/transformers/json"
       }
     },
     "umbriel": {

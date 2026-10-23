@@ -1,0 +1,1091 @@
+{
+  "repos": {
+    "Aaronontheweb/dotnet-skills": {
+      "head": "ac0deb2f531ff5090718cb0069c73ba3f9f95f69",
+      "skills": {
+        "agents/modern-csharp-coding-standards": "0ad3c88a99c3271049e968bee1f6a8393b83bb1043905c29d857eac771baee75"
+      },
+      "trees": {
+        "agents/modern-csharp-coding-standards": "008c2e06dc3fab527f69700f007f43f5cd420ae6"
+      }
+    },
+    "aaron-he-zhu/aaron-marketing-skills": {
+      "head": "4f34516ce6222109e2b296a9db3f77f2e8674624",
+      "skills": {
+        "agents/competitor-analysis": "622e3f1d74fef47fd4c0e8184f89d33ba52e65c7383cfb118b50eacc01050e07",
+        "agents/site-structure-optimizer": "f1425c41ff312069b1724caa0c726b9746837232636b91987f7774f23e6740f3"
+      },
+      "trees": {
+        "agents/competitor-analysis": "06c4c841ac53646e62753ef29341b509fd30d679",
+        "agents/site-structure-optimizer": "390b94a1b76e6c0ca472c5d3e871783b959f014c"
+      }
+    },
+    "actionbook/rust-skills": {
+      "head": "5c40d3ad785193231b7d0dbfb8e1eb447e5edd94",
+      "skills": {
+        "agents/m01-ownership": "8dfd4b15c86081beed5d35470926e5242118ed7bce8ce770ed9d412eacbe5f24",
+        "agents/m06-error-handling": "bb7fb58901441645c173edc3f837399895bbdda2f1d7bd53e95925877aff4e73",
+        "agents/m07-concurrency": "3e0cbb597f292da880aab1d2f5433da32e072713dfb08a57ac4cd4eef57ad626",
+        "agents/m10-performance": "a836503f09ef308c99b89880f416736101685f3eb419b12d342be8decb6654aa"
+      },
+      "trees": {
+        "agents/m01-ownership": "d45f2f4c4a492d1783169f333488c85454805812",
+        "agents/m06-error-handling": "47c04e309319fd97d6cef4f50778d4e497fff57d",
+        "agents/m07-concurrency": "2441813554275759779d05725e6219a94009116e",
+        "agents/m10-performance": "d6f7981c8c2bdb66a2542d65327547b680e27cf0"
+      }
+    },
+    "addyosmani/agent-skills": {
+      "head": "aeac41d4d005999432bb7312f7ff06383a91d59d",
+      "skills": {
+        "agents/code-review-and-quality": "0667c7af98996c0bec4fb0eb444680bdbf1da1d6a3cfdf5dbe8cbd350d9d2752"
+      },
+      "trees": {
+        "agents/code-review-and-quality": "2c0b966d411b0d64c4f44efdde30d5f6f3666f76"
+      }
+    },
+    "addyosmani/web-quality-skills": {
+      "head": "afa8da942115f2961fdbfa80807ea0b232ff6c00",
+      "skills": {
+        "agents/accessibility": "48861fac56e62fd43f9c3a173cef9e35a1545637445c6bdb64c18f083af84a44",
+        "agents/best-practices": null,
+        "agents/core-web-vitals": "2ce82f716569421bdffc8edf5c8abbbd7646ba115071d17aa2d538f5ee3424e8",
+        "agents/performance": "0b39d050ba0d2abc7ae5ab31f5b52b80a4e9f250aa01a61357968819ca28de18",
+        "agents/seo": "a9f5f5a03f30917ebdaaccff436b7d0e0df68f0c19b273302863b9c5cdb9f20d",
+        "agents/web-quality-audit": null
+      },
+      "trees": {
+        "agents/accessibility": "90b7b38a892c625d19408df411e46cca7ff3819d",
+        "agents/core-web-vitals": "79f9fe00ddd0855b35e7498e3752c6d02304eb65",
+        "agents/performance": "69232372c8ae1d7f927267073560cbc762251662",
+        "agents/seo": "da1d9c981518b28eded931b8680c2e4c631740af"
+      }
+    },
+    "affaan-m/ECC": {
+      "head": "90606c8315ee09cafc303515c5f33024db6b9882",
+      "skills": {
+        "agents/react-patterns": "44d2c6304ff7ea20643a0203b74de9c7a42e1f70a2b73a5762500dea385dfc44",
+        "opencode/security-review": "b525654c76b223da82e2ed3794b43b6cc5479601c4761df451cddd3c6b43260d"
+      },
+      "trees": {
+        "agents/react-patterns": "eda27679d5af43c3d76ce4653851a46b7d2aee21"
+      }
+    },
+    "affaan-m/ecc": {
+      "head": "90606c8315ee09cafc303515c5f33024db6b9882",
+      "skills": {
+        "agents/context-budget": "a77c689b5f75b7bbb8839cb863c07701c0ab748304469ef948f3da5b722f5973",
+        "agents/csharp-testing": "ae79893902d6f651bf06edca052022b259bdbefaff3d7809c6240ec385916e21",
+        "agents/golang-patterns": "8cbfb90287390c9f09d46d5266f0e7f61ba5bd74400c1431b74a334be7bfdd6f",
+        "agents/golang-testing": "12195f2589c4a7b741523bed09db8b64f243c635b4c78297136c6becd7b1e032",
+        "agents/kotlin-exposed-patterns": "b16804b33a2d98b837a504b9864af44915423b4145ebc48755a06526e5d69f53",
+        "agents/kotlin-ktor-patterns": "2c379bb26946179a48ad2c3b49c9460b0a0309a80709f03693ab8a3ef480e582",
+        "agents/kotlin-patterns": "13278a2dcaa94b4173e9dcb7de73e4272e2ed8422580735b3c01a67a0a9b2ef6",
+        "agents/kotlin-testing": "b873fd7d21ff27f949d55a8a167dea5b4a53b70b3979829fb60136b659bb36f7",
+        "agents/python-patterns": "3ce7d51e18d3e2fa79635e569e73a8d269bc484ff1095fae7c414543f023e95e",
+        "agents/rust-testing": "bd66d6441ff6d3a6acb89c902cd6a01bf58410aec3ecbc43d45409b3a3788ac8"
+      },
+      "trees": {
+        "agents/csharp-testing": "013a35ba2160a6f7723f5f26495dd4a35d440078",
+        "agents/golang-patterns": "763d95fcd0915b066a537d63a8ee0a1a76b37aac",
+        "agents/golang-testing": "ec79dd0b5aa1df23d7362a3c22c1f0a7bd4bb594",
+        "agents/kotlin-exposed-patterns": "c32f1dd6b155584d827476c51ecffe29a3c43be9",
+        "agents/kotlin-ktor-patterns": "2408c3384551f01e45c8f7764790198d074e460f",
+        "agents/kotlin-patterns": "2697a080732edb070db208bdb5a0b33eb434facd",
+        "agents/kotlin-testing": "1ba730dbefe847fac0f3bcc2ff7d2800e56f283f",
+        "agents/python-patterns": "a760f82665c97712722cf849f7b0d24872678a70",
+        "agents/rust-testing": "168d8a24ffec489070a6da1bf8af19716ba356bc"
+      }
+    },
+    "agricidaniel/claude-seo": {
+      "head": "4b99de2f7de7e7d5247042e5fb5b4ea9368ef734",
+      "skills": {
+        "agents/seo-backlinks": "de9d6a0815d98908fb2db9227b0229c26a7c66b24980230baf395ad508c9e622",
+        "agents/seo-geo": "6a144c46f804bc7508d1909391743d81d2935c67a0b5f266038c817157bcb2a2"
+      },
+      "trees": {
+        "agents/seo-backlinks": "84511fb6101ed24f65aea7705066ef9d766b948e",
+        "agents/seo-geo": "bed6bf4eb00855ee7404d2e28dd5e4cf351ba5db"
+      }
+    },
+    "alibaba/open-code-review": {
+      "head": "375f64cd6f67a48a135da83cfcf59c52669a09cb",
+      "skills": {
+        "agents/open-code-review": "d3a3a06ec51a1b1d8c4ff4cb5fbc963269446b1627178c1106c606868f5a4d29"
+      },
+      "trees": {
+        "agents/open-code-review": "6ca3160dcfcf7ff4d3ccfd0c999f59d06e6ad603"
+      }
+    },
+    "alleneubank/claude-code": {
+      "head": "2921eb8a685a2589c4c3e6ecbc8eaa12ffadde73",
+      "skills": {
+        "agents/typescript-best-practices": "9866bb48d92a951feafb77f6f48ea39b42c6c1e901788c916d4aad40f60db008"
+      },
+      "trees": {
+        "agents/typescript-best-practices": "ddfe7d6738caa866df1275a9f55ea30300f916ee"
+      }
+    },
+    "anthropics/claude-code": {
+      "head": "5ed799e5cc56bea9efff57398ca43e31d82784ff",
+      "skills": {
+        "agents/plugin-settings": "ecb3e5f515cc30cd0f28f141b3f357bcbb8b7ba28d88d290bbd8b1ad4a020695",
+        "agents/plugin-structure": "1456f41074b8719a7e3ff70ada51325e2f28457e4fac19438c8cb0857a6d19e4",
+        "agents/writing-hookify-rules": "b8b06e1dc769b0e5fecb958a548495116561213bbe6566a49028bd6ce251d1ec"
+      },
+      "trees": {}
+    },
+    "anthropics/claude-plugins-official": {
+      "head": "d1adba47161a271799de7b548225d929310046bd",
+      "skills": {
+        "agents/claude-automation-recommender": "03e212c8691cccdb86e18647b8c87a349baa30ef3e361787557baef0f6521427",
+        "agents/claude-md-improver": "2391dc728f99eee6d482f49e037528ebaafe1a5857538fb8608896fb16f13d0a",
+        "agents/session-report": "955be2f91a74c8590a0fdacf5f694e0d5672f8a4053ccd06e95f2d5223162182"
+      },
+      "trees": {}
+    },
+    "anthropics/knowledge-work-plugins": {
+      "head": "bc8f6922cfeea215a202cdcc9f0d299a990889a8",
+      "skills": {
+        "agents/testing-strategy": "2fe64e97a596e862cd946bb8cddbbf4e9f1e1f21ca817f586111a25af474d0f8"
+      },
+      "trees": {
+        "agents/testing-strategy": "3221c8b9614642e02c8a474a8a7cd799b09bf7fa"
+      }
+    },
+    "anthropics/skills": {
+      "head": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+      "skills": {
+        "agents/frontend-design": "89496d5dd00f4810205f351759594fc2742bf8eea85a2f2b2d1de59f4bd91576",
+        "agents/skill-creator": "9168c1ec0fba7143bd1a867b749fc846aa23d764580276e0f4622beb267a98da",
+        "agents/webapp-testing": "8320d78c856340fa2f09a3ffb79b91de9427945abc18d36b6d7e9204120dad0a",
+        "opencode/academy-guide": "07075be5acc7c54fd6b06a1e7636608fa195b83eb98cbddb02e61b9ac1356889",
+        "opencode/algorithmic-art": "b2ca295de7f9c86c444f1fa21239e22e0eb7013ced1c652169b9402cc96ff744",
+        "opencode/frontend-design": "89496d5dd00f4810205f351759594fc2742bf8eea85a2f2b2d1de59f4bd91576",
+        "opencode/mcp-builder": "c3791dd574afbcb20038cd1b9641c378364f7f1351482b74debdf03dd0c72499",
+        "opencode/skill-creator": "1faaba062706b5ed9489e32286517fb0805b26e5f784982f10741c41eb4587ed"
+      },
+      "trees": {
+        "agents/frontend-design": "d79e2a5bb4df4a386c2adcdd9ab8709bba28c3f6",
+        "agents/webapp-testing": "5ffb7dc66b9fd4c25c3e400a4c00da99a349b714",
+        "opencode/academy-guide": "baddb91c315ea384f9191615054ba8026eb57ba2",
+        "opencode/algorithmic-art": "4aef6bcad51d058ec32b1acb9da436851863e56e",
+        "opencode/frontend-design": "d79e2a5bb4df4a386c2adcdd9ab8709bba28c3f6"
+      }
+    },
+    "apollographql/skills": {
+      "head": "f9843dce86b1a561e3bfbb024e65c28a6cbbe38c",
+      "skills": {
+        "agents/apollo-kotlin": "cc743e18aaa8cac7a22c5766fa6723ee7cc13aa4d347a923864581922dc34691",
+        "agents/apollo-server": "cba91046d9aec65d129ddc00e7ea26a01d863699bbb2a02fcf2fa4ff6b2aaa27",
+        "agents/rust-best-practices": "4b73768ffeb249ba196961d2bf27c7d790b8180098e913e642d588bd31d34ffc"
+      },
+      "trees": {
+        "agents/apollo-kotlin": "fc0f2273a5dfea791946a979e90dcfd55acec608",
+        "agents/apollo-server": "0966dce453ba5b3796992e9329c1bc9706389a14",
+        "agents/rust-best-practices": "b641cd05036ae1833560f3ea3072028e8efa7cae"
+      }
+    },
+    "arvindrk/extract-design-system": {
+      "head": "1873741ba8dea755e35e6e15134f7918cd58e036",
+      "skills": {
+        "agents/extract-design-system": "662e8adc63974ca54592eca3c89fb7133c1998c22a5524f112e9b1edd44b9a32"
+      },
+      "trees": {
+        "agents/extract-design-system": "e64b6fec82d59d296aad44ef9dacf42ad1d5eafd"
+      }
+    },
+    "assistant-ui/skills": {
+      "head": "1ba8e9105c504fe4ac2591e432783872d6b3c8ba",
+      "skills": {
+        "agents/react-mcp": "dc0490da4b3722bb52df437df9e4b7b7c027c194cb1a850c0967e71ccda4a111"
+      },
+      "trees": {
+        "agents/react-mcp": "d674bb421867a88d17e7f87bd90c09078182b985"
+      }
+    },
+    "asyrafhussin/agent-skills": {
+      "head": "1aa0ff717c10309226c9e678f00873976450fd76",
+      "skills": {
+        "agents/php-best-practices": "83e6f80b77303dbec99934f64ba6510490ec6163098e53f60679c6c1b72ccbbe"
+      },
+      "trees": {
+        "agents/php-best-practices": "d069f2f34ad73d9061ad13226acb653fa51d2240"
+      }
+    },
+    "bobmatnyc/claude-mpm-skills": {
+      "head": "718070a7d622921b01687799a1f9613f36c6f615",
+      "skills": {
+        "agents/testing-anti-patterns": "b4426532afb6bb7a7630c5c0538ecb55a42317b1e5eae8db4322d5129159d777"
+      },
+      "trees": {
+        "agents/testing-anti-patterns": "0555429aaadd16d96ae2264b57639524245eea6c"
+      }
+    },
+    "browser-act/skills": {
+      "head": "11c057b03f92101642cadc9f840564574120d184",
+      "skills": {
+        "agents/browser-act": "3e3edc42bc0c7328ea3ecb91b16561f87c917e823de5a86a91fc1cfbf342d43d"
+      },
+      "trees": {
+        "agents/browser-act": "fa4f5a3b13b847d22e01c1c8a34d5f2e85402620"
+      }
+    },
+    "browser-use/browser-use": {
+      "head": "aa093a843da5edbf323c0b4145c9b6a0db3ecde8",
+      "skills": {
+        "agents/browser-use": "2ec338a6678e4b285af4781958f7a59ccbfd67485dfa947caec897a412080f6a"
+      },
+      "trees": {
+        "agents/browser-use": "2b7c0ad80f2363d851372b5cfdf7d610483d5a41"
+      }
+    },
+    "browserbase/skills": {
+      "head": "6811ca31163332d9d60309cff48e77f09de37a17",
+      "skills": {
+        "agents/browser": "1db8101630cecd0782347bf67c9ccc1ab57f6ffe408f527612088ab55a392a5f"
+      },
+      "trees": {
+        "agents/browser": "a24f98728784659e1ee17e13e902946d28b29357"
+      }
+    },
+    "callstackincubator/agent-skills": {
+      "head": "59e9d17446a248b21d86f078fcd0bd2d36db1ca4",
+      "skills": {
+        "agents/react-native-best-practices": "dc1bfac7d410fd13855ac1f0fe77b17e124792ce58c474d393048ad1400b97de"
+      },
+      "trees": {
+        "agents/react-native-best-practices": "02d5a3e51c58071cbfcb1d34199d4731a241d459"
+      }
+    },
+    "chrisbanes/skills": {
+      "head": "f0a89e311cc8592b8d430f2a065108b3d4ba227f",
+      "skills": {
+        "agents/kotlin-concurrency-and-flow": "8acf45f5133f76ddc23dc8b3729d4be80f3d3402884003107bbdb18136212e09"
+      },
+      "trees": {
+        "agents/kotlin-concurrency-and-flow": "efe20216b08041bdaa60074cf7409ef9948a0ec0"
+      }
+    },
+    "chromedevtools/chrome-devtools-mcp": {
+      "head": "d7f1e7803745601d0d4dc2129d8ad6c153e54158",
+      "skills": {
+        "agents/a11y-debugging": "07bb9e826ffde084e4e91ea14ad10569f346a7af539866428af3db6586dd53e5",
+        "agents/chrome-devtools": "3dbca8528db5940abc28faaebfd73a0fd08c34a5f3f46ff6b7810ea39b183de5"
+      },
+      "trees": {
+        "agents/a11y-debugging": "83d677e8a36b891d8e0badc37bd60526ff3bbff3",
+        "agents/chrome-devtools": "861c6713c390b72a35e5cca833903bed918bda9c"
+      }
+    },
+    "clerk/skills": {
+      "head": "e864e7fab5d3fdcccdfb3694a5e63ac2cecd6f78",
+      "skills": {
+        "agents/clerk-react-patterns": "130b1b74c3b856639fc216eb4d20f63734a68274db279a7a04196efcc14b0941"
+      },
+      "trees": {
+        "agents/clerk-react-patterns": "a4b6fce15ac8e48bc1c3aa6af9003e5231ab9a8d"
+      }
+    },
+    "coreyhaines31/marketingskills": {
+      "head": "e85f3cbc2e4a79bf33b2a12e9bdd9087d414735b",
+      "skills": {
+        "agents/seo-audit": "fe96e2214b52e85405d22f1c634382ebd9393370fd3ce69c0b5b6ca9bbf33437"
+      },
+      "trees": {
+        "agents/seo-audit": "dedc690c587c376951526c087a567f207c070595"
+      }
+    },
+    "currents-dev/playwright-best-practices-skill": {
+      "head": "283d5cbc5d11aac1abda058b16ad22c317d54dc0",
+      "skills": {
+        "agents/playwright-best-practices": "269ebc60de4c9030d4bd648386596ef04d8d09d9aa3f80cb919b0be0c1374300"
+      },
+      "trees": {
+        "agents/playwright-best-practices": "b4620eb2cfc6b58173cda800b7c7578190dfd632"
+      }
+    },
+    "cursor/plugins": {
+      "head": "190d28736eff128ec94f502a22c7fe0c4b56cd37",
+      "skills": {
+        "agents/thermo-nuclear-code-quality-review": "9052b01b46b1d8dbf94c45f9313ec1983443f9a460e83d49cdc7fe0f640ca476",
+        "opencode/advisor": "8301e55b0ccdf532b594ce584e1810cfd304d8137dc16f1aca0972018646ffe4",
+        "opencode/architect": "237dcdb19fb8b30806a454e712de494a2e6d2a16f1426d06ad960fb83c3c53d6",
+        "opencode/automate-me": "2cd34d4052b53c15d77a02a460ad193d8d09d1650a130d82136312fb937e03b9",
+        "opencode/deslop": "8883a7d459c07a0b2ee06972e79baa634009aa3bab969a6650acbefac394ad41",
+        "opencode/how": "9e81e55931076ac34cfa95aa58e74078a2acb9282670a51c2a4acb06a6884788",
+        "opencode/in-your-own-words": "007710e015186dbc5a0258dffc22933a7e29c07a8c3ad0bbccb8109192b00c06",
+        "opencode/interrogate": "b49c8bea7d4c5e1a6b31ff70bd231edc6aa42fddbec766347e70f07c503dd203",
+        "opencode/maintain-verification-skill": "081c363b9ed2327db313effede62149773c68cc441da716d17a009fd4e66bd92",
+        "opencode/poteto-mode": "d2b333900acec20172dcdf506fe9eb690ec83915e823dec874559bbf57dc277a",
+        "opencode/reflect": "e2973abcd13ef3b80e58846060a3c35d64e1bfa587bd6a27a200e98ba992ea90",
+        "opencode/teach": "371a2a40807cc1c0611d50b8170b2395f9c0297f7eb475e071018e12aa766bc5",
+        "opencode/unslop": "eca0ad9fa3a3867c83f3aaf3a058e247a569c8976a68ca423a569b93eb86de5d",
+        "opencode/why": "2e60d14ded74ec3194cad966264d553452aa1c7359777b71dcc90ea63bab6b1f"
+      },
+      "trees": {
+        "agents/thermo-nuclear-code-quality-review": "d9c8935dd560b3b6f5941247d04a1843f8c7cc35",
+        "opencode/deslop": "ac9ba043f9dd3b3a8850de6624ec5bc12e375599",
+        "opencode/in-your-own-words": "e5ff93020dd4ed33b80d9df9a235d1945c676a0d",
+        "opencode/teach": "3ee517292dae0476dc516f9f3805c08fb943c6ff",
+        "opencode/unslop": "4e572dd70e5557f490e3991c52ea58f0dcee8936"
+      }
+    },
+    "cxuu/golang-skills": {
+      "head": "91f0c2eef559a3168f9d3c38f5f99936d472b508",
+      "skills": {
+        "agents/go-code-review": "c88f1404c302b60b5603be09de21585b4b39dfe16da8260e335a537a1b532ef6",
+        "agents/go-context": "e51de723e8b59a70bb0009766356fb209982156c27b55a8102055e0a46a94728",
+        "agents/go-documentation": "e767f5566270752f43457daf9b2021a2b8ed9c3b5a5b64f53725bfacfd822794",
+        "agents/go-interfaces": "15c0a842592b50bdc789b669ea62d4d9fc4c43f095201e60a28594dc6404dfb2"
+      },
+      "trees": {
+        "agents/go-code-review": "398bb20b0c1cb0ed77e6b34f16f0e58a0b830bfb",
+        "agents/go-context": "697327c57e7b8486fcb2ed827b193651a094da28",
+        "agents/go-documentation": "e48fefa912e79fd96aad12ba5fd0cfa9a29239cb",
+        "agents/go-interfaces": "3a4cb16e09084cefc88e882f29621f9740801165"
+      }
+    },
+    "dart-lang/skills": {
+      "head": "bf984f3ef223dd85e92036f934bbcb6bf301e4ce",
+      "skills": {
+        "agents/dart-generate-test-mocks": "7bf12a98d63e96ed51ba077a24426be1b11a9fc508f7dfca60fc6e118c3fc923"
+      },
+      "trees": {
+        "agents/dart-generate-test-mocks": "36fbbd32e2517e37b7d071a429b8ffcd682c1088"
+      }
+    },
+    "dbt-labs/dbt-agent-skills": {
+      "head": "b8facde20b7a92c40ce3e6b86b71c4b92aa44040",
+      "skills": {
+        "agents/using-dbt-for-analytics-engineering": "bd3168a58865fd0aae10fd0bd8d30addc3844d01ed361b000432e82882eee128"
+      },
+      "trees": {
+        "agents/using-dbt-for-analytics-engineering": "e6411d2ec427a050363ac17b11afc7cdb5b38e4f"
+      }
+    },
+    "dimillian/skills": {
+      "head": "05ba982bfeb0d77d3c97d4542b0ee15034d05f84",
+      "skills": {
+        "agents/swiftui-performance-audit": "31091b8355a5969e6ef7969d74eaa683052f61ceb9024a3c54f3ee201da34bf7"
+      },
+      "trees": {
+        "agents/swiftui-performance-audit": "42390e917faf94ffab98087990bcb1445cd7f7c9"
+      }
+    },
+    "dotnet/skills": {
+      "head": "c848e7fffab05c594f9b954c6f3beb373d108447",
+      "skills": {
+        "agents/analyzing-dotnet-performance": "a4d4705556240772e3fe29c2bf4a4f2253dc63d12f7fc99468c52a14033a81c3",
+        "agents/dotnet-aot-compat": "c0e5bbd5998340f3e6fcb0d5f208041eee41a291330982c1c1e371f24864acda",
+        "agents/dotnet-pinvoke": "16bfc91bfbb47c40c0e457a0262945d3a353ebb072ec5b8ad8d4cbafcd8053db",
+        "agents/dotnet-trace-collect": "84803ff62a7f9ff347cd2365a26b5fbe5c5d700649db2d305b4eae85076ef259"
+      },
+      "trees": {
+        "agents/analyzing-dotnet-performance": "90d7cf1c18271925f17a1f395c77a036ebd63182",
+        "agents/dotnet-aot-compat": "1b0f12304e76f0072ecd0cfe328e053894eed640",
+        "agents/dotnet-pinvoke": "5dc88b9a1af4e9114a8b358776acd4c4b65ccdab",
+        "agents/dotnet-trace-collect": "b9e409a930132aa09de5f9daa79a147f0231d12e"
+      }
+    },
+    "dpearson2699/swift-ios-skills": {
+      "head": "8d90fd121a263355a4fb44fd082af1416a5c1c2a",
+      "skills": {
+        "agents/ios-accessibility": "df1276de5c52879e795214543abaf744bbed3d3c42cbb383c2d830efc4dd4c7e"
+      },
+      "trees": {
+        "agents/ios-accessibility": "55328ae96950f0c386a21d29a539911c16c11207"
+      }
+    },
+    "emilkowalski/skills": {
+      "head": "2d228630ba1446365f614a108cb8252f1feda202",
+      "skills": {
+        "agents/prototype": "77be567d8c946608fdd15e61b62ab383cdf289a194dce2479828b7eda860d3ba"
+      },
+      "trees": {
+        "agents/prototype": "34cd3a303aef0a975fcce3ac906d6b293e600399"
+      }
+    },
+    "getsentry/skills": {
+      "head": "f57ada2d0b640406ea7e25b11d636c530e77c58b",
+      "skills": {
+        "agents/claude-settings-audit": "f7622353786148ba75792ad02f22a3feaecc3b167e5457f5f5b8b794d0d3ce36"
+      },
+      "trees": {}
+    },
+    "github/awesome-copilot": {
+      "head": "613efc8c21d9b3ce642dff361d17006cd9967e28",
+      "skills": {
+        "agents/csharp-async": "e889958419757528e43fb674607d13fffe331a6673cfcef2b0ab8ff9fb569bb8",
+        "agents/csharp-docs": "93da3063bb770f13feec581efa3ff232c69a5a94b75cddfc4ad6e82909835cfe",
+        "agents/javascript-typescript-jest": "0073d19ab0275eb6a8200aced6789a53744667bd717b5d1f44ce708a1740e5d4",
+        "agents/kotlin-springboot": "beaa34d307bfcce5dd026e3b03c357f98f471b0de1b9fc6a0b7a64d132b74e95",
+        "agents/postgresql-code-review": "1167ec9449aa866e16bc7449e05ab4d391cdce95a0b0c5e1155b793160471eb5",
+        "opencode/api-breaking-change-detector": "92bacbc347ac324156c357211ea360e4ffa99c10c23d8b4cffa679c26316a432",
+        "opencode/bug-receipt": "29d861f45182dd03c1f91a81c2a036be241ed40185a276d75714374c57f17625",
+        "opencode/test-gap-audit": "e3e1944c5810acec1604de3489ce49e1b3589617951dcf243bba7c6b17cd6e6d"
+      },
+      "trees": {
+        "agents/csharp-async": "d4a1f9827d947b66c98581399424fd9510d1a8bf",
+        "agents/csharp-docs": "11399c92c99088f48697c5e29cd39f594f8642c6",
+        "agents/javascript-typescript-jest": "dde626acbe7a053f51fb0a2b706abe4c87d18a0c",
+        "agents/kotlin-springboot": "008707336b83e6de0e2e40aa1870dda22354b14e",
+        "agents/postgresql-code-review": "5e41d23340dfe6988fc87a727083d1cd30bc1b1c"
+      }
+    },
+    "giuseppe-trisciuoglio/developer-kit": {
+      "head": "fe73fb33a09ee6562eeec7415a3f9a3bcf795177",
+      "skills": {
+        "agents/typescript-docs": "03d856487c622b9215b35b85b95915ed323fc6721253ac2d67b13efb61744738"
+      },
+      "trees": {
+        "agents/typescript-docs": "cdcde5750bc2fdfa0aab5631baa6ed4ce8c49866"
+      }
+    },
+    "google-gemini/gemini-cli": {
+      "head": "c1740d29301a73a47dc3501c1aecc7eb00c0ee58",
+      "skills": {
+        "agents/code-reviewer": "270f0dd1d4c15a798bad5253a309cdc2056fe5322f99ba06ca22ce50581adc02"
+      },
+      "trees": {
+        "agents/code-reviewer": "e580e60f488d74811fbec80427183553295d7ceb"
+      }
+    },
+    "greensock/gsap-skills": {
+      "head": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "skills": {
+        "agents/gsap-react": "7d3b52822681a4158e371f895c58fb7030ecaf33f585a534b7162f9e92c5d893"
+      },
+      "trees": {
+        "agents/gsap-react": "ac01a338b96fddbc6cf65a89858d2e6068887b39"
+      }
+    },
+    "heygen-com/hyperframes": {
+      "head": "4371981b740d92f70e520cfbec34db68a1c93434",
+      "skills": {
+        "agents/embedded-captions": "76e8244b775bb3d0587748f5203b67c9b2d4f20d9c4696ffc74e85fc64b202a9",
+        "agents/faceless-explainer": "695a162ef61872865ca94dfa5e507947bae1ed478ad72f8899b262dad7728155",
+        "agents/figma": "c7fa7ed826ee1c60e66a4d4604cc7893bf660c4add399e0f0ff277b9b4cfdfa6",
+        "agents/general-video": "2fcb1a2b98f1e7c7737f75fab39ecd3efffb6c9f97bb96555ebc97cc3a69e400",
+        "agents/hyperframes": "468bc0a0d6e637b9fab36d523e593aa4e96c4ae9ae7d6d4240f92458bb821ce3",
+        "agents/hyperframes-animation": "ff0e05c3f0739cd5710f1c6a8c664f002851418e8a85c744a89dd1752a2dfca0",
+        "agents/hyperframes-audio": "c571bfb0ef857e28a333c3638543c2293cf7b23fd9e1f6eea64b9d58d3071f6c",
+        "agents/hyperframes-cli": "53e80215b0ff5c71bea716a2d40b0a25447ccc6b48d0e114258a2ad71530d0ca",
+        "agents/hyperframes-core": "2032e1c3546658f9d47a097a24120870cac0b291bcae3c6d5772fe3c5b07d640",
+        "agents/hyperframes-creative": "3156d76237055ace61c35f0f23793718c912f060b7b7970f8729ca111f70537d",
+        "agents/hyperframes-keyframes": "35ee995ddcf335c29644193cfc7df59b97022f424452db4e2a0cb2cde5bd095a",
+        "agents/hyperframes-registry": "3c13e3f7e1d7e87548a82ce6698a5838587a95b4a5f06ad2959d448e0a7c61e6",
+        "agents/hyperframes-studio": "073b806d264702d330426248608b7d70efb50050b8c61800f74dd6d77a317559",
+        "agents/media-use": "ffc644fd0298f1316bb480eaee7067f9721c2023fade3dcd4cbfa29785377c99",
+        "agents/motion-graphics": "32000e9748fb9cb94b8934fc827b607d90c983820725f749097c52925c802bb7",
+        "agents/music-to-video": "27132d130d995ea881eeb4bd54da86f6f6eda09adebc69c9486677aa9512d7de",
+        "agents/pr-to-video": "92f8cebb20dc7ebe0b7d13eefa1abfe6e58c551b046110d71c0fa17acf726d1f",
+        "agents/product-launch-video": "5595f97a2dbd0d719b455d4847045a85bea8f730933230b648cadba135d25406",
+        "agents/remotion-to-hyperframes": "53d693722e2437fda3459bbcb37c3bb8cb01e62088cf56c0b5d481f7339b93e1",
+        "agents/slideshow": "db8d45c41db56494856a207419a60bb4e97b6d0b60ed20571e43b3daff4c4046",
+        "agents/talking-head-recut": "bf1e87b9098c91e2a7014f2f0ec7cbc901a414e4c433a2797ad1e4734582011b"
+      },
+      "trees": {
+        "agents/embedded-captions": "4537a5a44d8503d41d9069c23793f26b5c55adb8",
+        "agents/figma": "00d8cd2eb6b34cd994bb391b556dda13b1b1e71c",
+        "agents/hyperframes-animation": "284a8f10bb196a6087d52ff6e0e13827602d10ed",
+        "agents/hyperframes-audio": "a0f60ce0e9bfc8f7b406b8f366cd899150b3f765",
+        "agents/hyperframes-core": "2585691179d4e90b29fc406fb6cac55ff30b6699",
+        "agents/hyperframes-keyframes": "3f631bbe5e46e487c9d73af4cbc60a0cc4f48cd3",
+        "agents/hyperframes-registry": "44e994d09c67b38791680e8f3ee33d454f7b98e2",
+        "agents/hyperframes-studio": "d6839000fac37b56ff86526e115074f8d7ecc2bd",
+        "agents/motion-graphics": "b91d621a3b589e2046266979c9135599b16b99ab",
+        "agents/music-to-video": "cd5cb49b2ccc621f3dc5a7f21b7d88d4d1880a27",
+        "agents/remotion-to-hyperframes": "5053f1396fbb4e34c5c768e1ff66d99b179231d9",
+        "agents/slideshow": "f2328ac8524e0d0f19f39b01e7d891c4e6d5a19e",
+        "agents/talking-head-recut": "75c87dc69aabf334e1ce771e6b7acf147cb163ad"
+      }
+    },
+    "heygen-com/hyperframes-community-skills": {
+      "head": "ba7a0bb6d3567d124c51f6074625043bfe0b32eb",
+      "skills": {
+        "agents/camera-3d-captions": "d8ff85fb544874431d7b60ca2655651e058a6bd2f536eb022e8655f1fe0da9cb",
+        "agents/day-in-my-life": "6782094192bc01b3ede35ca4fb9180aa28cb3da9e29646da0493e9df4ab2e75c",
+        "agents/duo": "313328382125deed7000822e5eebebc4ebea58be842599758972ce65f86645cf",
+        "agents/p5-paint-animation": "3b8823bc9fbc22c69dba1fe2590b3669a0bfe7ac50e6aa46aa117335c84ee562",
+        "agents/prod-by-claude": "bde55b0fb5736239a3f628882ef28608980d9a4494d3f0d94223c64c371e0c38",
+        "agents/session-story": "3366f1ef07760ffedd2b984c8072a8fa0eccb0dc4ea179896bfbe56ffdf10871",
+        "agents/vox-explainer": "7470e059d5143c378eda953686eebad9096091aca9bda0a190c88dc81c2e1915",
+        "agents/x-posting-license": "a858f9f49f5e53f34a57c59628e72eb579b03512ddb2ac17fca19cecdf7a05b7"
+      },
+      "trees": {
+        "agents/camera-3d-captions": "65c30963703ea8cda7f6e0eafa6a53266f69396e",
+        "agents/day-in-my-life": "6dd784b3b1daaf651eaf55a60951befc5daee7ca",
+        "agents/duo": "37a7df1849e1df5cbd63aaf8498aa8b8d98bd190",
+        "agents/p5-paint-animation": "cea98d892cd01b34adad7f8ce6039a0d011d084d",
+        "agents/prod-by-claude": "f1aeca9961135b0af640faf6f26ad93317196b0a",
+        "agents/session-story": "d9a8a66ea1ca06089118e30a4e6871d7d9f9c440",
+        "agents/vox-explainer": "093d02a235908a050bdee9b6c9d6a0528328d480",
+        "agents/x-posting-license": "27f6139ef777245ca2f5c1e02774a319aa39ce88"
+      }
+    },
+    "heygen-com/skills": {
+      "head": null,
+      "skills": {
+        "agents/heygen-avatar": null,
+        "agents/heygen-translate": null,
+        "agents/heygen-video": null
+      },
+      "trees": {}
+    },
+    "ibelick/ui-skills": {
+      "head": "55363c305097d4c84487bd5f323d29b3f067bf72",
+      "skills": {
+        "agents/fixing-accessibility": "4fa8f5a772b4eef3d28a54c136b507d070e54e2c326578f65eaf5e5a0118b38a",
+        "agents/fixing-motion-performance": "426dcf33f23419643f2aab71e2253e1a5b5684a808fabb8a4ad135e489ed7a0f"
+      },
+      "trees": {
+        "agents/fixing-accessibility": "e825388bce62e4456ed3b2b899c9bc58f5873c5b",
+        "agents/fixing-motion-performance": "76e5757bd2eb8ff38ff667eca9b665cbd707a386"
+      }
+    },
+    "jakubkrehel/skills": {
+      "head": "4c66b1fa86e9ab70187b43d7da9b6fdb29f2ef63",
+      "skills": {
+        "agents/better-colors": "d73506789d2f6c12513bc84a14f351754535ad047365727953316843edc9e88a"
+      },
+      "trees": {
+        "agents/better-colors": "1f96b150ca7f25fd63ba6079a2ceaf75849186f5"
+      }
+    },
+    "jeffallan/claude-skills": {
+      "head": "02b05028ba6c93f7aed45314b15c0dd5abead9d6",
+      "skills": {
+        "agents/golang-pro": "15141427053f494a63844ea394ce871a68a862152ad9cd0326d40cf325bb4916",
+        "agents/typescript-pro": "c5fc7e8b83e7abd8833fe97bf03a63f9d29340d856f268b83f3ee63d2b3bff1e"
+      },
+      "trees": {
+        "agents/golang-pro": "77236ba0ba332d7556e1abb3626f5b4f6acf46fb",
+        "agents/typescript-pro": "749a0d4d18783570b071285606687f256d8ee17b"
+      }
+    },
+    "juliusbrussee/caveman": {
+      "head": "bad48a0e1df55e05e3f52249afa35ecc1909ee76",
+      "skills": {
+        "agents/caveman-review": "36a4007c5c0c6b90b5accfee1cd769a86e4963b651dece2ce5f17a223a0abb4b"
+      },
+      "trees": {
+        "agents/caveman-review": "515d07fbd383fb9a15ad94647d133f681dc56197"
+      }
+    },
+    "kotlin/kotlin-agent-skills": {
+      "head": "c2f90697bf71966a117a13340d5fff787f004140",
+      "skills": {
+        "agents/kotlin-backend-jpa-entity-mapping": "3f5ab01a11f1a9b74b21d3129081d7c21bc1161ec1095adaebba0699b8c14a50",
+        "agents/kotlin-tooling-java-to-kotlin": "ca92cdd8c0f5186172033b9c879da9865d570ecf59d3cd75279f7c4f525c7320",
+        "agents/kotlin-tooling-native-build-performance": "c4fa36e7c7f793c32566a5c3783679d2cac4109726e6bfd73d458bef6fa2f664"
+      },
+      "trees": {
+        "agents/kotlin-backend-jpa-entity-mapping": "6f5c02f324621dd5d5206f67fed9f38a986cdccb",
+        "agents/kotlin-tooling-java-to-kotlin": "d05d2ae99b0af003bc65b8a5b3eda2cd149e99c9",
+        "agents/kotlin-tooling-native-build-performance": "eaa7a2862535fabce35a2edf0c6b96810446d4bd"
+      }
+    },
+    "krzysztofsurdy/code-virtuoso": {
+      "head": "4dc457fc5ce1e80c960a0c59076484c9c3d8ab06",
+      "skills": {
+        "agents/php-upgrade": "b934c29868427172c1ba9a50dcd8c18b010de94d5036d371f94b53ff13f379c7"
+      },
+      "trees": {}
+    },
+    "laurigates/claude-plugins": {
+      "head": "a3f9eb5eda15ae0dcb792d149d4cff29b08fffcc",
+      "skills": {
+        "agents/python-code-quality": "c302df32d1ec04360854c1599e26e51db7046ab6d5d5b4ffbc2bb0a3fae176fd"
+      },
+      "trees": {
+        "agents/python-code-quality": "d30df7c319aa350e813e122958f50a76c2828ccf"
+      }
+    },
+    "leonxlnx/taste-skill": {
+      "head": "6010f91a9935f1c167dfc500fb1a475681892e6b",
+      "skills": {
+        "agents/design-taste-frontend": "dbcaa06fdfcf31ffd7f18caaf626ce152a42891fda990132e612a6ce47622098"
+      },
+      "trees": {
+        "agents/design-taste-frontend": "2a22452297d559ea5ad97c178879d30ee3ec8022"
+      }
+    },
+    "lobehub/lobehub": {
+      "head": "96fe722c817ced3058599035c5f5adabc6ba726c",
+      "skills": {
+        "agents/typescript": "bce1ead7c274c760f639d167faf17c0b0f4960c98076d1d09200ba686a012c57"
+      },
+      "trees": {
+        "agents/typescript": "cd70bddc67f0304032980e18c758f2ed8f9f3e77"
+      }
+    },
+    "mattpocock/skills": {
+      "head": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+      "skills": {
+        "agents/code-review": "bb3048304e5c783c09783326a9e8f8ba55a31e810f511a792238bb8ad45a0978",
+        "agents/git-guardrails-claude-code": "b34a7c5c76c24195a0a272d42f3a0291d3b2e12e1558dbad387cba3056f48f84",
+        "agents/tdd": "ef3cbb31aa8b1f8a3f9b6a042c230dc9312019e84cdc6337f60890f177fd5764",
+        "opencode/chief-of-staff": "376f88be7e986c7d43a34430d94d2843d125a6374200c3cb47cfb153ad5f7cd4",
+        "opencode/code-review": "bb3048304e5c783c09783326a9e8f8ba55a31e810f511a792238bb8ad45a0978",
+        "opencode/codebase-design": "07246bd43eadfb50ac686aee5297d2cb808bf5ad00fb2ed289416b4b79e7850c",
+        "opencode/prototype": "090ae76b97353255ca29be783d69bcc1029e0195bdf43118d0b6f7ea9acc89b0",
+        "opencode/research": "d293faf4e4da791b8046cd2eed5b4dce46f591f1a26be4099a55b968b5dbe9c9"
+      },
+      "trees": {
+        "agents/code-review": "fee7bb5fdddc069d58cbea09b2c36b5a859eac05",
+        "agents/tdd": "667dbdd00c09d0e2189e082986e6a4d61a67c2a6",
+        "opencode/code-review": "fee7bb5fdddc069d58cbea09b2c36b5a859eac05",
+        "opencode/codebase-design": "07ba1cd60efc12d0d3a083005c1d9651cf15e39a",
+        "opencode/prototype": "e41d92e171f074a2b6887d8f6faca4a15c83d1ca",
+        "opencode/research": "0a6796c5667e95ed2301ba7381c123b4acb2ae1a"
+      }
+    },
+    "mcollina/skills": {
+      "head": "c75d70dbfbe991d8cec42aeda0b64ff14fbb9ac7",
+      "skills": {
+        "agents/fastify-best-practices": "c498fb81ab5d3fed0bdb47eac3c538878889647df590a01ae40ea44caf5a7f66",
+        "agents/node": "517920b6c8452fd36689dd0ffda9b1a211b0511d3565f37e3d4a68794c3b6433",
+        "agents/typescript-magician": "fca11ae8476f71d73723652cd3541b8494371eae5d36a5f67cf0ce2fd97608de"
+      },
+      "trees": {
+        "agents/fastify-best-practices": "f943e2c716e09e3099da5bd45e714f8a95801b80",
+        "agents/node": "359e8c0e1843122275c113174cd6459967d3cb4f",
+        "agents/typescript-magician": "5f12eb5bb17ab9d8645a0f5ac6572d8d444e7c0a"
+      }
+    },
+    "mgifford/accessibility-skills": {
+      "head": "ada839399f053c55e1a776a98c02f8904d70dd32",
+      "skills": {
+        "agents/aria-live-regions": "29a98faced7e59f4afa63a8805e5cf853e246419b09d2c2263efb609cc806024",
+        "agents/ci-cd": "f5953ce61df50105caf20afe264f17d713fb43e97b7c15c27f8dbdf6d1556b9d",
+        "agents/forms": "1dbaf0400fdf5903db701c1718d4a2024c3a4362b6afac14340b74c74eb2885f",
+        "agents/keyboard": "7f717ffaa2b07ad6fc7c7cffad3bb271640c60becdd507060df418e746d544b2"
+      },
+      "trees": {
+        "agents/aria-live-regions": "7fedd96e08c2be3e2e95843517f56ba9085bb3e7",
+        "agents/ci-cd": "02c85988b0f17781bb5fc313bb0ace53b1bc83f4",
+        "agents/forms": "c7cb5a0a41b50efe0837f95e2525f8a8e6873e73",
+        "agents/keyboard": "067092a87067cf6a9301a21b5142444b85ea8fa7"
+      }
+    },
+    "microsoft/playwright-cli": {
+      "head": "b1a5903c5b633b8c9f843ad7b629c2a78437040c",
+      "skills": {
+        "agents/playwright-cli": "2131a1568e4143c87329d5780c87d5007681259309da288caf5d2395a1078a42"
+      },
+      "trees": {
+        "agents/playwright-cli": "6b746b43751be277378e0ee04fe0db69f24da045"
+      }
+    },
+    "microsoft/vscode": {
+      "head": "f96ec1d5f763118a06634ee4bb5838782445a2da",
+      "skills": {
+        "agents/heap-snapshot-analysis": "f88091453a012248064643d887e2fe1a1aab05091191f7152d8ff89d1a98ca3f"
+      },
+      "trees": {
+        "agents/heap-snapshot-analysis": "7fcd8e04848de68dd04e5b4d97632809ae94dfa2"
+      }
+    },
+    "midasmatterhorn/artcraft-skills": {
+      "head": "aa35c244d1151f6c0b9b79aedeba1d9c93342afa",
+      "skills": {
+        "opencode/cadcraft": "cbc0fb357c8959104a3bfc7dfe615fbd3264ea6e61089eb7507fc4bb2838f934",
+        "opencode/deckcraft": "6b8af7fcc5ac5da581af6d5d0cbc35210c7dd4e5953ddda215dc1951b7a14daf",
+        "opencode/designcraft": "e3f038d717a1e420f42833d4f3686d580a93d51809a0938168dc330237f02386",
+        "opencode/effectcraft": "cd5af9086e23251184b03d437eccb2c44104e70735ca9ea074416bd64f67fdfb",
+        "opencode/figcraft": "015212edd8513d282b67af7af96fffee1dc7d23fc47512c90c1a8cd205076463",
+        "opencode/filmcraft": "5b142ce182aa882ca527280c5aebc4f5cc0564d63d1ccd2f7fc4364167fc2143",
+        "opencode/gridcraft": "351a25db39c0cdd1043fa2e227703614b1f108989d8ca608f0facb3662dab0bd",
+        "opencode/lightcraft": "2f6f55efa9ba60e73cf29cc57590f5ce5e12dca9b83254c053970f7048aee412",
+        "opencode/pdfcraft": "e3753955b1838cfca7b34f01c041bd03646ef4e2b25e6ed70180e044e4ab48d9",
+        "opencode/photocraft": "e0aee7707d5f4f91a64452da04422ea98f6adbfccdf13d13eec94837963bef70",
+        "opencode/soundcraft": "2346bd83fe3032c51c16de47062ef198ebfd619b820bde863221526e127cc784",
+        "opencode/vectorcraft": "0c964d641088b6127a7ed755c894a5e6805dcd6aba04056f415970fffedfd7ac",
+        "opencode/wordcraft": "0d7db74ca603e2ecd5b4a7537ab3236c150bf475184af71af9a27b894c015eac"
+      },
+      "trees": {
+        "opencode/cadcraft": "9555a319aad2dfa34160c6b1b6413be736203254",
+        "opencode/deckcraft": "2f020402dadcaf3efcd80f5d44f740877bc2d517",
+        "opencode/designcraft": "8ac62e5f005dd1a10ccbaaef6d931dc250eb1182",
+        "opencode/effectcraft": "d8273e0ccf455bb3f3bb1656833dbdd3d6e6dbcc",
+        "opencode/figcraft": "0271527933fd22efd6422449bcd34631cea24577",
+        "opencode/filmcraft": "d13161ccd85b3cbdb79ab36b68acc6223c7109e1",
+        "opencode/gridcraft": "14548a3bd8e00e5a2747f075844d2f21c5d4f51c",
+        "opencode/lightcraft": "09718dd57275ce5f38aefcbade4427554e7cd159",
+        "opencode/pdfcraft": "f30e4139e51bc6bb90a4d8b61dcfc2b2fb2a82ea",
+        "opencode/photocraft": "24246b142c9c6fa29cbbb32a246da3a8959c2e0f",
+        "opencode/soundcraft": "9a869ff09d06ec372b6200e28005a405e218913c",
+        "opencode/vectorcraft": "3dfbe6cd67522e9906a2d4a072dcddaa0f82862f",
+        "opencode/wordcraft": "952734028830693ddae82522e5cbb1510171480c"
+      }
+    },
+    "millionco/react-doctor": {
+      "head": "84ad0c8d0df7a3ab7d26946367fae3bc39c100d0",
+      "skills": {
+        "agents/react-doctor": "e6c550dffe6395722c56654e424dea041203a80ac4c452ef1ee5bdaae4cad521"
+      },
+      "trees": {
+        "agents/react-doctor": "d3deec46812d0387d3ff41e6139ec7a44802037f"
+      }
+    },
+    "mindrally/skills": {
+      "head": "7682ca77710e0971eab4e0ae5dddfa281aea0ba5",
+      "skills": {
+        "agents/python-testing": "2a1b37cab5765a84e6b3ab8864276eb91244248667ccb53aa596bbd80c577c2d",
+        "agents/python-uv": "797fb470862ddb751e776882814d73cc2682dfa4a90845043037389a19f97604"
+      },
+      "trees": {
+        "agents/python-testing": "bc6cd3d3464d050572acce4f371187126787c88b",
+        "agents/python-uv": "04ecf5066302258eb7f36b5eee7969ad05aee9bb"
+      }
+    },
+    "mohitmishra786/low-level-dev-skills": {
+      "head": "bdc58472fa9f309ed1b3f7d985a0d8e9bd8f4608",
+      "skills": {
+        "agents/rust-sanitizers-miri": "0755391d945746a16597bb55b13a08054408e0bcab3e63484c29c01695b38700"
+      },
+      "trees": {
+        "agents/rust-sanitizers-miri": "483eda9205be7e27961d7882f083e0692a8ce72d"
+      }
+    },
+    "morluto/rea": {
+      "head": "01788bac863ac786bfbb648cad69b11e23b40a89",
+      "skills": {
+        "opencode/reverse-engineer-anything": "813309bca3cb6a1951d2b1f75582f2c7092c476f371d1d0ca6687d3f5c071102"
+      },
+      "trees": {
+        "opencode/reverse-engineer-anything": "a3d655d8254081c506d9234cf2325e1df50da227"
+      }
+    },
+    "neondatabase/agent-skills": {
+      "head": "d814689cbba1506b7a25a7a6df5346258ba8ccf8",
+      "skills": {
+        "agents/neon-postgres-branches": "d6b7ecfc52508c57bd3c8572a7cd0c582c256e36731124eb8598e8b24780ab1d"
+      },
+      "trees": {
+        "agents/neon-postgres-branches": "6c540149c6c83cbbf4de27b485029dade184f172"
+      }
+    },
+    "nesnilnehc/ai-cortex": {
+      "head": "4e68830618487357aab5bd85300728286837236c",
+      "skills": {
+        "agents/review-php": "64911df698f8e3632a139f50c2964f7a9a1832c334ff0c96e32c4a8091f37040"
+      },
+      "trees": {
+        "agents/review-php": "e1b748f062dd495a222aa0b4034bb75536293733"
+      }
+    },
+    "nextlevelbuilder/ui-ux-pro-max-skill": {
+      "head": "56ea9cf174ed86786187daa9de0e6247cb0747e4",
+      "skills": {
+        "agents/ui-ux-pro-max": "41393f88ba1a9ed032262baf31a85e0fb3d923bf9a7e53fd6f5465d73e270290"
+      },
+      "trees": {
+        "agents/ui-ux-pro-max": "0b6619c11598d7ce32041044cb2e6fc6adea1efc"
+      }
+    },
+    "nousresearch/hermes-agent": {
+      "head": "4d04303818b61bf3aa09278af48356315515965b",
+      "skills": {
+        "agents/apple-notes": "2af9426f39ad0f0bed99640c71711c9e8182fa9568a946880c8e4df1220501e6",
+        "agents/arxiv": "3088c9f6b76fd0ef6239f518722a23cf11422b8140d3624a00e3b3d18d4b400b",
+        "agents/computer-use": "2416981f79ae252d43410a9a9106ff54537b3b6e066b003257100d12ad8d18a5",
+        "agents/email-inbox-triage": "aebcd56ada764e6ea7bbb3bbd2ec7b80f096457ca7eb2bc0d800d2d1c65bdefa",
+        "agents/google-workspace": "7fedf534d0297877ea4c24828ee837fa5776d2bdfdc5a3c3e035437551298182",
+        "agents/grounded-citations": "507b3825c333c91e2ade8355fa4de0b9f83785dcd4801e38777cddeac77aa3f6",
+        "agents/hermes-agent": "1dfa284ab00829dfda8dfb3601b4491da9ce08689b5eb1224e90de69182eb89a",
+        "agents/imessage": "5fa389f25a4a3fdfed4523e36d73c7c11dd30daf5dae67bb4d0581e113ccc31f",
+        "agents/llm-wiki": "dfcd96fe560b21bd034adab3735f940e4f1856b6aa5903db50f61e59e209b7f3",
+        "agents/obsidian": "3508c83555dfd2757f511fc798ba8798ad9dc1dd71fdc0d18e546026e612539d"
+      },
+      "trees": {}
+    },
+    "nowork-studio/notfair-plugin": {
+      "head": "ed835f273dce03a451c13fa0cb67305ae58ecb05",
+      "skills": {
+        "agents/schema-markup-generator": "f8f38da92d567438a3a6d28ee2b9975d3f01ac7646f19f2736cb7060485c1b40"
+      },
+      "trees": {
+        "agents/schema-markup-generator": "0f6ac8f36a40ee8605cd8f20410faf53d91c6e66"
+      }
+    },
+    "obra/superpowers": {
+      "head": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
+      "skills": {
+        "agents/test-driven-development": "3cfe4ebb6fa7288f668d87880d279c8e48f7a92b63415e296857060f5ce22e05"
+      },
+      "trees": {
+        "agents/test-driven-development": "847144cf0824095922c0d4875648b9fa74877e1a"
+      }
+    },
+    "openai/skills": {
+      "head": "49f948faa9258a0c61caceaf225e179651397431",
+      "skills": {
+        "agents/aspnet-core": "fb18a0333dffca0e18a77260e72b74f004c746ba8ee421fba81f42fa562ad38e",
+        "opencode/define-goal": "a159b6dae6d8e5a1d9683f22064b5c88c70580f6aedab96017d38b0a046799ad",
+        "opencode/playwright": "68aad444a9076906919e6114638e9cb3ecca0202e9134f7212ac6cf933a7d7ca",
+        "opencode/security-best-practices": "7bd6c2cc8083d90f5d5489c80887ed5399e167d3e7323c7f294035e1e586b689",
+        "opencode/security-ownership-map": "6eaca3bbadae6a91413fa2d682f6556c93aa4f45ea80a110fb08a4c3deae7feb",
+        "opencode/security-threat-model": "a262f878637565892051aa945c88e8748e743896c20925b59c5c2d7d79e061a7"
+      },
+      "trees": {
+        "agents/aspnet-core": "cd4c1d36475ff872ec355cd7d763c6895d58e716",
+        "opencode/define-goal": "eac32ae7b2ef0061267e908c316c29ec18f87a33",
+        "opencode/security-best-practices": "349d45885fd3e432e7d0e5c6e21a2a712db158ef",
+        "opencode/security-ownership-map": "59e92b875f9213d0efe8881071978cca4cac54f1",
+        "opencode/security-threat-model": "455ed2d898ef7d1e8836898f07be3a7d2c3f38d2"
+      }
+    },
+    "openclaw/openclaw": {
+      "head": "f9b097a8d38a59735f2de1070895b2e1ab94144c",
+      "skills": {
+        "agents/apple-reminders": "3aaed1565bfe6d08c976a20666ccbbabd2aaf9570e97a9d2b9525b2119c45d2d",
+        "agents/clawhub": "113d22127ddb24e223a6e96934eef7cd9598b1597a09ae458d33d2cf8e5573ec",
+        "agents/gog": "c4a55a267176ffd1c6201d9dccbe04aa7fdf29be445f34c573bbd1caa330144e",
+        "agents/healthcheck": "264419ccd1493195c77d598e025848603f7a946e74512c2401e997c4cde606a8",
+        "agents/peekaboo": "34a9003c1edfb18bf0443e970e46cdfec980f35c534b1f1badd6e89fdd2d9e51",
+        "agents/summarize": "32108a7b7accadd51daaa530f58ec81ae3be3f85b002e6c04a896949891b2eb5",
+        "agents/weather": "05b1fda855f1f3758470b0e5aa2cd7dfbd4bb71106b7623c797a6d1975f3d170"
+      },
+      "trees": {
+        "agents/peekaboo": "55e94ad95e42b0e309555443a7b82e0ea5852df7"
+      }
+    },
+    "pbakaus/impeccable": {
+      "head": "dad8dbb3aac21ad1fa236c110315ef4abece23e8",
+      "skills": {
+        "agents/impeccable": "f3b0127245eb9795c2c7caf2a9350e674738b0fc1eba53f0ffa03e6c9a38dc62"
+      },
+      "trees": {
+        "agents/impeccable": "f09f5ad7f7d913f9d4eeecd464c59868b27406ba"
+      }
+    },
+    "pixijs/pixijs-skills": {
+      "head": "83760c6f53462ca9cecd68055041f5a8c94758ce",
+      "skills": {
+        "agents/pixijs-accessibility": "0c5b1d794f1765586e101db129c69925cfdf4debd2d03baad4f27657dd6a46f9",
+        "agents/pixijs-performance": "7da321f498f6f3595397266989898bcc2b02a2d46e154a88efce41766e312206"
+      },
+      "trees": {
+        "agents/pixijs-accessibility": "71327be64c8ed921bf4c8a3e01270f73eb4c6cb1",
+        "agents/pixijs-performance": "4398faa9426c3230a865ede6711e2986217b40c5"
+      }
+    },
+    "planetscale/database-skills": {
+      "head": "f6ed002d03084cb39c01d1d58904d47a36f5322a",
+      "skills": {
+        "agents/postgres": "6a2936ebf5486fbb61cd968695dbdeb1084b071ea3ac96bfcc32a23010390f61"
+      },
+      "trees": {
+        "agents/postgres": "9589f4be80426a42d37030e186dceed734043eaa"
+      }
+    },
+    "pproenca/dot-skills": {
+      "head": "cf93c57cac89d6fc3e4194686000411567f5caf3",
+      "skills": {
+        "agents/react-hook-form": "a054dad4cb4aa43d8af720658aa33cb58e83867fd8a6943ac0e58662870cdae9"
+      },
+      "trees": {
+        "agents/react-hook-form": "43d953d2b6dfef78df8a3c04fcce68734cf53466"
+      }
+    },
+    "prisma/skills": {
+      "head": "ba3f9d73200bbb62e49733ab93a961fd138a2c18",
+      "skills": {
+        "agents/prisma-database-setup": "0e11bb75ddfba8c6ee3dd776742699f7fe993d530497273232f1ffac80025e15"
+      },
+      "trees": {
+        "agents/prisma-database-setup": "97489aaf25ac8731739a9e0709d98e9bf99fd4ff"
+      }
+    },
+    "prompt-security/clawsec": {
+      "head": "03c19784f6c1e83ac81da2857f996ac9557dcceb",
+      "skills": {
+        "agents/clawsec-suite": "6df1220ad43978b6a65f991a7d408e01209c2a527b3d824a0cf771d2bb1a26b4"
+      },
+      "trees": {}
+    },
+    "remix-run/agent-skills": {
+      "head": "33578aae4aa36a90c9f8f602105a1ccb0f4efe45",
+      "skills": {
+        "agents/react-router-framework-mode": "6a5efe657c87f262371f3f231e2242f414d53de35f22898d318bbb60edf336b7"
+      },
+      "trees": {
+        "agents/react-router-framework-mode": "08ac3f4e80ca73ecd37b86fcdb83124a7bec5000"
+      }
+    },
+    "resend/react-email": {
+      "head": "e0561e164e9c28859d24373804e30b364931ee77",
+      "skills": {
+        "agents/react-email": "3bd41af14c7dc71796369bba014b247e1178d52b4b6799beb64188782814245c"
+      },
+      "trees": {
+        "agents/react-email": "e6e198406ce5d1b14eb43e7a94f16b8bd2739461"
+      }
+    },
+    "samber/cc-skills-golang": {
+      "head": "8e899e20ff0cd4dc524af3993e4c62d8ee8c5717",
+      "skills": {
+        "agents/golang-benchmark": "1a53f2aaff32ba46a725502dfb2a5e4406f1ebd3715b83c52b87a23e1754363d",
+        "agents/golang-concurrency": "403d5d9ae3c66082231eaad2e001b02a1a9d100f1d93d52db184165dbbaa1f94",
+        "agents/golang-error-handling": "94a1fa4718ecc5348e217d9b0c34d5c57d6f16ce5796a6c471166814830fad85",
+        "agents/golang-performance": "1a219a27beb6c7ab52cb7fc701d539f529f9935894be91f2edea34c7b70e27b6"
+      },
+      "trees": {
+        "agents/golang-benchmark": "0aa2fc1837c172b00c449a6767822b71a14a2a02",
+        "agents/golang-concurrency": "8396cc7b30ae9ec5dfd64b4b00b5bd6eb5460e78",
+        "agents/golang-error-handling": "aaad19ba1ebd07b7498f30805f40ae56087d81e6",
+        "agents/golang-performance": "9260cac6353890eddd985b87530c1febbe6be853"
+      }
+    },
+    "shadcn/ui": {
+      "head": "ba1503c64472b82256d9de95e2e62c5901a38e8b",
+      "skills": {
+        "agents/shadcn": "e976181d1ffe560455eb3c7bd83cec5f111a23b32128c20718fd0db6e071fb2d"
+      },
+      "trees": {
+        "agents/shadcn": "900e3dff4bc1b341db90a147bee6dbed4c2add3c"
+      }
+    },
+    "sickn33/agentic-awesome-skills": {
+      "head": "2984de11956e413008c6f98121cd141c499e47a3",
+      "skills": {
+        "agents/programmatic-seo": "22f4f58a78b37e824cd490b3dac138dbf119f6171db4f91e39a8faba36501de6",
+        "agents/typescript-expert": "5de5c69acdab25ae3a5ffb6b1f409befd0a5486d3f5fdeb93c2c33bb34fb4e11"
+      },
+      "trees": {
+        "agents/programmatic-seo": "d52211c6d134933e83eed5f42d1ad9a310effd8c",
+        "agents/typescript-expert": "b0efb7c01a925ca79313689f922e42c311d54f63"
+      }
+    },
+    "softaworks/agent-toolkit": {
+      "head": "3027f20f3181758385a1bb8c022d4041dfb4de84",
+      "skills": {
+        "agents/database-schema-designer": "0de52fedf479b1a0453c73113a749752fa3b6f279375bf4753a3f86dfa96ebb7",
+        "agents/openapi-to-typescript": "525b39ee84d8fbc835d1dea710fb36b40fd4834441a4d18d75a8dafe985eeacd"
+      },
+      "trees": {
+        "agents/database-schema-designer": "aaedacc8d3da73b0bbc02f75dc22d2854371c3dd",
+        "agents/openapi-to-typescript": "d290240518f61c70b6c2ef063d0d06d6ad76cdad"
+      }
+    },
+    "supabase/agent-skills": {
+      "head": "c9be0e931b7930f7d02126d04774d904c381e7d7",
+      "skills": {
+        "agents/supabase-postgres-best-practices": "5766a8e9524c3c2a81041409be237c3baf515aa04a135871a21dd351682d173f"
+      },
+      "trees": {
+        "agents/supabase-postgres-best-practices": "27bde25111c4cd5e6f803fc9db5fbffe27bb26cf"
+      }
+    },
+    "tencent/browserskill": {
+      "head": "6214e3d6a3d74eaf39c0202c4f182b5755974da9",
+      "skills": {
+        "agents/browser-skill": "2b17a80618ff02f1a0a9b7cbddef25a0154654344cb8147c3364f31e25432103"
+      },
+      "trees": {
+        "agents/browser-skill": "0eabddf440636702de1c6eceb021ca361e2e3dda"
+      }
+    },
+    "trailofbits/skills": {
+      "head": "a3131740a39291e42fd15b9eac07e0b393ad71b1",
+      "skills": {
+        "agents/mutation-testing": "1e7de91c2ff99a7cfe63582ad439562b8bc433851c7337b88a5a9ce339010def",
+        "agents/rust-review": "3de2fb6f09a8d57d4f5c3ea2e94871af222b960f5da444115ad4119af6fb38a4"
+      },
+      "trees": {
+        "agents/mutation-testing": "586088a0dcc07f124d6e76647332c91e25e82e84",
+        "agents/rust-review": "82a542f8fa857cc1202560a09bdbf829e1af8172"
+      }
+    },
+    "vercel-labs/agent-browser": {
+      "head": "fd93075e55a21a47fcb36d7433361daa867a0580",
+      "skills": {
+        "agents/agent-browser": "dd491d53824ad9286ec950aee667098446332429a6d41fe28b4ba11f1959264c"
+      },
+      "trees": {
+        "agents/agent-browser": "82def67855a0d2aad7794207951820fa5422fdb0"
+      }
+    },
+    "vercel-labs/agent-skills": {
+      "head": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "skills": {
+        "agents/vercel-react-best-practices": "16b2055c5f9da13685718c1dd71978f1584a249513e1f341df3edceb08842f1b",
+        "agents/web-design-guidelines": "a6a44d5498f7e8f68289902f3dedfc6f38ae0cee1e96527c80724cf27f727c2a"
+      },
+      "trees": {
+        "agents/vercel-react-best-practices": "51ed887279858a6cf33e91a84804b152eda8d159",
+        "agents/web-design-guidelines": "3116f3e62dbd02b44a598b1aa690d2a8938e8f89"
+      }
+    },
+    "vuejs-ai/skills": {
+      "head": "f5d4b3b869bb8a86ddfea148196f7db64aeefeab",
+      "skills": {
+        "agents/vue-testing-best-practices": "d52dfe7bc614d83e910e76d02505acc231760fdb0629f7a7dfc1eae3f3140389"
+      },
+      "trees": {
+        "agents/vue-testing-best-practices": "c42b78ec2e00e02c2ed926495460b11936b63e12"
+      }
+    },
+    "warpdotdev/common-skills": {
+      "head": "8792394ff1b655e0af451b8fabb68ef0cfcbd208",
+      "skills": {
+        "agents/review-pr": "f46eca8cb563c0ed3d5c0f7f47e38309968857c5448503ffd49a7be0e7cb8560"
+      },
+      "trees": {
+        "agents/review-pr": "ee744db4e23be67660abd81db265632ca67479b5"
+      }
+    },
+    "win4r/openclaw-workspace": {
+      "head": "4e81a914b5f4ed52d88e0b31476354f92fcd4be7",
+      "skills": {
+        "agents/openclaw-workspace": "97c64d6ab5952ca0f2f98ed0ee61d5b5a07801bc4561dc28d0156af75f1fefab"
+      },
+      "trees": {}
+    },
+    "wshobson/agents": {
+      "head": "0874a27b17a22e2b7c2e2bcd725768e0803cad06",
+      "skills": {
+        "agents/async-python-patterns": "997bbb5d6801111917688aef8709ed05842a22213b98f3e0d9d0cbaa2a20a94e",
+        "agents/bats-testing-patterns": "88fcc9f018bce059b1c3674700bab53c11ca1b586772a080ef6c79a8fc54798f",
+        "agents/database-migration": "5df0cca523be0aa58997789e684c1fe406a4e269f9b5699a06c4aa15bc162499",
+        "agents/e2e-testing-patterns": "00073527ff3d71707db4a0beec7b6541bb7c16773445b4616b5103527d1ec85f",
+        "agents/postgresql-table-design": "dcf86100f65aba50a217a9f60d768d2dcbc4875383239215fcb44d0f9fc6b329",
+        "agents/python-design-patterns": "32d9905d574bb749b6dda97aa58706e639b8903b19c26e0212104484d3af662c",
+        "agents/python-error-handling": "da9a6db2373b3d14156c92f21ec804185ee45706ead80832714ce82686f98d8b",
+        "agents/python-performance-optimization": "cef1aafbb462ac8f77f63e7ba2a24fb15200b8a14f1f6e96d3f4833c4a2b76db",
+        "agents/python-project-structure": "2f4f560964af8ecad4d54666c044baa54671d0abd1136c848b539befe24db170",
+        "agents/python-type-safety": "585c546dcf57f4429da07c1b767e62c0e1098154a35c763a80b09603353a4eb5",
+        "agents/rust-async-patterns": "a5856315f26a03c047ca494a2135f0272d568910df6cc99f9e98b84cfae2dc7d",
+        "agents/sql-optimization-patterns": "783e7095e7607bdc6c93073cff49825eefc2a7f85fe4bd2e9f5c4fc3cd1d8e0b",
+        "agents/typescript-advanced-types": "cdb885ca76ed5147c025e57a165c17eae923dff5faa9236cf0fe4365394a9a9d"
+      },
+      "trees": {
+        "agents/async-python-patterns": "0cad4d17610d162518c320c416fd7a3be794d54c",
+        "agents/bats-testing-patterns": "b6412f33829c899a7e7b9fde6ca92cabfda58ab6",
+        "agents/database-migration": "80a176973c42ea85e1aaca325c3a713ad8569a82",
+        "agents/e2e-testing-patterns": "86295119d734be2bbaf5e33bae404c0b66adc99b",
+        "agents/postgresql-table-design": "15f9d6713b43271f938906fd2ea81d1d01a6d9cb",
+        "agents/python-design-patterns": "dabf99bc85ef98de1d4d130286f1a4c1087f65a3",
+        "agents/python-error-handling": "480ff9e8e8f8ec7b839b8303e1372e2fec6a78eb",
+        "agents/python-performance-optimization": "f7d93ea51a12291d0a120dfb9db300c87d8750f6",
+        "agents/python-project-structure": "70109b96fb8e73142730844acd8e6ffe125a2139",
+        "agents/python-type-safety": "bf3b765e5f348c6a0bcf786241a348f680b56d75",
+        "agents/rust-async-patterns": "3624037dbe3d96e2e55ecb6988afeaffbbb9ad1b",
+        "agents/sql-optimization-patterns": "4164f446ebdcb43861b46a616418d793245df302",
+        "agents/typescript-advanced-types": "7e9663cb1d15ca0aff369d35a31348b7e8cf5e95"
+      }
+    },
+    "xobotyi/cc-foundry": {
+      "head": "a46e08f818befddd55955bb38ca4b2c752604ba3",
+      "skills": {
+        "agents/phpunit": "1f312d128fc7e2c5e179107a6b3480f05171fcdccdd465cf20a9eb53484e0cad"
+      },
+      "trees": {
+        "agents/phpunit": "d313f0a0dd6f3f2ebb17725cfb81d8cfc6bdcb63"
+      }
+    }
+  },
+  "version": 1
+}

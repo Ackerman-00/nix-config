@@ -15,13 +15,26 @@ home.nix                     home-manager entry point
 modules/
   system/                    nix settings, boot, network, locale, users, maintenance
   desktop/                   greeter, fonts, services, noctalia, umbriel
-  packages/                  vendored debs/AppImages, python env, MCP registry
   browsers/                  helium (vendored), firefox
   shell/                     zsh tooling, neovim
-home-manager/
-  shell/                     zsh, kitty, starship, fastfetch, git, direnv
-  desktop/                   umbriel
-  programs/                  noctalia, vesktop, opencode
+  home-manager/              home-manager modules
+    programs/                noctalia, vesktop
+    shell/                   zsh, kitty, starship, fastfetch, git, direnv
+  packages/                  products, one group per role
+    agent/                   the agent runtime
+      skills/                skill subsystem, auto-update from upstream
+      opencode/              the app and its global config
+      neurakeep/             memory runtime
+      openchamber/           desktop shell
+    media/                   media & video production tooling
+      hyperframes/           HyperFrames CLI, skills, local voice, transcription
+      concat/                the video editor, vendored
+      craft-launcher/        the Craft launcher, the official prebuilt tarball
+      tts/                   TTS python packages for AI video editing workflows
+    mcp/                     local MCP servers
+      servers/               youtube transcript, playwright
+      concat/                the concat bridge
+      blender/               the blender bridge
 ```
 
 ## Installing on a fresh minimal system
@@ -122,10 +135,42 @@ nix flake update umbriel              # bump umbriel
 nix flake update                      # bump everything (includes nixpkgs)
 ```
 
-## Vendored packages
+## Agent skills
 
-`opencode`, `helium`, and `concat` are built from upstream prebuilt artifacts
-pinned via flake inputs, so a rebuild picks up new versions without a formula
-change. `opencode-feed` and `concat-manifest` point at `releases/latest` style
+Every skill OpenCode reads lives under `~/.agents/skills` and
+`~/.config/opencode/skills`. The lockfile the `skills` CLI wrote, kept at
+`~/.agents/.skill-lock.json`, records per skill the GitHub upstream it came
+from.
+
+`modules/packages/agent/skills/` owns that tree. On every rebuild its
+activation step:
+
+1. restores the locally authored and locally adapted skills (committed under
+   `overrides/`) so a fetch can never clobber them;
+2. re-fetches the upstream-tracked skills whose repo moved;
+3. restores the local copies again.
+
+Skills that must never come back are listed in `my.skills.excluded` —
+`heygen-avatar`, `heygen-translate`, `heygen-video` (the HeyGen service is
+paid), plus `best-practices` and `web-quality-audit`.
+
+`my.skills.refresh` controls the upstream fetch; `my.skills.restore` controls
+the local-copy restore. They are separate on purpose.
+
+Locally adapted skills are pinned to the copy in `overrides/`. To pick up an
+upstream change to one of them, re-run the generator and commit the result:
+
+```sh
+modules/packages/agent/skills/generate.sh
+```
+
+`helium` and `concat` are built from upstream prebuilt artifacts pinned via
+flake inputs, so a rebuild picks up new versions without a formula change.
+`craft-launcher-feed` and `concat-manifest` point at `releases/latest` style
 URLs, which drift; if evaluation fails on a `narHash` mismatch, run
-`nix flake update`.
+`nix flake update craft-launcher-feed`.
+
+`opencode` and `opencode-desktop` come from nixpkgs. The CLI is installed by
+the `programs.opencode` Home Manager module, which also writes the global
+`opencode.json`, the `AGENTS.md` and the agent and command directories. The
+desktop app is a nixpkgs system package.

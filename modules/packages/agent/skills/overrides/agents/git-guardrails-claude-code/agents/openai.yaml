@@ -1,0 +1,3 @@
+interface:
+  display_name: "Git Guardrails for OpenCode"
+  short_description: "Block destructive git commands"

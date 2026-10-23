@@ -1,0 +1,38 @@
+{
+  "skill": "first-mobile-app",
+  "method": "subagent skill-selection simulation (claude CLI unavailable); adapted per agentskills.io optimizing-descriptions guidance (verified via websearch 2026-10-17)",
+  "final_description_chars": 630,
+  "rounds": [
+    {
+      "round": 1,
+      "description": "original (no 'Not for' clause; 'writing a PRD for a mobile app')",
+      "queries": 20,
+      "results": {"agents": "session-family (explore/general agents)", "should_trigger": "10/10", "should_not_trigger": "9/10", "score": "19/20 (95%)"},
+      "failure": "query 13 (PRD for internal browser admin tool) -> false positive on 'first-mobile-app'; bare 'PRD' keyword overrode mobile qualifier"
+    },
+    {
+      "round": 2,
+      "description": "revised: 'PRD for an app that will run on a phone' + 'Not for web-only apps, browser dashboards, or tools that never target a phone store'",
+      "queries": "boundary set x2 reps",
+      "results": {"mobile-PRD positive": "2/2 correct", "non-mobile PRD negative": "2/2 routed elsewhere (brainstorming)", "desktop kiosk spec": "2/2 routed elsewhere", "mobile positives sanity": "2/2"}
+    },
+    {
+      "round": 3,
+      "description": "same as round 2",
+      "purpose": "weak-model robustness (user requirement: must work on OpenCode free models)",
+      "queries": 40,
+      "results": {
+        "deepseek-v4.1-flash-free": "20/20 correct (10 positives -> first-mobile-app, 10 negatives -> elsewhere/none)",
+        "mimo-v2.6-flash-free": "20/20 correct (10 positives -> first-mobile-app, 10 negatives -> elsewhere/none)",
+        "note": "PRD near-miss both models routed to brainstorming; PRD-positive both models triggered first-mobile-app"
+      },
+      "score": "40/40 (100%)"
+    }
+  ],
+  "frontmatter_check": {"description_chars": 630, "limit": 1024, "third_person": true, "no_xml": true},
+  "body_weaks": [
+    "added 'How to use this skill' section: follow steps 1-8 in order, never skip steps 1-3 (for models that skip validation)",
+    "Claude-specific wording generalized to multi-vendor lists (Claude/Codex/ChatGPT/Gemini/Cursor)"
+  ],
+  "sources_line": "regime verified 2026-10-17: platform.claude.com skills best-practices; agentskills.io optimizing-descriptions (pushy clause, near-miss negatives, multiple reps); umar.codes trigger study (boundary 'Not for' words = most reliable part; short condition-list descriptions outperform long prose)"
+}

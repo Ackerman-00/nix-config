@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Plan prescribes a web prototype validated with real users BEFORE building native",
+      "passed": true,
+      "evidence": "Step 2: 'Do not open a mobile builder yet... Two days: build a clickable web version... One full week: put it in front of real target users' precedes any native step"
+    },
+    {
+      "text": "Plan instructs flow-by-flow building with a per-flow spec/PRD, explicitly against one giant prompt",
+      "passed": true,
+      "evidence": "Step 5 PRD per flow; Step 7: 'One flow at a time... Never ask for the whole app in one prompt'"
+    },
+    {
+      "text": "Mentions testing with 5-7 real people before release",
+      "passed": true,
+      "evidence": "Step 8: 'Test with 5-7 real people before any release and collect feedback from each person individually'"
+    },
+    {
+      "text": "Covers BOTH stores: Apple ($99/yr, TestFlight) and Google Play ($25, closed testing requirement)",
+      "passed": true,
+      "evidence": "Step 8: 'Apple Developer Program, $99/year... TestFlight' and 'Google: Play developer registration, $25 one-time... closed test with 12 testers for 14 days'"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  }
+}

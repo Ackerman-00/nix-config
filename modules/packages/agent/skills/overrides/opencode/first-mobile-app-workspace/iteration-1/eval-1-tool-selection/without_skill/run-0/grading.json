@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "States that Lovable produces web apps, not native store-submittable mobile apps",
+      "passed": true,
+      "evidence": "Caveat 1: 'It cannot build a native mobile app... web-only platform... publishing always ends at a web URL'"
+    },
+    {
+      "text": "Gives concrete builder-selection criteria including pricing model and code ownership/export",
+      "passed": true,
+      "evidence": "Discusses Lovable credit pricing ('the cost is the credits, not the plan') and ownership ('GitHub export so you're never locked in'); compares alternatives with prices"
+    },
+    {
+      "text": "Advises validating the idea (prototype + real users) before investing in the real build",
+      "passed": true,
+      "evidence": "Guardrail 'Ship order: prototype -> show your sister -> fix -> pilot with 5 friendly clients -> security review -> then real bookings'"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  }
+}

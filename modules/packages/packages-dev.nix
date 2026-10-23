@@ -18,13 +18,13 @@
       pkg-config
       lazygit
       nixfmt
-      nodejs
+      nodejs_latest
       rustup
       uv
       pipx
     ];
 
-    # Domain libs for the single interpreter (python-env.nix builds it).
+    # Domain libs
     my.python.packages = [
       "ipython"
       "debugpy"

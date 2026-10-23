@@ -2,10 +2,9 @@
 {
   imports = [
     inputs.umbriel.homeModules.default
-    ./home-manager/programs/noctalia
-    ./home-manager/programs/vesktop.nix
-    ./home-manager/programs/opencode.nix
-    ./home-manager/shell
+    ./modules/home-manager/programs/noctalia
+    ./modules/home-manager/programs/vesktop.nix
+    ./modules/home-manager/shell
   ];
 
   home = {

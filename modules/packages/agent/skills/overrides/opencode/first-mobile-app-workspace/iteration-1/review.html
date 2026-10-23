@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eval Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" integrity="sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #faf9f5;
+      --surface: #ffffff;
+      --border: #e8e6dc;
+      --text: #141413;
+      --text-muted: #b0aea5;
+      --accent: #d97757;
+      --accent-hover: #c4613f;
+      --green: #788c5d;
+      --green-bg: #eef2e8;
+      --red: #c44;
+      --red-bg: #fceaea;
+      --header-bg: #141413;
+      --header-text: #faf9f5;
+      --radius: 6px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- Header ---- */
+    .header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .header .instructions {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 0.25rem;
+    }
+    .header .progress {
+      font-size: 0.875rem;
+      opacity: 0.8;
+      text-align: right;
+    }
+
+    /* ---- Main content ---- */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* ---- Sections ---- */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      flex-shrink: 0;
+    }
+    .section-header {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.75rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .section-body {
+      padding: 1rem;
+    }
+
+    /* ---- Config badge ---- */
+    .config-badge {
+      display: inline-block;
+      padding: 0.2rem 0.625rem;
+      border-radius: 9999px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-left: 0.75rem;
+      vertical-align: middle;
+    }
+    .config-badge.config-primary {
+      background: rgba(33, 150, 243, 0.12);
+      color: #1976d2;
+    }
+    .config-badge.config-baseline {
+      background: rgba(255, 193, 7, 0.15);
+      color: #f57f17;
+    }
+
+    /* ---- Prompt ---- */
+    .prompt-text {
+      white-space: pre-wrap;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    /* ---- Outputs ---- */
+    .output-file {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .output-file + .output-file {
+      margin-top: 1rem;
+    }
+    .output-file-header {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .output-file-header .dl-btn {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-decoration: none;
+      cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+    .output-file-header .dl-btn:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    .output-file-content {
+      padding: 0.75rem;
+      overflow-x: auto;
+    }
+    .output-file-content pre {
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+    }
+    .output-file-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    .output-file-content iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    .output-file-content table {
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      width: 100%;
+    }
+    .output-file-content table td,
+    .output-file-content table th {
+      border: 1px solid var(--border);
+      padding: 0.375rem 0.5rem;
+      text-align: left;
+    }
+    .output-file-content table th {
+      background: var(--bg);
+      font-weight: 600;
+    }
+    .output-file-content .download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .output-file-content .download-link:hover {
+      background: var(--border);
+    }
+    .empty-state {
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* ---- Feedback ---- */
+    .prev-feedback {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.625rem 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .prev-feedback-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+      color: var(--text-muted);
+    }
+    .feedback-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      resize: vertical;
+      color: var(--text);
+    }
+    .feedback-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .feedback-status {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      min-height: 1.1em;
+    }
+
+    /* ---- Grades (collapsible) ---- */
+    .grades-toggle {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .grades-toggle:hover {
+      color: var(--accent);
+    }
+    .grades-toggle .arrow {
+      margin-right: 0.5rem;
+      transition: transform 0.15s;
+      font-size: 0.75rem;
+    }
+    .grades-toggle .arrow.open {
+      transform: rotate(90deg);
+    }
+    .grades-content {
+      display: none;
+      margin-top: 0.75rem;
+    }
+    .grades-content.open {
+      display: block;
+    }
+    .grades-summary {
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .grade-badge {
+      display: inline-block;
+      padding: 0.125rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .grade-pass { background: var(--green-bg); color: var(--green); }
+    .grade-fail { background: var(--red-bg); color: var(--red); }
+    .assertion-list {
+      list-style: none;
+    }
+    .assertion-item {
+      padding: 0.625rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8125rem;
+    }
+    .assertion-item:last-child { border-bottom: none; }
+    .assertion-status {
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+    .assertion-status.pass { color: var(--green); }
+    .assertion-status.fail { color: var(--red); }
+    .assertion-evidence {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+      padding-left: 1.5rem;
+    }
+
+    /* ---- View tabs ---- */
+    .view-tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .view-tab {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.625rem 1.25rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+    }
+    .view-tab:hover { color: var(--text); }
+    .view-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .view-panel { display: none; }
+    .view-panel.active { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+
+    /* ---- Benchmark view ---- */
+    .benchmark-view {
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .benchmark-table {
+      border-collapse: collapse;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.8125rem;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+    .benchmark-table th, .benchmark-table td {
+      padding: 0.625rem 0.75rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    .benchmark-table th {
+      font-family: 'Poppins', sans-serif;
+      background: var(--header-bg);
+      color: var(--header-text);
+      font-weight: 500;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .benchmark-table tr:hover { background: var(--bg); }
+    .benchmark-table tr.benchmark-row-with { background: rgba(33, 150, 243, 0.06); }
+    .benchmark-table tr.benchmark-row-without { background: rgba(255, 193, 7, 0.06); }
+    .benchmark-table tr.benchmark-row-with:hover { background: rgba(33, 150, 243, 0.12); }
+    .benchmark-table tr.benchmark-row-without:hover { background: rgba(255, 193, 7, 0.12); }
+    .benchmark-table tr.benchmark-row-avg { font-weight: 600; border-top: 2px solid var(--border); }
+    .benchmark-table tr.benchmark-row-avg.benchmark-row-with { background: rgba(33, 150, 243, 0.12); }
+    .benchmark-table tr.benchmark-row-avg.benchmark-row-without { background: rgba(255, 193, 7, 0.12); }
+    .benchmark-delta-positive { color: var(--green); font-weight: 600; }
+    .benchmark-delta-negative { color: var(--red); font-weight: 600; }
+    .benchmark-notes {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+    .benchmark-notes h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+    }
+    .benchmark-notes ul {
+      list-style: disc;
+      padding-left: 1.25rem;
+    }
+    .benchmark-notes li {
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      margin-bottom: 0.375rem;
+    }
+    .benchmark-empty {
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+      padding: 3rem;
+    }
+
+    /* ---- Navigation ---- */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0;
+    }
+    .nav-btn {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: var(--bg);
+      border-color: var(--text-muted);
+    }
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .done-btn {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .done-btn:hover {
+      background: var(--bg);
+      border-color: var(--text-muted);
+    }
+    .done-btn.ready {
+      border: none;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+    }
+    .done-btn.ready:hover {
+      background: var(--accent-hover);
+    }
+    /* ---- Done overlay ---- */
+    .done-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+    .done-overlay.visible {
+      display: flex;
+    }
+    .done-card {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 2rem 3rem;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+    }
+    .done-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .done-card p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .done-card .btn-row {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .done-card button {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+    .done-card button:hover {
+      background: var(--bg);
+    }
+    /* ---- Toast ---- */
+    .toast {
+      position: fixed;
+      bottom: 5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 0.625rem 1.25rem;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 200;
+    }
+    .toast.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" style="height:100vh; display:flex; flex-direction:column;">
+    <div class="header">
+      <div>
+        <h1>Eval Review: <span id="skill-name"></span></h1>
+        <div class="instructions">Review each output and leave feedback below. Navigate with arrow keys or buttons. When done, copy feedback and paste into Claude Code.</div>
+      </div>
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <!-- View tabs (only shown when benchmark data exists) -->
+    <div class="view-tabs" id="view-tabs" style="display:none;">
+      <button class="view-tab active" onclick="switchView('outputs')">Outputs</button>
+      <button class="view-tab" onclick="switchView('benchmark')">Benchmark</button>
+    </div>
+
+    <!-- Outputs panel (qualitative review) -->
+    <div class="view-panel active" id="panel-outputs">
+    <div class="main">
+      <!-- Prompt -->
+      <div class="section">
+        <div class="section-header">Prompt <span class="config-badge" id="config-badge" style="display:none;"></span></div>
+        <div class="section-body">
+          <div class="prompt-text" id="prompt-text"></div>
+        </div>
+      </div>
+
+      <!-- Outputs -->
+      <div class="section">
+        <div class="section-header">Output</div>
+        <div class="section-body" id="outputs-body">
+          <div class="empty-state">No output files found</div>
+        </div>
+      </div>
+
+      <!-- Previous Output (collapsible) -->
+      <div class="section" id="prev-outputs-section" style="display:none;">
+        <div class="section-header">
+          <div class="grades-toggle" onclick="togglePrevOutputs()">
+            <span class="arrow" id="prev-outputs-arrow">&#9654;</span>
+            Previous Output
+          </div>
+        </div>
+        <div class="grades-content" id="prev-outputs-content"></div>
+      </div>
+
+      <!-- Grades (collapsible) -->
+      <div class="section" id="grades-section" style="display:none;">
+        <div class="section-header">
+          <div class="grades-toggle" onclick="toggleGrades()">
+            <span class="arrow" id="grades-arrow">&#9654;</span>
+            Formal Grades
+          </div>
+        </div>
+        <div class="grades-content" id="grades-content"></div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="section">
+        <div class="section-header">Your Feedback</div>
+        <div class="section-body">
+          <textarea
+            class="feedback-textarea"
+            id="feedback"
+            placeholder="What do you think of this output? Any issues, suggestions, or things that look great?"
+          ></textarea>
+          <div class="feedback-status" id="feedback-status"></div>
+          <div class="prev-feedback" id="prev-feedback" style="display:none;">
+            <div class="prev-feedback-label">Previous feedback</div>
+            <div id="prev-feedback-text"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav" id="outputs-nav">
+      <button class="nav-btn" id="prev-btn" onclick="navigate(-1)">&#8592; Previous</button>
+      <button class="done-btn" id="done-btn" onclick="showDoneDialog()">Submit All Reviews</button>
+      <button class="nav-btn" id="next-btn" onclick="navigate(1)">Next &#8594;</button>
+    </div>
+    </div><!-- end panel-outputs -->
+
+    <!-- Benchmark panel (quantitative stats) -->
+    <div class="view-panel" id="panel-benchmark">
+      <div class="benchmark-view" id="benchmark-content">
+        <div class="benchmark-empty">No benchmark data available. Run a benchmark to see quantitative results here.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Done overlay -->
+  <div class="done-overlay" id="done-overlay">
+    <div class="done-card">
+      <h2>Review Complete</h2>
+      <p>Your feedback has been saved. Go back to your Claude Code session and tell Claude you're done reviewing.</p>
+      <div class="btn-row">
+        <button onclick="closeDoneDialog()">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ---- Embedded data (injected by generate_review.py) ----
+    const EMBEDDED_DATA = {"skill_name": "first-mobile-app", "runs": [{"id": "eval-0-noob-habit-tracker-with_skill-run-0", "prompt": "I have never coded. I have an idea for a habit tracker app for iPhone and Android. I want it in the App Store and Google Play. Walk me through what I should do, in order.", "eval_id": 0, "outputs": [{"name": "plan.md", "type": "text", "content": "# From Idea to App Store: Your Habit Tracker Roadmap\n\nYou've never coded. That's fine \u2014 AI builders have removed most of the coding barrier, and non-technical people ship real apps now. What no tool removes is the **order of operations**. The most expensive mistake in mobile is building a native app for an idea nobody wants. So the rule for everything below: **validate cheap, build later.** Work through these eight steps in order.\n\n## Step 1 \u2014 Define exactly what you're building\n\nThere are two ways to arrive at an app idea, and you should know which one you're on:\n\n- **Your own pain:** you have the habit-tracking problem yourself and know exactly what's missing. Innovation path \u2014 higher risk, needs heavier validation.\n- **A validated category:** habit tracking is a huge, established category. Demand is pre-proven, and competitors' pricing, reviews, and complaints are public. Your job is to study every competitor and find the angle where you can be much better \u2014 your insight, your design, your approach.\n\nA habit tracker means you're on the validated-category path. This week: read the top habit trackers in both stores, especially their 1\u2605 and 3\u2605 reviews. That's where your angle lives. Then write one paragraph: who it's for, what problem it solves, why yours wins.\n\n## Step 2 \u2014 Prototype and validate on the web first (1\u20132 weeks)\n\nDo not open a mobile builder yet. This step saves you months:\n\n- **Two days:** build a clickable web version with an AI tool \u2014 Lovable, Replit, or Claude chat, whatever you already pay for. The tool barely matters; it just has to produce a clickable web app fast.\n- **One full week:** put it in front of real target users \u2014 not friends saying \"cool,\" but people who actually want to build habits. Ask three things: Is this interesting? Does the workflow make sense? Which features would you actually use? A questionnaire works; people reply even in crowded categories (one founder got 100+ replies in the period-tracker niche and still found her angle).\n- **Expect to pivot or drop the idea entirely.** That's a win \u2014 you learned it in a week instead of six months.\n\n## Step 3 \u2014 Decide: does it need to be a real mobile app?\n\nThe web version decides. Be honest:\n\n- **Stay web** if it's good enough. Don't go native just because it feels more like \"real.\"\n- **Go installed** if the web is blocked by real mobile needs. For a habit tracker, it likely will be: daily reminder notifications and a home-screen widget are core to the product, and a web page can't do those well.\n\nIf it must be installed, your options:\n\n| Option | Verdict |\n|---|---|\n| Wrapper (Capacitor, Despia) | Fast, but temporary \u2014 a shortcut, not a destination |\n| React Native | Solid cross-platform; most AI builders support it |\n| Native (Swift + Kotlin) | Where the market is moving; best long-term answer; more complex but worth it |\n\nWhy native is realistic for you now: AI collapsed development cost, so a full native app no longer requires two specialist developers. Since you want both iOS and Android, aim for a tool that produces both platforms \u2014 preferably native Swift and Kotlin from one project. If nothing clears that bar, the pragmatic fallback is React Native + Expo.\n\nExpect a **full rebuild** from the web prototype to the native app. Rebuilds are far easier than first builds \u2014 by then you know exactly what to build and which features matter.\n\n## Step 4 \u2014 Map the app flow by flow\n\nBefore any code, sketch the whole app on paper or a whiteboard. Habit trackers break down like this:\n\n- **Onboarding** \u2014 what a brand-new user sees and sets up first: pick a goal, create the first habit, set reminder times\n- **Registration** \u2014 sign-in; decide whether v1 needs it at all\n- **Monetization** \u2014 what's free, what's paid; optional at launch\n- **Core product** \u2014 usually several flows: create/edit a habit, the daily check-off, streaks and history, progress/stats, reminder setup\n\nThen add the mobile-specific pieces: notifications, and an optional widget showing today's habits. Browse [mobbin.com](https://mobbin.com) \u2014 a library of how real shipped apps structure their screens. Study 3\u20135 habit or lifestyle apps and note the flow patterns. Mark what differs from your web version.\n\n## Step 5 \u2014 Write the PRD\n\nThe PRD (product requirements document) is a written description of the app, flow by flow \u2014 the exact document you hand to the AI builder. Co-write it with Claude: feed in your sketches, web-version screenshots, and competitor-review notes, and work through each flow's screens, states, and edge cases (what happens after 20 habits? after a missed day?).\n\nWhy this matters: **without a PRD, the AI invents its own product. With one, it builds yours.** Expect to spend real hours here. It's the highest-leverage writing in the whole project.\n\n## Step 6 \u2014 Choose a builder \u2014 three checks\n\nThis is the tool that turns your PRD into a real app on both platforms. Test candidates against these, in order:\n\n1. **Pricing model.** Prefer tools where you plug in your own AI agent or subscription (e.g. Claude, Cursor) over per-credit billing. You'll maintain this app for years, and per-credit costs compound. The cheapest option that works usually wins \u2014 this is a long play.\n2. **Code ownership.** You must always be able to take your code out for free. Some tools gate exports behind expensive plans. Check before you invest a cent.\n3. **Feel.** Actually use it for a day. Comfort compounds over months of iteration.\n\nNative preference: for iOS + Android together, pick a tool that generates both platforms from one project, preferably native Swift and Kotlin. If no tool on the market clears all three checks with that bar, **React Native + Expo** is the pragmatic cross-platform fallback \u2014 battle-tested and supported by most AI builders.\n\n## Step 7 \u2014 Build flow by flow\n\n- **One flow at a time:** one spec (that PRD section) + reference screenshots = one prompt cycle. Review, run, fix, then move to the next flow. **Never ask for the whole app in one prompt** \u2014 that's how first-timers get unreviewable, broken output.\n- **Time:** full-time, about a week or two for an average app. At side-project pace (a few hours a day), one to two months is normal.\n- **Budget ~30% of your total time for debugging and verification.** It's not an interruption; it's part of the build. Test each flow on a real device as it's finished.\n\n## Step 8 \u2014 Test and release fast\n\nThe store requirements, concretely:\n\n- **Apple:** Apple Developer Program, $99/year. Send builds to testers via **TestFlight**.\n- **Google:** Play developer registration, $25 one-time. Important: new personal developer accounts must run a **closed test with 12 testers for 14 days** before a public release. Recruit those 12 early so the clock can run in parallel with your polishing.\n- **Test with 5\u20137 real people before any release** and collect feedback from each person individually \u2014 that's how you find what's actually confusing.\n- **No testers lined up?** Release free and learn from real App Store and Play users. Pricing can wait; your first job is learning. Ship feature by feature, not in one big-bang launch.\n\nThe faster you release, the faster you learn.\n\n## Mistakes to avoid\n\n| Mistake | Fix |\n|---|---|\n| Building the native app before validating | Web prototype + real users first (steps 2\u20133) |\n| Asking the AI for the whole app in one prompt | One flow at a time, spec per flow |\n| Skipping the PRD | The AI invents the product instead of building yours |\n| Per-credit billing on a long-lived app | Own-agent tooling on your own subscription |\n| A tool that can't export your code free | Verify ownership before starting |\n| Waiting for \"polish\" to release | TestFlight at 5\u20137 users; ship the version |\n| No testers lined up | Release free, learn from real store users |\n\n## Your first move\n\n1. This week: read the top habit trackers' 1\u2605\u20133\u2605 reviews in both stores, and write your one-paragraph angle.\n2. Next two days: build the clickable web prototype.\n3. Then one week: put it in front of real target users before deciding anything about the app stores.\n\nTotal fixed cost to reach both stores later: $99/year (Apple) + $25 one-time (Google), plus whatever builder subscription you choose.\n"}], "grading": {"expectations": [{"text": "Plan prescribes a web prototype validated with real users BEFORE building native", "passed": true, "evidence": "Step 2: 'Do not open a mobile builder yet... Two days: build a clickable web version... One full week: put it in front of real target users' precedes any native step"}, {"text": "Plan instructs flow-by-flow building with a per-flow spec/PRD, explicitly against one giant prompt", "passed": true, "evidence": "Step 5 PRD per flow; Step 7: 'One flow at a time... Never ask for the whole app in one prompt'"}, {"text": "Mentions testing with 5-7 real people before release", "passed": true, "evidence": "Step 8: 'Test with 5-7 real people before any release and collect feedback from each person individually'"}, {"text": "Covers BOTH stores: Apple ($99/yr, TestFlight) and Google Play ($25, closed testing requirement)", "passed": true, "evidence": "Step 8: 'Apple Developer Program, $99/year... TestFlight' and 'Google: Play developer registration, $25 one-time... closed test with 12 testers for 14 days'"}], "summary": {"passed": 4, "failed": 0, "total": 4, "pass_rate": 1.0}}}, {"id": "eval-0-noob-habit-tracker-without_skill-run-0", "prompt": "I have never coded. I have an idea for a habit tracker app for iPhone and Android. I want it in the App Store and Google Play. Walk me through what I should do, in order.", "eval_id": 0, "outputs": [{"name": "plan.md", "type": "text", "content": "# Your habit tracker: from zero code to both app stores\n\n*A step-by-step plan for a first-time builder \u2014 October 2026*\n\n## The honest version first\n\nYou can absolutely do this without ever \"learning to code\" the way a computer science student does. In 2026 the work looks different: you direct an AI assistant that writes the code, you test the app on your own phone, and you handle the store paperwork. People ship small apps like this all the time.\n\nBut be clear-eyed: it's a project, not a weekend. For a habit tracker, plan on roughly **2\u20134 months of part-time work** for your first version, about **$124 in the first year** in unavoidable fees, and a real chunk of that time spent on testing, store requirements and marketing \u2014 not on code. The code is the part AI helps with most.\n\nAlso: a habit tracker is a good first app, because it can work fully offline. No accounts, no server, no sync, no privacy headaches. Version 1 should keep everything on the phone.\n\n## 1. Pick how you'll build it (the one big decision)\n\n**Path A \u2014 AI-assisted build with a cross-platform framework (recommended).** Use Expo, a free toolkit that makes one codebase run on both iPhone and Android. You describe features to an AI coding assistant (ChatGPT, Claude, Cursor, Copilot \u2014 whichever you prefer); it writes the code; you open the app on your own phone in seconds with the free \"Expo Go\" app. Cost: $0 to start. You'll pick up basic builder skills along the way \u2014 running commands, saving versions, reading error messages \u2014 and the AI coaches you through each one. You do **not** need a Mac: iPhone builds happen on Expo's cloud builders.\n\n**Path B \u2014 No-code app builders.** Tools like Adalo, Thunkable, Draftbit and FlutterFlow let you assemble screens by dragging pieces together. Faster to your first screen; usually costs a monthly subscription (typically tens of dollars or more \u2014 check current pricing); you can hit the limits of the tool; some handle store publishing for you. Good if you truly want zero terminal. Trade-offs: less control, ongoing cost, and switching later means rebuilding.\n\n**Path C \u2014 Hire a developer.** For even a small app, think thousands of dollars minimum. You'd still manage the stores, testing and marketing yourself. Only worth it if you have budget and a validated idea.\n\nThis plan assumes Path A. Steps 5\u201310 apply no matter which path you choose.\n\n## 2. The plan, in order\n\n### Step 1 \u2014 Decide what Version 1 is (one evening)\n\nWrite down the smallest version worth shipping. For a habit tracker, a good v1: add/edit/delete habits; check one off each day; see your streak; one daily reminder per habit; a simple stats screen. Explicitly **not** in v1: user accounts, cloud sync, sharing, social features, home-screen widgets (surprisingly tricky), Apple Watch apps. Every extra feature means days of work \u2014 and you can always add later.\n\nDo this too: install 2\u20133 popular habit trackers (Streaks, Habitica, Loop, Fabulous...) and read their 1- and 2-star reviews. That's free market research: it tells you what annoys users and where you can do better.\n\n### Step 2 \u2014 Set up your computer (half a day)\n\nAny Windows, Mac or Linux laptop works. You do **not** need a Mac. Install Node.js (the \"LTS\" version) and VS Code (a free code editor). Create a free account at expo.dev. Install the free **Expo Go** app on your phone. Recommended: also create a free GitHub account to back up your project.\n\nThen, in your AI assistant, ask: *\"Walk me through creating a new Expo app and running it on my phone with Expo Go, step by step, assuming I've done nothing like this before.\"* Your daily working loop from then on: AI edits the code \u2192 you save \u2192 your phone updates automatically. That loop is the whole game.\n\n### Step 3 \u2014 Build the app in thin slices (the biggest chunk of the calendar)\n\nBuild in this order, with each slice testable on your phone the same day:\n\n1. Show a list of habits (fake data first).\n2. Add, edit, delete habits.\n3. Tap to check off a habit for today.\n4. Save data between launches (a small database right on the phone).\n5. Streak logic.\n6. Daily reminder notifications.\n7. Stats screen (a calendar heat map or simple bar chart).\n8. Polish: icon, colors, dark mode, empty states, a little animation or sound.\n\nRules of the road: keep every change small; test on a real phone constantly; when something breaks, paste the full error message to your AI before changing anything; save after each working feature. Things breaking constantly is normal \u2014 that, plus fixing them, *is* the work.\n\nOne practical note: create the project with the newest Expo SDK, and update it again before you submit \u2014 the stores periodically require apps built with the latest tools (Apple, for example, now requires apps built with the iOS 26 SDK), and staying current on Expo keeps you compliant automatically.\n\n### Step 4 \u2014 Test like a stranger (1\u20132 weeks)\n\n- Install it on family or friends' phones; watch them use it without your help.\n- Try to break it: airplane mode, no notification permission, changed time zone, force-quitting mid-action, huge text sizes, dark mode.\n- Compare iPhone vs Android quirks (notifications and back gestures differ between them).\n- Fix the worst 10 annoyances; write down everything else for version 1.1.\n\n### Step 5 \u2014 Enroll with Apple and Google (start early \u2014 the waiting is out of your control)\n\n**Apple Developer Program \u2014 $99/year.** You need an Apple Account (your Apple ID) with two-factor authentication and your legal name; sometimes a quick identity check. Enroll at developer.apple.com/programs. Approval is usually within a day or two, but can take longer. Enroll as an individual unless you have a registered company \u2014 organization accounts need extra paperwork.\n\n**Google Play Console \u2014 $25 once.** Register at play.google.com/console; identity verification can take days. Critical detail: personal developer accounts must run a **closed test with at least 12 testers who stay opted in for 14 continuous days** before you may even apply for production access. That application is then reviewed (usually within about 7 days) before you can publish. Start this clock as early as you can \u2014 and start recruiting your 12 testers now.\n\n### Step 6 \u2014 Prepare your store listing (a weekend)\n\n- **Icon:** one 1024\u00d71024 image. Make it yourself with a free design tool, or generate one.\n- **Screenshots:** 4\u20138 per platform, in the exact sizes each console lists. You can frame them in a phone mockup for free.\n- **Text:** app name (check it's not already taken in either store), short and long descriptions, keywords. Write for a human first \u2014 but do put the obvious words (\"habit tracker\", \"streaks\") in the title and description.\n- **Privacy policy:** both stores require a link, even for an app that collects nothing. For a local-only app it's a short page (\"data stays on your device; we collect nothing\"). Host it anywhere public (GitHub Pages, Notion, any site builder).\n- **Support contact** (email or page), plus Google's \"Data safety\" form and Apple's \"App Privacy\" questionnaire. Local-only app = \"no data collected\" \u2014 that's a selling point; say so.\n\n### Step 7 \u2014 Ship to Apple\n\n1. Create the app in App Store Connect (a bundle ID like `com.yourname.habittracker`).\n2. Build and upload from any computer using Expo's tools (`eas build`, then `eas submit`). Let EAS generate and manage your signing certificates when it asks \u2014 this used to be the scary part; it's automated now.\n3. Install it from **TestFlight** (Apple's beta service) on your own phone and clean up anything embarrassing. Internal testers get builds instantly; outside testers need a brief review.\n4. Submit for App Review with a short reviewer note explaining what the app does. Reviews often finish in a day or two. First submissions frequently get one rejection \u2014 read the exact reason, fix it, resubmit. This is a normal loop, not a failure.\n5. Release manually once approved, or automatically \u2014 your call.\n\n### Step 8 \u2014 Ship to Google\n\n1. Create the app in Play Console; fill in the listing, the Data safety form and the content rating.\n2. Build the Android file (`.aab`) with `eas build` and upload it, or use `eas submit`.\n3. **Internal testing** first: just you and a few people; builds become available quickly.\n4. **Closed test:** your 12+ testers opt in and stay opted in for 14 continuous days. Recruit a few extras \u2014 anyone who drops out restarts their own 14-day clock. (Can't find 12 people? There are paid tester-matching services \u2014 vet them and make sure the testers are real people who actually use the app.)\n5. After the 14 days, apply for production access from the Play Console dashboard; the application is reviewed (usually \u22647 days), then your app goes through its own review.\n6. Release.\n\n### Step 9 \u2014 Launch, then keep going\n\n- Release quietly, then widen. Watch the crash dashboards in both consoles.\n- Reply to every review. Ship fixes in small updates \u2014 most code-only fixes can go out over the air (no new review) with Expo.\n- The hard part is not building \u2014 it's being found. Pick a niche (\"a habit tracker for new runners\" beats \"another habit tracker\"), post honest updates while you build, and record a 30-second demo video for the store pages and social posts.\n\n### Step 10 \u2014 Money (later, once v1 is stable)\n\n- Start free. Add paid features once real people use the app.\n- Digital purchases must use the stores' billing systems (set up subscriptions/products in both consoles; tools like RevenueCat make cross-store subscriptions manageable).\n- The stores take a cut: Apple 30% (15% via the free-to-join App Store Small Business Program \u2014 you qualify under $1M/year), Google Play roughly 15% on your first $1M/year (30% above). Auto-renewing subscriptions generally qualify for about 15% on both.\n- You'll file tax and banking details in each console; both stores pay out monthly.\n\n## 3. What it costs\n\n| Item | Cost |\n| --- | --- |\n| Apple Developer Program | $99 / year |\n| Google Play Console | $25 one-time |\n| Expo + EAS Build | $0 (free tier: 15 iOS + 15 Android cloud builds/month, slower queue; $19/mo optional for faster queues) |\n| AI coding assistant | $0\u2013$20+/month, depending on what you use |\n| Optional: domain + hosting for privacy policy / support page | ~$0\u2013$15 / year |\n| Optional: icon / screenshot design help | $0 (DIY) to ~$150 |\n| **First-year total** | **~$124 + optional extras** |\n\nYour real investment is time: 5\u201310 hours a week for 2\u20134 months is a realistic pace for a first app.\n\n## 4. What trips up almost every first-timer\n\n1. Feature creep \u2014 you'll be tempted to add \"just one more thing\". Don't; ship small.\n2. Expecting to pass review on the first try \u2014 budget one rejection and its fix.\n3. Skipping the privacy policy or data-safety forms \u2014 an easy, avoidable rejection.\n4. Testing only on your computer \u2014 real phones behave differently.\n5. Starting with accounts and sync \u2014 huge complexity, zero value to a v1 user.\n6. Ignoring Google's 12-testers-for-14-days rule \u2014 it can silently cost you a month.\n7. Treating launch as the finish line \u2014 updates, reviews and support are the ongoing job.\n\n## 5. Your checklist\n\n- [ ] Write the v1 feature list; read competitors' bad reviews.\n- [ ] Install Node.js + VS Code; make an Expo account; install Expo Go on your phone.\n- [ ] Build the app in slices; test on a real phone daily.\n- [ ] Have friends and family try it; fix the worst bugs.\n- [ ] Enroll: Apple ($99/yr) and Google ($25) \u2014 start early.\n- [ ] Prepare icon, screenshots, descriptions, privacy policy.\n- [ ] TestFlight yourself \u2192 submit to Apple review.\n- [ ] Play internal test \u2192 closed test (12 testers \u00d7 14 days) \u2192 production access \u2192 release.\n- [ ] Launch; watch crashes; answer reviews.\n- [ ] Update regularly; consider monetization once stable.\n"}], "grading": {"expectations": [{"text": "Plan prescribes a web prototype validated with real users BEFORE building native", "passed": false, "evidence": "Goes straight to 'Path A - AI-assisted build with Expo' as step 1; no web prototype or user-validation phase anywhere in the plan"}, {"text": "Plan instructs flow-by-flow building with a per-flow spec/PRD, explicitly against one giant prompt", "passed": false, "evidence": "Says 'build in thin slices' (feature list, not flows); no PRD, no per-flow spec, no warning against one giant prompt"}, {"text": "Mentions testing with 5-7 real people before release", "passed": false, "evidence": "Says 'Install it on family or friends' phones' but never specifies 5-7 testers"}, {"text": "Covers BOTH stores: Apple ($99/yr, TestFlight) and Google Play ($25, closed testing requirement)", "passed": true, "evidence": "Step 5: 'Apple Developer Program - $99/year'; Step 8: 'Google Play Console - $25 once... 12 testers who stay opted in for 14 continuous days'"}], "summary": {"passed": 1, "failed": 3, "total": 4, "pass_rate": 0.25}}}, {"id": "eval-1-tool-selection-with_skill-run-0", "prompt": "I want to build a booking app for my sister's dog grooming salon. Should I use Lovable? I keep seeing ads for it. What tools would you pick and why?", "eval_id": 1, "outputs": [{"name": "plan.md", "type": "text", "content": "# Booking App for Your Sister's Dog Grooming Salon \u2014 Plan and Tool Picks\n\n## Your direct questions, answered first\n\n**Should you use Lovable?** Yes \u2014 for the right phase. Lovable is a great fit for the *prototype and validation* stage: it produces a clickable web app fast, and at that stage the tool barely matters (Lovable, Replit, or plain Claude chat \u2014 whatever you already pay for). The ads are irrelevant to the decision either way. What Lovable should *not* automatically be is your long-term builder. That choice comes later and is made on three checks: pricing model, code ownership, and feel \u2014 not on ad spend.\n\n**Do you actually need a mobile app?** For a salon booking flow: start on the web, and you may never need to leave it. The only strong pull toward native is push notifications for appointment reminders \u2014 but SMS/email reminders usually cover that for a business this size. Use the tiebreak rule below after the prototype.\n\n**What tools I'd pick, and why:**\n\n| Stage | Pick | Why |\n|---|---|---|\n| Prototype (days 1\u20132) | Lovable, Replit, or Claude \u2014 whatever you already pay for | Fastest path to a clickable web app; tool choice doesn't matter here |\n| Validation (week 1) | No new tool \u2014 put the prototype in front of real people | Ideas die in validation, not in code |\n| Long-term web builder | Claude Code / Cursor on a plain codebase you own, or a builder with free code export | You'll maintain this for years; per-credit billing compounds, and locked exports trap you |\n| If it truly needs to be mobile | React Native + Expo as the pragmatic fallback; a native-generating builder only if it passes the three checks | One project covers iOS + Android; native (Swift + Kotlin) is the long-term ideal if you commit |\n| Before any of the above | Off-the-shelf check: Fresha, Booksy, Square Appointments, MoeGo-style platforms | The cheapest build is the one you don't do \u2014 study their pricing, reviews, and complaints |\n\n## 1. Define exactly what you're building\n\nTwo users share one product:\n\n- **Her clients** \u2014 book an appointment from their phone in under a minute, get a reminder, show up.\n- **Your sister** \u2014 see and manage her day: calendar, availability, requests, reminders, no-shows, maybe deposits.\n\nYou're on the \"validated category\" path: booking software is a solved market. That's good news \u2014 demand is proven, and competitors' pricing, reviews, and complaints are visible. Study them. Your edge is not a novel booking concept; it's your sister's actual workflow (deposit rules? no-shows? service durations by breed and coat? before/after photos for social?).\n\nTalk to her before anything else. And answer honestly: if an off-the-shelf platform covers 90% of what she needs, that's your answer \u2014 don't build. A custom app wins when her workflow is specific enough that generic tools annoy her daily.\n\n## 2. Prototype and validate on web first (1\u20132 weeks)\n\n- Two days on the prototype, then a full week with real users.\n- Build a mobile **web** version \u2014 Lovable, Replit, or Claude chat. Clickable, ugly-fine, fast.\n- Questions to answer: Is booking through this actually pleasant? Does the flow make sense? Which features does your sister need on day one vs. never?\n- Put it in front of your sister and 5\u201310 of her real clients. A short questionnaire works.\n- Expect to pivot often or drop it entirely. That is the point \u2014 learn it before spending real mobile effort.\n\n## 3. Decide web or mobile \u2014 the tiebreak rule\n\nThe web version decides:\n\n- Web good enough = **stay web**. Do not build native because it feels like \"real\".\n- Web blocked by real mobile needs (installed app, notifications, widgets, camera, store presence) = go native.\n\nFor a booking app, the honest assessment:\n\n| The habit | Does it force native? |\n|---|---|\n| Clients book from a phone browser | No \u2014 web handles it |\n| Appointment reminders | Usually no \u2014 SMS/email reminders are the practical choice for salons |\n| Store presence / brand credibility | Marginal \u2014 a link in the Instagram bio and Google profile does most of the work |\n| The salon owner manages her schedule | No \u2014 phone browser is fine |\n\nVerdict for this project: **web first, likely stay web** (you can make it installable as a PWA). Build native only if, after validation, reminders/notifications turn out to be the feature people actually demand \u2014 and expect a full rebuild from web to native if so. The rebuild is far easier than the first build: you'll already know exactly what to build.\n\nIf you do go mobile:\n\n| Option | Verdict |\n|---|---|\n| Wrapper (Capacitor, Despia) | Fast, but temporary. A shortcut, not a destination. |\n| React Native + Expo | Solid cross-platform default; most AI builders support it. |\n| Native (Swift + Kotlin) | Best long-term answer where the market is moving; AI has cut the cost enough that a non-specialist can do it. More complex, worth it. |\n\n## 4. Map the app flow by flow\n\nBefore any code, sketch it on paper. Split everything into flows:\n\n- Client booking: choose service \u2192 pick date and time \u2192 enter details (and dog details) \u2192 confirm \u2192 reminder \u2192 maybe deposit.\n- Client accounts: their pets, history, rebooking.\n- Owner schedule: calendar, availability, day view, manage and move bookings.\n- Notifications: reminders, confirmations, cancellations.\n- Monetization flow: deposits and no-show/cancellation policy (salons live and die by no-shows).\n- Optional later: before/after photos, review requests.\n\nUse the web prototype screenshots as reference, then ask what differs on a phone. Browse [mobbin.com](https://mobbin.com) to see how real booking apps structure these flows.\n\n## 5. Write the PRD\n\nA product requirements document, flow by flow \u2014 this is the context you hand to the AI builder. Co-write it with Claude. Without a PRD the agent guesses and invents the product; with one it follows your plan.\n\n## 6. Choose a builder \u2014 three checks\n\nThis is where \"should I use Lovable?\" gets its real answer, for the long-term tool:\n\n1. **Pricing model:** prefer tools that let you plug in your own AI agent or subscription (Claude, Cursor) over per-credit billing. You will maintain this app for years \u2014 per-credit costs compound. Cheapest option that works usually wins; this is a long play.\n2. **Code ownership:** you must always be able to take your code and leave, free. Some tools gate exports behind expensive plans. Check the current terms before you invest anything.\n3. **Feel:** try it for real work. Comfort compounds across months of iteration.\n\nThen apply the checks. If web-only: prototype in Lovable, rebuild into a codebase you own (Claude Code or Cursor on your own subscription is the boring, maintainable answer for a long-lived business tool). If both platforms are genuinely needed: prefer a tool that produces both platforms, ideally native Swift and Kotlin from one project \u2014 and if nothing fits that bar on the three checks, React Native + Expo is the pragmatic fallback.\n\n## 7. Build flow by flow\n\nOne flow = one spec + screenshots, one prompt cycle at a time. **Never ask for the whole app in one prompt.**\n\n- Full-time effort: a week or two for an app like this. Side-project pace: one to two months is fine.\n- Budget ~30% of total time for debugging and verification.\n\n## 8. Test and release fast\n\n- Your testers: your sister and 5\u20137 real clients. Collect feedback from each one individually.\n- Apple Developer Program: $99/year; ship builds via TestFlight.\n- Google Play: $25 one-time; new personal accounts need a closed test (12 testers for 14 days) before public release.\n- No testers? Release free and learn from real store users.\n- Pricing optional at the start \u2014 ship free, monetize later (the salon's monetization is deposits and fewer no-shows, not app fees).\n\nThe faster you release, the faster you learn. Ship feature by feature.\n\n## Mistakes to avoid on this project\n\n| Mistake | Correction |\n|---|---|\n| Building native before validating | Web prototype + real users first (steps 2\u20133) |\n| Skipping the off-the-shelf comparison | Check Fresha/Booksy/Square-class tools first; maybe you don't build at all |\n| Asking for the whole app in one prompt | Flow by flow, spec per flow |\n| Skipped PRD | The AI invents the product instead of building hers |\n| Per-credit billing on a long-lived app | Own-agent tooling on your own subscription |\n| Plan that can't export code free | Verify ownership before starting |\n| Waiting for polish to release | TestFlight at 5\u20137 users, ship the version |\n\n## The short version\n\nLovable: yes, for the two-day prototype and validation week. Long-term builder: decide with the three checks \u2014 my pick for a web tool is owning your own code with Claude/Cursor on a subscription you already pay for. Mobile: probably unnecessary; stay web unless reminders/notifications prove otherwise, and if you go mobile use React Native + Expo or a native-generating tool that passes the checks. And before any of it: check whether an off-the-shelf salon platform already wins.\n"}], "grading": {"expectations": [{"text": "States that Lovable produces web apps, not native store-submittable mobile apps", "passed": true, "evidence": "'Lovable is a great fit for the prototype and validation stage: it produces a clickable web app fast' - and long-term table lists it only for prototype stage"}, {"text": "Gives concrete builder-selection criteria including pricing model and code ownership/export", "passed": true, "evidence": "Section 6 'three checks': pricing model (own-agent over per-credit), code ownership ('take your code and leave, free'), feel"}, {"text": "Advises validating the idea (prototype + real users) before investing in the real build", "passed": true, "evidence": "Section 2: 'Two days on the prototype, then a full week with real users' before committing to a builder"}], "summary": {"passed": 3, "failed": 0, "total": 3, "pass_rate": 1.0}}}, {"id": "eval-1-tool-selection-without_skill-run-0", "prompt": "I want to build a booking app for my sister's dog grooming salon. Should I use Lovable? I keep seeing ads for it. What tools would you pick and why?", "eval_id": 1, "outputs": [{"name": "plan.md", "type": "text", "content": "# Booking app for a dog grooming salon \u2014 should you use Lovable, and what would I build it with?\n\n*Prepared Oct 17, 2026. Prices, limits, and platform rules below were checked against current vendor documentation and 2026 industry roundups (sources at the end). These things change \u2014 re-verify before you pay.*\n\n## TL;DR\n\n- **The first decision is buy vs. build, not \"Lovable or not.\"** For a single grooming salon, purpose-built software (MoeGo, Groomsoft, Teddy, Square Appointments\u2026) already does booking, pet records, deposits, and *compliant* SMS reminders for roughly $20\u2013$150/month with zero maintenance. That is very hard to beat with a custom app you'll maintain in your spare time.\n- **If you want to build anyway, Lovable is a legitimate, good choice** \u2014 and the one I'd pick among AI builders for a non-developer: it generates a full-stack web app (React front end + Supabase database/auth + hosting) from prompts, and you can export the real code to GitHub. Pro is $25/month.\n- **Four things the ads won't say:** (1) it builds websites/mobile web apps, not native iOS/Android apps \u2014 there is no App Store output; (2) the credit-based pricing means real iteration costs more than the $25 sticker; (3) security research on vibe-coded apps is genuinely bad \u2014 91% of audited deployed ones had at least one vulnerability; (4) the moment your sister depends on it, you are her IT department.\n- **For a salon, the right surface is a mobile-friendly web app / PWA anyway, not a native app.** Clients click a link from Instagram or Google; nobody downloads an app store app for one salon. That neutralizes Lovable's biggest weakness.\n- **My recommendation:** put her on off-the-shelf grooming software as the baseline now; if you build, make it a Lovable project that ships as a PWA and has to *earn* replacing the baseline. Budget \u2248 $25\u201350/month + ~$12/year domain + Stripe transaction fees, plus one security review before real client data goes in.\n\n## 1. \"Should I use Lovable?\"\n\nShort answer: **Lovable is real and good at what it does \u2014 but what it does may not be what \"booking app for my sister's salon\" needs first.**\n\nWhat Lovable actually is (verified against its docs and multiple independent 2026 comparisons):\n\n- An AI app builder that turns plain-English prompts into a **full-stack web app**: React front end, Supabase-backed database/auth/storage/hosting (\"Lovable Cloud\"), one-click publish, visual editing, and **two-way GitHub sync** so you own and can export the code.\n- **Pricing:** Free tier is a trial (5 build credits/day, capped ~30/month). Pro is **$25/month** ($21/month billed annually) with 100 credits/month; Business is $50/month. Since a June 2026 billing change, one credit balance pays for building *and* hosting *and* in-app AI, so the real monthly cost depends on how much you iterate.\n- It runs a mandatory pre-publish security scan \u2014 helpful, but not a substitute for a real security review (see below).\n- Ads: Lovable is heavily funded and markets to everyone, so you see it everywhere. The ads are a signal of marketing spend, not of fit for your specific job. Independent 2026 comparisons do consistently rank it first for full-stack MVPs by non-developers, so it's not hype \u2014 it's just not the whole decision.\n\n**Four caveats the ads don't tell you:**\n\n1. **It cannot build a native mobile app.** Lovable's own docs say it is a web-only platform; it does not generate React Native, and publishing always ends at a web URL. (The Lovable phone app is for building *from* your phone \u2014 your app's users still get a website.) If you eventually need a store listing: PWA first (fine), a Capacitor wrapper second (risky \u2014 Apple's guideline 4.2 rejects thin \"repackaged website\" apps), or rebuild the screens in React Native/Expo against the same Supabase backend (the \"real\" route, more work).\n2. **The cost is the credits, not the plan.** Booking apps need a lot of iteration. Heavy prompt sessions burn credits fast; top-ups are $0.30/credit on Pro. Budget $25\u201350/month realistically, not $25 once.\n3. **Security is the risk you're least equipped to see.** A 2026 large-scale study of vibe-coded applications collected 9,041 apps and audited 200 publicly deployed ones: **91% contained at least one vulnerability, 65.77% of findings were Critical/High**, concentrated in access control, injection, and auth failures. Your app will hold client names, phones, addresses, pet data, and payment-adjacent flows. This is fixable \u2014 but it needs someone who knows what row-level security is to check the work *before* real customers use it.\n4. **You become the vendor.** When it breaks at 8am on a Saturday with a full grooming schedule, there's no support line \u2014 there's you. Off-the-shelf software has support, and your sister has a fallback.\n\nVerdict: use Lovable if the goal includes \"I want to build this\" \u2014 it's the best fit in its category for a first-time builder. Don't reach for it because ads made it feel like the default way to give your sister bookings; for that goal, start with the comparison below.\n\n## 2. Buy vs. build: what off-the-shelf gives you\n\nGrooming-specific software already solves: online booking + calendar, pet profiles and grooming notes, SMS reminders (the vendor deals with carrier registration for you), deposits and no-show policies, packages/memberships, intake forms, before/after photos, and even route optimization for mobile grooming.\n\n2026 prices (check current before committing):\n\n| Option | Price | Notes |\n|---|---|---|\n| **MoeGo** | Salon: $79 / $149 / $239 per location/month (Basic/Growth/Ultimate). Mobile grooming: $49 / $99 / $159 per van | The grooming-industry default; deepest feature set; SMS caps by tier drive the real cost |\n| Groomsoft | ~$29.95/month shops, ~$39.90/month mobile | Cheaper, plainer; older interface |\n| GroomBoard | $19 (Solo) / $39 (Salon) | Flat pricing; SMS allowances included |\n| Teddy | ~$49 flat, unlimited texting | Aimed at text-heavy solo groomers |\n| Square Appointments | Free tier; paid from ~$49/month | Smart if she already uses Square for payments |\n| DaySmart Pet | from ~$29/month; two-way texting from ~$149 | Wider pet-business suite |\n\nRule of thumb: if her booking process today is \"phone, texts, Instagram DMs, and a paper book,\" any middle row above is a bigger upgrade than a custom app \u2014 for less than a day of your setup time, and it keeps working when you're on holiday.\n\n## 3. If you build: the tools I'd pick, and why\n\n**Builder: Lovable ($25/month).** It's the most opinionated AI builder in exactly the right way for you \u2014 auth, database, and payments are wired up by default, there's a visual editor for small changes, one-click publishing, and GitHub export so you're never locked in. Alternatives and when they'd win: **Bolt.new** if you want framework freedom or intend to go React Native/Expo later (it documents Expo workflows); **v0 (Vercel)** if you mainly want polished React UI and have a developer helping; **Replit** if your long-term goal is growing into coding. For a first full-stack build by a non-developer: Lovable.\n\n**Database, auth, file storage: Supabase** (Lovable Cloud runs on it). Why: Postgres + auth + row-level security + file storage (pet photos!) in one service. Free tier is genuinely usable during development (2 projects, 500 MB database, 5 GB egress, 50k monthly users; free projects pause after 7 days of inactivity \u2014 fine while building, not for launch). Pro is $25/month when it's real. Row-level security (RLS) is what stops client A from reading client B's data \u2014 make it an explicit checklist item, because it is the #1 documented failure in vibe-coded apps.\n\n**Payments: Stripe** (standard US rate 2.9% + 30\u00a2 per successful online card charge). Why: deposits at booking and cancellation policies are how salons actually kill no-shows, and Stripe Checkout keeps you out of PCI scope. Never store card numbers in your database \u2014 that's the one mistake that turns a hobby app into a liability.\n\n**Reminders: this is the part you should NOT reflexively build.** Sending business text messages from your own app to US numbers requires **A2P 10DLC registration** with the carriers: a Brand (one-time $4 as a Sole Proprietor) + a Campaign (one-time $15 vetting + $2/month), approval typically under a week, documented opt-in, and \u2014 since June 30, 2026 \u2014 public privacy policy and terms URLs. It's doable, but it's paperwork standing between you and every \"your dog is ready\" text. Email via a service like Resend is easy and free at small scale. My pick: leave SMS to her off-the-shelf tool for now, build email first, add 10DLC only if the custom app carries real volume.\n\n**Hosting: Lovable's built-in hosting** (covered by plan credits) \u2014 simplest. If you export the code and deploy on Vercel instead, note that Vercel's free Hobby plan is explicitly **non-commercial only**: a business app needs Pro at $20/month. Custom domain \u2248 $12/year.\n\n**The mobile surface: mobile web + PWA.** Add a web app manifest + service worker (Lovable can do this) so clients get a home-screen icon and app-like feel from the link she posts. iOS caveat: web push on iOS only works after the user manually adds it to the home screen (iOS 16.4+) \u2014 irrelevant if you stick to SMS/email reminders. **Only if a store listing is truly non-negotiable:** rebuild in React Native with Expo against the same Supabase backend and ship via EAS Build; budget App Store $99/year + Google Play $25 one-time, plus review time. For one salon, that is almost certainly not worth it.\n\n**What I would NOT add: a third-party booking engine.** Cal.com looks tempting, but in 2026 its hosted API requires paid plans, its open-source fork (Cal.diy) is self-host-only and explicitly not recommended for production by its own maintainers, and its old API v1 was retired in spring 2026. For a single salon's rules, modeling availability directly in your own Postgres table \u2014 with a unique constraint that makes double-booking impossible \u2014 is simpler and more controllable.\n\n## 4. The features that actually matter (define them before you prompt)\n\nAI builders are great at screens and tables and weakest at exactly the logic a booking system lives on. Write these rules down *with your sister* before prompting, or you'll get an app that looks done and is subtly wrong:\n\n1. **Availability with buffers.** Slot length depends on service (bath vs. full groom) and dog size/condition, plus cleanup time between dogs. Double-booking prevention must be enforced by the database, not just the UI.\n2. **Recurring appointments.** Grooming is cyclical (every 4\u20138 weeks). Rebooking at checkout is the single highest-value flow for her revenue.\n3. **Deposits / no-show policy.** Optional Stripe deposit per service type; clear cancellation window.\n4. **Reminders.** Confirmation at booking + day-before. (See the SMS note in \u00a73.)\n5. **Pet + client profiles.** Breed, weight, temperament, matting notes, allergies, vaccination dates, before/after photos, grooming history.\n6. **Intake form** for new clients and a **waitlist** (cancellation filling is real money).\n7. **Groomer view.** Mobile-friendly day calendar for whoever is holding the clippers, plus a simple \"today\" list.\n8. **Fallback.** A printable day sheet. If the app is down, the salon still runs.\n\n## 5. Money and time (realistic)\n\n| Item | Buy path | Build path |\n|---|---|---|\n| Upfront | $0 | Your time (10\u201340 hours to first useful version) |\n| Monthly software | ~$20\u2013$150 | Lovable $25\u201350 + Supabase $0 \u2192 $25 when launched for real |\n| Domain | included / $0\u201320 | ~$12/year |\n| Payments | per transaction | per transaction (Stripe 2.9% + 30\u00a2) |\n| SMS | included in most plans | A2P 10DLC \u2248 $4 + $15 + $2/month when you get there |\n| Native stores | n/a | $99/year Apple + $25 Google \u2014 only if you go native |\n| Security review | n/a | 1\u20132 paid developer days before real client data |\n\nThe honest comparison isn't \"$25/month vs. $79/month.\" It's \"$79/month and it works with support,\" vs. \"$30/month and you are on the hook forever.\" If building is also a learning project you value, that's a fair trade. If building is a chore you're doing to save $50/month, it is not a good trade.\n\n## 6. Guardrails (if you build)\n\n- **Ship order:** prototype \u2192 show your sister \u2192 fix it with her \u2192 pilot with 5 friendly clients \u2192 security review \u2192 *then* real bookings. Don't cut this line.\n- **Security, concretely:** turn on and verify RLS on every table; test with a second fake client account that it can't read anyone else's rows; keep API keys server-side (never in the front end); let Stripe handle all card data; collect only data you actually need; read what Lovable's pre-publish scan flags and fix it.\n- **Ownership:** wire GitHub on day 1; keep a monthly export/backup ritual.\n- **Reliability:** free Supabase projects pause after a week of inactivity (fine in dev, never launch on Free); know how to restore a backup; keep the paper fallback.\n- **Kill criteria:** if the app isn't saving her time or money within ~3 months of pilot, fold the functionality back into her off-the-shelf tool and keep the Lovable project as a portfolio piece. That's a win, not a failure.\n\n## 7. Suggested next steps\n\n1. **(This week)** Shadow her booking process for 45 minutes: how bookings arrive, appointments per day, no-show rate, who books, what she hates.\n2. **(This week)** Start a trial of MoeGo or Square Appointments as the comparison baseline \u2014 seriously, this is the yardstick your custom app must beat.\n3. **(Next 2 weeks)** If you're building: free Lovable account; build the three core screens (client booking flow, groomer day view, pet profile); iterate twice with your sister watching. Upgrade to Pro only when the free credits choke you.\n4. **(Weeks 3\u20138)** Pilot the build as a PWA with real clients, in parallel with the baseline. Get 1\u20132 days of developer review for security before any real customer data goes in.\n5. **(Week 8+)** Decide with data: does the app beat the baseline on her time saved? If yes, migrate. If no, keep the baseline \u2014 you've lost nothing but $50 and a few weekends.\n\n## Bottom line\n\nThe ads aren't lying about Lovable \u2014 it's one of the best tools of its kind, and exactly the right pick if you want to build something this year. But the salon doesn't need an app for its own sake; it needs bookings that don't get lost, reminders that go out, and money that doesn't evaporate to no-shows. Off-the-shelf grooming software delivers that today for the price of a couple of grooms a month. Build the Lovable app *because you want to build it* \u2014 as a shadow project that has to earn the right to replace the baseline. That's how your sister gets great booking and you keep the fun of the project.\n\n---\n\n*Facts checked Oct 17, 2026: Lovable pricing and platform docs (docs.lovable.dev, lovable.dev/guides \u2014 web-only, no native output; Free: 5 build credits/day capped ~30/month; Pro $25/month; single credit balance since June 2026). Supabase pricing (Free: 2 projects, 500 MB DB, 5 GB egress, 50k MAU, 7-day inactivity pause; Pro $25/month). Vercel fair-use docs + terms (Hobby = non-commercial only; Pro $20/month). Stripe standard pricing 2.9% + 30\u00a2. Twilio A2P 10DLC docs (mandatory registration for US business SMS; Sole Proprietor: $4 brand + $15 campaign vetting + $2/month; ~1 week approval; privacy policy/T&Cs required for new campaigns since June 30, 2026). Apple $99/year, Google Play $25 one-time. MoeGo, Groomsoft, GroomBoard, Teddy, DaySmart, Square Appointments 2026 pricing from industry roundups. arXiv 2606.23130 \u2014 \"Understanding the (In)Security of Vibe-Coded Applications\" (9,041 apps collected; 200 deployed audited; 91.0% \u22651 vulnerability; 65.77% Critical/High). Cal.com docs and Cal.diy README (hosted API on paid plans; open-source fork self-host only, not production-recommended; API v1 retired spring 2026).*\n"}], "grading": {"expectations": [{"text": "States that Lovable produces web apps, not native store-submittable mobile apps", "passed": true, "evidence": "Caveat 1: 'It cannot build a native mobile app... web-only platform... publishing always ends at a web URL'"}, {"text": "Gives concrete builder-selection criteria including pricing model and code ownership/export", "passed": true, "evidence": "Discusses Lovable credit pricing ('the cost is the credits, not the plan') and ownership ('GitHub export so you're never locked in'); compares alternatives with prices"}, {"text": "Advises validating the idea (prototype + real users) before investing in the real build", "passed": true, "evidence": "Guardrail 'Ship order: prototype -> show your sister -> fix -> pilot with 5 friendly clients -> security review -> then real bookings'"}], "summary": {"passed": 3, "failed": 0, "total": 3, "pass_rate": 1.0}}}, {"id": "eval-2-web-to-native-with_skill-run-0", "prompt": "I already built a web app for tracking local board game nights with Lovable and about 40 people use it weekly. People keep asking for an app they can install with push notifications. What should I do now?", "eval_id": 2, "outputs": [{"name": "plan.md", "type": "text", "content": "# From Lovable Web App to Installable App With Push Notifications\n\n## Where you are\n\nYou've already done the hardest part. The path to a first mobile app is: validate cheap on web first, then decide whether a real app is needed. Your Lovable app with ~40 weekly users is that validation \u2014 the idea works, the workflow works, and now people are asking for the next thing unprompted. Inbound requests for an installable app with push notifications are the strongest signal you can get.\n\nYou're at the decision point now. Here's how to make it correctly.\n\n## 1. Pin down the actual demand first (a few days)\n\nBefore touching any builder, ask all ~40 users directly. A short form works; one topic per question:\n\n- Would you actually install it today \u2014 or is the website good enough day to day?\n- What do you want push notifications for? Reminder before a game night, a new night announced, changes/cancellations, \"who's coming\" updates?\n- iPhone or Android? This decides whether you can start with one platform.\n- What should the app do that the website can't? (Widget with the next game night, etc.)\n\nThis separates \"we need notifications for events\" from \"an app would feel more real.\" Those two answers lead to very different decisions, and this check costs you days, not weeks.\n\n## 2. The decision: build the real mobile app\n\nThe decision rule: the web version decides. Web good enough \u2014 stay web. Web blocked by real mobile needs \u2014 installed app, notifications, widgets, camera, store presence \u2014 go real. Your users are asking for two things on that list by name, so the answer is: go real.\n\nYour options, honestly stated:\n\n- Wrapper (Capacitor, Despia): fastest path to installable with push, but it's a shortcut, not a destination. Use only as a stopgap if you must have notifications live next week.\n- React Native: solid cross-platform choice; most AI builders support it. The pragmatic fallback.\n- Native (Swift + Kotlin): where the market is moving and the best long-term answer. AI collapsed the development cost, so this is realistic even without specialist developers. The default recommendation.\n\nSet two expectations:\n\n- Expect a full rebuild, not a port. That's fine \u2014 a rebuild is far easier than the first build, because you already know exactly what to build and which features matter.\n- Keep the web app running while you build. Your 40 users shouldn't notice a transition.\n\n## 3. Map the app flow by flow (before any code)\n\nSketch each flow on paper using your web app screenshots as reference. Browse mobbin.com to see how real apps structure them.\n\n- Onboarding (new users)\n- Registration / sign-in \u2014 your existing 40 already have accounts; plan a smooth first login\n- Core product: game night list/calendar, RSVP, roster, history (usually several flows inside)\n- Notifications: reminders, new-night announcements, changes \u2014 the reason you're doing this\n- Monetization \u2014 optional at the start; skip if the app stays free\n- Anything the survey surfaced (widgets, etc.)\n\n## 4. Write the PRD, flow by flow\n\nCo-write it with Claude. This is the context you hand to the AI builder. Without a PRD the agent guesses; with one it builds your plan. One flow = one spec + screenshots.\n\n## 5. Choose a builder \u2014 three checks\n\n1. Pricing model: prefer tools that let you plug in your own AI agent or subscription (Claude, Cursor) over per-credit billing. You'll maintain this app for years; per-credit costs compound.\n2. Code ownership: you must always be able to take your code free. Some tools gate exports behind expensive plans. Check before you invest anything.\n3. Feel: try it. Comfort compounds across months of iteration.\n\nNative preference: pick a tool that produces both iOS and Android from one project, ideally native Swift and Kotlin. If the survey shows nearly everyone is on one platform, you can start there and expand later. If no available tool clears the three checks at that bar, React Native + Expo is the pragmatic fallback.\n\n## 6. Build flow by flow\n\nOne flow = one spec + screenshots, one prompt cycle at a time. Never ask for the whole app in one prompt.\n\n- Full-time: a week or two for an app this size.\n- Side-project pace (a few hours a day): one to two months. That's fine.\n- Budget ~30% of the time for debugging and verification.\n\n## 7. Test and release fast\n\n- TestFlight (Apple Developer Program, $99/year) to your 5\u20137 most engaged users first, then the rest of your 40. Collect feedback from each person individually.\n- Google Play: $25 one-time registration. New personal accounts need a closed test \u2014 12 testers for 14 days \u2014 before public release; your group satisfies that easily.\n- Ship free. Pricing is optional at the start; monetize later, if ever.\n\nThe faster you release, the faster you learn. Ship feature by feature.\n\n## One question to settle along the way\n\nIs this a tool for your group, or the start of a product for board game groups everywhere? Both are valid. If it's the second, write the PRD for strangers rather than your friends, and study how groups organize today to find the angle where you're much better. Your traction already proves the core loop works.\n"}], "grading": {"expectations": [{"text": "Justifies going native via concrete mobile needs (installed app, push notifications) rather than vibes", "passed": true, "evidence": "'Your users are asking for two things on that list by name [installed app, notifications], so the answer is: go real' - tiebreak applied to stated needs"}, {"text": "Warns a rebuild is required and explains why the rebuild is easier than the first build", "passed": true, "evidence": "'Expect a full rebuild, not a port... a rebuild is far easier than the first build, because you already know exactly what to build'"}, {"text": "Prescribes flow-by-flow rebuild (map flows, per-flow specs) instead of one-shot regeneration", "passed": true, "evidence": "Section 3 maps flows from web screenshots; Section 4 PRD per flow; Section 6 'Never ask for the whole app in one prompt'"}, {"text": "Covers a concrete release path (TestFlight / testers / developer accounts)", "passed": true, "evidence": "Section 7: TestFlight ($99/yr), 5-7 engaged users first, Google Play $25 with 12-tester closed test"}], "summary": {"passed": 4, "failed": 0, "total": 4, "pass_rate": 1.0}}}, {"id": "eval-2-web-to-native-without_skill-run-0", "prompt": "I already built a web app for tracking local board game nights with Lovable and about 40 people use it weekly. People keep asking for an app they can install with push notifications. What should I do now?", "eval_id": 2, "outputs": [{"name": "plan.md", "type": "text", "content": "# From your Lovable web app to an installable app with push notifications\n\n## The short answer\n\nYou do **not** need to rebuild anything native. Your existing Lovable app can become an installable app with push notifications in a couple of weekends, for roughly $0, by turning it into a **PWA (Progressive Web App)** and adding **web push**:\n\n- **Android and desktop:** installs from the browser (icon on home screen, full-screen window), push notifications work.\n- **iPhone:** also installs (Share \u2192 Add to Home Screen), and push works \u2014 with one catch: iPhone users only get notifications **after** they add the app to their home screen (iOS 16.4+). There is no push for a plain Safari tab.\n- One codebase, instant updates, no App Store review, no developer fees.\n\nOnly if, after that, the group still wants \"the real app in the App Store\", wrap the same web app with **Capacitor** and ship it to the stores \u2014 do not rewrite it. A native rewrite (React Native / Flutter) means weeks of work and a second codebase to maintain, for zero real benefit at 40 users.\n\n## Why this fits your situation\n\n- 40 weekly users is a friend group, not a market. The main reason to be in app stores is discovery \u2014 you already hand everyone the link.\n- What people are actually asking for is almost certainly \"an icon on my phone\" and \"remind me about game night\". A PWA delivers both.\n- You keep building in Lovable at your current speed. Store apps need review for every update; a PWA ships the moment you publish.\n- Cost: PWA is $0 extra. Store apps are $99/yr (Apple) + $25 (Google) + build tooling + review cycles, plus ongoing upkeep.\n\n## What \"installable + push\" looks like on each platform\n\n| Platform | Install | Push notifications |\n|---|---|---|\n| Android (Chrome) | Automatic \"Install app\" prompt once the PWA is set up, or menu \u2192 \"Add to Home screen\" | Yes, even in-browser; best after install |\n| iPhone (Safari, iOS 16.4+) | Share \u2192 Add to Home Screen \u2192 keep \"Open as Web App\" on (iOS 26+) | Only after install; permission must be requested inside the installed app |\n| Desktop (Chrome/Edge) | Install from the address bar | Yes |\n\nHonest iOS caveats, worth telling the group up front:\n\n- A Safari tab can never receive push on iPhone; it has to be the home-screen version.\n- Apple requires the permission prompt to appear from a user tap (button), not automatically on load.\n- There will be some drop-off at the install step. A short in-app guide (\"iPhone: tap Share \u2192 Add to Home Screen\") recovers most of it.\n\n## The three routes (and when each is right)\n\n### Route 1 \u2014 PWA + web push on your existing app (recommended now)\n\nAdd a manifest, a service worker, and a push subscription flow. Nothing about your current app changes; you add files alongside it. Most of this Lovable can generate for you, and everything runs on the Supabase backend your app likely already uses.\n\nEffort: a few hours for installability; about a weekend for push + reminders. Cost: $0 at your scale (Supabase free tier; push delivery itself is free \u2014 it uses the browser's built-in Web Push protocol).\n\n### Route 2 \u2014 PWA with a hosted push service (least maintenance)\n\n- **OneSignal**: free plan covers far more than 40 users (10,000 web push subscribers; even the stricter 2026 free-plan limits only cap mobile push at 1,000 monthly active users). Dashboard for sending/scheduling, and it automatically cleans up dead subscriptions \u2014 a chore the roll-your-own route leaves to you. It also later works for Capacitor/native with the same account.\n- **Progressier**: a no-code PWA + push toolkit with a Lovable-specific quickstart; from about $15\u201325/month. Good if you never want to touch files.\n\n### Route 3 \u2014 Store apps via Capacitor (only if the group genuinely insists)\n\nWrap the same web app in a native shell and publish to both stores. Real native push via OneSignal's official Capacitor SDK. Costs and caveats:\n\n- Apple Developer Program $99/year, Google Play $25 one-time; you need a Mac (or a cloud macOS build service) for iOS builds.\n- Apple guideline 4.2 rejects \"a website in a shell\" apps \u2014 you must add genuine native value (offline, push, calendar sync, share sheet) or it may be rejected.\n- New Google Play personal developer accounts must run a closed test with 12 testers for 14 consecutive days before production. Your 40 users can fill that easily; organization accounts are exempt.\n- Do this because you *want* store presence \u2014 not because a wrapped web app notifies better. It is the same app underneath.\n\nAnd what not to do: a full native rewrite (React Native/Flutter). Weeks of work, a second codebase forever, and your Lovable workflow is gone \u2014 for a 40-person hobby app.\n\n## Step-by-step plan\n\n### First, 10 minutes of homework\n\nAsk the group two questions: (1) iPhone or Android? (2) Which notifications do you actually want \u2014 \"night tomorrow\" reminder, \"new night posted\", \"spot opened up\"? The phone split tells you how much the iOS install flow matters; the answers tell you which notifications to build first.\n\n### Weekend 1 \u2014 Make it installable\n\n1. **Export your code to GitHub.** In Lovable: Settings \u2192 GitHub \u2192 connect (Git sync is available on all plans, and it protects you from lock-in whatever you do next).\n2. **Add the PWA layer** \u2014 either ask Lovable (\"Convert this app into an installable PWA: manifest, icons, service worker, install banner\") or add it via your own editor:\n   - `public/manifest.json`: name, short_name, icons (192px + 512px), `display: \"standalone\"`, theme color, start_url.\n   - Service worker registration + a light cache of the app shell (vite-plugin-pwa is the standard tool if you're editing the Vite project directly).\n   - Icons in `public/icons/`.\n3. **Add a \"Get the app\" banner in the app.** Android users see a one-tap Install button (the `beforeinstallprompt` event); iPhone users see a short illustrated \"Share \u2192 Add to Home Screen\" guide.\n4. **Publish and test on real phones** (one Android, one iPhone). Simulators do not show install prompts or push. Verify: icon, full-screen launch, the iOS instructions match what users actually see on iOS 26 (\"keep Open as Web App on\").\n5. **Hosting:** your lovable.app URL already has HTTPS and is fine for this. A custom domain on Lovable requires a paid plan; alternatively host the exported code on Cloudflare Pages/Netlify (free tiers) with your own domain. HTTPS is mandatory \u2014 you already have it either way.\n\n### Weekend 2 \u2014 Push notifications\n\nPick one:\n\n**A. Hosted (OneSignal or Progressier).** Add their snippet after the PWA setup, trigger their permission prompt from a button, send a test. Fastest path, and they handle the unglamorous parts (dead subscriptions, delivery quirks, but \u2014 note \u2014 even with a hosted service the iPhone still must install the app first).\n\n**B. Free, all inside Supabase (what the standard walkthrough does):**\n\n- Generate VAPID keys: `npx web-push generate-vapid-keys`. Public key in the frontend, private key as a Supabase secret.\n- `push_subscriptions` table: `user_id`, `subscription` JSONB, plus row-level security so users only touch their own rows.\n- Subscribe flow: user taps \"Enable notifications\" \u2192 `Notification.requestPermission()` \u2192 `pushManager.subscribe()` \u2192 save subscription to Supabase.\n- `send-push` Edge Function using the `web-push` npm package.\n- Service worker `push` and `notificationclick` handlers to display the notification and open the right screen.\n\nThen wire up the sends:\n\n- **Scheduled reminder** \u2014 \"Game night tomorrow at 7\" via Supabase Cron (pg_cron + pg_net) calling your send function; or OneSignal's built-in scheduler.\n- **Event notifications** \u2014 \"New game night posted\" / \"A spot opened up\" via a Supabase database trigger.\n- **Hygiene** \u2014 delete subscriptions that return 410/404 so the list stays clean.\n\n### Two cheap wins worth doing alongside\n\n1. **Calendar feed (ICS):** a subscribe-once calendar link for upcoming nights. About two hours of work, zero permissions, works for every phone \u2014 arguably the most reliable \"don't miss it\" channel you can ship.\n2. **Email fallback** (Resend or Supabase email) for people who won't install, and keep the group chat as belt and braces for the weekly reminder.\n\n### Weeks 3\u20134 \u2014 Measure, then decide\n\nTrack three numbers: share of weekly users who installed, share who enabled push, reminder click-through. If install rate is low, treat it as an onboarding problem \u2014 usually it's the iOS instructions. Only if the group is still asking for \"the real app\" after a month of this should you go Route 3 (Capacitor).\n\n## Notification design (keep it minimal)\n\nEvent-driven plus one reminder is plenty. Resist more:\n\n- \"Game night tomorrow, 7pm at [place]. 2 spots left.\" \u2192 opens the event\n- \"New game night posted\" \u2192 opens RSVP\n- Optional: \"A spot just opened up for tomorrow\"\n\nAdd a per-category toggle in settings so people can mute reminders without deleting the icon. Never send notifications that don't pass the \"would a friend say this out loud?\" test.\n\n## Costs, side by side\n\n| Path | One-off | Recurring |\n|---|---|---|\n| PWA + Supabase web push | $0 | $0 (free tier; domain ~$12/yr if you leave lovable.app) |\n| PWA + OneSignal | $0 | $0 at 40 users |\n| PWA + Progressier | $0 | ~$15\u201325/month |\n| Capacitor store apps | Apple $99/yr + Google $25 | build tooling if no Mac; maintenance for two stores |\n| Native rewrite | weeks of work | two codebases forever |\n\n## Gotchas\n\n- Never request notification permission on first load. Ask right after someone RSVPs or creates a night \u2014 the moment it's obviously useful.\n- The permission prompt is one-shot. One accidental \"Don't allow\" costs you that device forever.\n- On iPhone, push does not exist until the app is on the home screen. Write the instructions for iOS 26, including \"leave Open as Web App on\".\n- Test under the **published** URL, not a preview \u2014 service workers behave differently there.\n- Don't over-cache in the service worker; never cache session or user data.\n- If you edit code in both GitHub and Lovable, sync conflicts happen \u2014 edit in one place at a time.\n- Push is a nudge, not a guarantee. The calendar feed and group chat stay as your safety net.\n- Everything above is the same app. Never fork the web app and the \"app\" version.\n\n## Bottom line\n\nThis weekend: GitHub sync, PWA, install guide. Next weekend: web push (OneSignal if you want easy, Supabase if you want free), a \"night tomorrow\" reminder, and an ICS calendar feed. Revisit store apps only if people still want them a month from now \u2014 and even then, wrap with Capacitor, don't rewrite.\n\n## Key facts verified (October 2026)\n\n- iOS web push requires adding the web app to the Home Screen (iOS 16.4+); iOS 26 has an \"Open as Web App\" toggle when adding, and it must stay on. Sources: Apple Support (\"Turn a website into an app in Safari\"), WebKit blog, OneSignal iOS web push docs.\n- Lovable: Git sync available on all plans; custom domains require a paid plan. Source: docs.lovable.dev (GitHub integration, custom domain).\n- OneSignal free plan: 10,000 web push subscribers; 2026 free-plan changes cap mobile push at 1,000 MAU \u2014 both far above 40 users. Source: onesignal.com/pricing and related posts.\n- Google Play: personal developer accounts created after Nov 13, 2023 need 12 testers for 14 consecutive days of closed testing; organization accounts are exempt. Sources: multiple 2026 guides (Testerbee, ontests.app).\n- Apple guideline 4.2 (\"minimum functionality\") still rejects thin web wrappers in 2026. Source: 2026 App Store review write-ups (Capgo, wanilla.co).\n- Supabase Cron (pg_cron + pg_net) can schedule Edge Functions for reminders. Source: supabase.com docs (\"Scheduling Edge Functions\") and Supabase Cron pages.\n"}], "grading": {"expectations": [{"text": "Justifies going native via concrete mobile needs (installed app, push notifications) rather than vibes", "passed": false, "evidence": "Argues the opposite: 'You do not need to rebuild anything native... by turning it into a PWA'; no case made FOR going native"}, {"text": "Warns a rebuild is required and explains why the rebuild is easier than the first build", "passed": false, "evidence": "Explicitly says 'never rewrite native' and 'do not rewrite' - no rebuild-is-easier argument because no rebuild is prescribed"}, {"text": "Prescribes flow-by-flow rebuild (map flows, per-flow specs) instead of one-shot regeneration", "passed": false, "evidence": "Prescribes adding PWA/push layers to the existing app, not a flow-mapped rebuild"}, {"text": "Covers a concrete release path (TestFlight / testers / developer accounts)", "passed": true, "evidence": "Route 3 covers store route: '$99/yr (Apple) + $25 (Google)', 12-tester closed test, review cycles - conditionally, if group insists"}], "summary": {"passed": 1, "failed": 3, "total": 4, "pass_rate": 0.25}}}], "previous_feedback": {}, "previous_outputs": {}, "benchmark": {"metadata": {"skill_name": "first-mobile-app", "skill_path": "<path/to/skill>", "executor_model": "<model-name>", "analyzer_model": "<model-name>", "timestamp": "2026-10-17T00:28:59Z", "evals_run": [0, 1, 2], "runs_per_configuration": 3}, "runs": [{"eval_id": 0, "configuration": "with_skill", "run_number": 0, "result": {"pass_rate": 1.0, "passed": 4, "failed": 0, "total": 4, "time_seconds": 0, "tokens": 0, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "Plan prescribes a web prototype validated with real users BEFORE building native", "passed": true, "evidence": "Step 2: 'Do not open a mobile builder yet... Two days: build a clickable web version... One full week: put it in front of real target users' precedes any native step"}, {"text": "Plan instructs flow-by-flow building with a per-flow spec/PRD, explicitly against one giant prompt", "passed": true, "evidence": "Step 5 PRD per flow; Step 7: 'One flow at a time... Never ask for the whole app in one prompt'"}, {"text": "Mentions testing with 5-7 real people before release", "passed": true, "evidence": "Step 8: 'Test with 5-7 real people before any release and collect feedback from each person individually'"}, {"text": "Covers BOTH stores: Apple ($99/yr, TestFlight) and Google Play ($25, closed testing requirement)", "passed": true, "evidence": "Step 8: 'Apple Developer Program, $99/year... TestFlight' and 'Google: Play developer registration, $25 one-time... closed test with 12 testers for 14 days'"}], "notes": []}, {"eval_id": 1, "configuration": "with_skill", "run_number": 0, "result": {"pass_rate": 1.0, "passed": 3, "failed": 0, "total": 3, "time_seconds": 0, "tokens": 0, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "States that Lovable produces web apps, not native store-submittable mobile apps", "passed": true, "evidence": "'Lovable is a great fit for the prototype and validation stage: it produces a clickable web app fast' - and long-term table lists it only for prototype stage"}, {"text": "Gives concrete builder-selection criteria including pricing model and code ownership/export", "passed": true, "evidence": "Section 6 'three checks': pricing model (own-agent over per-credit), code ownership ('take your code and leave, free'), feel"}, {"text": "Advises validating the idea (prototype + real users) before investing in the real build", "passed": true, "evidence": "Section 2: 'Two days on the prototype, then a full week with real users' before committing to a builder"}], "notes": []}, {"eval_id": 2, "configuration": "with_skill", "run_number": 0, "result": {"pass_rate": 1.0, "passed": 4, "failed": 0, "total": 4, "time_seconds": 0, "tokens": 0, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "Justifies going native via concrete mobile needs (installed app, push notifications) rather than vibes", "passed": true, "evidence": "'Your users are asking for two things on that list by name [installed app, notifications], so the answer is: go real' - tiebreak applied to stated needs"}, {"text": "Warns a rebuild is required and explains why the rebuild is easier than the first build", "passed": true, "evidence": "'Expect a full rebuild, not a port... a rebuild is far easier than the first build, because you already know exactly what to build'"}, {"text": "Prescribes flow-by-flow rebuild (map flows, per-flow specs) instead of one-shot regeneration", "passed": true, "evidence": "Section 3 maps flows from web screenshots; Section 4 PRD per flow; Section 6 'Never ask for the whole app in one prompt'"}, {"text": "Covers a concrete release path (TestFlight / testers / developer accounts)", "passed": true, "evidence": "Section 7: TestFlight ($99/yr), 5-7 engaged users first, Google Play $25 with 12-tester closed test"}], "notes": []}, {"eval_id": 0, "configuration": "without_skill", "run_number": 0, "result": {"pass_rate": 0.25, "passed": 1, "failed": 3, "total": 4, "time_seconds": 0, "tokens": 0, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "Plan prescribes a web prototype validated with real users BEFORE building native", "passed": false, "evidence": "Goes straight to 'Path A - AI-assisted build with Expo' as step 1; no web prototype or user-validation phase anywhere in the plan"}, {"text": "Plan instructs flow-by-flow building with a per-flow spec/PRD, explicitly against one giant prompt", "passed": false, "evidence": "Says 'build in thin slices' (feature list, not flows); no PRD, no per-flow spec, no warning against one giant prompt"}, {"text": "Mentions testing with 5-7 real people before release", "passed": false, "evidence": "Says 'Install it on family or friends' phones' but never specifies 5-7 testers"}, {"text": "Covers BOTH stores: Apple ($99/yr, TestFlight) and Google Play ($25, closed testing requirement)", "passed": true, "evidence": "Step 5: 'Apple Developer Program - $99/year'; Step 8: 'Google Play Console - $25 once... 12 testers who stay opted in for 14 continuous days'"}], "notes": []}, {"eval_id": 1, "configuration": "without_skill", "run_number": 0, "result": {"pass_rate": 1.0, "passed": 3, "failed": 0, "total": 3, "time_seconds": 0, "tokens": 0, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "States that Lovable produces web apps, not native store-submittable mobile apps", "passed": true, "evidence": "Caveat 1: 'It cannot build a native mobile app... web-only platform... publishing always ends at a web URL'"}, {"text": "Gives concrete builder-selection criteria including pricing model and code ownership/export", "passed": true, "evidence": "Discusses Lovable credit pricing ('the cost is the credits, not the plan') and ownership ('GitHub export so you're never locked in'); compares alternatives with prices"}, {"text": "Advises validating the idea (prototype + real users) before investing in the real build", "passed": true, "evidence": "Guardrail 'Ship order: prototype -> show your sister -> fix -> pilot with 5 friendly clients -> security review -> then real bookings'"}], "notes": []}, {"eval_id": 2, "configuration": "without_skill", "run_number": 0, "result": {"pass_rate": 0.25, "passed": 1, "failed": 3, "total": 4, "time_seconds": 0, "tokens": 0, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "Justifies going native via concrete mobile needs (installed app, push notifications) rather than vibes", "passed": false, "evidence": "Argues the opposite: 'You do not need to rebuild anything native... by turning it into a PWA'; no case made FOR going native"}, {"text": "Warns a rebuild is required and explains why the rebuild is easier than the first build", "passed": false, "evidence": "Explicitly says 'never rewrite native' and 'do not rewrite' - no rebuild-is-easier argument because no rebuild is prescribed"}, {"text": "Prescribes flow-by-flow rebuild (map flows, per-flow specs) instead of one-shot regeneration", "passed": false, "evidence": "Prescribes adding PWA/push layers to the existing app, not a flow-mapped rebuild"}, {"text": "Covers a concrete release path (TestFlight / testers / developer accounts)", "passed": true, "evidence": "Route 3 covers store route: '$99/yr (Apple) + $25 (Google)', 12-tester closed test, review cycles - conditionally, if group insists"}], "notes": []}], "run_summary": {"with_skill": {"pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0}, "time_seconds": {"mean": 0.0, "stddev": 0.0, "min": 0, "max": 0}, "tokens": {"mean": 0.0, "stddev": 0.0, "min": 0, "max": 0}}, "without_skill": {"pass_rate": {"mean": 0.5, "stddev": 0.433, "min": 0.25, "max": 1.0}, "time_seconds": {"mean": 0.0, "stddev": 0.0, "min": 0, "max": 0}, "tokens": {"mean": 0.0, "stddev": 0.0, "min": 0, "max": 0}}, "delta": {"pass_rate": "+0.50", "time_seconds": "+0.0", "tokens": "+0"}}, "notes": []}};
+
+    // ---- State ----
+    let feedbackMap = {};  // run_id -> feedback text
+    let currentIndex = 0;
+    let visitedRuns = new Set();
+
+    // ---- Init ----
+    async function init() {
+      // Load saved feedback from server — but only if this isn't a fresh
+      // iteration (indicated by previous_feedback being present). When
+      // previous feedback exists, the feedback.json on disk is stale from
+      // the prior iteration and should not pre-fill the textareas.
+      const hasPrevious = Object.keys(EMBEDDED_DATA.previous_feedback || {}).length > 0
+        || Object.keys(EMBEDDED_DATA.previous_outputs || {}).length > 0;
+      if (!hasPrevious) {
+        try {
+          const resp = await fetch("/api/feedback");
+          const data = await resp.json();
+          if (data.reviews) {
+            for (const r of data.reviews) feedbackMap[r.run_id] = r.feedback;
+          }
+        } catch { /* first run, no feedback yet */ }
+      }
+
+      document.getElementById("skill-name").textContent = EMBEDDED_DATA.skill_name;
+      showRun(0);
+
+      // Wire up feedback auto-save
+      const textarea = document.getElementById("feedback");
+      let saveTimeout = null;
+      textarea.addEventListener("input", () => {
+        clearTimeout(saveTimeout);
+        document.getElementById("feedback-status").textContent = "";
+        saveTimeout = setTimeout(() => saveCurrentFeedback(), 800);
+      });
+    }
+
+    // ---- Navigation ----
+    function navigate(delta) {
+      const newIndex = currentIndex + delta;
+      if (newIndex >= 0 && newIndex < EMBEDDED_DATA.runs.length) {
+        saveCurrentFeedback();
+        showRun(newIndex);
+      }
+    }
+
+    function updateNavButtons() {
+      document.getElementById("prev-btn").disabled = currentIndex === 0;
+      document.getElementById("next-btn").disabled =
+        currentIndex === EMBEDDED_DATA.runs.length - 1;
+    }
+
+    // ---- Show a run ----
+    function showRun(index) {
+      currentIndex = index;
+      const run = EMBEDDED_DATA.runs[index];
+
+      // Progress
+      document.getElementById("progress").textContent =
+        `${index + 1} of ${EMBEDDED_DATA.runs.length}`;
+
+      // Prompt
+      document.getElementById("prompt-text").textContent = run.prompt;
+
+      // Config badge
+      const badge = document.getElementById("config-badge");
+      const configMatch = run.id.match(/(with_skill|without_skill|new_skill|old_skill)/);
+      if (configMatch) {
+        const config = configMatch[1];
+        const isBaseline = config === "without_skill" || config === "old_skill";
+        badge.textContent = config.replace(/_/g, " ");
+        badge.className = "config-badge " + (isBaseline ? "config-baseline" : "config-primary");
+        badge.style.display = "inline-block";
+      } else {
+        badge.style.display = "none";
+      }
+
+      // Outputs
+      renderOutputs(run);
+
+      // Previous outputs
+      renderPrevOutputs(run);
+
+      // Grades
+      renderGrades(run);
+
+      // Previous feedback
+      const prevFb = (EMBEDDED_DATA.previous_feedback || {})[run.id];
+      const prevEl = document.getElementById("prev-feedback");
+      if (prevFb) {
+        document.getElementById("prev-feedback-text").textContent = prevFb;
+        prevEl.style.display = "block";
+      } else {
+        prevEl.style.display = "none";
+      }
+
+      // Feedback
+      document.getElementById("feedback").value = feedbackMap[run.id] || "";
+      document.getElementById("feedback-status").textContent = "";
+
+      updateNavButtons();
+
+      // Track visited runs and promote done button when all visited
+      visitedRuns.add(index);
+      const doneBtn = document.getElementById("done-btn");
+      if (visitedRuns.size >= EMBEDDED_DATA.runs.length) {
+        doneBtn.classList.add("ready");
+      }
+
+      // Scroll main content to top
+      document.querySelector(".main").scrollTop = 0;
+    }
+
+    // ---- Render outputs ----
+    function renderOutputs(run) {
+      const container = document.getElementById("outputs-body");
+      container.innerHTML = "";
+
+      const outputs = run.outputs || [];
+      if (outputs.length === 0) {
+        container.innerHTML = '<div class="empty-state">No output files</div>';
+        return;
+      }
+
+      for (const file of outputs) {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "output-file";
+
+        // Always show file header with download link
+        const header = document.createElement("div");
+        header.className = "output-file-header";
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = file.name;
+        header.appendChild(nameSpan);
+        const dlBtn = document.createElement("a");
+        dlBtn.className = "dl-btn";
+        dlBtn.textContent = "Download";
+        dlBtn.download = file.name;
+        dlBtn.href = getDownloadUri(file);
+        header.appendChild(dlBtn);
+        fileDiv.appendChild(header);
+
+        const content = document.createElement("div");
+        content.className = "output-file-content";
+
+        if (file.type === "text") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          content.appendChild(pre);
+        } else if (file.type === "image") {
+          const img = document.createElement("img");
+          img.src = file.data_uri;
+          img.alt = file.name;
+          content.appendChild(img);
+        } else if (file.type === "pdf") {
+          const iframe = document.createElement("iframe");
+          iframe.src = file.data_uri;
+          content.appendChild(iframe);
+        } else if (file.type === "xlsx") {
+          renderXlsx(content, file.data_b64);
+        } else if (file.type === "binary") {
+          const a = document.createElement("a");
+          a.className = "download-link";
+          a.href = file.data_uri;
+          a.download = file.name;
+          a.textContent = "Download " + file.name;
+          content.appendChild(a);
+        } else if (file.type === "error") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          pre.style.color = "var(--red)";
+          content.appendChild(pre);
+        }
+
+        fileDiv.appendChild(content);
+        container.appendChild(fileDiv);
+      }
+    }
+
+    // ---- XLSX rendering via SheetJS ----
+    function renderXlsx(container, b64Data) {
+      try {
+        const raw = Uint8Array.from(atob(b64Data), c => c.charCodeAt(0));
+        const wb = XLSX.read(raw, { type: "array" });
+
+        for (let i = 0; i < wb.SheetNames.length; i++) {
+          const sheetName = wb.SheetNames[i];
+          const ws = wb.Sheets[sheetName];
+
+          if (wb.SheetNames.length > 1) {
+            const sheetLabel = document.createElement("div");
+            sheetLabel.style.cssText =
+              "font-weight:600; font-size:0.8rem; color:#b0aea5; margin-top:0.5rem; margin-bottom:0.25rem;";
+            sheetLabel.textContent = "Sheet: " + sheetName;
+            container.appendChild(sheetLabel);
+          }
+
+          const htmlStr = XLSX.utils.sheet_to_html(ws, { editable: false });
+          const wrapper = document.createElement("div");
+          wrapper.innerHTML = htmlStr;
+          container.appendChild(wrapper);
+        }
+      } catch (err) {
+        container.textContent = "Error rendering spreadsheet: " + err.message;
+      }
+    }
+
+    // ---- Grades ----
+    function renderGrades(run) {
+      const section = document.getElementById("grades-section");
+      const content = document.getElementById("grades-content");
+
+      if (!run.grading) {
+        section.style.display = "none";
+        return;
+      }
+
+      const grading = run.grading;
+      section.style.display = "block";
+      // Reset to collapsed
+      content.classList.remove("open");
+      document.getElementById("grades-arrow").classList.remove("open");
+
+      const summary = grading.summary || {};
+      const expectations = grading.expectations || [];
+
+      let html = '<div style="padding: 1rem;">';
+
+      // Summary line
+      const passRate = summary.pass_rate != null
+        ? Math.round(summary.pass_rate * 100) + "%"
+        : "?";
+      const badgeClass = summary.pass_rate >= 0.8 ? "grade-pass" : summary.pass_rate >= 0.5 ? "" : "grade-fail";
+      html += '<div class="grades-summary">';
+      html += '<span class="grade-badge ' + badgeClass + '">' + passRate + '</span>';
+      html += '<span>' + (summary.passed || 0) + ' passed, ' + (summary.failed || 0) + ' failed of ' + (summary.total || 0) + '</span>';
+      html += '</div>';
+
+      // Assertions list
+      html += '<ul class="assertion-list">';
+      for (const exp of expectations) {
+        const statusClass = exp.passed ? "pass" : "fail";
+        const statusIcon = exp.passed ? "\u2713" : "\u2717";
+        html += '<li class="assertion-item">';
+        html += '<span class="assertion-status ' + statusClass + '">' + statusIcon + '</span>';
+        html += '<span>' + escapeHtml(exp.text) + '</span>';
+        if (exp.evidence) {
+          html += '<div class="assertion-evidence">' + escapeHtml(exp.evidence) + '</div>';
+        }
+        html += '</li>';
+      }
+      html += '</ul>';
+
+      html += '</div>';
+      content.innerHTML = html;
+    }
+
+    function toggleGrades() {
+      const content = document.getElementById("grades-content");
+      const arrow = document.getElementById("grades-arrow");
+      content.classList.toggle("open");
+      arrow.classList.toggle("open");
+    }
+
+    // ---- Previous outputs (collapsible) ----
+    function renderPrevOutputs(run) {
+      const section = document.getElementById("prev-outputs-section");
+      const content = document.getElementById("prev-outputs-content");
+      const prevOutputs = (EMBEDDED_DATA.previous_outputs || {})[run.id];
+
+      if (!prevOutputs || prevOutputs.length === 0) {
+        section.style.display = "none";
+        return;
+      }
+
+      section.style.display = "block";
+      // Reset to collapsed
+      content.classList.remove("open");
+      document.getElementById("prev-outputs-arrow").classList.remove("open");
+
+      // Render the files into the content area
+      content.innerHTML = "";
+      const wrapper = document.createElement("div");
+      wrapper.style.padding = "1rem";
+
+      for (const file of prevOutputs) {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "output-file";
+
+        const header = document.createElement("div");
+        header.className = "output-file-header";
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = file.name;
+        header.appendChild(nameSpan);
+        const dlBtn = document.createElement("a");
+        dlBtn.className = "dl-btn";
+        dlBtn.textContent = "Download";
+        dlBtn.download = file.name;
+        dlBtn.href = getDownloadUri(file);
+        header.appendChild(dlBtn);
+        fileDiv.appendChild(header);
+
+        const fc = document.createElement("div");
+        fc.className = "output-file-content";
+
+        if (file.type === "text") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          fc.appendChild(pre);
+        } else if (file.type === "image") {
+          const img = document.createElement("img");
+          img.src = file.data_uri;
+          img.alt = file.name;
+          fc.appendChild(img);
+        } else if (file.type === "pdf") {
+          const iframe = document.createElement("iframe");
+          iframe.src = file.data_uri;
+          fc.appendChild(iframe);
+        } else if (file.type === "xlsx") {
+          renderXlsx(fc, file.data_b64);
+        } else if (file.type === "binary") {
+          const a = document.createElement("a");
+          a.className = "download-link";
+          a.href = file.data_uri;
+          a.download = file.name;
+          a.textContent = "Download " + file.name;
+          fc.appendChild(a);
+        }
+
+        fileDiv.appendChild(fc);
+        wrapper.appendChild(fileDiv);
+      }
+
+      content.appendChild(wrapper);
+    }
+
+    function togglePrevOutputs() {
+      const content = document.getElementById("prev-outputs-content");
+      const arrow = document.getElementById("prev-outputs-arrow");
+      content.classList.toggle("open");
+      arrow.classList.toggle("open");
+    }
+
+    // ---- Feedback (saved to server -> feedback.json) ----
+    function saveCurrentFeedback() {
+      const run = EMBEDDED_DATA.runs[currentIndex];
+      const text = document.getElementById("feedback").value;
+
+      if (text.trim() === "") {
+        delete feedbackMap[run.id];
+      } else {
+        feedbackMap[run.id] = text;
+      }
+
+      // Build reviews array from map
+      const reviews = [];
+      for (const [run_id, feedback] of Object.entries(feedbackMap)) {
+        if (feedback.trim()) {
+          reviews.push({ run_id, feedback, timestamp: new Date().toISOString() });
+        }
+      }
+
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reviews, status: "in_progress" }),
+      }).then(() => {
+        document.getElementById("feedback-status").textContent = "Saved";
+      }).catch(() => {
+        // Static mode or server unavailable — no-op on auto-save,
+        // feedback will be downloaded on final submit
+        document.getElementById("feedback-status").textContent = "Will download on submit";
+      });
+    }
+
+    // ---- Done ----
+    function showDoneDialog() {
+      // Save current textarea to feedbackMap (but don't POST yet)
+      const run = EMBEDDED_DATA.runs[currentIndex];
+      const text = document.getElementById("feedback").value;
+      if (text.trim() === "") {
+        delete feedbackMap[run.id];
+      } else {
+        feedbackMap[run.id] = text;
+      }
+
+      // POST once with status: complete — include ALL runs so the model
+      // can distinguish "no feedback" (looks good) from "not reviewed"
+      const reviews = [];
+      const ts = new Date().toISOString();
+      for (const r of EMBEDDED_DATA.runs) {
+        reviews.push({ run_id: r.id, feedback: feedbackMap[r.id] || "", timestamp: ts });
+      }
+      const payload = JSON.stringify({ reviews, status: "complete" }, null, 2);
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }).then(() => {
+        document.getElementById("done-overlay").classList.add("visible");
+      }).catch(() => {
+        // Server not available (static mode) — download as file
+        const blob = new Blob([payload], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "feedback.json";
+        a.click();
+        URL.revokeObjectURL(url);
+        document.getElementById("done-overlay").classList.add("visible");
+      });
+    }
+
+    function closeDoneDialog() {
+      // Reset status back to in_progress
+      saveCurrentFeedback();
+      document.getElementById("done-overlay").classList.remove("visible");
+    }
+
+    // ---- Toast ----
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("visible");
+      setTimeout(() => toast.classList.remove("visible"), 2000);
+    }
+
+    // ---- Keyboard nav ----
+    document.addEventListener("keydown", (e) => {
+      // Don't capture when typing in textarea
+      if (e.target.tagName === "TEXTAREA") return;
+
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        navigate(-1);
+      } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        navigate(1);
+      }
+    });
+
+    // ---- Util ----
+    function getDownloadUri(file) {
+      if (file.data_uri) return file.data_uri;
+      if (file.data_b64) return "data:application/octet-stream;base64," + file.data_b64;
+      if (file.type === "text") return "data:text/plain;charset=utf-8," + encodeURIComponent(file.content);
+      return "#";
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // ---- View switching ----
+    function switchView(view) {
+      document.querySelectorAll(".view-tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".view-panel").forEach(p => p.classList.remove("active"));
+      document.querySelector(`[onclick="switchView('${view}')"]`).classList.add("active");
+      document.getElementById("panel-" + view).classList.add("active");
+    }
+
+    // ---- Benchmark rendering ----
+    function renderBenchmark() {
+      const data = EMBEDDED_DATA.benchmark;
+      if (!data) return;
+
+      // Show the tabs
+      document.getElementById("view-tabs").style.display = "flex";
+
+      const container = document.getElementById("benchmark-content");
+      const summary = data.run_summary || {};
+      const metadata = data.metadata || {};
+      const notes = data.notes || [];
+
+      let html = "";
+
+      // Header
+      html += "<h2 style='font-family: Poppins, sans-serif; margin-bottom: 0.5rem;'>Benchmark Results</h2>";
+      html += "<p style='color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1.25rem;'>";
+      if (metadata.skill_name) html += "<strong>" + escapeHtml(metadata.skill_name) + "</strong> &mdash; ";
+      if (metadata.timestamp) html += metadata.timestamp + " &mdash; ";
+      if (metadata.evals_run) html += "Evals: " + metadata.evals_run.join(", ") + " &mdash; ";
+      html += (metadata.runs_per_configuration || "?") + " runs per configuration";
+      html += "</p>";
+
+      // Summary table
+      html += '<table class="benchmark-table">';
+
+      function fmtStat(stat, pct) {
+        if (!stat) return "—";
+        const suffix = pct ? "%" : "";
+        const m = pct ? (stat.mean * 100).toFixed(0) : stat.mean.toFixed(1);
+        const s = pct ? (stat.stddev * 100).toFixed(0) : stat.stddev.toFixed(1);
+        return m + suffix + " ± " + s + suffix;
+      }
+
+      function deltaClass(val) {
+        if (!val) return "";
+        const n = parseFloat(val);
+        if (n > 0) return "benchmark-delta-positive";
+        if (n < 0) return "benchmark-delta-negative";
+        return "";
+      }
+
+      // Discover config names dynamically (everything except "delta")
+      const configs = Object.keys(summary).filter(k => k !== "delta");
+      const configA = configs[0] || "config_a";
+      const configB = configs[1] || "config_b";
+      const labelA = configA.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const labelB = configB.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const a = summary[configA] || {};
+      const b = summary[configB] || {};
+      const delta = summary.delta || {};
+
+      html += "<thead><tr><th>Metric</th><th>" + escapeHtml(labelA) + "</th><th>" + escapeHtml(labelB) + "</th><th>Delta</th></tr></thead>";
+      html += "<tbody>";
+
+      html += "<tr><td><strong>Pass Rate</strong></td>";
+      html += "<td>" + fmtStat(a.pass_rate, true) + "</td>";
+      html += "<td>" + fmtStat(b.pass_rate, true) + "</td>";
+      html += '<td class="' + deltaClass(delta.pass_rate) + '">' + (delta.pass_rate || "—") + "</td></tr>";
+
+      // Time (only show row if data exists)
+      if (a.time_seconds || b.time_seconds) {
+        html += "<tr><td><strong>Time (s)</strong></td>";
+        html += "<td>" + fmtStat(a.time_seconds, false) + "</td>";
+        html += "<td>" + fmtStat(b.time_seconds, false) + "</td>";
+        html += '<td class="' + deltaClass(delta.time_seconds) + '">' + (delta.time_seconds ? delta.time_seconds + "s" : "—") + "</td></tr>";
+      }
+
+      // Tokens (only show row if data exists)
+      if (a.tokens || b.tokens) {
+        html += "<tr><td><strong>Tokens</strong></td>";
+        html += "<td>" + fmtStat(a.tokens, false) + "</td>";
+        html += "<td>" + fmtStat(b.tokens, false) + "</td>";
+        html += '<td class="' + deltaClass(delta.tokens) + '">' + (delta.tokens || "—") + "</td></tr>";
+      }
+
+      html += "</tbody></table>";
+
+      // Per-eval breakdown (if runs data available)
+      const runs = data.runs || [];
+      if (runs.length > 0) {
+        const evalIds = [...new Set(runs.map(r => r.eval_id))].sort((a, b) => a - b);
+
+        html += "<h3 style='font-family: Poppins, sans-serif; margin-bottom: 0.75rem;'>Per-Eval Breakdown</h3>";
+
+        const hasTime = runs.some(r => r.result && r.result.time_seconds != null);
+        const hasErrors = runs.some(r => r.result && r.result.errors > 0);
+
+        for (const evalId of evalIds) {
+          const evalRuns = runs.filter(r => r.eval_id === evalId);
+          const evalName = evalRuns[0] && evalRuns[0].eval_name ? evalRuns[0].eval_name : "Eval " + evalId;
+
+          html += "<h4 style='font-family: Poppins, sans-serif; margin: 1rem 0 0.5rem; color: var(--text);'>" + escapeHtml(evalName) + "</h4>";
+          html += '<table class="benchmark-table">';
+          html += "<thead><tr><th>Config</th><th>Run</th><th>Pass Rate</th>";
+          if (hasTime) html += "<th>Time (s)</th>";
+          if (hasErrors) html += "<th>Crashes During Execution</th>";
+          html += "</tr></thead>";
+          html += "<tbody>";
+
+          // Group by config and render with average rows
+          const configGroups = [...new Set(evalRuns.map(r => r.configuration))];
+          for (let ci = 0; ci < configGroups.length; ci++) {
+            const config = configGroups[ci];
+            const configRuns = evalRuns.filter(r => r.configuration === config);
+            if (configRuns.length === 0) continue;
+
+            const rowClass = ci === 0 ? "benchmark-row-with" : "benchmark-row-without";
+            const configLabel = config.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+
+            for (const run of configRuns) {
+              const r = run.result || {};
+              const prClass = r.pass_rate >= 0.8 ? "benchmark-delta-positive" : r.pass_rate < 0.5 ? "benchmark-delta-negative" : "";
+              html += '<tr class="' + rowClass + '">';
+              html += "<td>" + configLabel + "</td>";
+              html += "<td>" + run.run_number + "</td>";
+              html += '<td class="' + prClass + '">' + ((r.pass_rate || 0) * 100).toFixed(0) + "% (" + (r.passed || 0) + "/" + (r.total || 0) + ")</td>";
+              if (hasTime) html += "<td>" + (r.time_seconds != null ? r.time_seconds.toFixed(1) : "—") + "</td>";
+              if (hasErrors) html += "<td>" + (r.errors || 0) + "</td>";
+              html += "</tr>";
+            }
+
+            // Average row
+            const rates = configRuns.map(r => (r.result || {}).pass_rate || 0);
+            const avgRate = rates.reduce((a, b) => a + b, 0) / rates.length;
+            const avgPrClass = avgRate >= 0.8 ? "benchmark-delta-positive" : avgRate < 0.5 ? "benchmark-delta-negative" : "";
+            html += '<tr class="benchmark-row-avg ' + rowClass + '">';
+            html += "<td>" + configLabel + "</td>";
+            html += "<td>Avg</td>";
+            html += '<td class="' + avgPrClass + '">' + (avgRate * 100).toFixed(0) + "%</td>";
+            if (hasTime) {
+              const times = configRuns.map(r => (r.result || {}).time_seconds).filter(t => t != null);
+              html += "<td>" + (times.length ? (times.reduce((a, b) => a + b, 0) / times.length).toFixed(1) : "—") + "</td>";
+            }
+            if (hasErrors) html += "<td></td>";
+            html += "</tr>";
+          }
+          html += "</tbody></table>";
+
+          // Per-assertion detail for this eval
+          const runsWithExpectations = {};
+          for (const config of configGroups) {
+            runsWithExpectations[config] = evalRuns.filter(r => r.configuration === config && r.expectations && r.expectations.length > 0);
+          }
+          const hasAnyExpectations = Object.values(runsWithExpectations).some(runs => runs.length > 0);
+          if (hasAnyExpectations) {
+            // Collect all unique assertion texts across all configs
+            const allAssertions = [];
+            const seen = new Set();
+            for (const config of configGroups) {
+              for (const run of runsWithExpectations[config]) {
+                for (const exp of (run.expectations || [])) {
+                  if (!seen.has(exp.text)) {
+                    seen.add(exp.text);
+                    allAssertions.push(exp.text);
+                  }
+                }
+              }
+            }
+
+            html += '<table class="benchmark-table" style="margin-top: 0.5rem;">';
+            html += "<thead><tr><th>Assertion</th>";
+            for (const config of configGroups) {
+              const label = config.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+              html += "<th>" + escapeHtml(label) + "</th>";
+            }
+            html += "</tr></thead><tbody>";
+
+            for (const assertionText of allAssertions) {
+              html += "<tr><td>" + escapeHtml(assertionText) + "</td>";
+
+              for (const config of configGroups) {
+                html += "<td>";
+                for (const run of runsWithExpectations[config]) {
+                  const exp = (run.expectations || []).find(e => e.text === assertionText);
+                  if (exp) {
+                    const cls = exp.passed ? "benchmark-delta-positive" : "benchmark-delta-negative";
+                    const icon = exp.passed ? "\u2713" : "\u2717";
+                    html += '<span class="' + cls + '" title="Run ' + run.run_number + ': ' + escapeHtml(exp.evidence || "") + '">' + icon + "</span> ";
+                  } else {
+                    html += "— ";
+                  }
+                }
+                html += "</td>";
+              }
+              html += "</tr>";
+            }
+            html += "</tbody></table>";
+          }
+        }
+      }
+
+      // Notes
+      if (notes.length > 0) {
+        html += '<div class="benchmark-notes">';
+        html += "<h3>Analysis Notes</h3>";
+        html += "<ul>";
+        for (const note of notes) {
+          html += "<li>" + escapeHtml(note) + "</li>";
+        }
+        html += "</ul></div>";
+      }
+
+      container.innerHTML = html;
+    }
+
+    // ---- Start ----
+    init();
+    renderBenchmark();
+  </script>
+</body>
+</html>

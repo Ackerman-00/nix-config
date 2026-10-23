@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "States that Lovable produces web apps, not native store-submittable mobile apps",
+      "passed": true,
+      "evidence": "'Lovable is a great fit for the prototype and validation stage: it produces a clickable web app fast' - and long-term table lists it only for prototype stage"
+    },
+    {
+      "text": "Gives concrete builder-selection criteria including pricing model and code ownership/export",
+      "passed": true,
+      "evidence": "Section 6 'three checks': pricing model (own-agent over per-credit), code ownership ('take your code and leave, free'), feel"
+    },
+    {
+      "text": "Advises validating the idea (prototype + real users) before investing in the real build",
+      "passed": true,
+      "evidence": "Section 2: 'Two days on the prototype, then a full week with real users' before committing to a builder"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  }
+}
