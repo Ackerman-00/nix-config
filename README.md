@@ -9,8 +9,10 @@ Host `quietcraft` · user `ackerman` · stateVersion `26.11`
 
 ```
 flake.nix                    inputs, outputs, cachix substituters
-configuration.nix            root module: hardware-config + ./modules
-hardware-configuration.nix   gitignored — generated per machine
+hosts/
+  quietcraft/
+    default.nix              root module: paths guard + ../../modules
+hardware-configuration.nix   generated per machine; commit to hosts/quietcraft/
 home.nix                     home-manager entry point
 modules/
   system/                    nix settings, boot, network, locale, users, maintenance
@@ -86,6 +88,13 @@ The user has no password by default — set one after the first switch:
 ```sh
 sudo passwd ackerman
 ```
+
+## Post-install TODO (after the first switch)
+
+- Generate `hardware-configuration.nix` (`nixos-generate-config`), commit it into `hosts/quietcraft/`.
+- Drop the `pathExists` guard in `hosts/quietcraft/default.nix` and remove the comment.
+- Switch `nh` flake references from `path:/etc/nixos` to `/etc/nixos`.
+- Drop `path:` from rebuild commands.
 
 ## Rebuilding
 
