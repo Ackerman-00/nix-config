@@ -32,13 +32,25 @@
     "craft-launcher-feed": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-NAq6RAN6cZq6boYeF+V73NhwrqOFd9llMWSyMlwwAXo=",
+        "narHash": "sha256-YAF0XNpXCQlL2fnOjFEUwC6Ri4mFqdnXQ+xVTgZyroM=",
         "type": "file",
         "url": "https://api.github.com/repos/storytold/craft-launcher/releases/latest"
       },
       "original": {
         "type": "file",
         "url": "https://api.github.com/repos/storytold/craft-launcher/releases/latest"
+      }
+    },
+    "freebuff-feed": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-eYSl9pR1w6JllAkKCc4nrenZsaldl/DjKJ04yoqvKSI=",
+        "type": "file",
+        "url": "https://freebuff.com/api/desktop/updates/linux-x64-deb/latest-linux.yml"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://freebuff.com/api/desktop/updates/linux-x64-deb/latest-linux.yml"
       }
     },
     "helium-pin": {
@@ -80,7 +92,7 @@
     "hyperframes-npm": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-NpGeW8Ta8a6NVbvOU1MWgW/jCJPWmyzDs0187MXT3Os=",
+        "narHash": "sha256-1U6wRGE/Syk+Yetnuxjitrsrmv3DNtHDDtT1KR/S9QA=",
         "type": "file",
         "url": "https://registry.npmjs.org/-/package/hyperframes/dist-tags"
       },
@@ -175,11 +187,24 @@
         "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
       }
     },
+    "omnirush-feed": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-7SxrxAjr1vY5r5CKriQ3J8b5DJysPeOKWesfay/fWMw=",
+        "type": "file",
+        "url": "https://github.com/omnirush-ai/omnirush-gui/releases/latest/download/latest-linux.yml"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/omnirush-ai/omnirush-gui/releases/latest/download/latest-linux.yml"
+      }
+    },
     "root": {
       "inputs": {
         "blender-mcp-src": "blender-mcp-src",
         "concat-manifest": "concat-manifest",
         "craft-launcher-feed": "craft-launcher-feed",
+        "freebuff-feed": "freebuff-feed",
         "helium-pin": "helium-pin",
         "home-manager": "home-manager",
         "hyperframes-npm": "hyperframes-npm",
@@ -188,6 +213,7 @@
         "mcp-youtube-transcript-src": "mcp-youtube-transcript-src",
         "neurakeep-npm": "neurakeep-npm",
         "nixpkgs": "nixpkgs",
+        "omnirush-feed": "omnirush-feed",
         "superpowers-src": "superpowers-src",
         "torch-pypi": "torch-pypi",
         "transformers-pypi": "transformers-pypi",

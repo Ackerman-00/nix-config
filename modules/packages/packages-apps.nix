@@ -16,6 +16,7 @@
 
     environment.systemPackages = with pkgs; [
       blender
+      chatgpt
       evince
       file-roller
       gnome-text-editor

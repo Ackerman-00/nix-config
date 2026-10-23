@@ -1,19 +1,9 @@
-# mcp-youtube-transcript v0.7.0 (jkawamoto) + yt-dlp CLI.
-# v0.7.0 is the newest release compatible with nixpkgs mcp 1.x (locked:
-# 1.29.0, checked 2026-10-02); v0.7.1+ through v0.8.0 (Oct 2026 latest)
-# needs mcp>=2, unpackaged. Bump by retagging the flake input once nixpkgs
-# ships mcp 2.x.
+# MCP servers: youtube transcript + playwright
 #
-# The binaries are installed but never auto-connected: both servers register
-# with `disabled: true` unless my.mcp.<name>.enable is set.
-#
-# Playwright (browser automation via Helium) is NOT nix-packaged: upstream
-# ships npm-only. The pin lives here (`playwrightMcpVersion` below) and
-# is registered in `my.mcp.servers` for the opencode renderer; there is
-# no second copy to drift.
-# Helium over Firefox: system Firefox is broken on this snapshot
-# (libxul.so wants NSS_3.113, system has NSS 3.112.5), Helium is a healthy
-# Chromium 154, and Playwright targets Chromium first-class.
+# pin: v0.7.0, last release on nixpkgs mcp 1.x; v0.7.1+ needs mcp 2.x,
+# unpackaged (retag the input when nixpkgs ships it)
+# opt-in: registered `disabled: true` unless my.mcp.<name>.enable
+# playwright: npm-only, pinned here, Helium-backed (system Firefox is broken)
 {
   config,
   lib,

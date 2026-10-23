@@ -1,193 +1,151 @@
 # quietcraft
 
-NixOS flake for `quietcraft`, a single-user x86_64-linux machine running the
-Umbriel compositor with Noctalia as the desktop shell.
+NixOS flake for `quietcraft`: one x86_64-linux machine, Umbriel compositor,
+Noctalia shell.
 
 Host `quietcraft` · user `ackerman` · stateVersion `26.11`
 
-## Repo layout
+## Install from a minimal ISO
 
-```
-flake.nix                    inputs, outputs, cachix substituters
-hosts/
-  quietcraft/
-    default.nix              root module: paths guard + ../../modules
-hardware-configuration.nix   generated per machine; commit to hosts/quietcraft/
-home.nix                     home-manager entry point
-modules/
-  system/                    nix settings, boot, network, locale, users, maintenance
-  desktop/                   greeter, fonts, services, noctalia, umbriel
-  browsers/                  helium (vendored), firefox
-  shell/                     zsh tooling, neovim
-  home-manager/              home-manager modules
-    programs/                noctalia, vesktop
-    shell/                   zsh, kitty, starship, fastfetch, git, direnv
-  packages/                  products, one group per role
-    agent/                   the agent runtime
-      skills/                skill subsystem, auto-update from upstream
-      opencode/              the app and its global config
-      neurakeep/             memory runtime
-      openchamber/           desktop shell
-    media/                   media & video production tooling
-      hyperframes/           HyperFrames CLI, skills, local voice, transcription
-      concat/                the video editor, vendored
-      craft-launcher/        the Craft launcher, the official prebuilt tarball
-      tts/                   TTS python packages for AI video editing workflows
-    mcp/                     local MCP servers
-      servers/               youtube transcript, playwright
-      concat/                the concat bridge
-      blender/               the blender bridge
-```
-
-## Installing on a fresh minimal system
-
-A minimal NixOS install has no `git` and no flakes enabled, so bootstrap both
-before anything else:
+The minimal ISO ships neither git nor flakes:
 
 ```sh
 nix-shell -p git --extra-experimental-features 'nix-command flakes'
 ```
 
-Clone straight into `/etc/nixos`. Do not keep a second copy in `$HOME`: `/etc/nixos`
-is the one every rebuild reads, so a copy elsewhere silently never applies.
-
-`/etc` is root-owned, so git cannot create the directory itself — make it first and
-hand it to your user, then clone into the empty dir (git refuses a non-empty one).
-
-State-version safety: `system.stateVersion`/`home.stateVersion` are set to the
-release of the ISO used for the *first* install and must never change afterwards.
+Replace the stock config with this repo (one command):
 
 ```sh
-sudo rm -rf /etc/nixos
-sudo mkdir -p /etc/nixos
-sudo chown "$USER" /etc/nixos
-git clone https://github.com/Ackerman-00/nix-config /etc/nixos
+sudo rm -rf /etc/nixos && sudo git clone https://github.com/Ackerman-00/nix-config /etc/nixos && sudo chown -R "$USER" /etc/nixos
 ```
 
-`hardware-configuration.nix` is gitignored, so it never ships in the clone.
-Generate it on the target machine:
+`hardware-configuration.nix` is gitignored — it holds this disk's UUIDs — so
+generate it on the target machine:
 
 ```sh
 sudo nixos-generate-config --show-hardware-config \
   | sudo tee /etc/nixos/hardware-configuration.nix
 ```
 
-First switch. The `path:` prefix is required, not cosmetic, and
-`accept-flake-config` is needed once so `nixConfig` can apply the umbriel cache
-before the system nix settings exist:
+First switch. `path:` is required (see below); `accept-flake-config` is needed
+once so `nixConfig` can add the Umbriel cache before the system settings exist:
 
 ```sh
 sudo nixos-rebuild switch \
   --flake path:/etc/nixos#quietcraft \
   --extra-experimental-features 'nix-command flakes' \
-  --option accept-flake-config true   # bootstrap only
+  --option accept-flake-config true
 ```
 
-The user has no password by default — set one after the first switch:
+The user is created without a password:
 
 ```sh
 sudo passwd ackerman
 ```
 
-## Post-install TODO (after the first switch)
+`system.stateVersion` and `home.stateVersion` are the release of the ISO used
+for the first install. Never change them.
 
-- Generate `hardware-configuration.nix` (`nixos-generate-config`), commit it into `hosts/quietcraft/`.
-- Drop the `pathExists` guard in `hosts/quietcraft/default.nix` and remove the comment.
-- Switch `nh` flake references from `path:/etc/nixos` to `/etc/nixos`.
-- Drop `path:` from rebuild commands.
-
-## Toggles
-
-- `my.firefox.enable` defaults to `false`: system Firefox is broken on this
-  snapshot; set it to `true` to install it.
-
-## Rebuilding
+## Daily
 
 ```sh
-nh os switch      # normal rebuild
-nh os test        # build + activate without adding a boot entry
-nh clean all      # prune old generations (runs daily as a timer already)
+nh os switch      # rebuild
+nh os test        # build + activate, no boot entry
+nh clean all      # prune generations (also runs daily as a timer)
 ```
 
-Or without `nh`:
+`nh` is configured for `path:/etc/nixos`. Plain fallback:
 
 ```sh
 sudo nixos-rebuild switch --flake path:/etc/nixos#quietcraft
 ```
 
-## The `path:` prefix
+## Why `path:`
 
-`hardware-configuration.nix` is gitignored, so it is not in git. A git flake
-reference (`--flake /etc/nixos#quietcraft`) only copies *tracked* files into the
-store, which silently omits it and fails the build with:
+`hardware-configuration.nix` is untracked, and a git flake reference copies
+only tracked files into the store. That silently drops the file and the build
+dies with `The 'fileSystems' option does not specify your root file system`.
+Use `path:` everywhere, checks included: `nix flake check path:.`.
+
+## Layout
 
 ```
-The 'fileSystems' option does not specify your root file system.
+flake.nix                inputs, outputs, checks, cachix substituters
+hosts/quietcraft/        root module (+ gitignored hardware-configuration.nix)
+home.nix                 home-manager entry point
+modules/
+  system/                nix settings, boot, network, locale, users, maintenance
+  desktop/               greeter, fonts, services, noctalia, umbriel
+  browsers/              helium (vendored), firefox, brave-origin
+  shell/                 zsh tooling, neovim
+  home-manager/          shell (zsh, kitty, starship, fastfetch, git, direnv),
+                         programs (noctalia, vesktop)
+  packages/
+    agent/               skills, opencode, neurakeep, openchamber,
+                         freebuff, omnirush, ollama, cline
+    media/               hyperframes, concat, craft-launcher, tts
+    mcp/                 youtube transcript + playwright, concat, blender
+    packages-*.nix       flat groups: apps, desktop, dev, gaming, kankan, utils
 ```
 
-Use `path:` everywhere so the directory is copied verbatim. `nh` is already
-configured for this.
+Every module is gated by `my.<name>.enable`. All default to on except
+`my.firefox` (system Firefox is broken on this snapshot) and
+`my.mcp.<server>.enable`, which only auto-connects an MCP server at OpenCode
+startup. Turn anything off in `hosts/quietcraft/default.nix`.
 
-This applies to `nix flake check` as well, so the check command below uses
-`path:.`. On a checkout without the file — a fresh clone, or CI — the check
-fails with that same assertion.
+## Inputs and versions
 
-## Binary cache
-
-Umbriel and `xdg-desktop-portal-umbriel` come from
-[`umbriel.cachix.org`](https://umbriel.cachix.org) instead of being compiled,
-declared in both `flake.nix` (`nixConfig`) and `modules/system/nix-settings.nix`
-(`nix.settings`). The input is pinned to the upstream `cachix` branch, which
-only advances to commits whose CI has published binaries.
-
-The input deliberately sets no `follows` on nixpkgs — its store paths only match
-the cache when built against the nixpkgs its own lockfile pins.
-
-## Lint and checks
+Helium, Concat and Craft Launcher are built from upstream prebuilt artifacts
+pinned as flake inputs, so a rebuild picks up a new release with no formula
+change. Those pins point at `releases/latest` style URLs and therefore drift;
+on a `narHash` mismatch:
 
 ```sh
-nix flake check path:.               # nixfmt, statix, deadnix, noctalia toml
-nix fmt                               # format
-nix flake update umbriel              # bump umbriel
-nix flake update                      # bump everything (includes nixpkgs)
+nix flake update craft-launcher-feed concat-manifest helium-pin
+```
+
+Freebuff and OmniRush are unfree Electron apps taken from the upstream `.deb`,
+versioned by their feed inputs:
+
+```sh
+nix flake update freebuff-feed omnirush-feed
+```
+
+Umbriel and `xdg-desktop-portal-umbriel` come from
+[`umbriel.cachix.org`](https://umbriel.cachix.org) instead of being compiled —
+declared in `nixConfig` here and in `nix.settings` under `modules/system/`. The
+input tracks the upstream `cachix` branch, which only advances to commits whose
+CI published binaries, and deliberately does not `follows` nixpkgs: its store
+paths only match the cache when built against its own pinned nixpkgs.
+
+`opencode` and `opencode-desktop` come from nixpkgs. The CLI is installed by
+the `programs.opencode` Home Manager module, which also writes the global
+`opencode.json`, `AGENTS.md`, and the agent and command directories.
+
+## Checks
+
+```sh
+nix flake check path:.    # nixfmt, statix, deadnix, noctalia toml
+nix fmt
+nix flake update umbriel  # bump one input
+nix flake update          # bump everything
 ```
 
 ## Agent skills
 
-Every skill OpenCode reads lives under `~/.agents/skills` and
-`~/.config/opencode/skills`. The lockfile the `skills` CLI wrote, kept at
-`~/.agents/.skill-lock.json`, records per skill the GitHub upstream it came
-from.
+`modules/packages/agent/skills/` owns `~/.agents/skills` and
+`~/.config/opencode/skills`; the CLI's lockfile sits at
+`~/.local/share/agent-skills/skill-lock.json`. Every rebuild restores the skills
+committed under `overrides/`, re-fetches the upstream-tracked ones, then
+restores the local copies again — a fetch cannot clobber a local edit.
 
-`modules/packages/agent/skills/` owns that tree. On every rebuild its
-activation step:
+`my.skills.refresh` controls the fetch, `my.skills.restore` the restore.
+`my.skills.excluded` keeps retired skills from coming back: `heygen-avatar`,
+`heygen-translate`, `heygen-video` (the service is paid), `best-practices`,
+`web-quality-audit`.
 
-1. restores the locally authored and locally adapted skills (committed under
-   `overrides/`) so a fetch can never clobber them;
-2. re-fetches the upstream-tracked skills whose repo moved;
-3. restores the local copies again.
-
-Skills that must never come back are listed in `my.skills.excluded` —
-`heygen-avatar`, `heygen-translate`, `heygen-video` (the HeyGen service is
-paid), plus `best-practices` and `web-quality-audit`.
-
-`my.skills.refresh` controls the upstream fetch; `my.skills.restore` controls
-the local-copy restore. They are separate on purpose.
-
-Locally adapted skills are pinned to the copy in `overrides/`. To pick up an
-upstream change to one of them, re-run the generator and commit the result:
+An upstream change to an adapted skill needs a regeneration:
 
 ```sh
 modules/packages/agent/skills/generate.sh
 ```
-
-`helium` and `concat` are built from upstream prebuilt artifacts pinned via
-flake inputs, so a rebuild picks up new versions without a formula change.
-`craft-launcher-feed` and `concat-manifest` point at `releases/latest` style
-URLs, which drift; if evaluation fails on a `narHash` mismatch, run
-`nix flake update craft-launcher-feed`.
-
-`opencode` and `opencode-desktop` come from nixpkgs. The CLI is installed by
-the `programs.opencode` Home Manager module, which also writes the global
-`opencode.json`, the `AGENTS.md` and the agent and command directories. The
-desktop app is a nixpkgs system package.

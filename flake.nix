@@ -38,6 +38,18 @@
       flake = false;
     };
 
+    # OmniRush desktop update feed
+    omnirush-feed = {
+      url = "file+https://github.com/omnirush-ai/omnirush-gui/releases/latest/download/latest-linux.yml";
+      flake = false;
+    };
+
+    # Freebuff desktop update feed
+    freebuff-feed = {
+      url = "file+https://freebuff.com/api/desktop/updates/linux-x64-deb/latest-linux.yml";
+      flake = false;
+    };
+
     # Blender MCP source, commit pinned
     # nix flake update blender-mcp-src
     blender-mcp-src = {

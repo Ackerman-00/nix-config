@@ -25,8 +25,7 @@ let
     src = ./python;
     build-system = with pkgs.python3Packages; [ setuptools ];
     dependencies = with pkgs.python3Packages; [ mcp ];
-    # Upstream has no nix-wired test suite; the stdio entrypoint is
-    # verified via `concat-mcp --help` plus a live Concat socket check.
+    # No upstream tests; entrypoint verified with a dummy token.
     doCheck = false;
     meta = {
       description = "MCP bridge for the Concat video editor JSON-RPC API";

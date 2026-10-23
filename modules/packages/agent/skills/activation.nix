@@ -24,7 +24,7 @@ in
   export SKILLS_OPENCODE_DIR="${homeDirectory}/.config/opencode/skills"
   export SKILLS_GIT="${git}/bin/git"
   export SKILLS_TAR="${gnutar}/bin/tar"
-  export SKILLS_EXCLUDED="${lib.concatStringsSep " " excludedSkills}"
+  export SKILLS_EXCLUDED=${lib.escapeShellArg (lib.concatStringsSep " " excludedSkills)}
   export SKILLS_REFRESH="${if runRefresh then "1" else "0"}"
   export SKILLS_RESTORE="${if runRestore then "1" else "0"}"
   export SKILLS_DEADLINE="${toString refreshDeadline}"
