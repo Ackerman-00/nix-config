@@ -5,10 +5,8 @@
   ...
 }:
 {
-  options.my.apps.enable = lib.mkOption {
-    type = lib.types.bool;
+  options.my.apps.enable = lib.mkEnableOption "Desktop apps." // {
     default = true;
-    description = "Desktop apps.";
   };
 
   config = lib.mkIf config.my.apps.enable {

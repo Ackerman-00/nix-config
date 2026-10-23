@@ -37,11 +37,11 @@ let
   };
 in
 {
-  options.my.concat-mcp.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = true;
-    description = "Concat MCP bridge (stdio server wrapping Concat's JSON-RPC socket) for OpenCode/LLM clients.";
-  };
+  options.my.concat-mcp.enable =
+    lib.mkEnableOption "Concat MCP bridge (stdio server wrapping Concat's JSON-RPC socket) for OpenCode/LLM clients."
+    // {
+      default = true;
+    };
 
   config = lib.mkIf config.my.concat-mcp.enable {
     environment.systemPackages = [ concat-mcp ];

@@ -42,11 +42,11 @@ let
   };
 in
 {
-  options.my.blender-mcp.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = true;
-    description = "Community Blender MCP server binary (mcp-for-blender, +blender-mcp compat link) for OpenCode/LLM clients.";
-  };
+  options.my.blender-mcp.enable =
+    lib.mkEnableOption "Community Blender MCP server binary (mcp-for-blender, +blender-mcp compat link) for OpenCode/LLM clients."
+    // {
+      default = true;
+    };
 
   config = lib.mkIf config.my.blender-mcp.enable {
     environment.systemPackages = [ mcp-for-blender ];

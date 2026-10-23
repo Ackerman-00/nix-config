@@ -5,10 +5,8 @@
   ...
 }:
 {
-  options.my.dev.enable = lib.mkOption {
-    type = lib.types.bool;
+  options.my.dev.enable = lib.mkEnableOption "Dev tools and python env." // {
     default = true;
-    description = "Dev tools and python env.";
   };
 
   config = lib.mkIf config.my.dev.enable {

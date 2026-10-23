@@ -5,10 +5,8 @@
   ...
 }:
 {
-  options.my.gaming.enable = lib.mkOption {
-    type = lib.types.bool;
+  options.my.gaming.enable = lib.mkEnableOption "Gaming packages." // {
     default = true;
-    description = "Gaming packages.";
   };
 
   config = lib.mkIf config.my.gaming.enable {

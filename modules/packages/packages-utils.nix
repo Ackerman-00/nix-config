@@ -5,10 +5,8 @@
   ...
 }:
 {
-  options.my.utils.enable = lib.mkOption {
-    type = lib.types.bool;
+  options.my.utils.enable = lib.mkEnableOption "CLI utilities and codecs." // {
     default = true;
-    description = "CLI utilities and codecs.";
   };
 
   config = lib.mkIf config.my.utils.enable {

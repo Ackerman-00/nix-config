@@ -31,10 +31,8 @@ let
 in
 {
   options.my.hyperframes = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
+    enable = lib.mkEnableOption "HyperFrames CLI, skills, local voice and transcription." // {
       default = true;
-      description = "HyperFrames CLI, skills, local voice and transcription.";
     };
 
     cliVersion = lib.mkOption {

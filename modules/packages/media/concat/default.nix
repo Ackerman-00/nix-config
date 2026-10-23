@@ -13,10 +13,8 @@ let
   concat = pkgs.callPackage ./package.nix { concatManifest = inputs.concat-manifest; };
 in
 {
-  options.my.concat.enable = lib.mkOption {
-    type = lib.types.bool;
+  options.my.concat.enable = lib.mkEnableOption "Concat video editor." // {
     default = true;
-    description = "Concat video editor.";
   };
 
   config = lib.mkIf config.my.concat.enable {

@@ -6,29 +6,25 @@
 }:
 {
   options.my.mcp = {
-    blender.enable = lib.mkOption {
-      type = lib.types.bool;
+    blender.enable = lib.mkEnableOption "Auto-connect the Blender MCP server at OpenCode startup." // {
       default = false;
-      description = "Auto-connect the Blender MCP server at OpenCode startup.";
     };
 
-    concat.enable = lib.mkOption {
-      type = lib.types.bool;
+    concat.enable = lib.mkEnableOption "Auto-connect the Concat MCP server at OpenCode startup." // {
       default = false;
-      description = "Auto-connect the Concat MCP server at OpenCode startup.";
     };
 
-    playwright.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Auto-connect the Playwright MCP server at OpenCode startup.";
-    };
+    playwright.enable =
+      lib.mkEnableOption "Auto-connect the Playwright MCP server at OpenCode startup."
+      // {
+        default = false;
+      };
 
-    youtube-transcript.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Auto-connect the YouTube-transcript MCP server at OpenCode startup.";
-    };
+    youtube-transcript.enable =
+      lib.mkEnableOption "Auto-connect the YouTube-transcript MCP server at OpenCode startup."
+      // {
+        default = false;
+      };
 
     servers = lib.mkOption {
       type = lib.types.attrsOf (

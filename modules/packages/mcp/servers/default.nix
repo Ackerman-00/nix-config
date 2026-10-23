@@ -52,11 +52,11 @@ let
   };
 in
 {
-  options.my.mcp-servers.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = true;
-    description = "YouTube transcript MCP server + yt-dlp for OpenCode/LLM clients.";
-  };
+  options.my.mcp-servers.enable =
+    lib.mkEnableOption "YouTube transcript MCP server + yt-dlp for OpenCode/LLM clients."
+    // {
+      default = true;
+    };
 
   config = lib.mkIf config.my.mcp-servers.enable {
     environment.systemPackages = [

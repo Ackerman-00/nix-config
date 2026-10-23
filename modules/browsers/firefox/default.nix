@@ -5,10 +5,8 @@
   ...
 }:
 {
-  options.my.firefox.enable = lib.mkOption {
-    type = lib.types.bool;
+  options.my.firefox.enable = lib.mkEnableOption "Firefox browser." // {
     default = false; # system Firefox is broken on this snapshot
-    description = "Firefox browser.";
   };
 
   config = lib.mkIf config.my.firefox.enable {

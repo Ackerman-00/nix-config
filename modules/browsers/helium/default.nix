@@ -10,10 +10,8 @@ let
   helium = pkgs.callPackage ./package.nix { heliumPin = inputs.helium-pin; };
 in
 {
-  options.my.helium.enable = lib.mkOption {
-    type = lib.types.bool;
+  options.my.helium.enable = lib.mkEnableOption "Helium browser." // {
     default = true;
-    description = "Helium browser.";
   };
 
   config = lib.mkIf config.my.helium.enable {

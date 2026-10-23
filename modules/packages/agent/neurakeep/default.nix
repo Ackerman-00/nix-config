@@ -15,10 +15,8 @@ let
 in
 {
   options.my.neurakeep = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
+    enable = lib.mkEnableOption "Install the NeuraKeep runtime and expose it to OpenCode." // {
       default = true;
-      description = "Install the NeuraKeep runtime and expose it to OpenCode.";
     };
 
     version = lib.mkOption {

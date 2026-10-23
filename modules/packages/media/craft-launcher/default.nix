@@ -9,10 +9,8 @@
 
 {
   options.my.craftLauncher = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
+    enable = lib.mkEnableOption "The Craft launcher." // {
       default = true;
-      description = "The Craft launcher.";
     };
   };
 

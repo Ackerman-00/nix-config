@@ -1,5 +1,5 @@
 # Nix store: caches, offline dedup timer, daily GC.
-{ ... }:
+{ _, ... }:
 {
   nixpkgs.config.allowUnfree = true;
 

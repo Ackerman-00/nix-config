@@ -7,10 +7,8 @@
 }:
 
 {
-  options.my.tts.enable = lib.mkOption {
-    type = lib.types.bool;
+  options.my.tts.enable = lib.mkEnableOption "TTS Python packages for AI video editing." // {
     default = true;
-    description = "TTS Python packages for AI video editing.";
   };
 
   config = lib.mkIf config.my.tts.enable {

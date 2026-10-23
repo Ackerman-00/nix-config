@@ -6,16 +6,16 @@
 }:
 {
   options.my.cloudflareWarp = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = ''
+    enable =
+      lib.mkEnableOption ''
         Cloudflare WARP. After the first switch run `warp-cli registration
         new`, then `warp-cli connect`. Verify with
         `curl https://www.cloudflare.com/cdn-cgi/trace`: it must print
         `warp=on`.
-      '';
-    };
+      ''
+      // {
+        default = true;
+      };
   };
 
   config = {

@@ -21,10 +21,8 @@ let
 in
 {
   options.my.skills = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
+    enable = lib.mkEnableOption "Refresh the agent skills from their upstreams on rebuild." // {
       default = true;
-      description = "Refresh the agent skills from their upstreams on rebuild.";
     };
 
     excluded = lib.mkOption {

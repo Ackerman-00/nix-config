@@ -10,11 +10,11 @@ let
   openchamber = pkgs.callPackage ./package.nix { };
 in
 {
-  options.my.openchamber.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = true;
-    description = "OpenChamber agentic development environment.";
-  };
+  options.my.openchamber.enable =
+    lib.mkEnableOption "OpenChamber agentic development environment."
+    // {
+      default = true;
+    };
 
   config = lib.mkIf config.my.openchamber.enable {
     environment.systemPackages = [ openchamber ];

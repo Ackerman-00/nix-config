@@ -9,10 +9,8 @@
   imports = [ ./config.nix ];
 
   options.my.opencode = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
+    enable = lib.mkEnableOption "The OpenCode app and its runtime config." // {
       default = true;
-      description = "The OpenCode app and its runtime config.";
     };
 
     config = lib.mkOption {

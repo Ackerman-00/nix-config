@@ -6,10 +6,8 @@
   ...
 }:
 {
-  options.my.desktop.enable = lib.mkOption {
-    type = lib.types.bool;
+  options.my.desktop.enable = lib.mkEnableOption "Desktop shell and theming packages." // {
     default = true;
-    description = "Desktop shell and theming packages.";
   };
 
   config = lib.mkIf config.my.desktop.enable {
