@@ -32,7 +32,7 @@
     "craft-launcher-feed": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-YAF0XNpXCQlL2fnOjFEUwC6Ri4mFqdnXQ+xVTgZyroM=",
+        "narHash": "sha256-ihkuezX5+1fIH73tuFC9ueZ/ClW1KeaONBinA1L7dhg=",
         "type": "file",
         "url": "https://api.github.com/repos/storytold/craft-launcher/releases/latest"
       },
