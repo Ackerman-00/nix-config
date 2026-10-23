@@ -96,6 +96,11 @@ sudo passwd ackerman
 - Switch `nh` flake references from `path:/etc/nixos` to `/etc/nixos`.
 - Drop `path:` from rebuild commands.
 
+## Toggles
+
+- `my.firefox.enable` defaults to `false`: system Firefox is broken on this
+  snapshot; set it to `true` to install it.
+
 ## Rebuilding
 
 ```sh
