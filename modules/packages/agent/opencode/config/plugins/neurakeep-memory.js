@@ -44,7 +44,6 @@ const DEFAULTS = {
   recall: true,
   autoApply: true,
   extractor: "llm",
-  extractAgent: "memory-extractor",
   extractTitle: "neurakeep-extract",
   extractBatch: 6,
   extractIntervalMs: 240000,
@@ -292,7 +291,7 @@ export default {
 
     async function askModel(prompt) {
       const created = await ctx.session.create({
-        agent: config.extractAgent,
+        ...(config.extractAgent ? { agent: config.extractAgent } : {}),
         title: config.extractTitle,
         ...(config.model ? { model: config.model } : {}),
       })
@@ -635,6 +634,7 @@ export default {
     let sweeping = false
     async function sweep() {
       if (config.paused) return
+      if (!config.capture) return
       if (sweeping) return
       sweeping = true
       try {
@@ -682,8 +682,10 @@ export default {
       }
     })()
 
-    const sweepTimer = setInterval(() => void sweep(), config.sweepIntervalMs)
-    sweepTimer.unref()
+    // Auto capture and extraction only when capture is on. With it off the
+    // plugin recalls memories and serves the MCP tools; sync happens on request.
+    let sweepTimer = null
+    let firstSweepTimer = null
     // Backoff
     let extractDelay = config.extractIntervalMs
     let extractTimer = null
@@ -705,9 +707,13 @@ export default {
       }, extractDelay)
       extractTimer.unref()
     }
-    scheduleExtract()
-    const firstSweepTimer = setTimeout(() => void sweep(), 5000)
-    firstSweepTimer.unref()
+    if (config.capture) {
+      sweepTimer = setInterval(() => void sweep(), config.sweepIntervalMs)
+      sweepTimer.unref()
+      firstSweepTimer = setTimeout(() => void sweep(), 5000)
+      firstSweepTimer.unref()
+      scheduleExtract()
+    }
 
     await ctx.command.transform((editor) => {
       editor.add({

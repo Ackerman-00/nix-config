@@ -10,20 +10,9 @@
       "space": "project"
     }
   ],
-  "capture": true,
+  "capture": false,
   "recall": true,
   "autoApply": true,
-  "extractor": "llm",
-  "extractAgent": "memory-extractor",
-  "model": {
-    "providerID": "opencode",
-    "id": "deepseek-v4.1-flash-free"
-  },
-  "extractTitle": "neurakeep-extract",
-  "extractBatch": 2,
-  "extractIntervalMs": 180000,
-  "extractTimeoutMs": 180000,
-  "extractMaxCharsPerItem": 6000,
   "space": "personal",
   "trustLevel": "observed",
   "visibility": "private",
@@ -31,15 +20,5 @@
   "recallLimit": 5,
   "recallBodyChars": 1200,
   "recallTotalChars": 6000,
-  "maxMessagesPerCapture": 60,
-  "maxMessageChars": 4000,
-  "minCaptureChars": 60,
-  "searchTimeoutMs": 15000,
-  "sweepIntervalMs": 90000,
-  "sweepBatch": 10,
-  "skipTitles": [
-    "neurakeep-extract",
-    "review-panel"
-  ],
-  "paused": false
+  "searchTimeoutMs": 15000
 }
