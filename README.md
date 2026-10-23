@@ -52,6 +52,9 @@ is the one every rebuild reads, so a copy elsewhere silently never applies.
 `/etc` is root-owned, so git cannot create the directory itself — make it first and
 hand it to your user, then clone into the empty dir (git refuses a non-empty one).
 
+State-version safety: `system.stateVersion`/`home.stateVersion` are set to the
+release of the ISO used for the *first* install and must never change afterwards.
+
 ```sh
 sudo rm -rf /etc/nixos
 sudo mkdir -p /etc/nixos
