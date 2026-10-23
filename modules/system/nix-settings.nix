@@ -1,5 +1,5 @@
 # Nix store: caches, offline dedup timer, daily GC.
-{ lib, ... }:
+{ ... }:
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -9,7 +9,6 @@
         "nix-command"
         "flakes"
       ];
-      accept-flake-config = true;
       auto-optimise-store = false;
       max-jobs = "auto";
       http-connections = 50;
@@ -21,13 +20,10 @@
         "root"
         "ackerman"
       ];
-      substituters = lib.mkForce [ "https://cache.nixos.org" ];
-      trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      ];
-      # Umbriel + xdg-desktop-portal-umbriel. Verbatim from
-      # docs.noctalia.dev/umbriel "Binary cache"; upstream flake.nix ships
-      # no nixConfig of its own, so the substituter must be declared here.
+      # cache.nixos.org is already in nix's default substituters.
+      # Umbriel + xdg-desktop-portal-umbriel come from a cachix cache; add
+      # it as an *extra* substituter so a missing cache nar falls back to
+      # the defaults instead of replacing them.
       extra-substituters = [ "https://umbriel.cachix.org" ];
       extra-trusted-public-keys = [
         "umbriel.cachix.org-1:JfNq/2yg2S6D6z4Z2dVSZrZlDPQTKtexB6GAVLD98nw="

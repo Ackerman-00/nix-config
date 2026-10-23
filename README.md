@@ -75,7 +75,7 @@ before the system nix settings exist:
 sudo nixos-rebuild switch \
   --flake path:/etc/nixos#quietcraft \
   --extra-experimental-features 'nix-command flakes' \
-  --option accept-flake-config true
+  --option accept-flake-config true   # bootstrap only
 ```
 
 The user has no password by default — set one after the first switch:
