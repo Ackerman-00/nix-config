@@ -18,11 +18,6 @@
 
     umbriel.url = "github:noctalia-dev/umbriel/cachix";
 
-    craft-launcher-feed = {
-      url = "file+https://api.github.com/repos/storytold/craft-launcher/releases/latest";
-      flake = false;
-    };
-
     helium-pin = {
       url = "github:amaanq/helium-flake";
       flake = false;
@@ -135,9 +130,7 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
         in
         {
-          craft-launcher = pkgs.callPackage ./modules/packages/media/craft-launcher/package.nix {
-            craftLauncherFeed = inputs.craft-launcher-feed;
-          };
+          craft-launcher = pkgs.callPackage ./modules/packages/media/craft-launcher/package.nix { };
           hyperframes-skills = pkgs.callPackage ./modules/packages/media/hyperframes/skills.nix {
             hyperframesSrc = inputs.hyperframes-src;
           };

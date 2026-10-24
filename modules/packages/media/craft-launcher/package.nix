@@ -2,29 +2,15 @@
   pkgs,
   lib,
   fetchurl,
-  craftLauncherFeed,
 }:
 
 let
-  feed = builtins.fromJSON (builtins.readFile craftLauncherFeed);
+  pname = "craft-launcher";
+  version = "0.7.0";
 
-  assets = builtins.filter (a: builtins.match ".*linux-x86_64\\.tar\\.gz" a.name != null) feed.assets;
+  url = "https://github.com/storytold/craft-launcher/releases/download/v${version}/artcraft-launcher-${version}-linux-x86_64.tar.gz";
 
-  asset =
-    if assets == [ ] then
-      throw "craft-launcher: the ${feed.tag_name} release has no linux-x86_64.tar.gz asset"
-    else
-      builtins.head assets;
-
-  version = lib.removePrefix "v" feed.tag_name;
-
-  url = asset.browser_download_url;
-
-  hash =
-    if asset ? digest && asset.digest != null && asset.digest != "" then
-      asset.digest
-    else
-      throw "craft-launcher: the release asset ${asset.name} has no digest; the GitHub release API must answer with one";
+  hash = "sha256:d2b420d9e080549829ada1f44f3c3735fcc20bd18936702b36a598e2dc713ab9";
 
   src = fetchurl { inherit url hash; };
 
@@ -42,8 +28,7 @@ let
   runtimeBins = [ pkgs.zenity ];
 in
 pkgs.stdenv.mkDerivation {
-  pname = "craft-launcher";
-  inherit version src;
+  inherit pname version src;
 
   dontConfigure = true;
   dontBuild = true;
@@ -55,7 +40,7 @@ pkgs.stdenv.mkDerivation {
     copyDesktopItems
   ];
 
-  sourceRoot = lib.removeSuffix ".tar.gz" asset.name;
+  sourceRoot = "artcraft-launcher-${version}-linux-x86_64";
 
   desktopItems = [
     (pkgs.makeDesktopItem {

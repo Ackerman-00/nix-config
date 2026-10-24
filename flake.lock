@@ -29,18 +29,6 @@
         "url": "https://github.com/jub0t/Concat/releases/latest/download/manifest.json"
       }
     },
-    "craft-launcher-feed": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-Bxs8OQIUgiNXoJsUuJ4UTW32Ge58WRUgL7RdyrwkWtI=",
-        "type": "file",
-        "url": "https://api.github.com/repos/storytold/craft-launcher/releases/latest"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://api.github.com/repos/storytold/craft-launcher/releases/latest"
-      }
-    },
     "freebuff-feed": {
       "flake": false,
       "locked": {
@@ -216,7 +204,6 @@
       "inputs": {
         "blender-mcp-src": "blender-mcp-src",
         "concat-manifest": "concat-manifest",
-        "craft-launcher-feed": "craft-launcher-feed",
         "freebuff-feed": "freebuff-feed",
         "helium-pin": "helium-pin",
         "home-manager": "home-manager",

@@ -15,7 +15,7 @@
 
   config = lib.mkIf config.my.craftLauncher.enable {
     environment.systemPackages = [
-      (pkgs.callPackage ./package.nix { craftLauncherFeed = inputs.craft-launcher-feed; })
+      (pkgs.callPackage ./package.nix { })
     ];
   };
 }
