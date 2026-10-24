@@ -43,8 +43,10 @@ NixOS flake for host `quietcraft`. Hardware: AMD Ryzen 5 5600G, Vega 7 iGPU, AMD
 
 ## Web access
 
-- Use `websearch`, `webfetch`, and `codesearch`. They are allowed.
-- If `websearch` fails, retry once with a shorter query, then use `webfetch` on the NixOS release notes. A failed search never stops the run.
+- `websearch`, `webfetch`, and `codesearch` are allowed. No search API keys are configured. The workflow sets `websearch.provider` to `random`, so OpenCode picks from the providers it offers by itself, no consent prompt blocks the run, and a rate-limited provider (HTTP 429) falls over to another one automatically.
+- If `websearch` fails once, stop using it for this run. Use `gh api` and `curl --max-time 60` on raw.githubusercontent.com (NixOS/nixpkgs `nixos/doc/manual/release-notes/`) and the NixOS options search instead.
+- Do not `webfetch` the full nixos.org release-notes page. It is huge and times out.
+- A failed search or fetch never stops the run.
 
 ## Relay file
 

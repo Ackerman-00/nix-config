@@ -97,8 +97,7 @@ jobs:
         shell: bash
         timeout-minutes: 300
         env:
-          OPENCODE_ENABLE_EXA: '1'
-          OPENCODE_CONFIG_CONTENT: '{"agents":{"title":{"model":"opencode/mimo-v2.6-flash-free"}},"permission":{"*":"allow","bash":"allow","edit":"allow","webfetch":"allow","websearch":"allow","codesearch":"allow"}}'
+          OPENCODE_CONFIG_CONTENT: '{"agents":{"title":{"model":"opencode/mimo-v2.6-flash-free"}},"websearch":{"provider":"random"}}'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.REPO_FULL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
           REPO_FULL_ACCESS_TOKEN: ${{ secrets.REPO_FULL_ACCESS_TOKEN }}
@@ -120,7 +119,7 @@ jobs:
           3. Model notes (data from the catalog script, may be empty):
           $(cat "$NOTES" 2>/dev/null)
           If they list new or retired models, update tools/model-rank.txt and opencode.json.
-          4. Use the websearch tool for the latest NixOS changes: release notes, renamed options, deprecations. If a search fails, retry once with a shorter query, then use webfetch on https://nixos.org/manual/nixos/unstable/release-notes.html. A failed search never stops the run. Write "websearch: webfetch fallback" in the relay if you had to fall back.
+          4. Search the web for the latest NixOS changes: release notes, renamed options, deprecations. Use the websearch tool. If it fails once, do not retry it. Use bash instead: gh api repos/NixOS/nixpkgs/contents/nixos/doc/manual/release-notes to list the files, then curl --max-time 60 -fsSL on the newest rl-*.section.md from raw.githubusercontent.com. Do not use webfetch on nixos.org, the page is huge and times out. A failed search never stops the run. Write "websearch: curl fallback" in the relay if you had to fall back.
           5. Load your skills. Use the ones that fit (coding, security, optimization, deslop). A missing skill never blocks you.
           6. Review your own setup: .github/workflows/opencode-schedule.yml, AGENTS.md, opencode.json and tools/. Fix every real flaw you find. Before you push any change to a file under .github/workflows, run bash tools/check-workflows.sh and push only if it prints WORKFLOW VALIDATION PASSED.
           7. Make small improvements to the Nix code: simpler, newer syntax, no dead code, cache-friendly, binary-first. One concern per commit.
