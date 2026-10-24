@@ -13,19 +13,22 @@ The minimal ISO ships neither git nor flakes:
 nix-shell -p git --extra-experimental-features 'nix-command flakes'
 ```
 
-Replace the stock config with this repo (one command):
+Replace everything inside the stock `/etc/nixos` with this repo and generate
+the machine's hardware config in one command:
 
 ```sh
-sudo rm -rf /etc/nixos && sudo git clone https://github.com/Ackerman-00/nix-config /etc/nixos && sudo chown -R "$USER" /etc/nixos
+tmp=$(mktemp -d) \
+  && git clone https://github.com/Ackerman-00/nix-config "$tmp" \
+  && sudo find /etc/nixos -mindepth 1 -delete \
+  && sudo cp -a "$tmp"/. /etc/nixos/ \
+  && sudo nixos-generate-config --show-hardware-config \
+       | sudo tee /etc/nixos/hosts/quietcraft/hardware-configuration.nix >/dev/null \
+  && sudo rm -rf "$tmp" \
+  && sudo chown -R "$USER" /etc/nixos
 ```
 
-`hardware-configuration.nix` is gitignored — it holds this disk's UUIDs — so
-generate it on the target machine:
-
-```sh
-sudo nixos-generate-config --show-hardware-config \
-  | sudo tee /etc/nixos/hardware-configuration.nix
-```
+`hardware-configuration.nix` stays local (it holds this disk's UUIDs), so the
+install writes the generated file straight into the host directory.
 
 First switch. `path:` is required (see below); `accept-flake-config` is needed
 once so `nixConfig` can add the Umbriel cache before the system settings exist:
