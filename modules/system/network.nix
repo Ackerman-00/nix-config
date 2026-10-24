@@ -23,9 +23,6 @@
       networkmanager.enable = true;
     };
 
-    services.cloudflare-warp = {
-      enable = config.my.cloudflareWarp.enable;
-      openFirewall = true;
-    };
+    services.cloudflare-warp.enable = config.my.cloudflareWarp.enable;
   };
 }

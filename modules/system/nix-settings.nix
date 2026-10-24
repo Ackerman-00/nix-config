@@ -8,8 +8,6 @@
         "nix-command"
         "flakes"
       ];
-      auto-optimise-store = false;
-      max-jobs = "auto";
       http-connections = 50;
       download-buffer-size = 268435456;
       fallback = true;
@@ -26,7 +24,5 @@
     };
 
     optimise.automatic = true;
-
-    gc.automatic = false;
   };
 }

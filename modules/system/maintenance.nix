@@ -14,6 +14,4 @@
   system.switch.inhibitors = {
     systemd-version = config.systemd.package.version;
   };
-
-  systemd.oomd.enable = true;
 }
