@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   hardware = {
-    enableAllFirmware = true;
+    enableRedistributableFirmware = true;
     bluetooth.enable = true;
     cpu.amd.updateMicrocode = true;
     graphics = {
