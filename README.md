@@ -58,7 +58,7 @@ modules/
 ```
 
 Every module is gated by `my.<name>.enable` and defaults to on, except
-`my.firefox` and `my.mcp.<server>.enable` (opt-in MCP servers).
+`my.firefox`, `my.cline` and `my.mcp.<server>.enable` (opt-in MCP servers).
 
 ## Checks
 
