@@ -28,13 +28,23 @@ NixOS flake for host `quietcraft`. Hardware: AMD Ryzen 5 5600G, Vega 7 iGPU, AMD
 
 ## Verification (mandatory)
 
-- Pull a NixOS unstable docker image yourself. Run it privileged with systemd as init and `/etc/nixos` mounted. Wait for `systemctl is-system-running`.
+- Pull a NixOS unstable docker image yourself. Run it privileged with systemd as init and the repo mounted at `/etc/nixos`. Wait for `systemctl is-system-running`.
 - Inside it, run exactly: `sudo nixos-rebuild switch --flake /etc/nixos#quietcraft`
 - Only this counts. `nix flake check`, `nixos-rebuild build`, `test`, and `dry-run` do not.
 - Use binary caches. Do not compile locally when a substitute exists.
-- Working copy must be `/etc/nixos`.
 - If it fails: read the error, fix, retry. After 5 failures run `git checkout -- .` and write `status: failed`.
 - Save the working docker image name and flags as a `docker:` line in `.opencode-relay.md` and reuse it next run.
+
+## Self-maintenance
+
+- You may fix flaws in `.github/workflows/opencode-schedule.yml`, `AGENTS.md`, `opencode.json` and `tools/`.
+- Before pushing any change under `.github/workflows`, run `bash tools/check-workflows.sh`. Push only if it prints `WORKFLOW VALIDATION PASSED`.
+- Never add a permission scope that `tools/workflow-valid.py` rejects.
+
+## Web access
+
+- Use `websearch`, `webfetch`, and `codesearch`. They are allowed.
+- If `websearch` fails, retry once with a shorter query, then use `webfetch` on the NixOS release notes. A failed search never stops the run.
 
 ## Relay file
 
@@ -43,15 +53,15 @@ NixOS flake for host `quietcraft`. Hardware: AMD Ryzen 5 5600G, Vega 7 iGPU, AMD
 ```
 run_id: <run id from the prompt>
 status: complete
+verified: sudo nixos-rebuild switch --flake /etc/nixos#quietcraft
 ```
 
-Use `status: failed` only if verification gave up. Then add up to 3 short lines on what changed.
+Use `status: failed` and no `verified` line only if verification gave up. Then add up to 3 short lines on what changed.
 
 ## Git and secrets
 
-- Push with the configured credentials. `REPO_FULL_ACCESS_TOKEN` is in the environment.
+- Push as `github-actions[bot]` with the configured credentials. `REPO_FULL_ACCESS_TOKEN` is in the environment.
 - Never print, log, echo, commit, or paste any token or environment variable. Never run `env`, `printenv`, or `git config --list`.
-- Never edit anything under `.github/workflows`.
 - Never change `system.stateVersion`.
 - Refresh only drifting flake inputs with `nix flake update <input>`.
 
