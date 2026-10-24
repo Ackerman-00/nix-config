@@ -19,7 +19,7 @@ let
       "--root"
       neurakeepCfg.vault
     ];
-    enabled = true;
+    disabled = !config.my.mcp.neurakeep.enable;
     timeout = 20000;
   };
 
@@ -38,7 +38,8 @@ let
     }
     // (if s.environment != { } then { inherit (s) environment; } else { })
     // {
-      inherit (s) enabled timeout;
+      disabled = !s.enabled;
+      inherit (s) timeout;
     };
 
   regularFiles = dir: lib.filterAttrs (_: v: v == "regular") (builtins.readDir dir);

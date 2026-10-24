@@ -30,6 +30,7 @@ let
   src = fetchurl { inherit url hash; };
 
   runtimeDeps = with pkgs; [
+    dbus
     libxkbcommon
     wayland
     libx11
@@ -38,6 +39,8 @@ let
     vulkan-loader
     libGL
   ];
+
+  runtimeBins = [ pkgs.zenity ];
 in
 pkgs.stdenv.mkDerivation {
   pname = "craft-launcher";
@@ -86,7 +89,8 @@ pkgs.stdenv.mkDerivation {
 
   preFixup = ''
     wrapProgram $out/bin/artcraft-launcher \
-      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath runtimeDeps}
+      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath runtimeDeps} \
+      --prefix PATH : ${lib.makeBinPath runtimeBins}
   '';
 
   doInstallCheck = true;

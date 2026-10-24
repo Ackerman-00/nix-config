@@ -51,8 +51,8 @@ What to look for in the output:
   writable path, or a `remote` server with no auth headers.
 - `opencode debug config`: `permissions` rules that `allow` broad shell
   patterns, `providers` pointing at an unknown base URL, `plugins` entries
-  with unpinned git refs, `mcp` servers with `enabled: true` that the user
-  does not remember adding.
+  with unpinned git refs, `mcp.servers` entries without `disabled: true`
+  that the user does not remember adding.
 - `opencode debug agents`: an agent whose `permission` block allows edits or
   shell where the name suggests read-only work.
 

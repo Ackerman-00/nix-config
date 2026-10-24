@@ -10,9 +10,11 @@
       default = false;
     };
 
-    concat.enable = lib.mkEnableOption "Auto-connect the Concat MCP server at OpenCode startup." // {
-      default = false;
-    };
+    neurakeep.enable =
+      lib.mkEnableOption "Auto-connect the NeuraKeep MCP server at OpenCode startup."
+      // {
+        default = false;
+      };
 
     playwright.enable =
       lib.mkEnableOption "Auto-connect the Playwright MCP server at OpenCode startup."
@@ -42,7 +44,7 @@
             enabled = lib.mkOption {
               type = lib.types.bool;
               default = false;
-              description = "Connect at startup. Off renders as `enabled: false` (no process spawned).";
+              description = "Connect at startup. Off renders as `disabled: true` (no process spawned).";
             };
 
             timeout = lib.mkOption {

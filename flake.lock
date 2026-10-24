@@ -134,11 +134,11 @@
       "locked": {
         "lastModified": 1792783228,
         "narHash": "sha256-GYuySf8GDDLt3zLPf2lK4U0PuJHQFZSGFebqclZZmRM=",
-        "path": "/etc/nixos/hosts/quietcraft/hardware-configuration.nix",
+        "path": "/etc/nixos/hardware-configuration.nix",
         "type": "path"
       },
       "original": {
-        "path": "/etc/nixos/hosts/quietcraft/hardware-configuration.nix",
+        "path": "/etc/nixos/hardware-configuration.nix",
         "type": "path"
       }
     },

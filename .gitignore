@@ -1,5 +1,5 @@
 # Machine-specific: disk UUIDs and swap, never pushed
-hosts/quietcraft/hardware-configuration.nix
+hardware-configuration.nix
 
 # Python bytecode
 __pycache__/

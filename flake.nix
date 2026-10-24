@@ -108,7 +108,7 @@
     # input keeps the plain `/etc/nixos#quietcraft` flake reference working.
     # After regenerating the file: sudo nix flake update local-hardware
     local-hardware = {
-      url = "path:/etc/nixos/hosts/quietcraft/hardware-configuration.nix";
+      url = "path:/etc/nixos/hardware-configuration.nix";
       flake = false;
     };
   };

@@ -24,9 +24,6 @@
   };
 
   config = lib.mkIf config.my.opencode.enable {
-    environment.systemPackages = [
-      pkgs.opencode
-      pkgs.opencode-desktop
-    ];
+    environment.systemPackages = [ pkgs.opencode ];
   };
 }
