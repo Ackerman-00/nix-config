@@ -92,8 +92,10 @@ in
               cp -r "$dst" "$skills_backup/$name/$stamp"
               echo "hyperframes: kept the changed copy of $name in $skills_backup/$name/$stamp"
             fi
+            [[ -e "$dst" ]] && chmod -R u+w "$dst" 2>/dev/null || true
             rm -rf "$dst"
             cp -r "$src" "$dst"
+            chmod -R u+w "$dst"
           done
         fi
       '';
