@@ -5,13 +5,13 @@
 
 let
   pname = "openchamber";
-  version = "2.1.0";
+  version = "2.5.1";
 
   url = "https://github.com/openchamber/openchamber/releases/download/v${version}/OpenChamber-${version}-linux-x86_64.AppImage";
 
   src = pkgs.fetchurl {
     inherit url;
-    hash = "sha256-q08g/HwXzLy+cgz8u7q9C1ksGdjn6+BmPXyz+RiggvI=";
+    hash = "sha256-+3urWx26a58ZET0CV9akjVVPsL3m2SSlsMEW7a87pNo=";
   };
 
   extracted = pkgs.appimageTools.extract { inherit pname version src; };
@@ -94,8 +94,8 @@ pkgs.stdenv.mkDerivation {
       $out/opt/openchamber/openchamber \
       $out/opt/openchamber/chrome_crashpad_handler
 
-    mkdir -p $out/share/icons/hicolor/scalable/apps
-    cp $out/opt/openchamber/openchamber.svg $out/share/icons/hicolor/scalable/apps/openchamber.svg
+    mkdir -p $out/share/icons
+    cp -r $out/opt/openchamber/usr/share/icons/. $out/share/icons/
 
     ln -s $out/opt/openchamber/openchamber $out/bin/openchamber
 
@@ -115,6 +115,7 @@ pkgs.stdenv.mkDerivation {
   installCheckPhase = ''
     test -x $out/bin/openchamber
     test -f $out/share/applications/openchamber.desktop
+    test -f $out/share/icons/hicolor/512x512/apps/openchamber.png
   '';
 
   passthru = {
