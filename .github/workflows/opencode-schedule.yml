@@ -8,19 +8,9 @@ on:
 permissions:
   actions: write
   artifact-metadata: write
-  attestations: write
-  checks: write
   contents: write
-  deployments: write
-  discussions: write
   issues: write
-  models: read
-  packages: write
-  pages: write
   pull-requests: write
-  repository-projects: write
-  security-events: write
-  statuses: write
 
 concurrency:
   group: opencode-schedule
@@ -30,22 +20,6 @@ jobs:
   opencode:
     runs-on: ubuntu-latest
     timeout-minutes: 360
-    permissions:
-      actions: write
-      artifact-metadata: write
-      attestations: write
-      checks: write
-      contents: write
-      deployments: write
-      discussions: write
-      issues: write
-      models: read
-      packages: write
-      pages: write
-      pull-requests: write
-      repository-projects: write
-      security-events: write
-      statuses: write
     env:
       RUN_ID: ${{ github.run_id }}
       GIT_AUTHOR_NAME: github-actions[bot]
