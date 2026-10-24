@@ -103,6 +103,14 @@
       url = "file+https://registry.npmjs.org/-/package/neurakeep/dist-tags";
       flake = false;
     };
+
+    # Machine-local hardware config (gitignored, holds disk UUIDs). A path:
+    # input keeps the plain `/etc/nixos#quietcraft` flake reference working.
+    # After regenerating the file: sudo nix flake update local-hardware
+    local-hardware = {
+      url = "path:/etc/nixos/hosts/quietcraft/hardware-configuration.nix";
+      flake = false;
+    };
   };
 
   outputs =

@@ -32,7 +32,7 @@
     "craft-launcher-feed": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-ihkuezX5+1fIH73tuFC9ueZ/ClW1KeaONBinA1L7dhg=",
+        "narHash": "sha256-V4hk9Rwtn8qX1Ai0LYV/SDvM2nUtSFUK39cKrOUAm2g=",
         "type": "file",
         "url": "https://api.github.com/repos/storytold/craft-launcher/releases/latest"
       },
@@ -92,7 +92,7 @@
     "hyperframes-npm": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-1U6wRGE/Syk+Yetnuxjitrsrmv3DNtHDDtT1KR/S9QA=",
+        "narHash": "sha256-tFWCtKfkW2gAcjPY5f5RvWJCnfd/rhlyCH8LRapc1LE=",
         "type": "file",
         "url": "https://registry.npmjs.org/-/package/hyperframes/dist-tags"
       },
@@ -127,6 +127,19 @@
       "original": {
         "type": "file",
         "url": "https://pypi.org/pypi/kokoro-onnx/json"
+      }
+    },
+    "local-hardware": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792783228,
+        "narHash": "sha256-GYuySf8GDDLt3zLPf2lK4U0PuJHQFZSGFebqclZZmRM=",
+        "path": "/etc/nixos/hosts/quietcraft/hardware-configuration.nix",
+        "type": "path"
+      },
+      "original": {
+        "path": "/etc/nixos/hosts/quietcraft/hardware-configuration.nix",
+        "type": "path"
       }
     },
     "mcp-youtube-transcript-src": {
@@ -210,6 +223,7 @@
         "hyperframes-npm": "hyperframes-npm",
         "hyperframes-src": "hyperframes-src",
         "kokoro-pypi": "kokoro-pypi",
+        "local-hardware": "local-hardware",
         "mcp-youtube-transcript-src": "mcp-youtube-transcript-src",
         "neurakeep-npm": "neurakeep-npm",
         "nixpkgs": "nixpkgs",
