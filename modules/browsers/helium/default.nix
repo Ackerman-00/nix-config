@@ -6,7 +6,7 @@
   ...
 }:
 let
-  helium = pkgs.callPackage ./package.nix { heliumPin = inputs.helium-pin; };
+  helium = pkgs.callPackage ./package.nix { };
 in
 {
   options.my.helium.enable = lib.mkEnableOption "Helium browser." // {

@@ -41,22 +41,6 @@
         "url": "https://freebuff.com/api/desktop/updates/linux-x64-deb/latest-linux.yml"
       }
     },
-    "helium-pin": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1791200822,
-        "narHash": "sha256-zJ/ezx6peOYU1gnjUtwVhuldWx9Tre6wzkrfZOBj3CQ=",
-        "owner": "amaanq",
-        "repo": "helium-flake",
-        "rev": "590e6fbb91105b44fb1d46debdee21fb266abfa7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "amaanq",
-        "repo": "helium-flake",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -205,7 +189,6 @@
         "blender-mcp-src": "blender-mcp-src",
         "concat-manifest": "concat-manifest",
         "freebuff-feed": "freebuff-feed",
-        "helium-pin": "helium-pin",
         "home-manager": "home-manager",
         "hyperframes-npm": "hyperframes-npm",
         "hyperframes-src": "hyperframes-src",

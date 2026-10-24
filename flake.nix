@@ -18,11 +18,6 @@
 
     umbriel.url = "github:noctalia-dev/umbriel/cachix";
 
-    helium-pin = {
-      url = "github:amaanq/helium-flake";
-      flake = false;
-    };
-
     concat-manifest = {
       url = "file+https://github.com/jub0t/Concat/releases/latest/download/manifest.json";
       flake = false;
@@ -131,6 +126,20 @@
         in
         {
           craft-launcher = pkgs.callPackage ./modules/packages/media/craft-launcher/package.nix { };
+          helium = pkgs.callPackage ./modules/browsers/helium/package.nix { };
+          update-user-apps = pkgs.writeShellApplication {
+            name = "update-user-apps";
+            runtimeInputs = [
+              pkgs.nix-update
+              pkgs.git
+            ];
+            text = ''
+              root="$(git rev-parse --show-toplevel 2>/dev/null || printf '%s' "$PWD")"
+              cd "$root"
+              nix-update --flake .#craft-launcher
+              nix-update --flake .#helium
+            '';
+          };
           hyperframes-skills = pkgs.callPackage ./modules/packages/media/hyperframes/skills.nix {
             hyperframesSrc = inputs.hyperframes-src;
           };

@@ -1,36 +1,18 @@
 {
   pkgs,
   lib,
-  heliumPin,
+  fetchurl,
 }:
 
 let
   pname = "helium";
+  version = "0.20.1.1";
 
-  pinFile = "${heliumPin}/versions.json";
-  pins =
-    if builtins.pathExists pinFile then
-      builtins.fromJSON (builtins.readFile pinFile)
-    else
-      throw "helium: ${pinFile} is missing; is the `helium-pin` flake input intact?";
+  url = "https://github.com/imputnet/helium-linux/releases/download/${version}/helium-${version}-x86_64_linux.tar.xz";
 
-  current =
-    pins.${pkgs.stdenv.hostPlatform.system}
-      or (throw "helium: helium-pin provides no entry for ${pkgs.stdenv.hostPlatform.system}");
+  hash = "sha256-ICP6RM76D70+GQcch+kNYSdfCLqPW0jVjCNSFVZem1M=";
 
-  inherit (current) version;
-  inherit (current) hash;
-
-  url =
-    let
-      raw = current.url;
-    in
-    if lib.hasPrefix "https://" raw && lib.hasInfix "/${version}/" raw then
-      raw
-    else
-      throw "helium: pin entry disagrees with its version (${version}): ${raw}";
-
-  src = pkgs.fetchurl { inherit url hash; };
+  src = fetchurl { inherit url hash; };
 
   runtimeDeps = with pkgs; [
     stdenv.cc.cc.lib
