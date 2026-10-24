@@ -64,6 +64,6 @@ Every module is gated by `my.<name>.enable` and defaults to on, except
 
 ```sh
 nix flake check
-nix fmt
+nix fmt $(git ls-files '*.nix')
 nix flake update          # bump every input
 ```

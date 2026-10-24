@@ -21,7 +21,7 @@ NixOS flake for host `quietcraft`. Hardware: AMD Ryzen 5 5600G, Vega 7 iGPU, AMD
 - Comments: none, except a short `# title` above a block when needed. Never leave commented-out code.
 - Never invent an option. Confirm it exists in this nixpkgs before using it.
 - After every fix, find the root cause, grep for the same pattern, and add a cheap guard. Follow `root-cause-foresight`.
-- Run `nix fmt`, `deadnix`, `statix` before verifying.
+- Run `nix fmt $(git ls-files '*.nix')`, `deadnix`, `statix` before verifying.
 
 ## Hardware and kernel
 

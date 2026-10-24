@@ -15,7 +15,7 @@ Kernel-developer rules: small modules, one concern each, explicit over clever, n
 - No `with pkgs;` at file level. No `rec`. No `lib.mdDoc`.
 - `lib.mkIf`, `lib.mkMerge`, `lib.mkDefault`. Use `lib.mkForce` only with a reason.
 - Use `lib.mkEnableOption` and typed options for anything reused.
-- Run `nix fmt`, `deadnix`, `statix`. Fix what they report.
+- Run `nix fmt $(git ls-files '*.nix')`, `deadnix`, `statix`. Fix what they report.
 - Comments: none, except one short `# title` above a block.
 
 ## Safe AMD optimization (Ryzen 5 5600G, Vega 7)

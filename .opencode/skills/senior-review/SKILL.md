@@ -21,7 +21,7 @@ description: Peak-quality, no-slop engineering rules for every change in this re
 ## Self-review before commit
 
 1. `git diff` and read it as a stranger. Cut everything that is not needed.
-2. `nix fmt`, `deadnix`, `statix` clean.
+2. `nix fmt $(git ls-files '*.nix')`, `deadnix`, `statix` clean.
 3. Does the change do exactly what the commit message says, nothing more?
 4. Did I leave any comment, debug line, commented-out code or unused argument? Remove it.
 5. Is a secret, token or private path in the diff? Remove it.
