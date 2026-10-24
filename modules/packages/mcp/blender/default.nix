@@ -15,7 +15,7 @@ let
     build-system = with pkgs.python3Packages; [ setuptools ];
     dependencies = with pkgs.python3Packages; [
       httpx
-      mcp
+      mcp_1
     ];
     doCheck = false;
     postInstall = ''
