@@ -1,4 +1,3 @@
-# Craft launcher
 {
   pkgs,
   lib,

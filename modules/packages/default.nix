@@ -1,4 +1,3 @@
-# Package sets, one file per role (toggle via my.<role>.enable).
 {
   imports = [
     ./packages-desktop.nix

@@ -1,4 +1,3 @@
-# Neovim (LazyVim):
 {
   config,
   pkgs,
@@ -7,7 +6,6 @@
 }:
 
 let
-  # Plugins
   plugins = with pkgs.vimPlugins; [
     LazyVim
     blink-cmp
@@ -56,7 +54,6 @@ let
     rustaceanvim
   ];
 
-  # Helpers
   mkEntryFromDrv =
     drv:
     if lib.isDerivation drv then
@@ -67,7 +64,6 @@ let
     else
       drv;
 
-  # Mini Modules
   miniModules =
     builtins.map
       (m: {
@@ -84,7 +80,6 @@ let
         "mini.surround"
       ];
 
-  # Treesitter (python extra needs ninja + rst)
   treesitterGrammars =
     (pkgs.vimPlugins.nvim-treesitter.withPlugins (
       p: with p; [
@@ -121,13 +116,11 @@ let
       ]
     )).dependencies;
 
-  # Grammars Path
   grammarsPath = pkgs.symlinkJoin {
     name = "nvim-treesitter-parsers";
     paths = treesitterGrammars;
   };
 
-  # Lazy Path
   lazyPath = pkgs.linkFarm "lazy-plugins" (builtins.map mkEntryFromDrv plugins ++ miniModules);
 
   nvim = config.home-manager.users.ackerman.programs.neovim.finalPackage;
@@ -143,8 +136,6 @@ in
       stylua
       tree-sitter
       zls
-      # Python (LazyVim lang.python, mason off so binaries come from Nix).
-      # Default LSP: basedpyright (drop-in pyright + inlay hints/semantic tokens).
       basedpyright
       pyright
       ruff
@@ -152,7 +143,6 @@ in
       python3Packages.debugpy
     ];
 
-    # Launcher for Open With: kitty provides the terminal.
     xdg.desktopEntries.nvim = {
       name = "Neovim";
       genericName = "Text Editor";

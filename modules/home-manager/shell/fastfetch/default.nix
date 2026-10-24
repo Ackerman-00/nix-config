@@ -1,4 +1,3 @@
-# Fastfetch + random-logo wrapper.
 { pkgs, ... }:
 let
   esc = builtins.fromJSON ''"\u001b"'';
@@ -10,7 +9,6 @@ let
       fastfetch
     ];
     text = ''
-      #!/usr/bin/env bash
 
       confDir="''${XDG_CONFIG_HOME:-$HOME/.config}"
       logoDir="''${confDir}/fastfetch/logo"

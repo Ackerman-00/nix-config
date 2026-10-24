@@ -1,4 +1,3 @@
-# Media tooling
 {
   imports = [
     ./hyperframes

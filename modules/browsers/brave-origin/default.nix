@@ -1,4 +1,3 @@
-# Brave Origin browser
 {
   config,
   lib,

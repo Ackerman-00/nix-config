@@ -1,4 +1,3 @@
-# Network
 {
   config,
   lib,

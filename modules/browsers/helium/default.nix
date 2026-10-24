@@ -1,4 +1,3 @@
-# Helium browser, policies, mime, default-browser wiring.
 {
   config,
   inputs,
@@ -18,7 +17,7 @@ in
     programs.chromium = {
       enable = true;
       extensions = [
-        "ghmbeldphafepmbegfdlkpapadhbakde" # Proton Pass
+        "ghmbeldphafepmbegfdlkpapadhbakde"
       ];
     };
 
@@ -31,7 +30,6 @@ in
       };
     };
 
-    # Widevine CDM comes from nixpkgs, not the tarball.
     home-manager.users.ackerman.xdg.configFile."net.imput.helium/WidevineCdm/latest-component-updated-widevine-cdm".text =
       builtins.toJSON {
         Path = "${pkgs.widevine-cdm}/share/google/chrome/WidevineCdm";

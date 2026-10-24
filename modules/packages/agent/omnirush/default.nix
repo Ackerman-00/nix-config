@@ -1,4 +1,3 @@
-# OmniRush desktop
 {
   config,
   lib,

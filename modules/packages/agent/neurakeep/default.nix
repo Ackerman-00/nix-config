@@ -1,4 +1,3 @@
-# NeuraKeep runtime
 {
   config,
   lib,

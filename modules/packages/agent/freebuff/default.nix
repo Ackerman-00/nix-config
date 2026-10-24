@@ -1,4 +1,3 @@
-# Freebuff desktop
 {
   config,
   lib,

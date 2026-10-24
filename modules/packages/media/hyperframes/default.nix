@@ -1,4 +1,3 @@
-# HyperFrames
 {
   config,
   lib,
@@ -18,14 +17,12 @@ let
       exec npx --yes hyperframes@${cfg.cliVersion} "$@"
     '';
   };
-  # Python pin
   kokoroPython = pkgs.python313;
   kokoroPip = kokoroPython.pkgs.pip;
   pyTag = lib.concatStringsSep "." (lib.take 2 (lib.splitVersion kokoroPython.version));
   homeDir = config.users.users.ackerman.home;
   kokoroVenv = "${homeDir}/.local/share/hyperframes/kokoro-venv";
   zlibLib = lib.makeLibraryPath [ pkgs.zlib ];
-  # libstdc++
   gccLib = lib.makeLibraryPath [ pkgs.gcc-unwrapped.lib ];
   soundfileVersion = "0.13.1";
 in
@@ -77,7 +74,6 @@ in
         HYPERFRAMES_PYTHON = "${kokoroVenv}/bin/python";
       };
 
-      # hm-backup
       activation.hyperframes-skills = hm.hm.dag.entryAfter [ "writeBoundary" ] ''
         skills_src="${skills}/skills"
         skills_dst="${homeDir}/.agents/skills"
@@ -103,7 +99,6 @@ in
       '';
 
       activation.hyperframes-kokoro = hm.hm.dag.entryAfter [ "writeBoundary" ] ''
-        # Activation PATH
         kokoro_version() {
           "${kokoroVenv}/bin/python" -c 'import importlib.metadata as m; print(m.version("kokoro-onnx"))' 2>/dev/null
         }
@@ -115,7 +110,6 @@ in
         if ! kokoro_usable; then
           rm -rf "${kokoroVenv}"
           ${kokoroPython}/bin/python3 -m venv --copies --without-pip "${kokoroVenv}"
-          # Wheel RPATH
           for p in "${kokoroVenv}/bin/python" "${kokoroVenv}/bin/python3" "${kokoroVenv}/bin/python${pyTag}"; do
             [ -f "$p" ] || continue
             ${pkgs.patchelf}/bin/patchelf --force-rpath \

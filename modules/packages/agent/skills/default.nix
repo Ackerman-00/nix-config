@@ -1,4 +1,3 @@
-# Agent skills
 {
   config,
   lib,
@@ -11,7 +10,6 @@ let
   homeDirectory = config.users.users.ackerman.home;
   hm = inputs.home-manager.lib;
 
-  # Store copies
   artifacts = pkgs.callPackage ./package.nix { inherit lib; };
   overrides = "${artifacts}/overrides";
 
@@ -74,7 +72,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # Clone time
     systemd.services.home-manager-ackerman.serviceConfig.TimeoutStartSec = lib.mkForce "45min";
 
     home-manager.users.ackerman.home = {
@@ -83,7 +80,6 @@ in
         ".local/share/agent-skills/upstream-map.json".source = "${mapFile}";
       };
 
-      # Writes the live tree
       activation.agent-skills =
         hm.hm.dag.entryAfter
           [

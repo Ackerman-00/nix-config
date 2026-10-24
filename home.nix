@@ -8,8 +8,6 @@
   ];
 
   home = {
-    # NOTE: must equal the release of the ISO used for the FIRST install.
-    # Never change this afterwards.
     stateVersion = "26.11";
 
     sessionPath = [

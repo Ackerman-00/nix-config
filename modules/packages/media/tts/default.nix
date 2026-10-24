@@ -1,4 +1,3 @@
-# TTS packages
 {
   config,
   lib,

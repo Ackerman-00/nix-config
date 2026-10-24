@@ -1,4 +1,3 @@
-# Login session: greeter, Wayland env, portals, dirs.
 { pkgs, ... }:
 {
   services.displayManager.noctalia-greeter = {

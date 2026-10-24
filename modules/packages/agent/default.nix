@@ -1,4 +1,3 @@
-# Agent tooling
 {
   imports = [
     ./skills

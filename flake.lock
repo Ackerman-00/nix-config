@@ -32,7 +32,7 @@
     "craft-launcher-feed": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-V4hk9Rwtn8qX1Ai0LYV/SDvM2nUtSFUK39cKrOUAm2g=",
+        "narHash": "sha256-I3SiDabCXOooT5jR5ATvnEGwdZSLJjZ8ihIOp4Pi/rs=",
         "type": "file",
         "url": "https://api.github.com/repos/storytold/craft-launcher/releases/latest"
       },
@@ -92,7 +92,7 @@
     "hyperframes-npm": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-tFWCtKfkW2gAcjPY5f5RvWJCnfd/rhlyCH8LRapc1LE=",
+        "narHash": "sha256-MCWPUVDA/A9nU1WdmxlW4luREk4P7VugALtCCKpUZ4M=",
         "type": "file",
         "url": "https://registry.npmjs.org/-/package/hyperframes/dist-tags"
       },
@@ -132,8 +132,8 @@
     "local-hardware": {
       "flake": false,
       "locked": {
-        "lastModified": 1792783228,
-        "narHash": "sha256-GYuySf8GDDLt3zLPf2lK4U0PuJHQFZSGFebqclZZmRM=",
+        "lastModified": 1792835322,
+        "narHash": "sha256-tv2lVwnU2nfmRFPCe5g6GRSSBw7KYx7j+ewjF9jDyT0=",
         "path": "/etc/nixos/hardware-configuration.nix",
         "type": "path"
       },

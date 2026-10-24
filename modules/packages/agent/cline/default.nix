@@ -1,4 +1,3 @@
-# Cline agent CLI
 {
   config,
   lib,

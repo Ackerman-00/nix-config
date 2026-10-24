@@ -1,4 +1,3 @@
-# OmniRush desktop: upstream .deb, feed-pinned
 {
   pkgs,
   lib,
@@ -8,7 +7,6 @@
 let
   pname = "omnirush";
 
-  # electron-updater generic feed
   feed = builtins.readFile omnirushFeed;
   lines = lib.splitString "\n" feed;
 
@@ -20,7 +18,6 @@ let
 
   version = field "version: ";
 
-  # feed path points at the AppImage, so pick the deb entry
   debIndex =
     lib.findFirst
       (i: builtins.match "  - url: .*linux-amd64-.*\\.deb" (builtins.elemAt lines i) != null)
@@ -131,7 +128,6 @@ pkgs.stdenv.mkDerivation {
     cp -r opt/omnirush/. $out/opt/omnirush/
     cp -r usr/share/icons $out/share/
 
-    # Bundled ELFs, sidecars included
     find $out/opt/omnirush -type f -perm -u+x -print0 | while IFS= read -r -d "" f; do
       if patchelf --print-interpreter "$f" >/dev/null 2>&1; then
         patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" "$f"

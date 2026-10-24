@@ -15,7 +15,7 @@
       nerd-fonts.jetbrains-mono
     ];
     fontconfig = {
-      enable = true; # packages alone don't reach pickers without this
+      enable = true;
       defaultFonts = {
         serif = [
           "Maple Mono NF"

@@ -1,4 +1,3 @@
-# Shell domain: prompt, fetch, terminal, git.
 {
   imports = [
     ./direnv

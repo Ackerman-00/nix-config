@@ -1,4 +1,3 @@
-# Agent skills artifacts
 {
   pkgs,
   lib,
@@ -15,7 +14,6 @@ pkgs.runCommand "agent-skills" { } ''
   cp ${./state-seed.json} $out/state-seed.json
   cp ${./skill-lock.json} $out/skill-lock.json
   cp ${pkgs.writeText "agent-skills-upstream-map.json" (sl.mapJson map)} $out/upstream-map.json
-  # Missing copies
   for copy in ${lib.escapeShellArgs localCopies}; do
     if [ ! -d "$out/overrides/''${copy%%/*}/''${copy##*/}" ]; then
       echo "agent-skills: the local copy $copy is missing" >&2

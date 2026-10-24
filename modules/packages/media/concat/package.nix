@@ -1,9 +1,3 @@
-# Concat video editor, vendored in-tree (official prebuilt .deb).
-# Version, URL and sha256 come from the `concat-manifest` flake input, so
-# flake.lock is the only pin and `nix flake update` is the whole procedure.
-# The .deb is unpacked (not AppImage/rpm): it lays out whole under
-# /opt/concat with FFmpeg beside the binary, so dpkg plus an interpreter
-# fix and a wrapper is the entire install.
 {
   pkgs,
   lib,
@@ -23,15 +17,11 @@ let
     .${pkgs.stdenv.hostPlatform.system}
       or (throw "concat: manifest has no entry for ${pkgs.stdenv.hostPlatform.system}");
 
-  # The tag can carry a pre-release suffix; the version field is what
-  # the bundles are named for.
   version = lib.removePrefix "v" manifest.version;
 
   entry =
     manifest.binaries.linux.${arch}.deb or (throw "concat: manifest has no linux/${arch} deb entry");
 
-  # Upstream owns the URL shape; reject a parse that points anywhere else
-  # rather than fetching something unexpected.
   url =
     if lib.hasPrefix "https://github.com/jub0t/Concat/releases/download/" entry.url then
       entry.url
@@ -43,9 +33,6 @@ let
     inherit (entry) sha256;
   };
 
-  # System libraries the bundle does NOT ship (upstream nfpm.yaml depends):
-  # toolkit for file dialogs, fonts, xkb, GL, sound. Everything else
-  # (FFmpeg, onnxruntime) rides in /opt/concat/lib by rpath.
   runtimeDeps = with pkgs; [
     stdenv.cc.cc.lib
     alsa-lib
@@ -74,7 +61,6 @@ pkgs.stdenv.mkDerivation {
     patchelf
     makeWrapper
     copyDesktopItems
-    # Use shell wrapper so gappsWrapperArgs below can use shell expansions.
     (wrapGAppsHook3.override { makeWrapper = makeShellWrapper; })
   ];
 
@@ -110,16 +96,12 @@ pkgs.stdenv.mkDerivation {
 
     cp -r opt/concat/. $out/opt/concat/
 
-    # The bundled binary was built for FHS distros and expects
-    # /lib64/ld-linux; repoint at the Nix dynamic linker.
     patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
       $out/opt/concat/concat
 
-    # Upstream hicolor icon for the desktop entry.
     mkdir -p $out/share/icons
     cp -r usr/share/icons/. $out/share/icons/
 
-    # Launcher on the path (upstream ships /usr/bin/concat doing the same).
     ln -s $out/opt/concat/concat $out/bin/concat
 
     runHook postInstall
@@ -138,7 +120,6 @@ pkgs.stdenv.mkDerivation {
     test -f $out/share/applications/concat.desktop
   '';
 
-  # The resolved pin, for inspection.
   passthru = {
     inherit
       url

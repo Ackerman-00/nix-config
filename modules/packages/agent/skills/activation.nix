@@ -1,4 +1,3 @@
-# Refresh activation
 {
   lib,
   pkgs,

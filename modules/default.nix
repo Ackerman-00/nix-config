@@ -1,4 +1,3 @@
-# Single-host module index. Domains below, singles for one-concern files.
 {
   imports = [
     ./system

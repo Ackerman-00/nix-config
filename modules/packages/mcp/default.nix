@@ -1,4 +1,3 @@
-# MCP servers
 {
   imports = [
     ./servers

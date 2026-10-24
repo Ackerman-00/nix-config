@@ -1,4 +1,3 @@
-# HyperFrames skills
 {
   pkgs,
   lib,
@@ -30,7 +29,6 @@ pkgs.runCommand "hyperframes-skills"
       fi
       cp -r ${overrides}/$n/. "./skills/$n/"
     done
-    # Paid providers
     find ./skills -name 'heygen*' -print -delete
     if find ./skills -name 'heygen*' -print -quit | grep -q .; then
       echo "hyperframes-skills: a HeyGen provider script survived the merge" >&2

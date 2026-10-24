@@ -1,4 +1,3 @@
-# MCP registry
 {
   config,
   lib,

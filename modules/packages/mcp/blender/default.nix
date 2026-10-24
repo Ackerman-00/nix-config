@@ -1,11 +1,3 @@
-# Blender MCP server (ahujasid/mcp-for-blender, Oct 2026 latest: v2.1.3).
-# Source pinned via the `blender-mcp-src` flake input (commit-pinned, no
-# upstream tags exist); bump by updating the rev in flake.nix, then:
-#   nix flake update blender-mcp-src
-# Then rebuild: sudo nixos-rebuild switch --flake /etc/nixos#quietcraft
-#
-# The binary is installed but never auto-connected: the server registers
-# with `disabled: true` unless my.mcp.blender.enable is set.
 {
   config,
   lib,
@@ -25,12 +17,8 @@ let
       httpx
       mcp
     ];
-    # Upstream has no nix-wired test suite; the stdio entrypoint is
-    # verified via `mcp-for-blender --help` plus a live Blender socket check.
     doCheck = false;
     postInstall = ''
-      # Keep the old `blender-mcp` name working: tutorials and existing
-      # configs reference both names for the same server.
       ln -s $out/bin/mcp-for-blender $out/bin/blender-mcp
     '';
     meta = {

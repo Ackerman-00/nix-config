@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-  # AppImage + portable binaries
   programs = {
     dconf.enable = true;
 

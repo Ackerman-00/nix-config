@@ -22,7 +22,6 @@
       pipx
     ];
 
-    # Domain libs
     my.python.packages = [
       "ipython"
       "debugpy"

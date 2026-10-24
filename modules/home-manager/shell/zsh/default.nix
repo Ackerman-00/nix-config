@@ -1,4 +1,3 @@
-# Zsh + Oh My Zsh.
 { config, ... }:
 {
   programs.zsh = {

@@ -1,4 +1,3 @@
-# Firefox: browser + policies (policies.json only materializes with enable).
 {
   config,
   lib,
@@ -6,14 +5,13 @@
 }:
 {
   options.my.firefox.enable = lib.mkEnableOption "Firefox browser." // {
-    default = false; # system Firefox is broken on this snapshot
+    default = false;
   };
 
   config = lib.mkIf config.my.firefox.enable {
     programs.firefox = {
-      enable = true; # also installs the wrapped build (policies baked in)
+      enable = true;
 
-      # VA-API decode on AMD (wiki: Accelerated Video Playback, FF >= 137).
       preferences = {
         "media.hardware-video-decoding.force-enabled" = true;
       };
@@ -21,7 +19,7 @@
       policies = {
         DisableTelemetry = true;
         DisableFirefoxStudies = true;
-        OfferToSaveLogins = false; # Proton Pass handles logins
+        OfferToSaveLogins = false;
 
         ExtensionSettings = {
           "78272b6fa58f4a1abaac99321d503a20@proton.me" = {

@@ -1,7 +1,6 @@
 {
   description = "NixOS Optimized Flake";
 
-  # Eval-time caches
   nixConfig = {
     extra-substituters = [ "https://umbriel.cachix.org" ];
     extra-trusted-public-keys = [
@@ -17,77 +16,63 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Umbriel compositor, official nix modules
     umbriel.url = "github:noctalia-dev/umbriel/cachix";
 
-    # Craft launcher release feed
     craft-launcher-feed = {
       url = "file+https://api.github.com/repos/storytold/craft-launcher/releases/latest";
       flake = false;
     };
 
-    # Helium versions.json pin
     helium-pin = {
       url = "github:amaanq/helium-flake";
       flake = false;
     };
 
-    # Concat release manifest
     concat-manifest = {
       url = "file+https://github.com/jub0t/Concat/releases/latest/download/manifest.json";
       flake = false;
     };
 
-    # OmniRush desktop update feed
     omnirush-feed = {
       url = "file+https://github.com/omnirush-ai/omnirush-gui/releases/latest/download/latest-linux.yml";
       flake = false;
     };
 
-    # Freebuff desktop update feed
     freebuff-feed = {
       url = "file+https://freebuff.com/api/desktop/updates/linux-x64-deb/latest-linux.yml";
       flake = false;
     };
 
-    # Blender MCP source, commit pinned
-    # nix flake update blender-mcp-src
     blender-mcp-src = {
       url = "github:ahujasid/mcp-for-blender/60d2a31b4632a7bc178f3dd636f7e68dfb5c8ae4";
       flake = false;
     };
 
-    # YouTube transcript MCP source, tag pinned
     mcp-youtube-transcript-src = {
       url = "git+https://github.com/jkawamoto/mcp-youtube-transcript.git?ref=refs/tags/v0.7.0";
       flake = false;
     };
 
-    # HyperFrames source: CLI monorepo and skills
     hyperframes-src = {
       url = "git+https://github.com/heygen-com/hyperframes.git";
       flake = false;
     };
 
-    # HyperFrames CLI version from the npm dist-tags feed
     hyperframes-npm = {
       url = "file+https://registry.npmjs.org/-/package/hyperframes/dist-tags";
       flake = false;
     };
 
-    # Superpowers source
     superpowers-src = {
       url = "github:obra/superpowers";
       flake = false;
     };
 
-    # Kokoro version, from the PyPI metadata feed
     kokoro-pypi = {
       url = "file+https://pypi.org/pypi/kokoro-onnx/json";
       flake = false;
     };
 
-    # MusicGen deps
     torch-pypi = {
       url = "file+https://pypi.org/pypi/torch/json";
       flake = false;
@@ -98,15 +83,11 @@
       flake = false;
     };
 
-    # NeuraKeep version
     neurakeep-npm = {
       url = "file+https://registry.npmjs.org/-/package/neurakeep/dist-tags";
       flake = false;
     };
 
-    # Machine-local hardware config (gitignored, holds disk UUIDs). A path:
-    # input keeps the plain `/etc/nixos#quietcraft` flake reference working.
-    # After regenerating the file: sudo nix flake update local-hardware
     local-hardware = {
       url = "path:/etc/nixos/hardware-configuration.nix";
       flake = false;
@@ -123,7 +104,6 @@
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
 
-      # Repo gates (toplevel eval is automatic).
       checks.x86_64-linux =
         let
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -150,8 +130,6 @@
           '';
         };
 
-      # The merged HyperFrames skill set (upstream + local OpenCode
-      # adaptations), so the skills can be built and inspected on their own.
       packages.x86_64-linux =
         let
           pkgs = nixpkgs.legacyPackages.x86_64-linux;

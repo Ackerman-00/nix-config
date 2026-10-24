@@ -1,4 +1,3 @@
-# Freebuff desktop: upstream .deb, feed-pinned
 {
   pkgs,
   lib,
@@ -8,7 +7,6 @@
 let
   pname = "freebuff";
 
-  # electron-updater generic feed
   feed = builtins.readFile freebuffFeed;
 
   field =
@@ -65,7 +63,6 @@ let
     pango
     udev
     wayland
-    # bundled git
     zlib
   ];
 
@@ -117,7 +114,6 @@ pkgs.stdenv.mkDerivation {
     cp -r opt/Freebuff/. $out/opt/Freebuff/
     cp -r usr/share/icons $out/share/
 
-    # Bundled ELFs: git, bun, crashpad, orchestrator
     find $out/opt/Freebuff -type f -perm -u+x -print0 | while IFS= read -r -d "" f; do
       if patchelf --print-interpreter "$f" >/dev/null 2>&1; then
         patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" "$f"

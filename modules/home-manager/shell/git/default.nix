@@ -1,4 +1,3 @@
-# Git: credential helper via GNOME Keyring.
 { pkgs, ... }:
 {
   programs.git = {

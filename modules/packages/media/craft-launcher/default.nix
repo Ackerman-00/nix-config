@@ -1,4 +1,3 @@
-# Craft launcher
 {
   config,
   inputs,

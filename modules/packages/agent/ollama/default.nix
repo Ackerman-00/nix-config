@@ -1,4 +1,3 @@
-# Ollama runtime: Vulkan backend
 {
   config,
   lib,

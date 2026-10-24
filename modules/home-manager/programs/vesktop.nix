@@ -1,4 +1,3 @@
-# Vesktop launcher: pin default icon, immune to icon theme.
 { pkgs, ... }:
 {
   xdg.desktopEntries.vesktop = {

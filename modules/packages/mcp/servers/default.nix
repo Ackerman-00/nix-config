@@ -1,9 +1,3 @@
-# MCP servers: youtube transcript + playwright
-#
-# pin: v0.7.0, last release on nixpkgs mcp 1.x; v0.7.1+ needs mcp 2.x,
-# unpackaged (retag the input when nixpkgs ships it)
-# opt-in: registered `disabled: true` unless my.mcp.<name>.enable
-# playwright: npm-only, pinned here, Helium-backed (system Firefox is broken)
 {
   config,
   lib,
@@ -30,8 +24,6 @@ let
       youtube-transcript-api
       yt-dlp
     ];
-    # Upstream has no nix-wired test suite; the stdio entrypoint is
-    # verified via `mcp-youtube-transcript --help` plus a live fetch.
     doCheck = false;
     meta = {
       description = "MCP server retrieving transcripts of YouTube videos (yt-dlp based, no API key)";
@@ -59,8 +51,6 @@ in
       enabled = config.my.mcp.youtube-transcript.enable;
     };
 
-    # NOT nix-packaged (upstream ships npm-only). --executable-path
-    # avoids Playwright's own browser download, broken on NixOS.
     my.mcp.servers.playwright = {
       command = [
         "/run/current-system/sw/bin/npx"

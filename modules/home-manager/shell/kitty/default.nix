@@ -1,4 +1,3 @@
-# Kitty terminal.
 {
   config,
   lib,
@@ -24,7 +23,6 @@
     };
   };
 
-  # Fatal gate: bad kitty.conf refuses to activate.
   home.activation.validateKitty = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         kitty_lib="$(dirname "$(dirname "$(readlink -f "${config.programs.kitty.package}/bin/kitty")")")/lib/kitty"
         kitty_conf="${config.xdg.configHome}/kitty/kitty.conf"

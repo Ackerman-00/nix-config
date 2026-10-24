@@ -1,4 +1,3 @@
-# OpenCode config
 {
   config,
   lib,
