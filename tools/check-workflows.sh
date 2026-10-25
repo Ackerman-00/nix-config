@@ -26,15 +26,23 @@ PY
 echo "== actionlint =="
 # -shellcheck= disables shellcheck integration: its style infos are not
 # workflow validity and would otherwise fail a valid file.
-if command -v actionlint >/dev/null 2>&1; then
-  actionlint -shellcheck= -no-color .github/workflows/*.yml && echo "OK   actionlint clean" || FAIL=1
-else
-  if [ -x /tmp/opencode/actionlint ]; then
-    /tmp/opencode/actionlint -shellcheck= -no-color .github/workflows/*.yml && echo "OK   actionlint clean" || FAIL=1
-  else
-    echo "SKIP actionlint not installed - install it with:"
-    echo "  bash <(curl -sL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)"
+AL_VERSION=1.7.12
+AL_SHA256=8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
+al=$(command -v actionlint 2>/dev/null)
+[ -n "$al" ] || { [ -x /tmp/opencode/actionlint ] && al=/tmp/opencode/actionlint; }
+if [ -z "$al" ]; then
+  mkdir -p /tmp/opencode
+  url="https://github.com/rhysd/actionlint/releases/download/v${AL_VERSION}/actionlint_${AL_VERSION}_linux_amd64.tar.gz"
+  if curl -fsSL --max-time 60 "$url" -o /tmp/opencode/actionlint.tgz \
+    && echo "$AL_SHA256  /tmp/opencode/actionlint.tgz" | sha256sum -c --status \
+    && tar -xzf /tmp/opencode/actionlint.tgz -C /tmp/opencode actionlint; then
+    al=/tmp/opencode/actionlint
   fi
+fi
+if [ -n "$al" ]; then
+  "$al" -shellcheck= -no-color .github/workflows/*.yml && echo "OK   actionlint clean" || FAIL=1
+else
+  echo "SKIP actionlint unavailable and its download failed - not proving workflow validity"
 fi
 
 echo "== permission scopes =="
