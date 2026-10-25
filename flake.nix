@@ -34,12 +34,12 @@
     };
 
     blender-mcp-src = {
-      url = "github:ahujasid/mcp-for-blender/60d2a31b4632a7bc178f3dd636f7e68dfb5c8ae4";
+      url = "github:ahujasid/mcp-for-blender/febcd90ece59c3416d7c55fd3723cea46bcaa59d";
       flake = false;
     };
 
     mcp-youtube-transcript-src = {
-      url = "git+https://github.com/jkawamoto/mcp-youtube-transcript.git?ref=refs/tags/v0.7.0";
+      url = "git+https://github.com/jkawamoto/mcp-youtube-transcript.git?ref=refs/tags/v0.8.1";
       flake = false;
     };
 

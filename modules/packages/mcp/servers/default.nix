@@ -6,7 +6,7 @@
   ...
 }:
 let
-  version = "0.7.0";
+  version = "0.8.1";
   playwrightMcpVersion = "0.0.83";
   mcp-youtube-transcript = pkgs.python3Packages.buildPythonApplication {
     pname = "mcp-youtube-transcript";
@@ -15,7 +15,6 @@ let
     src = "${inputs.mcp-youtube-transcript-src}";
     build-system = with pkgs.python3Packages; [ hatchling ];
     dependencies = with pkgs.python3Packages; [
-      beautifulsoup4
       humanize
       mcp
       pydantic

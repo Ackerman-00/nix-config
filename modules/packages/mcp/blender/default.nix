@@ -6,7 +6,7 @@
   ...
 }:
 let
-  version = "2.1.3";
+  version = "2.2.4";
   mcp-for-blender = pkgs.python3Packages.buildPythonApplication {
     pname = "mcp-for-blender";
     inherit version;

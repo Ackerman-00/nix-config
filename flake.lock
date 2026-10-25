@@ -3,17 +3,17 @@
     "blender-mcp-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1790750363,
-        "narHash": "sha256-GFKE8+PU9+BnuMPK03UpCIfEB6aJjCaDw9d6S42NWc4=",
+        "lastModified": 1792817415,
+        "narHash": "sha256-8D3DWeGAcffqwi0VUIpkoTLMzhG39CWj9OeaeRlT9OA=",
         "owner": "ahujasid",
         "repo": "mcp-for-blender",
-        "rev": "60d2a31b4632a7bc178f3dd636f7e68dfb5c8ae4",
+        "rev": "febcd90ece59c3416d7c55fd3723cea46bcaa59d",
         "type": "github"
       },
       "original": {
         "owner": "ahujasid",
         "repo": "mcp-for-blender",
-        "rev": "60d2a31b4632a7bc178f3dd636f7e68dfb5c8ae4",
+        "rev": "febcd90ece59c3416d7c55fd3723cea46bcaa59d",
         "type": "github"
       }
     },
@@ -117,16 +117,16 @@
     "mcp-youtube-transcript-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1783560319,
-        "narHash": "sha256-oJE560O0EbCzWSRXSvo7LpNEd3bbvvvPLV/XYgW5Zio=",
-        "ref": "refs/tags/v0.7.0",
-        "rev": "ea333cad6a4b71428ebedc0c95d2b6e7d3c7f743",
-        "revCount": 252,
+        "lastModified": 1792557578,
+        "narHash": "sha256-M1gYC3IjUy7nJJREtkgO5XwG9QzneN8W0XJPOgG/tLY=",
+        "ref": "refs/tags/v0.8.1",
+        "rev": "c8b88693633d2f7b161b667ab8de0d4f4b303ca4",
+        "revCount": 295,
         "type": "git",
         "url": "https://github.com/jkawamoto/mcp-youtube-transcript.git"
       },
       "original": {
-        "ref": "refs/tags/v0.7.0",
+        "ref": "refs/tags/v0.8.1",
         "type": "git",
         "url": "https://github.com/jkawamoto/mcp-youtube-transcript.git"
       }
