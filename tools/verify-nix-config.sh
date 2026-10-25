@@ -9,3 +9,4 @@ grep -qx "run_id: $RUN_ID" "$RELAY" || { echo "FAIL: relay run_id mismatch"; exi
 grep -qix "status: complete" "$RELAY" || { echo "FAIL: relay status not complete"; exit 1; }
 grep -qx "verified: sudo nixos-rebuild switch --flake /etc/nixos#quietcraft" "$RELAY" || { echo "FAIL: relay has no verified switch line"; exit 1; }
 echo "PASS: relay run_id, status and verified line"
+bash tools/check-skills.sh
