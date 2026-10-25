@@ -23,10 +23,7 @@
     rtkit.enable = true;
     pam.services.greetd.enableGnomeKeyring = true;
 
-    polkit = {
-      enable = true;
-      enablePkexecWrapper = true;
-    };
+    polkit.enable = true;
   };
 
   systemd.user.services.speech-dispatcher = {
