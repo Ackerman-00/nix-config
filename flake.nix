@@ -44,7 +44,7 @@
     };
 
     hyperframes-src = {
-      url = "git+https://github.com/heygen-com/hyperframes.git";
+      url = "git+https://github.com/heygen-com/hyperframes.git?rev=25a4829d098f4215f8c82d284c5a15e761a809f9";
       flake = false;
     };
 
