@@ -13,6 +13,10 @@
       fallback = true;
       keep-outputs = true;
       warn-dirty = false;
+      allowed-users = [
+        "root"
+        "ackerman"
+      ];
       trusted-users = [
         "root"
         "ackerman"
