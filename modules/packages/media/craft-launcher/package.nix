@@ -6,11 +6,11 @@
 
 let
   pname = "craft-launcher";
-  version = "0.7.0";
+  version = "0.8.1";
 
   url = "https://github.com/storytold/craft-launcher/releases/download/v${version}/artcraft-launcher-${version}-linux-x86_64.tar.gz";
 
-  hash = "sha256:d2b420d9e080549829ada1f44f3c3735fcc20bd18936702b36a598e2dc713ab9";
+  hash = "sha256-RJpq7gv0NeUfPrGbTN34OyZ1JuQl4hp50oM1tqbLbTc=";
 
   src = fetchurl { inherit url hash; };
 
