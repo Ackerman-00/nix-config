@@ -50,11 +50,13 @@ for id in ${rank+"${rank[@]}"}; do
 done
 new=()
 retired=()
-for id in ${rank+"${rank[@]}"}; do
-  is_live "$id" && continue
-  excluded "$id" && continue
-  retired+=("$id")
-done
+if [ -n "$live" ]; then
+  for id in ${rank+"${rank[@]}"}; do
+    is_live "$id" && continue
+    excluded "$id" && continue
+    retired+=("$id")
+  done
+fi
 for id in $live; do
   excluded "$id" && continue
   is_ranked "$id" && continue
@@ -64,7 +66,9 @@ done
 
 if [ "${#chain[@]}" -eq 0 ]; then
   echo "model-cascade: catalog unreachable, using rank file order" >&2
-  chain=(${rank+"${rank[@]}"})
+  for id in ${rank+"${rank[@]}"}; do
+    excluded "$id" || chain+=("$id")
+  done
 fi
 if [ "${#new[@]}" -gt 0 ]; then
   echo "NEW FREE MODELS (not ranked yet - research and rank them): ${new[*]}" >&2
