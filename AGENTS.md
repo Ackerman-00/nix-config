@@ -60,7 +60,7 @@ NixOS flake for host `quietcraft`. Hardware: AMD Ryzen 5 5600G, Vega 7 iGPU, AMD
 
 ## Relay file
 
-`.opencode-relay.md` first two lines, exactly:
+`.opencode-relay.md` first three lines, exactly:
 
 ```
 run_id: <run id from the prompt>
