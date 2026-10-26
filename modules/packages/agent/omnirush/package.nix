@@ -150,7 +150,7 @@ pkgs.stdenv.mkDerivation {
 
   installCheckPhase = ''
     test -x $out/bin/omnirush
-    test -x $out/opt/omnirush/resources/sidecars/opencode-x86_64-unknown-linux-gnu
+    ls $out/opt/omnirush/resources/sidecars/opencode*-x86_64-unknown-linux-gnu
     test -f $out/share/applications/omnirush.desktop
     test -f $out/share/icons/hicolor/512x512/apps/omnirush.png
   '';
