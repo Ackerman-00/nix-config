@@ -127,6 +127,7 @@
         {
           craft-launcher = pkgs.callPackage ./modules/packages/media/craft-launcher/package.nix { };
           helium = pkgs.callPackage ./modules/browsers/helium/package.nix { };
+          openchamber = pkgs.callPackage ./modules/packages/agent/openchamber/package.nix { };
           update-user-apps = pkgs.writeShellApplication {
             name = "update-user-apps";
             runtimeInputs = [
@@ -138,6 +139,7 @@
               cd "$root"
               nix-update --flake .#craft-launcher
               nix-update --flake .#helium
+              nix-update --flake .#openchamber
             '';
           };
           hyperframes-skills = pkgs.callPackage ./modules/packages/media/hyperframes/skills.nix {
