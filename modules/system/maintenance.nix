@@ -11,6 +11,8 @@
     };
   };
 
+  services.fstrim.enable = true;
+
   system.switch.inhibitors = {
     systemd-version = config.systemd.package.version;
   };
