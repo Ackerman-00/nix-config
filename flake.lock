@@ -32,7 +32,7 @@
     "freebuff-feed": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-1IwyPzTP5EiuA7p4Ica11X+mjU9IwrJ3WsKZgRLiGuA=",
+        "narHash": "sha256-F+SFUxAqPW8IWtUhMsLJfk7Y4fuqD+9EFj7l9kBc5l4=",
         "type": "file",
         "url": "https://freebuff.com/api/desktop/updates/linux-x64-deb/latest-linux.yml"
       },
@@ -64,7 +64,7 @@
     "hyperframes-npm": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-pXMTc1nDd8YwDE9uZXMcKbBGrkwXjlJVsb0r4q5WaNY=",
+        "narHash": "sha256-2K9tMVYl5qybJIJYkiIzBu3L9k0eRiDsQrV/N9MdTF0=",
         "type": "file",
         "url": "https://registry.npmjs.org/-/package/hyperframes/dist-tags"
       },
@@ -176,7 +176,7 @@
     "omnirush-feed": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-vjHlD6OBSfiHNVnezpszVfAy0L5OY8u9GBhOjNAk8nk=",
+        "narHash": "sha256-mTkNuVchu83iG+8tldbI8EGq54h5EXeK932r8hVBKqY=",
         "type": "file",
         "url": "https://github.com/omnirush-ai/omnirush-gui/releases/latest/download/latest-linux.yml"
       },
