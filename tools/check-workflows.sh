@@ -42,7 +42,8 @@ fi
 if [ -n "$al" ]; then
   "$al" -shellcheck= -no-color .github/workflows/*.yml && echo "OK   actionlint clean" || FAIL=1
 else
-  echo "SKIP actionlint unavailable and its download failed - not proving workflow validity"
+  echo "FAIL actionlint unavailable and its download failed - cannot prove workflow validity"
+  FAIL=1
 fi
 
 echo "== permission scopes =="
