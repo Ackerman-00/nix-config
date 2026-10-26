@@ -137,9 +137,9 @@
             text = ''
               root="$(git rev-parse --show-toplevel 2>/dev/null || printf '%s' "$PWD")"
               cd "$root"
-              nix-update --flake .#craft-launcher
-              nix-update --flake .#helium
-              nix-update --flake .#openchamber
+              nix-update --flake craft-launcher
+              nix-update --flake helium
+              nix-update --flake openchamber
             '';
           };
           hyperframes-skills = pkgs.callPackage ./modules/packages/media/hyperframes/skills.nix {
