@@ -32,6 +32,12 @@
       "amd_pstate=active"
       "amdgpu.gpu_recovery=1"
     ];
+
+    # KSPP sysctls
+    kernel.sysctl = {
+      "kernel.dmesg_restrict" = 1;
+      "kernel.kptr_restrict" = 2;
+    };
   };
 
   zramSwap = {
