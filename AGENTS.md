@@ -32,6 +32,8 @@ NixOS flake for host `quietcraft`. Hardware: AMD Ryzen 5 5600G, Vega 7 iGPU, AMD
 ## Verification (mandatory)
 
 - Pull a NixOS unstable docker image yourself. Run it privileged with systemd as init and the repo mounted at `/etc/nixos`. Wait for `systemctl is-system-running`.
+- Inside the container copy `tools/ci-hardware.nix` to `hardware-configuration.nix`, then run `nix flake update local-hardware` so the lock matches the stub. It disables both boot loaders: disabling only systemd-boot fails the grub assertion.
+- Before committing, restore the owner's `local-hardware` node in `flake.lock` and delete the stub `hardware-configuration.nix` and any `configuration.nix` the image leaves behind.
 - Inside it, run exactly: `sudo nixos-rebuild switch --flake /etc/nixos#quietcraft`
 - Only this counts. `nix flake check`, `nixos-rebuild build`, `test`, and `dry-run` do not.
 - Use binary caches. Do not compile locally when a substitute exists.
