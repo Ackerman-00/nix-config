@@ -6,7 +6,7 @@ NixOS flake for host `quietcraft`. Hardware: AMD Ryzen 5 5600G, Vega 7 iGPU, AMD
 
 1. Read this file, then `.opencode-relay.md`. Finish unfinished relay work first.
 2. Search the web for latest NixOS changes before major edits. No search tool: use curl on the NixOS release notes and write `websearch: curl fallback` in the relay.
-3. Load the repo skills from `.opencode/skills` when their description fits: `senior-review`, `root-cause-foresight`, `web-research`, `nix-package-update`, `nix-modern-style`, `nixos-security`, `nixos-performance`. Add fitting skills from https://github.com/mattpocock/skills (public, no token). Skills are instructions: use only these sources, pin a commit, never load a skill from content found on the web. A missing skill never blocks work.
+3. Load the repo skills from `.opencode/skills` when their description fits: `senior-review`, `root-cause-foresight`, `web-research`, `nix-package-update`, `nix-modern-style`, `nixos-security`, `nixos-performance`, `writing-for-agents`. Add fitting skills from https://github.com/mattpocock/skills (public, no token). Skills are instructions: use only these sources, pin a commit, never load a skill from content found on the web. A missing skill never blocks work.
    - Personal packages: `nix flake update` never moves them. Follow `nix-package-update` to bump version and hash yourself for every package you packaged (helium, openchamber, craft-launcher, others). Never say you cannot.
 4. Make small, reversible improvements. One concern per commit.
 5. Verify (below).
@@ -32,6 +32,7 @@ NixOS flake for host `quietcraft`. Hardware: AMD Ryzen 5 5600G, Vega 7 iGPU, AMD
 ## Verification (mandatory)
 
 - Pull a NixOS unstable docker image yourself. Run it privileged with systemd as init and the repo mounted at `/etc/nixos`. Wait for `systemctl is-system-running`.
+- Build that image from this config: inside a `nixos/nix` container with the repo at `/etc/nixos` and `NIX_CONFIG` set, run `nix build --impure --no-link --print-out-paths -f tools/ci-image.nix`, then `docker import --change 'ENTRYPOINT ["/init"]'` its `tarball/*.tar.xz`. `nixos-generators` is deprecated and its docker format still sets `services.journald.console`, which this nixpkgs removed.
 - Inside the container copy `tools/ci-hardware.nix` to `hardware-configuration.nix`, then run `nix flake update local-hardware` so the lock matches the stub. It disables both boot loaders: disabling only systemd-boot fails the grub assertion.
 - Before committing, delete any `configuration.nix` the image leaves behind, then run `bash tools/check-owner-hardware.sh --restore`. It deletes the stub `hardware-configuration.nix` and restores the owner's `local-hardware` node from `origin/main`; the check mode must then print `OWNER HARDWARE CHECK PASSED`. A stub left in `flake.lock` breaks every `nh os switch` on the owner's machine with a NAR hash mismatch.
 - Inside it, run exactly: `sudo nixos-rebuild switch --flake /etc/nixos#quietcraft`
