@@ -33,10 +33,11 @@ NixOS flake for host `quietcraft`. Hardware: AMD Ryzen 5 5600G, Vega 7 iGPU, AMD
 
 - Pull a NixOS unstable docker image yourself. Run it privileged with systemd as init and the repo mounted at `/etc/nixos`. Wait for `systemctl is-system-running`.
 - Inside the container copy `tools/ci-hardware.nix` to `hardware-configuration.nix`, then run `nix flake update local-hardware` so the lock matches the stub. It disables both boot loaders: disabling only systemd-boot fails the grub assertion.
-- Before committing, restore the owner's `local-hardware` node in `flake.lock` and delete the stub `hardware-configuration.nix` and any `configuration.nix` the image leaves behind.
+- Before committing, delete any `configuration.nix` the image leaves behind, then run `bash tools/check-owner-hardware.sh --restore`. It deletes the stub `hardware-configuration.nix` and restores the owner's `local-hardware` node from `origin/main`; the check mode must then print `OWNER HARDWARE CHECK PASSED`. A stub left in `flake.lock` breaks every `nh os switch` on the owner's machine with a NAR hash mismatch.
 - Inside it, run exactly: `sudo nixos-rebuild switch --flake /etc/nixos#quietcraft`
 - Only this counts. `nix flake check`, `nixos-rebuild build`, `test`, and `dry-run` do not.
 - Use binary caches. Do not compile locally when a substitute exists.
+- The flake `nixConfig` substituter is untrusted inside the container, so nix ignores it and builds umbriel from source for ~20 minutes. Export `NIX_CONFIG` with `extra-substituters = https://umbriel.cachix.org` and `extra-trusted-public-keys = umbriel.cachix.org-1:JfNq/2yg2S6D6z4Z2dVSZrZlDPQTKtexB6GAVLD98nw=` before the pre-build, then run the exact switch; its paths are already in the store.
 - If it fails: read the error, fix, retry. After 5 failures run `git checkout -- .` and write `status: failed`.
 - Save the working docker image name and flags as a `docker:` line in `.opencode-relay.md` and reuse it next run.
 
