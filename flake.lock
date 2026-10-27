@@ -64,7 +64,7 @@
     "hyperframes-npm": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-Z1UqiyqDn1qHwjTwQqRZeN9+ghebB/kO4Lpjk6RF2eY=",
+        "narHash": "sha256-vKzvL0/tGMKQlg5+Gq56MU2LRhiL7jiYdP3Y2u7HRG0=",
         "type": "file",
         "url": "https://registry.npmjs.org/-/package/hyperframes/dist-tags"
       },
@@ -251,11 +251,11 @@
         "xdg-desktop-portal-umbriel": "xdg-desktop-portal-umbriel"
       },
       "locked": {
-        "lastModified": 1793040322,
-        "narHash": "sha256-/ev57LNm1QmDpUJRA+IllezHQDTT+SJd4oA08nbfIxE=",
+        "lastModified": 1793098441,
+        "narHash": "sha256-qrq/BuujglYxsIlgRUxCczsF88o8o5qfIP/0z8VbhRg=",
         "owner": "noctalia-dev",
         "repo": "umbriel",
-        "rev": "366739955d3905d7600638eb637941b2782c0c68",
+        "rev": "910297eab0a343d4caeb6fbff4e6c62727b5a55c",
         "type": "github"
       },
       "original": {
