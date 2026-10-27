@@ -15,6 +15,14 @@
     };
     kernelPackages = pkgs.linuxPackages_latest;
     initrd.kernelModules = [ "amdgpu" ];
+
+    # unused network protocol modules
+    blacklistedKernelModules = [
+      "dccp"
+      "rds"
+      "sctp"
+      "tipc"
+    ];
     consoleLogLevel = 3;
     kernelParams = [
       "quiet"
