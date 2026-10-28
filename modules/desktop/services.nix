@@ -8,6 +8,7 @@
     upower.enable = false;
     gnome.gnome-keyring.enable = true;
     gnome.localsearch.enable = false;
+    speechd.enable = false;
     xserver.xkb.layout = "us";
     dbus.packages = [ pkgs.nautilus ];
     pipewire = {
@@ -24,11 +25,5 @@
     pam.services.greetd.enableGnomeKeyring = true;
 
     polkit.enable = true;
-  };
-
-  systemd.user.services.speech-dispatcher = {
-    enable = false;
-    aliases = [ ];
-    wantedBy = [ ];
   };
 }
