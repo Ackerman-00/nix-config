@@ -5,13 +5,13 @@
 
 let
   pname = "openchamber";
-  version = "2.5.2";
+  version = "2.5.3";
 
   url = "https://github.com/openchamber/openchamber/releases/download/v${version}/OpenChamber-${version}-linux-x86_64.AppImage";
 
   src = pkgs.fetchurl {
     inherit url;
-    hash = "sha256-6VgPKo5ctn5ppCRtFjuwnH8vKFhQS9cIbU+iBlVKWHg=";
+    hash = "sha256-wDSorfUq9bxQ+Z3OmU1wFZdBB00MQmb0VrcPWbyB3jI=";
   };
 
   extracted = pkgs.appimageTools.extract { inherit pname version src; };
