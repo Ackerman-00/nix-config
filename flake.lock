@@ -64,7 +64,7 @@
     "hyperframes-npm": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-x16AXmQo9wPvjj/yOoxI+NJcQ7bTZkDR0IYUb55sDZQ=",
+        "narHash": "sha256-0UjLu85lPXkDJZtyymWDoplBsws9h9M5E//ot+g8GzM=",
         "type": "file",
         "url": "https://registry.npmjs.org/-/package/hyperframes/dist-tags"
       },
@@ -146,11 +146,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1792773339,
-        "narHash": "sha256-rZLrzrC6i+jnTAlvPZHogKDulY7WWDEv9hJeHieO7Zw=",
+        "lastModified": 1793110635,
+        "narHash": "sha256-dhoW6VgFWlaodSY5jrBn+CF2FLmaUvDVgM7+C7T2+NM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "3ec636362e1816bc2f0888fa0fa2c69f1bc9e504",
+        "rev": "31ecbaca1bdefa45dffc409f0250bd8039ea0010",
         "type": "github"
       },
       "original": {
@@ -176,7 +176,7 @@
     "omnirush-feed": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-MAGnuUQkVlH8Zi00xDHvkcF7evsOmXc/QwrRvJu90Tc=",
+        "narHash": "sha256-g0+WQka2QfugL8eO6QcgqxzF+CozNbyU5uyxSbwAON4=",
         "type": "file",
         "url": "https://github.com/omnirush-ai/omnirush-gui/releases/latest/download/latest-linux.yml"
       },
@@ -251,11 +251,11 @@
         "xdg-desktop-portal-umbriel": "xdg-desktop-portal-umbriel"
       },
       "locked": {
-        "lastModified": 1793138920,
-        "narHash": "sha256-PIgtCtHcX0OWdt/M/fl6U0WDvp7qnQ+hw+I241yFsjs=",
+        "lastModified": 1793155970,
+        "narHash": "sha256-P5U/uZpscFkJ1ygEpbpn5vADaXoJ5ekgnwy76GJMPHI=",
         "owner": "noctalia-dev",
         "repo": "umbriel",
-        "rev": "8b7a76e72550a7b0bacc1015889815baa9aca4a5",
+        "rev": "b456dc29610dff3e92a1cc42a489e3b6d86cbf01",
         "type": "github"
       },
       "original": {
