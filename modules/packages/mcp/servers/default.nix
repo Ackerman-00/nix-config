@@ -6,7 +6,7 @@
   ...
 }:
 let
-  version = "0.8.1";
+  version = "0.8.3";
   playwrightMcpVersion = "0.0.83";
   mcp-youtube-transcript = pkgs.python3Packages.buildPythonApplication {
     pname = "mcp-youtube-transcript";

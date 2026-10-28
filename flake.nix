@@ -39,7 +39,7 @@
     };
 
     mcp-youtube-transcript-src = {
-      url = "git+https://github.com/jkawamoto/mcp-youtube-transcript.git?ref=refs/tags/v0.8.1";
+      url = "git+https://github.com/jkawamoto/mcp-youtube-transcript.git?ref=refs/tags/v0.8.3";
       flake = false;
     };
 
