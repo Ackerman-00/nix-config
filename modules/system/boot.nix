@@ -38,8 +38,11 @@
       "kernel.dmesg_restrict" = 1;
       "kernel.kptr_restrict" = 2;
       "kernel.kexec_load_disabled" = 1;
+      "kernel.perf_event_paranoid" = 3;
       "kernel.unprivileged_bpf_disabled" = 1;
       "kernel.yama.ptrace_scope" = 1;
+      "dev.tty.ldisc_autoload" = 0;
+      "net.core.bpf_jit_harden" = 2;
       "fs.suid_dumpable" = 0;
     };
   };
