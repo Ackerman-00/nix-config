@@ -47,6 +47,10 @@
     };
   };
 
+  # zram is in-memory swap, so the kernel should swap before dropping page cache
+  # https://docs.kernel.org/admin-guide/sysctl/vm.html#swappiness
+  boot.kernel.sysctl."vm.swappiness" = 100;
+
   zramSwap = {
     enable = true;
     algorithm = "zstd";
