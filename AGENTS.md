@@ -31,9 +31,9 @@ NixOS flake for host `quietcraft`. Hardware: AMD Ryzen 5 5600G, Vega 7 iGPU, AMD
 
 ## Verification (mandatory)
 
-- Pull a NixOS unstable docker image yourself. Run it privileged with systemd as init and the repo mounted at `/etc/nixos`. Wait for `systemctl is-system-running`.
-- Build that image from this config: inside a `nixos/nix` container with the repo at `/etc/nixos` and `NIX_CONFIG` set, run `nix build --impure --no-link --print-out-paths -f tools/ci-image.nix`, then `docker import --change 'ENTRYPOINT ["/init"]'` its `tarball/*.tar.xz`. `nixos-generators` is deprecated and its docker format still sets `services.journald.console`, which this nixpkgs removed.
-- Inside the container copy `tools/ci-hardware.nix` to `hardware-configuration.nix`, then run `nix flake update local-hardware` so the lock matches the stub. It disables both boot loaders: disabling only systemd-boot fails the grub assertion.
+- Copy `tools/ci-hardware.nix` to `hardware-configuration.nix` and run `nix flake update local-hardware` in a `nixos/nix` container with the repo at `/etc/nixos`; the image build and the switch both evaluate that input. It disables both boot loaders: disabling only systemd-boot fails the grub assertion.
+- Build the image from that config: in the same container with `NIX_CONFIG` set, run `nix build --impure --no-link --print-out-paths -f tools/ci-image.nix`, then `docker import --change 'ENTRYPOINT ["/init"]'` its `tarball/*.tar.xz`. `nixos-generators` is deprecated and its docker format still sets `services.journald.console`, which this nixpkgs removed.
+- Run the imported image privileged with systemd as init and the repo mounted at `/etc/nixos`. Wait for `systemctl is-system-running`.
 - Before committing, delete any `configuration.nix` the image leaves behind, then run `bash tools/check-owner-hardware.sh --restore`. It deletes the stub `hardware-configuration.nix` and restores the owner's `local-hardware` node from `origin/main`; the check mode must then print `OWNER HARDWARE CHECK PASSED`. A stub left in `flake.lock` breaks every `nh os switch` on the owner's machine with a NAR hash mismatch.
 - Inside it, run exactly: `sudo nixos-rebuild switch --flake /etc/nixos#quietcraft`
 - Only this counts. `nix flake check`, `nixos-rebuild build`, `test`, and `dry-run` do not.
