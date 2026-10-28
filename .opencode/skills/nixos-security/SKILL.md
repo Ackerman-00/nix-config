@@ -19,6 +19,7 @@ Harden one thing per commit, with a source. A hardening that breaks the owner's 
 - Confirm the option exists in this nixpkgs before using it: `nix eval .#nixosConfigurations.quietcraft.options.<path>.type` in the container, or read the module source with `gh api` on NixOS/nixpkgs.
 - `networking.firewall` is on by default. `networking.firewall.allowedTCPPorts` is a decision: name the service that needs it in the message.
 - `boot.initrd.systemd` is the default stage 1. Do not weaken it back to scripted stage 1.
+- Turn a service off through its own option (`services.speechd.enable = false`), which drops the unit and its socket; `systemd.services.<name>.enable = false` leaves socket, path and D-Bus activation able to start it.
 - Never widen `nix.settings.trusted-users`: a trusted user can build with `sandbox = false` and write to the store.
 - Secrets never enter the repo, a commit body, a log line or `.opencode-relay.md`. A workflow reads `${{ secrets.* }}` into the environment and nothing else prints it.
 - Never add a CI permission scope to pass a step; `tools/workflow-valid.py` is the authority on what GitHub accepts.
