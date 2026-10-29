@@ -32,6 +32,7 @@
       "amd_pstate=active"
       "amdgpu.gpu_recovery=1"
       "slab_nomerge"
+      "init_on_alloc=1"
       "page_alloc.shuffle=1"
     ];
 
