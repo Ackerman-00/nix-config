@@ -48,11 +48,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793124281,
-        "narHash": "sha256-KdGTOgYXgMDA/ymTV10yLMt9tOjz9EmTgnTvaD+bhe4=",
+        "lastModified": 1793193205,
+        "narHash": "sha256-X6xa6sGA7RnJQuZGbFMC+K+KToWAlBDCCjJXfTwEPsw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1e3ebeb683d055d1675d3f64e6d2b186cb2ee504",
+        "rev": "095fef2f265c3c0da4fe315efba8f8a04495ab34",
         "type": "github"
       },
       "original": {
@@ -64,7 +64,7 @@
     "hyperframes-npm": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-FWmyLO7U1LCgNwpzuHh/hiARgmjZ6AZg7Gu/U2MHjRE=",
+        "narHash": "sha256-1BVtfo7rfy1c6m8CM9hxwHLEiga5h9l+cGHfy7dXIVE=",
         "type": "file",
         "url": "https://registry.npmjs.org/-/package/hyperframes/dist-tags"
       },
@@ -118,16 +118,16 @@
     "mcp-youtube-transcript-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1792557578,
-        "narHash": "sha256-M1gYC3IjUy7nJJREtkgO5XwG9QzneN8W0XJPOgG/tLY=",
-        "ref": "refs/tags/v0.8.1",
-        "rev": "c8b88693633d2f7b161b667ab8de0d4f4b303ca4",
-        "revCount": 295,
+        "lastModified": 1793169388,
+        "narHash": "sha256-ouaPiGbi7cPm5vI1ClBoRwf/p+CUBvJ6boxrTlmOyzQ=",
+        "ref": "refs/tags/v0.8.3",
+        "rev": "fc6e33cfdc8618d375dc600bb54f0576d84615fe",
+        "revCount": 306,
         "type": "git",
         "url": "https://github.com/jkawamoto/mcp-youtube-transcript.git"
       },
       "original": {
-        "ref": "refs/tags/v0.8.1",
+        "ref": "refs/tags/v0.8.3",
         "type": "git",
         "url": "https://github.com/jkawamoto/mcp-youtube-transcript.git"
       }
@@ -224,7 +224,7 @@
     "torch-pypi": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-UCdwOK7tWZJKL1wzY1uX9vHFmtZhF5Ar09elPst3WeE=",
+        "narHash": "sha256-sYhcxRjQQfDGPkHleLAZIRfa3m9C0Joq15/4cJsqUqw=",
         "type": "file",
         "url": "https://pypi.org/pypi/torch/json"
       },
@@ -251,11 +251,11 @@
         "xdg-desktop-portal-umbriel": "xdg-desktop-portal-umbriel"
       },
       "locked": {
-        "lastModified": 1793155970,
-        "narHash": "sha256-P5U/uZpscFkJ1ygEpbpn5vADaXoJ5ekgnwy76GJMPHI=",
+        "lastModified": 1793207071,
+        "narHash": "sha256-grxAvXO2215VpVlMzEQ9TzpeMeQpP8EAOqj1WqC5qNU=",
         "owner": "noctalia-dev",
         "repo": "umbriel",
-        "rev": "b456dc29610dff3e92a1cc42a489e3b6d86cbf01",
+        "rev": "2958d582953a9eb623d945f50ffd5cc1a921ee18",
         "type": "github"
       },
       "original": {
