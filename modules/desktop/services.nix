@@ -9,7 +9,6 @@
     gnome.gnome-keyring.enable = true;
     gnome.localsearch.enable = false;
     speechd.enable = false;
-    xserver.xkb.layout = "us";
     dbus.packages = [ pkgs.nautilus ];
     pipewire = {
       enable = true;
