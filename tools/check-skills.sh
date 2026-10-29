@@ -10,7 +10,7 @@ ids = set()
 for path in ("AGENTS.md", ".github/workflows/opencode-schedule.yml"):
     for line in open(path):
         if ".opencode/skills" in line and "skills" in line:
-            ids.update(re.findall(r"`([a-z0-9]+(?:-[a-z0-9]+)+)`", line))
+            ids.update(re.findall(r"`([a-z0-9]+(?:-[a-z0-9]+)*)`", line))
 print("\n".join(sorted(ids)))
 PY
 ) || exit 1
