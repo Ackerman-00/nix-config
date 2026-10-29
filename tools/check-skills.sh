@@ -24,7 +24,7 @@ for id in $listed; do
 done
 for dir in .opencode/skills/*/; do
   id=$(basename "$dir")
-  printf '%s\n' "$listed" | grep -qxF -- "$id" || {
+  grep -qxF -- "$id" <<<"$listed" || {
     echo "FAIL present but unlisted: $id"
     fail=1
   }

@@ -34,7 +34,7 @@ if [ -f "$RANK_FILE" ]; then
   done < "$RANK_FILE"
 fi
 
-is_live() { printf '%s\n' "$live" | grep -qxF -- "$1"; }
+is_live() { grep -qxF -- "$1" <<<"$live"; }
 is_ranked() {
   local r
   for r in ${rank+"${rank[@]}"}; do
