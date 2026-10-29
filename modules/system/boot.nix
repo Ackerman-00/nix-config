@@ -31,6 +31,8 @@
       "rd.systemd.show_status=auto"
       "amd_pstate=active"
       "amdgpu.gpu_recovery=1"
+      "slab_nomerge"
+      "page_alloc.shuffle=1"
     ];
 
     # KSPP sysctls
