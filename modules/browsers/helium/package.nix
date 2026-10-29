@@ -6,11 +6,11 @@
 
 let
   pname = "helium";
-  version = "0.20.1.1";
+  version = "0.20.2.1";
 
   url = "https://github.com/imputnet/helium-linux/releases/download/${version}/helium-${version}-x86_64_linux.tar.xz";
 
-  hash = "sha256-ICP6RM76D70+GQcch+kNYSdfCLqPW0jVjCNSFVZem1M=";
+  hash = "sha256-upKssn7GzaNqi5SOIVQAmq7g1jMiKtJEviXnNqFD5vo=";
 
   src = fetchurl { inherit url hash; };
 
