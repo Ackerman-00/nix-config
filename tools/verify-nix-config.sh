@@ -8,6 +8,7 @@ echo "----- VERIFICATION REPORT -----"
 grep -qx "run_id: $RUN_ID" "$RELAY" || { echo "FAIL: relay run_id mismatch"; exit 1; }
 grep -qix "status: complete" "$RELAY" || { echo "FAIL: relay status not complete"; exit 1; }
 grep -qx "verified: sudo nixos-rebuild switch --flake /etc/nixos#quietcraft" "$RELAY" || { echo "FAIL: relay has no verified switch line"; exit 1; }
-echo "PASS: relay run_id, status and verified line"
+grep -q "^docker: " "$RELAY" || { echo "FAIL: relay has no docker: line for the next run"; exit 1; }
+echo "PASS: relay run_id, status, verified and docker line"
 bash tools/check-owner-hardware.sh
 bash tools/check-skills.sh

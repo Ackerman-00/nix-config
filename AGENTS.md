@@ -73,7 +73,7 @@ status: complete
 verified: sudo nixos-rebuild switch --flake /etc/nixos#quietcraft
 ```
 
-Use `status: failed` and no `verified` line only if verification gave up. Then add up to 3 short lines on what changed.
+Use `status: failed` and no `verified` line only if verification gave up. After those three lines add one `updated: <name> <old> -> <new>` or `skipped: <name> <reason>` line per personal package, one `docker:` line with the working image and flags, and up to 3 short `changed:` lines.
 
 ## Git and secrets
 
