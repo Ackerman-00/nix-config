@@ -9,7 +9,7 @@
         "flakes"
       ];
       http-connections = 50;
-      download-buffer-size = 268435456;
+      download-buffer-size = 33554432;
       fallback = true;
       keep-outputs = true;
       warn-dirty = false;
