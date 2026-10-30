@@ -64,7 +64,7 @@
     "hyperframes-npm": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-CtYStDw7O1476FCkw3h6/7enuATyz+1VsZfnm+xnNsY=",
+        "narHash": "sha256-B0CONCxB8yZLKQhrawYQ7TFVMMP2NhRjKOY3rKvMdR0=",
         "type": "file",
         "url": "https://registry.npmjs.org/-/package/hyperframes/dist-tags"
       },
@@ -176,7 +176,7 @@
     "omnirush-feed": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-g0+WQka2QfugL8eO6QcgqxzF+CozNbyU5uyxSbwAON4=",
+        "narHash": "sha256-LLhYOf2UlCdjRSodmUE9wMsPKFHCEubQJUWegMNS6ps=",
         "type": "file",
         "url": "https://github.com/omnirush-ai/omnirush-gui/releases/latest/download/latest-linux.yml"
       },
@@ -251,11 +251,11 @@
         "xdg-desktop-portal-umbriel": "xdg-desktop-portal-umbriel"
       },
       "locked": {
-        "lastModified": 1793309711,
-        "narHash": "sha256-j5UNdedBsdYUp6Kqt1/j996RcaYG9s5pBmdjPgJ2azs=",
+        "lastModified": 1793336202,
+        "narHash": "sha256-bD7JjYwYKOj9Z/kEAA7aSq9ufkbKMvsxz3MEhKmjyeQ=",
         "owner": "noctalia-dev",
         "repo": "umbriel",
-        "rev": "55655e4aa20a0bcbd85a3d7874cab11bbd0a4e1b",
+        "rev": "d1db16a5abc10763b19eb4535047f5be75ca6064",
         "type": "github"
       },
       "original": {
