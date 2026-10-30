@@ -39,7 +39,7 @@ NixOS flake for host `quietcraft`. Hardware: AMD Ryzen 5 5600G, Vega 7 iGPU, AMD
 - Only this counts. `nix flake check`, `nixos-rebuild build`, `test`, and `dry-run` do not.
 - Use binary caches. Do not compile locally when a substitute exists.
 - The flake `nixConfig` substituter is untrusted inside the container, so nix ignores it and builds umbriel from source for ~20 minutes. Export `NIX_CONFIG` with `extra-substituters = https://umbriel.cachix.org` and `extra-trusted-public-keys = umbriel.cachix.org-1:JfNq/2yg2S6D6z4Z2dVSZrZlDPQTKtexB6GAVLD98nw=` before the pre-build, then run the exact switch; its paths are already in the store.
-- A fresh GitHub runner boots without the netfilter match modules, so `firewall.service` fails the switch. Run `sudo modprobe ip_tables iptable_filter iptable_nat xt_pkttype xt_LOG ipt_rpfilter ip6t_rpfilter` on the runner before the switch; the reverse-path module is `ipt_rpfilter`, not `xt_rpfilter`.
+- A fresh GitHub runner boots without the netfilter match modules, so `firewall.service` fails the switch with `Extension pkttype revision 0 not supported`. Load `ip_tables iptable_filter iptable_nat xt_pkttype xt_LOG ipt_rpfilter ip6t_rpfilter` on the runner before the switch, one `sudo modprobe` per module, then confirm each with `lsmod`: a single combined `modprobe` exited 0 here without loading them. The reverse-path module is `ipt_rpfilter`, not `xt_rpfilter`.
 - If it fails: read the error, fix, retry. After 5 failures run `git checkout -- .` and write `status: failed`.
 - Save the working docker image name and flags as a `docker:` line in `.opencode-relay.md` and reuse it next run.
 
