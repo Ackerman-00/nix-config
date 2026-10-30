@@ -16,9 +16,14 @@
     kernelPackages = pkgs.linuxPackages_latest;
     initrd.kernelModules = [ "amdgpu" ];
 
-    # unused network protocol modules
+    # unused protocol and filesystem modules
     blacklistedKernelModules = [
+      "cramfs"
       "dccp"
+      "freevxfs"
+      "hfs"
+      "hfsplus"
+      "jffs2"
       "rds"
       "sctp"
       "tipc"
