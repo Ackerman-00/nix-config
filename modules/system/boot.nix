@@ -18,15 +18,20 @@
 
     # unused protocol and filesystem modules
     blacklistedKernelModules = [
+      "atm"
+      "can"
       "cramfs"
-      "dccp"
-      "freevxfs"
       "hfs"
       "hfsplus"
       "jffs2"
+      "n_hdlc"
+      "nfc"
+      "qrtr"
       "rds"
+      "rxrpc"
       "sctp"
       "tipc"
+      "x25"
     ];
     consoleLogLevel = 3;
     kernelParams = [
