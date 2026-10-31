@@ -107,7 +107,7 @@ jobs:
           11. Verify. Inside the container run exactly: sudo nixos-rebuild switch --flake /etc/nixos#quietcraft
              Nothing weaker counts as proof: not flake check, build, test or dry-run. Use binary caches, do not compile locally.
           12. If it fails, read the error, fix it, run it again. After 5 failed tries run git checkout -- . and use status: failed in step 14.
-          13. After success only: run sudo chown -R "$(id -u):$(id -g)" . then commit to main and push with git push. Credentials are already configured.
+          13. After success only: run sudo chown -R "\$(id -u):\$(id -g)" . then commit to main and push with git push. Credentials are already configured.
           14. Write .opencode-relay.md with these exact first lines:
           run_id: $RUN_ID
           status: complete
