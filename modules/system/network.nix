@@ -23,6 +23,20 @@
       networkmanager.enable = true;
     };
 
-    services.cloudflare-warp.enable = config.my.cloudflareWarp.enable;
+    services.cloudflare-warp = {
+      enable = config.my.cloudflareWarp.enable;
+      openFirewall = false;
+    };
+
+    assertions = [
+      {
+        assertion =
+          config.networking.firewall.allowedTCPPorts == [ ]
+          && config.networking.firewall.allowedUDPPorts == [ ]
+          && config.networking.firewall.allowedTCPPortRanges == [ ]
+          && config.networking.firewall.allowedUDPPortRanges == [ ];
+        message = "network: an enabled service opened an inbound port; set its openFirewall option to false, or change this assertion on purpose";
+      }
+    ];
   };
 }
