@@ -27,6 +27,7 @@ NixOS flake for host `quietcraft`. Hardware: AMD Ryzen 5 5600G, Vega 7 iGPU, AMD
 
 - AMD only: `amdgpu`, `hardware.amdgpu`, `hardware.cpu.amd.updateMicrocode`, `hardware.enableRedistributableFirmware`.
 - Change kernel, kernel params, or scheduler settings only with a stated reason from the NixOS manual, kernel docs, or a public repo. Prefer the default kernel unless a change is proven to help.
+- Every name in `boot.blacklistedKernelModules` must be a module this kernel builds, or the entry is a silent no-op. Run `bash tools/check-kernel-blacklist.sh` in the container after changing the kernel or the list.
 - Never remove a boot or filesystem option you do not fully understand.
 
 ## Verification (mandatory)
