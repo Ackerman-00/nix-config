@@ -32,7 +32,7 @@
     "freebuff-feed": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-2rBhqhO1VCUzhfKeIBDWxSZsY7nT7L4cA0my+p9SaHo=",
+        "narHash": "sha256-kzS1rqYNSSrinqyuXQa54WRYABI2TxL8sX/bZ9Nqb/s=",
         "type": "file",
         "url": "https://freebuff.com/api/desktop/updates/linux-x64-deb/latest-linux.yml"
       },
@@ -64,7 +64,7 @@
     "hyperframes-npm": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-gvn97ZfREi0/lR1dWZILSH4MoV6AfzD7DP3KTPwtp+4=",
+        "narHash": "sha256-hWOfs5timjH8f4B4mi+VnYHEBQN5tGz8mpNepAntiOU=",
         "type": "file",
         "url": "https://registry.npmjs.org/-/package/hyperframes/dist-tags"
       },
@@ -251,11 +251,11 @@
         "xdg-desktop-portal-umbriel": "xdg-desktop-portal-umbriel"
       },
       "locked": {
-        "lastModified": 1793377651,
-        "narHash": "sha256-FCnTRUi219EhbfVdBPvrV0cfOS+xbUmhzpQ4eujWrB0=",
+        "lastModified": 1793419709,
+        "narHash": "sha256-16BeMBjCuMxFjeWO2e97DDej6hOiFtDVW1gKRIH6+eo=",
         "owner": "noctalia-dev",
         "repo": "umbriel",
-        "rev": "a37ae93f8e190a352ae9804e366a82e33a0199d1",
+        "rev": "2952bbcbbb4669953abc67dd74f4cd9711dbce6b",
         "type": "github"
       },
       "original": {
