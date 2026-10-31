@@ -10,5 +10,6 @@ grep -qix "status: complete" "$RELAY" || { echo "FAIL: relay status not complete
 grep -qx "verified: sudo nixos-rebuild switch --flake /etc/nixos#quietcraft" "$RELAY" || { echo "FAIL: relay has no verified switch line"; exit 1; }
 grep -q "^docker: " "$RELAY" || { echo "FAIL: relay has no docker: line for the next run"; exit 1; }
 echo "PASS: relay run_id, status, verified and docker line"
+bash tools/load-runner-modules.sh --check
 bash tools/check-owner-hardware.sh
 bash tools/check-skills.sh
